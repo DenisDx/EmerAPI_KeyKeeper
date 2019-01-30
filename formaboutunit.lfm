@@ -1,0 +1,54 @@
+object FormAbout: TFormAbout
+  Left = 730
+  Height = 325
+  Top = 333
+  Width = 616
+  Caption = 'About'
+  ClientHeight = 325
+  ClientWidth = 616
+  LCLVersion = '1.8.2.0'
+  object Panel1: TPanel
+    Left = 0
+    Height = 50
+    Top = 275
+    Width = 616
+    Align = alBottom
+    BevelOuter = bvNone
+    ClientHeight = 50
+    ClientWidth = 616
+    TabOrder = 0
+    object bClose: TBitBtn
+      Left = 448
+      Height = 30
+      Top = 8
+      Width = 154
+      Anchors = [akTop, akRight]
+      Caption = 'Ok'
+      OnClick = bCloseClick
+      TabOrder = 0
+    end
+  end
+  object mAbout: TMemo
+    Left = 0
+    Height = 275
+    Top = 0
+    Width = 616
+    Align = alClient
+    Lines.Strings = (
+      'EmerAPI / Antifake Key Keeper Version 0.0.4 - a'
+      'By Denis'
+      ''
+      'Copyright (С) EmerAPI Developers, Emertech Limited'
+      'This is experimental software.'
+      'This app is a prototype.'
+      ''
+      'This software includes:'
+      'CryptoLib Library (Copyright (c) 2018 - 20XX Ugochukwu Mmaduekwe, Github Repository <https://github.com/Xor-el> )'
+      ''
+      'http://emerAPI.info'
+      'http://emcdpo.info'
+    )
+    ReadOnly = True
+    TabOrder = 1
+  end
+end

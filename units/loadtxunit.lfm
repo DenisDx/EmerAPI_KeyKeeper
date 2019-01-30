@@ -1,0 +1,81 @@
+object LoadTXForm: TLoadTXForm
+  Left = 739
+  Height = 240
+  Top = 217
+  Width = 813
+  Caption = 'Load TX'
+  ClientHeight = 240
+  ClientWidth = 813
+  OnShow = FormShow
+  LCLVersion = '1.8.4.0'
+  object Button1: TButton
+    Left = 8
+    Height = 25
+    Top = 208
+    Width = 792
+    Caption = 'Select this tx'
+    OnClick = Button1Click
+    TabOrder = 0
+  end
+  object Memo2: TMemo
+    Left = 8
+    Height = 96
+    Top = 104
+    Width = 792
+    Anchors = [akTop, akLeft, akRight]
+    Lines.Strings = (
+      '01000000cdc7835b01807033e083225b87cebbc779fe59210887f8d06542834d45c4a04ae658121874000000004847304402201021aacf3a0a80e067775fc0cfdc68b2631d22ee24e98d1ef9d6fdfa3ed0fe0402200bed96e7316d7bee6ef1ea8a4ccf219a914cb2d3bed72c05ef7fcee1be7f43f701feffffff02005ed0b2000000001976a914649e41b014a856eb56af9098696e8aaf5904b10388ac5c01a507000000001976a9147e3be20eb65c742a97ef6848e7fab8d2fe50e0c188ac213c0000'
+    )
+    TabOrder = 1
+  end
+  object Label2: TLabel
+    Left = 11
+    Height = 15
+    Top = 88
+    Width = 39
+    Caption = 'HEX TX'
+    ParentColor = False
+  end
+  object Label1: TLabel
+    Left = 8
+    Height = 15
+    Top = 16
+    Width = 42
+    Caption = 'TX hash'
+    ParentColor = False
+  end
+  object eTxID: TEdit
+    Left = 104
+    Height = 23
+    Top = 8
+    Width = 440
+    TabOrder = 2
+    Text = 'fb682eded4e3d4991a08ee5e097e67b324fbf320c178f0819a6d8a7cd9bcfcbb'
+  end
+  object Button2: TButton
+    Left = 376
+    Height = 25
+    Top = 40
+    Width = 168
+    Caption = 'load using old Emer API'
+    OnClick = Button2Click
+    TabOrder = 3
+  end
+  object Label3: TLabel
+    Left = 552
+    Height = 15
+    Top = 40
+    Width = 48
+    Caption = 'Network:'
+    ParentColor = False
+  end
+  object Button3: TButton
+    Left = 11
+    Height = 25
+    Top = 40
+    Width = 147
+    Caption = 'Load using EmerAPI'
+    OnClick = Button3Click
+    TabOrder = 4
+  end
+end

@@ -1,0 +1,9 @@
+object LocalizzzeForm: TLocalizzzeForm
+  Left = 396
+  Height = 535
+  Top = 136
+  Width = 892
+  Caption = 'Localization'
+  OnCreate = FormCreate
+  LCLVersion = '1.8.4.0'
+end

@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectOptions>
+    <Version Value="10"/>
+    <PathDelim Value="\"/>
+    <General>
+      <SessionStorage Value="InProjectDir"/>
+      <MainUnit Value="0"/>
+      <Title Value="EmerApi"/>
+      <ResourceType Value="res"/>
+      <UseXPManifest Value="True"/>
+      <XPManifest>
+        <TextName Value="Emertech.Antifake.KeyKeeper"/>
+      </XPManifest>
+      <Icon Value="0"/>
+      <Resources Count="4">
+        <Resource_0 FileName="img\icon1.png" Type="RCDATA" ResourceName="ICON1"/>
+        <Resource_1 FileName="translation.txt" Type="RCDATA" ResourceName="TRANSLATION"/>
+        <Resource_2 FileName="img\IMG1.png" Type="RCDATA" ResourceName="IMG1"/>
+        <Resource_3 FileName="img\IMG2.png" Type="RCDATA" ResourceName="IMG2"/>
+      </Resources>
+    </General>
+    <BuildModes Count="1">
+      <Item1 Name="Default" Default="True"/>
+    </BuildModes>
+    <PublishOptions>
+      <Version Value="2"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+      </local>
+    </RunParams>
+    <RequiredPackages Count="3">
+      <Item1>
+        <PackageName Value="SynEdit"/>
+      </Item1>
+      <Item2>
+        <PackageName Value="TurboPowerIPro"/>
+      </Item2>
+      <Item3>
+        <PackageName Value="LCL"/>
+      </Item3>
+    </RequiredPackages>
+    <Units Count="66">
+      <Unit0>
+        <Filename Value="EmerApi.lpr"/>
+        <IsPartOfProject Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="mainunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="MainForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="MainUnit"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="settingsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="SettingsForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="masterpasswordmasterunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="MasterPasswordWizardForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="MasterPasswordWizardUnit"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="questionunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="QuestionForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="QuestionUnit"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="localizzzeunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="LocalizzzeForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="Localizzzeunit"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="units\crypto.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Crypto"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="units\emertx.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="EmerTX"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="units\ucryptocut.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="units\UOpenSSL.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="units\UOpenSSLdef.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="units\USha256.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="units\helperunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="HelperUnit"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="units\localwalletunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="LocalWalletConsoleForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="setupunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="setUPForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit14>
+      <Unit15>
+        <Filename Value="units\passwordhelper.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="PasswordHelper"/>
+      </Unit15>
+      <Unit16>
+        <Filename Value="units\code3unit.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit16>
+      <Unit17>
+        <Filename Value="createpasswordunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="createPassword"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="CreatePasswordUnit"/>
+      </Unit17>
+      <Unit18>
+        <Filename Value="units\passrateunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="PassRate"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+      </Unit18>
+      <Unit19>
+        <Filename Value="entermasterpasswordunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="EnterMasterPasswordFrame"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="EnterMasterPasswordUnit"/>
+      </Unit19>
+      <Unit20>
+        <Filename Value="askformpunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="askForMPForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit20>
+      <Unit21>
+        <Filename Value="askforupunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="AskForUPForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="AskForUPUnit"/>
+      </Unit21>
+      <Unit22>
+        <Filename Value="emerapiserverunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="EmerAPIServerUnit"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="units\emerapiblockchainunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="EmerAPIBlockchainUnit"/>
+      </Unit23>
+      <Unit24>
+        <Filename Value="units\emerapiblockchainmergedunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="EmerAPIBlockchainMergedUnit"/>
+      </Unit24>
+      <Unit25>
+        <Filename Value="units\emerapiwalletunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="EmerAPIWalletUnit"/>
+      </Unit25>
+      <Unit26>
+        <Filename Value="debugconsoleunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="DebugConsoleForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="DebugConsoleUnit"/>
+      </Unit26>
+      <Unit27>
+        <Filename Value="unitcryptotest.lfm"/>
+        <IsPartOfProject Value="True"/>
+      </Unit27>
+      <Unit28>
+        <Filename Value="createpasswordunit.lfm"/>
+        <IsPartOfProject Value="True"/>
+      </Unit28>
+      <Unit29>
+        <Filename Value="units\createrawtxunit.lfm"/>
+        <IsPartOfProject Value="True"/>
+      </Unit29>
+      <Unit30>
+        <Filename Value="emerapidebugconsoleunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="EmerAPIDebugConsoleForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="EmerAPIDebugConsoleUnit"/>
+      </Unit30>
+      <Unit31>
+        <Filename Value="units\utxounit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="UTXOunit"/>
+      </Unit31>
+      <Unit32>
+        <Filename Value="units\emerapimain.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="EmerAPIMain"/>
+      </Unit32>
+      <Unit33>
+        <Filename Value="units\emerapitypes.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit33>
+      <Unit34>
+        <Filename Value="frameselectaddressunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FrameSelectAddress"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="FrameSelectAddressunit"/>
+      </Unit34>
+      <Unit35>
+        <Filename Value="paytoaddressframeunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FramePayToAddress"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="PayToAddressFrameUnit"/>
+      </Unit35>
+      <Unit36>
+        <Filename Value="walletbasicsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="WalletBasicsForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="WalletBasicsUnit"/>
+      </Unit36>
+      <Unit37>
+        <Filename Value="frameatomunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FrameAtom"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="FrameAtomunit"/>
+      </Unit37>
+      <Unit38>
+        <Filename Value="units\blockchainunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="BlockchainUnit"/>
+      </Unit38>
+      <Unit39>
+        <Filename Value="units\framecreatenameunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FrameCreateName"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="frameCreateNameUnit"/>
+      </Unit39>
+      <Unit40>
+        <Filename Value="guihelperunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="GUIHelperUnit"/>
+      </Unit40>
+      <Unit41>
+        <Filename Value="units\nvsrecordunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="NVSRecordUnit"/>
+      </Unit41>
+      <Unit42>
+        <Filename Value="framenvsrecordunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FrameNVSRecord"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="FrameNVSRecordUnit"/>
+      </Unit42>
+      <Unit43>
+        <Filename Value="framebasenvsunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FrameBaseNVS"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="FrameBaseNVSUnit"/>
+      </Unit43>
+      <Unit44>
+        <Filename Value="mempoolviewerunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="MempoolViewerForm"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="MempoolViewerUnit"/>
+      </Unit44>
+      <Unit45>
+        <Filename Value="units\mempoolunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="MemPoolUnit"/>
+      </Unit45>
+      <Unit46>
+        <Filename Value="units\emerapitransactionunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="EmerAPITransactionUnit"/>
+      </Unit46>
+      <Unit47>
+        <Filename Value="units\userutxolistunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="UserUTXOListUnit"/>
+      </Unit47>
+      <Unit48>
+        <Filename Value="units\cryptolib4pascalconnectorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="CryptoLib4PascalConnectorUnit"/>
+      </Unit48>
+      <Unit49>
+        <Filename Value="mempoolviewerunit2.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="MempoolViewerForm2"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="MempoolViewerUnit2"/>
+      </Unit49>
+      <Unit50>
+        <Filename Value="translation.txt"/>
+        <IsPartOfProject Value="True"/>
+      </Unit50>
+      <Unit51>
+        <Filename Value="units\basetxunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="BaseTXUnit"/>
+      </Unit51>
+      <Unit52>
+        <Filename Value="units\emerapiservertasksunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="EmerAPIServerTasksUnit"/>
+      </Unit52>
+      <Unit53>
+        <Filename Value="frameservertaskunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FrameServerTask"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="FrameServerTaskUnit"/>
+      </Unit53>
+      <Unit54>
+        <Filename Value="units\hdnodeunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="HDNodeUnit"/>
+      </Unit54>
+      <Unit55>
+        <Filename Value="guidepageunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="GuidePageUnit"/>
+      </Unit55>
+      <Unit56>
+        <Filename Value="masssendingunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="MassSendingForm"/>
+        <ResourceBaseClass Value="Form"/>
+      </Unit56>
+      <Unit57>
+        <Filename Value="framedigitalassetunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FrameDigitalAsset"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Frame"/>
+        <UnitName Value="FrameDigitalAssetUnit"/>
+      </Unit57>
+      <Unit58>
+        <Filename Value="nameviewunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="NameViewForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="NameViewUnit"/>
+      </Unit58>
+      <Unit59>
+        <Filename Value="atomformunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="AtomForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="AtomFormUnit"/>
+      </Unit59>
+      <Unit60>
+        <Filename Value="formaboutunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="FormAbout"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="FormAboutUnit"/>
+      </Unit60>
+      <Unit61>
+        <Filename Value="splashformunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="SplashForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="SplashFormUnit"/>
+      </Unit61>
+      <Unit62>
+        <Filename Value="helpredirector.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="HelpRedirector"/>
+      </Unit62>
+      <Unit63>
+        <Filename Value="signmessagechecksignatureunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="Form1"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="SignMessageUnit"/>
+      </Unit63>
+      <Unit64>
+        <Filename Value="checksignatureunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="CheckSignatureForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="CheckSignatureUnit"/>
+      </Unit64>
+      <Unit65>
+        <Filename Value="embededsignaturesunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="EmbededSignaturesUnit"/>
+      </Unit65>
+    </Units>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="11"/>
+    <PathDelim Value="\"/>
+    <Target>
+      <Filename Value="EmerApi"/>
+    </Target>
+    <SearchPaths>
+      <IncludeFiles Value="$(ProjOutDir)"/>
+      <OtherUnitFiles Value="units;CryptoLib4Pascal\CryptoLib\src\Interfaces;HashLib4Pascal\HashLib\src\Interfaces;HashLib4Pascal\HashLib\src\Utils;CryptoLib4Pascal\CryptoLib\src\Utils;generics.collections\src;CryptoLib4Pascal\CryptoLib\src\Security;HashLib4Pascal\HashLib\src\Base;HashLib4Pascal\HashLib\src\Nullable;HashLib4Pascal\HashLib\src\NullDigest;HashLib4Pascal\HashLib\src\Checksum;HashLib4Pascal\HashLib\src\Hash32;HashLib4Pascal\HashLib\src\Hash64;HashLib4Pascal\HashLib\src\Hash128;HashLib4Pascal\HashLib\src\Crypto;HashLib4Pascal\HashLib\src\Interfaces\IBlake2BConfigurations;HashLib4Pascal\HashLib\src\Interfaces\IBlake2SConfigurations;HashLib4Pascal\HashLib\src\Crypto\Blake2BConfigurations;HashLib4Pascal\HashLib\src\Crypto\Blake2SConfigurations;HashLib4Pascal\HashLib\src\KDF;CryptoLib4Pascal\CryptoLib\src\Crypto\Digests;CryptoLib4Pascal\CryptoLib\src\Asn1\Pkcs;CryptoLib4Pascal\CryptoLib\src\Asn1;CryptoLib4Pascal\CryptoLib\src\Utils\Helpers;CryptoLib4Pascal\CryptoLib\src\Utils\IO;CryptoLib4Pascal\CryptoLib\src\Math;CryptoLib4Pascal\CryptoLib\src\Utils\Collections;CryptoLib4Pascal\CryptoLib\src\Utils\Encoders;SimpleBaseLib4Pascal\SimpleBaseLib\src\Bases;SimpleBaseLib4Pascal\SimpleBaseLib\src\Utils;CryptoLib4Pascal\CryptoLib\src\Asn1\RossStandart;CryptoLib4Pascal\CryptoLib\src\Asn1\Oiw;CryptoLib4Pascal\CryptoLib\src\Asn1\Nist;CryptoLib4Pascal\CryptoLib\src\Asn1\X509;CryptoLib4Pascal\CryptoLib\src\Asn1\X9;CryptoLib4Pascal\CryptoLib\src\Asn1\Sec;CryptoLib4Pascal\CryptoLib\src\Asn1\TeleTrust;CryptoLib4Pascal\CryptoLib\src\Asn1\Misc;CryptoLib4Pascal\CryptoLib\src\Asn1\Iana;CryptoLib4Pascal\CryptoLib\src\Asn1\Eac;CryptoLib4Pascal\CryptoLib\src\Asn1\CryptoPro;CryptoLib4Pascal\CryptoLib\src\Asn1\Bsi;CryptoLib4Pascal\CryptoLib\src\Crypto\Prng;CryptoLib4Pascal\CryptoLib\src\Crypto\Signers;CryptoLib4Pascal\CryptoLib\src\Crypto\Parsers;CryptoLib4Pascal\CryptoLib\src\Crypto\Parameters;CryptoLib4Pascal\CryptoLib\src\Crypto\Modes;CryptoLib4Pascal\CryptoLib\src\Crypto\Macs;CryptoLib4Pascal\CryptoLib\src\Crypto\Generators;CryptoLib4Pascal\CryptoLib\src\Crypto\Engines;CryptoLib4Pascal\CryptoLib\src\Crypto\EC;CryptoLib4Pascal\CryptoLib\src\Crypto\Agreement;CryptoLib4Pascal\CryptoLib\src\Utils\Rng;CryptoLib4Pascal\CryptoLib\src\Utils\Randoms;CryptoLib4Pascal\CryptoLib\src\Math\EC;CryptoLib4Pascal\CryptoLib\src\Math\Field;CryptoLib4Pascal\CryptoLib\src\Math\Raw;CryptoLib4Pascal\CryptoLib\src\Math\EC\Abc;CryptoLib4Pascal\CryptoLib\src\Math\EC\Custom;CryptoLib4Pascal\CryptoLib\src\Math\EC\Endo;CryptoLib4Pascal\CryptoLib\src\Math\EC\Multiplier;CryptoLib4Pascal\CryptoLib\src\Crypto;CryptoLib4Pascal\CryptoLib\src\Math\EC\Custom\Sec;CryptoLib4Pascal\CryptoLib\src\Crypto\Paddings"/>
+      <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+    </SearchPaths>
+    <Linking>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
+    <Other>
+      <CustomOptions Value="-dUseCThreads"/>
+      <OtherDefines Count="1">
+        <Define0 Value="UseCThreads"/>
+      </OtherDefines>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <Exceptions Count="3">
+      <Item1>
+        <Name Value="EAbort"/>
+        <Enabled Value="False"/>
+      </Item1>
+      <Item2>
+        <Name Value="ECodetoolError"/>
+        <Enabled Value="False"/>
+      </Item2>
+      <Item3>
+        <Name Value="EFOpenError"/>
+        <Enabled Value="False"/>
+      </Item3>
+    </Exceptions>
+  </Debugging>
+</CONFIG>

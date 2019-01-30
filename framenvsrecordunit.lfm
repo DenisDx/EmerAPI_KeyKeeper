@@ -1,0 +1,43 @@
+inherited FrameNVSRecord: TFrameNVSRecord
+  Height = 229
+  Width = 465
+  ClientHeight = 229
+  ClientWidth = 465
+  DesignLeft = 809
+  DesignTop = 275
+  object PageControl1: TPageControl[0]
+    Left = 0
+    Height = 175
+    Top = 24
+    Width = 465
+    ActivePage = tsRawNVS
+    Align = alClient
+    TabIndex = 1
+    TabOrder = 0
+    object tsName: TTabSheet
+      Caption = 'tsName'
+    end
+    object tsRawNVS: TTabSheet
+      Caption = 'tsRawNVS - тут будет фрейм с rawNVS, name RO'
+    end
+  end
+  object pTools: TPanel[1]
+    Left = 0
+    Height = 30
+    Top = 199
+    Width = 465
+    Align = alBottom
+    BevelOuter = bvNone
+    TabOrder = 1
+  end
+  object pTitle: TPanel[2]
+    Left = 0
+    Height = 24
+    Top = 0
+    Width = 465
+    Align = alTop
+    BevelOuter = bvNone
+    Caption = 'pTitle'
+    TabOrder = 2
+  end
+end

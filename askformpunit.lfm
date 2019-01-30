@@ -1,0 +1,80 @@
+object askForMPForm: TaskForMPForm
+  Left = 524
+  Height = 200
+  Top = 334
+  Width = 577
+  Caption = 'Enter your Master Password'
+  ClientHeight = 200
+  ClientWidth = 577
+  Constraints.MinHeight = 200
+  Constraints.MinWidth = 500
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  LCLVersion = '1.8.4.0'
+  object BitBtn1: TBitBtn
+    Left = 445
+    Height = 30
+    Top = 160
+    Width = 123
+    Anchors = [akRight, akBottom]
+    Caption = 'Ok'
+    OnClick = BitBtn1Click
+    TabOrder = 0
+  end
+  object BitBtn2: TBitBtn
+    Left = 312
+    Height = 30
+    Top = 160
+    Width = 123
+    Anchors = [akRight, akBottom]
+    Caption = 'Cancel'
+    OnClick = BitBtn2Click
+    TabOrder = 1
+  end
+  object bHelp: TBitBtn
+    Left = 8
+    Height = 30
+    Top = 160
+    Width = 123
+    Anchors = [akLeft, akBottom]
+    Caption = 'Help'
+    TabOrder = 2
+  end
+  inline EnterMasterPasswordFrame1: TEnterMasterPasswordFrame
+    Width = 577
+    Align = alTop
+    ClientWidth = 577
+    TabOrder = 3
+    inherited Label1: TLabel
+      Height = 15
+      Width = 89
+    end
+    inherited eMasterPassword: TEdit
+      Height = 23
+      Width = 436
+    end
+    inherited pBip39Helper: TPanel
+      Width = 412
+    end
+    inherited lAssignedAddress: TLabel
+      Height = 15
+      Width = 94
+    end
+    inherited eAddress: TEdit
+      Height = 23
+      Width = 436
+    end
+    inherited chShowMasterPassword: TCheckBox
+      Height = 19
+      Width = 49
+    end
+    inherited lAddressInfo: TLabel
+      Height = 15
+      Width = 66
+    end
+    inherited chLegacyMode: TCheckBox
+      Height = 19
+      Width = 91
+    end
+  end
+end

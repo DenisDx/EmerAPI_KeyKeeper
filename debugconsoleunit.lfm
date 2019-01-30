@@ -1,0 +1,105 @@
+object DebugConsoleForm: TDebugConsoleForm
+  Left = 533
+  Height = 621
+  Top = 139
+  Width = 755
+  Caption = 'DebugConsoleForm'
+  ClientHeight = 621
+  ClientWidth = 755
+  LCLVersion = '1.8.4.0'
+  object meDebugConsole: TMemo
+    Left = 0
+    Height = 555
+    Top = 66
+    Width = 755
+    Align = alClient
+    ReadOnly = True
+    ScrollBars = ssAutoBoth
+    TabOrder = 0
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 66
+    Top = 0
+    Width = 755
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 66
+    ClientWidth = 755
+    TabOrder = 1
+    object BitBtn1: TBitBtn
+      Left = 8
+      Height = 30
+      Top = 0
+      Width = 75
+      Caption = 'clear'
+      OnClick = BitBtn1Click
+      TabOrder = 0
+    end
+    object Button1: TButton
+      Left = 8
+      Height = 30
+      Top = 32
+      Width = 75
+      Caption = 'WW'
+      OnClick = Button1Click
+      TabOrder = 1
+    end
+    object chTime: TCheckBox
+      Left = 120
+      Height = 19
+      Top = 8
+      Width = 47
+      Caption = 'Time'
+      Checked = True
+      State = cbChecked
+      TabOrder = 2
+    end
+    object chCutLong: TCheckBox
+      Left = 120
+      Height = 19
+      Top = 40
+      Width = 69
+      Caption = 'Cut Long'
+      Checked = True
+      State = cbChecked
+      TabOrder = 3
+    end
+    object chFilter: TCheckBox
+      Left = 235
+      Height = 19
+      Top = 7
+      Width = 59
+      Caption = 'chFilter'
+      TabOrder = 4
+    end
+    object chShowOnly: TCheckBox
+      Left = 235
+      Height = 19
+      Top = 35
+      Width = 87
+      Caption = 'chShowOnly'
+      TabOrder = 5
+    end
+    object meFilter: TMemo
+      Left = 344
+      Height = 58
+      Top = 4
+      Width = 222
+      Lines.Strings = (
+        'Data received:'
+        'Data sent:'
+      )
+      TabOrder = 6
+    end
+    object BitBtn2: TBitBtn
+      Left = 576
+      Height = 30
+      Top = 4
+      Width = 152
+      Caption = 'Remove Internal'
+      OnClick = BitBtn2Click
+      TabOrder = 7
+    end
+  end
+end

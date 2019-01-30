@@ -1,0 +1,945 @@
+object CreateRawTXForm: TCreateRawTXForm
+  Left = 355
+  Height = 854
+  Top = 81
+  Width = 1526
+  Caption = 'CreateRawTXForm'
+  ClientHeight = 854
+  ClientWidth = 1526
+  OnCreate = FormCreate
+  LCLVersion = '1.8.4.0'
+  object Inputs: TGroupBox
+    Left = 0
+    Height = 214
+    Top = 97
+    Width = 1526
+    Align = alClient
+    Caption = 'Inputs'
+    ClientHeight = 194
+    ClientWidth = 1522
+    TabOrder = 0
+    object StringGrid1: TStringGrid
+      Left = 0
+      Height = 101
+      Top = 0
+      Width = 1522
+      Align = alClient
+      Color = clMoneyGreen
+      ColCount = 8
+      DefaultColWidth = 160
+      Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goEditing, goRelaxedRowSelect, goSmoothScroll, goSelectionActive, goRowHighlight]
+      TabOrder = 0
+      OnEditingDone = StringGrid1EditingDone
+      OnSelectCell = StringGrid1SelectCell
+    end
+    object Panel1: TPanel
+      Left = 0
+      Height = 93
+      Top = 101
+      Width = 1522
+      Align = alBottom
+      ClientHeight = 93
+      ClientWidth = 1522
+      TabOrder = 1
+      object Label2: TLabel
+        Left = 8
+        Height = 15
+        Top = 8
+        Width = 23
+        Caption = 'txID:'
+        ParentColor = False
+      end
+      object Edit6: TEdit
+        Left = 72
+        Height = 23
+        Top = 8
+        Width = 560
+        TabOrder = 0
+        Text = 'Edit6'
+      end
+      object Button8: TButton
+        Left = 720
+        Height = 25
+        Top = 8
+        Width = 75
+        Caption = 'Locate'
+        OnClick = Button8Click
+        TabOrder = 1
+      end
+      object Button9: TButton
+        Left = 640
+        Height = 25
+        Top = 8
+        Width = 75
+        Caption = 'Set'
+        OnClick = Button9Click
+        TabOrder = 2
+      end
+      object Button14: TButton
+        Left = 587
+        Height = 25
+        Top = 64
+        Width = 192
+        Caption = 'fill UTXO amounts (uses server)'
+        TabOrder = 3
+      end
+      object Button15: TButton
+        Left = 8
+        Height = 25
+        Top = 35
+        Width = 112
+        Caption = '+ Add UTXO line'
+        OnClick = Button15Click
+        TabOrder = 4
+      end
+      object Button16: TButton
+        Left = 128
+        Height = 25
+        Top = 35
+        Width = 152
+        Caption = '- Delete last UTXO line'
+        OnClick = Button16Click
+        TabOrder = 5
+      end
+      object Button17: TButton
+        Left = 8
+        Height = 25
+        Top = 64
+        Width = 211
+        Caption = 'Fill UTXOs from address (uses server)'
+        OnClick = Button17Click
+        TabOrder = 6
+      end
+      object Edit7: TEdit
+        Left = 227
+        Height = 23
+        Top = 66
+        Width = 253
+        TabOrder = 7
+        Text = 'mpgyT6deSNSPNc1kmySvEiSHryfdzNGJ7c'
+      end
+      object Label16: TLabel
+        Left = 960
+        Height = 15
+        Top = 69
+        Width = 81
+        Caption = 'Total spending:'
+        ParentColor = False
+      end
+      object Edit13: TEdit
+        Left = 1057
+        Height = 23
+        Top = 64
+        Width = 136
+        TabOrder = 8
+        Text = 'Edit13'
+      end
+      object Button20: TButton
+        Left = 1201
+        Height = 25
+        Top = 62
+        Width = 75
+        Caption = 'Calculate'
+        OnClick = Button20Click
+        TabOrder = 9
+      end
+      object Button21: TButton
+        Left = 496
+        Height = 25
+        Top = 35
+        Width = 147
+        Caption = 'Set standart sequense V2'
+        OnClick = Button21Click
+        TabOrder = 10
+      end
+      object Button22: TButton
+        Left = 648
+        Height = 25
+        Top = 35
+        Width = 131
+        Caption = 'Clear all'
+        OnClick = Button22Click
+        TabOrder = 11
+      end
+      object Button23: TButton
+        Left = 1256
+        Height = 25
+        Top = 6
+        Width = 232
+        Caption = 'Sign TX using this PK for standart in'
+        OnClick = Button23Click
+        TabOrder = 12
+      end
+      object Edit14: TEdit
+        Left = 840
+        Height = 23
+        Top = 8
+        Width = 408
+        TabOrder = 13
+        Text = 'cT4Swqnt3Aaj15T8e53FqEv6p6ZhSpczKQn3LR3FM9PuBd4zbB2e'
+      end
+      object Button28: TButton
+        Left = 480
+        Height = 25
+        Top = 64
+        Width = 75
+        Caption = 'get from PK'
+        OnClick = Button28Click
+        TabOrder = 14
+      end
+      object Edit15: TEdit
+        Left = 840
+        Height = 23
+        Top = 37
+        Width = 408
+        TabOrder = 15
+        Text = 'Edit15'
+      end
+      object Button29: TButton
+        Left = 1256
+        Height = 25
+        Top = 35
+        Width = 171
+        Caption = '<< Sign TXin with script'
+        OnClick = Button29Click
+        TabOrder = 16
+      end
+      object Button30: TButton
+        Left = 296
+        Height = 25
+        Top = 35
+        Width = 152
+        Caption = '- Delete current UTXO line'
+        OnClick = Button30Click
+        TabOrder = 17
+      end
+    end
+  end
+  object GroupBox2: TGroupBox
+    Left = 0
+    Height = 48
+    Top = 0
+    Width = 1526
+    Align = alTop
+    Caption = 'Preparation'
+    ClientHeight = 28
+    ClientWidth = 1522
+    TabOrder = 1
+    object Label10: TLabel
+      Left = 8
+      Height = 30
+      Top = 0
+      Width = 139
+      Caption = 'Net ID for address decode '#13#10'(left empty for hex)'
+      ParentColor = False
+    end
+    object ComboBox1: TComboBox
+      Left = 160
+      Height = 23
+      Top = 2
+      Width = 228
+      ItemHeight = 15
+      Items.Strings = (
+        ''
+        '0 (bitcoin main)'
+        '33 (Emercoin main)'
+        '$6F (testnet)'
+      )
+      TabOrder = 0
+    end
+    object bLoadTX: TButton
+      Left = 408
+      Height = 25
+      Top = 0
+      Width = 75
+      Caption = 'Load TX'
+      OnClick = bLoadTXClick
+      TabOrder = 1
+    end
+    object bTextTX: TButton
+      Left = 691
+      Height = 25
+      Top = -4
+      Width = 51
+      Caption = 'Text TX 1'
+      OnClick = bTextTXClick
+      TabOrder = 2
+    end
+    object bTextTX1: TButton
+      Left = 744
+      Height = 25
+      Top = -4
+      Width = 85
+      Caption = 'Text TX 2 name'
+      OnClick = bTextTX1Click
+      TabOrder = 3
+    end
+    object bTextTX2: TButton
+      Left = 826
+      Height = 25
+      Top = -4
+      Width = 85
+      Caption = 'Text TX 3 name'
+      OnClick = bTextTX2Click
+      TabOrder = 4
+    end
+    object bTextTX3: TButton
+      Left = 912
+      Height = 25
+      Top = -4
+      Width = 93
+      Caption = 'Text TX 4 (new)'
+      OnClick = bTextTX3Click
+      TabOrder = 5
+    end
+    object bTextTX4: TButton
+      Left = 1000
+      Height = 25
+      Top = -4
+      Width = 93
+      Caption = 'Text TX 5 no sig'
+      OnClick = bTextTX4Click
+      TabOrder = 6
+    end
+    object bTextTX5: TButton
+      Left = 1088
+      Height = 25
+      Top = -2
+      Width = 104
+      Caption = 'long val name new'
+      OnClick = bTextTX5Click
+      TabOrder = 7
+    end
+    object bTextTX6: TButton
+      Left = 1184
+      Height = 25
+      Top = -4
+      Width = 80
+      Caption = 'Name Update'
+      OnClick = bTextTX6Click
+      TabOrder = 8
+    end
+    object bTextTX7: TButton
+      Left = 1264
+      Height = 25
+      Top = -5
+      Width = 72
+      Caption = 'Name Delete'
+      OnClick = bTextTX7Click
+      TabOrder = 9
+    end
+    object Button12: TButton
+      Left = 1336
+      Height = 25
+      Top = -5
+      Width = 40
+      Caption = 'bigest'
+      OnClick = Button12Click
+      TabOrder = 10
+    end
+    object Button26: TButton
+      Left = 512
+      Height = 25
+      Top = 0
+      Width = 75
+      Caption = 'EmptyTX'
+      OnClick = Button26Click
+      TabOrder = 11
+    end
+    object BitBtn1: TBitBtn
+      Left = 648
+      Height = 30
+      Top = -5
+      Width = 43
+      Caption = 'todo1'
+      OnClick = BitBtn1Click
+      TabOrder = 12
+    end
+    object Button31: TButton
+      Left = 1376
+      Height = 25
+      Top = -5
+      Width = 40
+      Caption = 'p2sh'
+      OnClick = Button31Click
+      TabOrder = 13
+    end
+    object Button32: TButton
+      Left = 1416
+      Height = 25
+      Top = -4
+      Width = 40
+      Caption = 'n2sh'
+      OnClick = Button32Click
+      TabOrder = 14
+    end
+    object Button33: TButton
+      Left = 1456
+      Height = 25
+      Top = -5
+      Width = 40
+      Caption = 'p2shSend'
+      OnClick = Button33Click
+      TabOrder = 15
+    end
+    object Button34: TButton
+      Left = 1496
+      Height = 25
+      Top = -4
+      Width = 40
+      Caption = 'p2shSend'
+      OnClick = Button34Click
+      TabOrder = 16
+    end
+  end
+  object GroupBox4: TGroupBox
+    Left = 0
+    Height = 49
+    Top = 48
+    Width = 1526
+    Align = alTop
+    Caption = 'Main TX info'
+    ClientHeight = 29
+    ClientWidth = 1522
+    TabOrder = 2
+    object Label4: TLabel
+      Left = 8
+      Height = 15
+      Top = 6
+      Width = 41
+      Caption = 'Version:'
+      ParentColor = False
+    end
+    object Edit2: TEdit
+      Left = 88
+      Height = 23
+      Top = 2
+      Width = 80
+      Color = clMoneyGreen
+      OnChange = Edit2Change
+      TabOrder = 0
+      Text = 'Edit2'
+    end
+    object Edit3: TEdit
+      Left = 424
+      Height = 23
+      Top = 2
+      Width = 80
+      Color = clMoneyGreen
+      OnChange = Edit3Change
+      TabOrder = 1
+      Text = 'Edit3'
+    end
+    object Label3: TLabel
+      Left = 344
+      Height = 15
+      Top = 6
+      Width = 27
+      Caption = 'time:'
+      ParentColor = False
+    end
+    object Label5: TLabel
+      Left = 656
+      Height = 15
+      Top = 6
+      Width = 52
+      Caption = 'lockTime:'
+      ParentColor = False
+    end
+    object Edit4: TEdit
+      Left = 752
+      Height = 23
+      Top = 2
+      Width = 80
+      Color = clMoneyGreen
+      OnChange = Edit4Change
+      TabOrder = 2
+      Text = 'Edit4'
+    end
+    object Button1: TButton
+      Left = 168
+      Height = 25
+      Top = 0
+      Width = 24
+      Caption = '1'
+      OnClick = Button1Click
+      TabOrder = 3
+    end
+    object Button2: TButton
+      Left = 192
+      Height = 25
+      Top = 0
+      Width = 24
+      Caption = '2'
+      OnClick = Button2Click
+      TabOrder = 4
+    end
+    object Button3: TButton
+      Left = 217
+      Height = 25
+      Top = 0
+      Width = 41
+      Caption = 'name'
+      OnClick = Button3Click
+      TabOrder = 5
+    end
+    object Button4: TButton
+      Left = 506
+      Height = 25
+      Top = 0
+      Width = 30
+      Caption = 'now'
+      OnClick = Button4Click
+      TabOrder = 6
+    end
+    object Button5: TButton
+      Left = 864
+      Height = 25
+      Top = 0
+      Width = 30
+      Caption = 'now'
+      OnClick = Button5Click
+      TabOrder = 7
+    end
+    object Button6: TButton
+      Left = 832
+      Height = 25
+      Top = 0
+      Width = 30
+      Caption = '0'
+      OnClick = Button6Click
+      TabOrder = 8
+    end
+  end
+  object Splitter1: TSplitter
+    Cursor = crVSplit
+    Left = 0
+    Height = 5
+    Top = 311
+    Width = 1526
+    Align = alBottom
+    ResizeAnchor = akBottom
+  end
+  object Panel2: TPanel
+    Left = 0
+    Height = 538
+    Top = 316
+    Width = 1526
+    Align = alBottom
+    BevelOuter = bvNone
+    ClientHeight = 538
+    ClientWidth = 1526
+    TabOrder = 4
+    object Splitter2: TSplitter
+      Cursor = crVSplit
+      Left = 0
+      Height = 5
+      Top = 371
+      Width = 1526
+      Align = alBottom
+      ResizeAnchor = akBottom
+    end
+    object GroupBoxTXOUT: TGroupBox
+      Left = 0
+      Height = 371
+      Top = 0
+      Width = 1526
+      Align = alClient
+      Anchors = [akTop, akLeft, akRight]
+      Caption = 'Outs'
+      ClientHeight = 351
+      ClientWidth = 1522
+      TabOrder = 1
+      object Panel3: TPanel
+        Left = 0
+        Height = 214
+        Top = 137
+        Width = 1522
+        Align = alBottom
+        ClientHeight = 214
+        ClientWidth = 1522
+        TabOrder = 0
+        object Memo1: TMemo
+          Left = 120
+          Height = 192
+          Top = 8
+          Width = 725
+          Anchors = [akTop, akLeft, akRight]
+          Lines.Strings = (
+            'Memo1'
+          )
+          TabOrder = 0
+        end
+        object Label1: TLabel
+          Left = 80
+          Height = 15
+          Top = 8
+          Width = 33
+          Caption = 'Script:'
+          ParentColor = False
+        end
+        object Button7: TButton
+          Left = 8
+          Height = 25
+          Top = 32
+          Width = 107
+          Caption = 'Encode'
+          OnClick = Button7Click
+          TabOrder = 1
+        end
+        object PageControl1: TPageControl
+          Left = 853
+          Height = 192
+          Top = 8
+          Width = 663
+          ActivePage = TabSheet3
+          Anchors = [akTop, akRight]
+          TabIndex = 2
+          TabOrder = 2
+          object TabSheet1: TTabSheet
+            Caption = 'Transfer'
+            ClientHeight = 164
+            ClientWidth = 655
+            object Label6: TLabel
+              Left = 8
+              Height = 15
+              Top = 16
+              Width = 62
+              Caption = 'rec address:'
+              ParentColor = False
+            end
+            object Edit1: TEdit
+              Left = 8
+              Height = 23
+              Top = 40
+              Width = 488
+              TabOrder = 0
+              Text = 'Edit1'
+            end
+            object Button10: TButton
+              Left = 8
+              Height = 25
+              Top = 72
+              Width = 75
+              Caption = 'set'
+              OnClick = Button10Click
+              TabOrder = 1
+            end
+          end
+          object TabSheet2: TTabSheet
+            Caption = 'Name new/update'
+            ClientHeight = 164
+            ClientWidth = 655
+            object Label7: TLabel
+              Left = 8
+              Height = 15
+              Top = 8
+              Width = 33
+              Caption = 'name:'
+              ParentColor = False
+            end
+            object Label8: TLabel
+              Left = 8
+              Height = 15
+              Top = 32
+              Width = 31
+              Caption = 'Value:'
+              ParentColor = False
+            end
+            object Label9: TLabel
+              Left = 8
+              Height = 15
+              Top = 90
+              Width = 28
+              Caption = 'Days:'
+              ParentColor = False
+            end
+            object Label11: TLabel
+              Left = 8
+              Height = 15
+              Top = 118
+              Width = 38
+              Caption = 'Owner:'
+              ParentColor = False
+            end
+            object Button11: TButton
+              Left = 4
+              Height = 25
+              Top = 138
+              Width = 75
+              Caption = 'set'
+              OnClick = Button11Click
+              TabOrder = 0
+            end
+            object Edit5: TEdit
+              Left = 56
+              Height = 23
+              Top = 8
+              Width = 539
+              Anchors = [akTop, akLeft, akRight]
+              TabOrder = 1
+              Text = 'Edit5'
+            end
+            object Edit8: TEdit
+              Left = 56
+              Height = 23
+              Top = 90
+              Width = 80
+              TabOrder = 2
+              Text = 'Edit8'
+            end
+            object Edit9: TEdit
+              Left = 56
+              Height = 23
+              Top = 114
+              Width = 587
+              Anchors = [akTop, akLeft, akRight]
+              TabOrder = 3
+              Text = 'Edit9'
+            end
+            object CheckBox1: TCheckBox
+              Left = 144
+              Height = 19
+              Top = 91
+              Width = 77
+              Caption = 'Name new'
+              TabOrder = 4
+            end
+            object CheckBox3: TCheckBox
+              Left = 602
+              Height = 19
+              Top = 8
+              Width = 41
+              Anchors = [akTop, akRight]
+              Caption = 'TXT'
+              TabOrder = 5
+            end
+            object CheckBox4: TCheckBox
+              Left = 603
+              Height = 19
+              Top = 32
+              Width = 41
+              Anchors = [akTop, akRight]
+              Caption = 'TXT'
+              TabOrder = 6
+            end
+            object Memo2: TMemo
+              Left = 56
+              Height = 59
+              Top = 33
+              Width = 538
+              Anchors = [akTop, akLeft, akRight, akBottom]
+              Lines.Strings = (
+                'Memo2'
+              )
+              TabOrder = 7
+            end
+          end
+          object TabSheet3: TTabSheet
+            Caption = 'Name delete'
+            ClientHeight = 164
+            ClientWidth = 655
+            object Label13: TLabel
+              Left = 8
+              Height = 15
+              Top = 8
+              Width = 33
+              Caption = 'name:'
+              ParentColor = False
+            end
+            object Edit10: TEdit
+              Left = 56
+              Height = 23
+              Top = 8
+              Width = 531
+              Anchors = [akTop, akLeft, akRight]
+              TabOrder = 0
+              Text = 'Edit10'
+            end
+            object Label14: TLabel
+              Left = 8
+              Height = 15
+              Top = 36
+              Width = 38
+              Caption = 'Owner:'
+              ParentColor = False
+            end
+            object Edit11: TEdit
+              Left = 56
+              Height = 23
+              Top = 32
+              Width = 587
+              Anchors = [akTop, akLeft, akRight]
+              TabOrder = 1
+              Text = 'Edit11'
+            end
+            object Button13: TButton
+              Left = 8
+              Height = 25
+              Top = 111
+              Width = 75
+              Caption = 'set'
+              OnClick = Button13Click
+              TabOrder = 2
+            end
+            object CheckBox5: TCheckBox
+              Left = 602
+              Height = 19
+              Top = 8
+              Width = 41
+              Anchors = [akTop, akRight]
+              Caption = 'TXT'
+              TabOrder = 3
+            end
+          end
+          object TabSheet4: TTabSheet
+            Caption = 'Other'
+          end
+        end
+        object CheckBox2: TCheckBox
+          Left = 8
+          Height = 19
+          Top = 64
+          Width = 53
+          Caption = 'asTest'
+          TabOrder = 3
+        end
+        object Button18: TButton
+          Left = 6
+          Height = 25
+          Top = 168
+          Width = 104
+          Caption = 'ChangeToRow'
+          OnClick = Button18Click
+          TabOrder = 4
+        end
+        object Button19: TButton
+          Left = 6
+          Height = 25
+          Top = 141
+          Width = 101
+          Caption = 'calc fee'
+          OnClick = Button19Click
+          TabOrder = 5
+        end
+        object Edit12: TEdit
+          Left = 8
+          Height = 23
+          Top = 112
+          Width = 102
+          TabOrder = 6
+          Text = '100'
+        end
+        object Label15: TLabel
+          Left = 8
+          Height = 15
+          Top = 96
+          Width = 21
+          Caption = 'Fee:'
+          ParentColor = False
+        end
+        object Button24: TButton
+          Left = 8
+          Height = 25
+          Top = 0
+          Width = 27
+          Caption = '+'
+          OnClick = Button24Click
+          TabOrder = 7
+        end
+        object Button25: TButton
+          Left = 40
+          Height = 25
+          Top = 0
+          Width = 27
+          Caption = '-'
+          OnClick = Button25Click
+          TabOrder = 8
+        end
+        object CheckBox6: TCheckBox
+          Left = 54
+          Height = 19
+          Top = 88
+          Width = 43
+          Caption = '/128'
+          TabOrder = 9
+        end
+      end
+      object StringGrid2: TStringGrid
+        Left = 0
+        Height = 137
+        Top = 0
+        Width = 1522
+        Align = alClient
+        Color = clMoneyGreen
+        ColCount = 4
+        DefaultColWidth = 500
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goColSizing, goEditing, goRelaxedRowSelect, goSmoothScroll, goSelectionActive, goRowHighlight]
+        TabOrder = 1
+        OnEditingDone = StringGrid2EditingDone
+        OnSelectCell = StringGrid2SelectCell
+      end
+    end
+    object GroupBoxTXassembled: TGroupBox
+      Left = 0
+      Height = 162
+      Top = 376
+      Width = 1526
+      Align = alBottom
+      Anchors = [akTop, akLeft, akRight, akBottom]
+      Caption = 'Assembled TX'
+      ClientHeight = 142
+      ClientWidth = 1522
+      TabOrder = 2
+      object Memo3: TMemo
+        Left = 0
+        Height = 102
+        Top = 40
+        Width = 1522
+        Align = alClient
+        Anchors = [akTop, akLeft, akRight]
+        Lines.Strings = (
+          'Memo3'
+        )
+        TabOrder = 0
+      end
+      object Panel4: TPanel
+        Left = 0
+        Height = 40
+        Top = 0
+        Width = 1522
+        Align = alTop
+        BevelOuter = bvNone
+        ClientHeight = 40
+        ClientWidth = 1522
+        TabOrder = 1
+        object bRebuild: TButton
+          Left = 8
+          Height = 31
+          Top = 1
+          Width = 168
+          Caption = 'Rebuild'
+          OnClick = bRebuildClick
+          TabOrder = 0
+        end
+        object Label12: TLabel
+          Left = 416
+          Height = 15
+          Top = 8
+          Width = 40
+          Caption = 'Label12'
+          ParentColor = False
+        end
+        object Button27: TButton
+          Left = 208
+          Height = 32
+          Top = 1
+          Width = 173
+          Caption = 'Send to BC'
+          OnClick = Button27Click
+          TabOrder = 1
+        end
+      end
+    end
+  end
+end

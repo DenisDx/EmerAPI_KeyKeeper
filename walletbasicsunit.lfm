@@ -1,0 +1,112 @@
+object WalletBasicsForm: TWalletBasicsForm
+  Left = 465
+  Height = 526
+  Top = 315
+  Width = 836
+  Caption = 'WalletBasicsForm'
+  ClientHeight = 526
+  ClientWidth = 836
+  OnShow = FormShow
+  LCLVersion = '1.8.4.0'
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 476
+    Top = 0
+    Width = 836
+    ActivePage = tsPay
+    Align = alClient
+    TabIndex = 0
+    TabOrder = 0
+    object tsPay: TTabSheet
+      Caption = 'Transfer coins'
+      ClientHeight = 448
+      ClientWidth = 828
+      inline FramePayToAddress1: TFramePayToAddress
+        Height = 448
+        Width = 828
+        Align = alClient
+        ClientHeight = 448
+        ClientWidth = 828
+        inherited pTop: TPanel
+          Width = 828
+          ClientWidth = 828
+        end
+        inherited pAddressFrame: TPanel
+          Width = 828
+          ClientWidth = 828
+          inherited FrameSelectAddress1: TFrameSelectAddress
+            Height = 166
+            Width = 828
+            Align = alClient
+            ClientHeight = 166
+            ClientWidth = 828
+            inherited eAddress: TEdit
+              Width = 804
+            end
+            inherited pAddressInfo: TPanel
+              Width = 800
+              ClientWidth = 800
+            end
+          end
+        end
+        inherited pTop1: TPanel
+          Width = 828
+          ClientWidth = 828
+        end
+      end
+    end
+    object tsCreateName: TTabSheet
+      Caption = 'Create NVS record'
+      ClientHeight = 448
+      ClientWidth = 828
+      inline FrameCreateName1: TFrameCreateName
+        Height = 448
+        Width = 828
+        Align = alClient
+        ClientHeight = 448
+        ClientWidth = 828
+        inherited Panel1: TPanel
+          Width = 828
+          ClientWidth = 828
+          inherited eName: TEdit
+            Width = 812
+          end
+        end
+        inherited Panel2: TPanel
+          Top = 373
+          Width = 828
+          ClientWidth = 828
+        end
+        inherited Panel3: TPanel
+          Height = 221
+          Width = 828
+          ClientHeight = 221
+          ClientWidth = 828
+          inherited meValue: TMemo
+            Height = 156
+            Width = 812
+            Lines.Strings = (
+              'meValue'
+            )
+          end
+          inherited lValueStat: TLabel
+            Top = 197
+          end
+        end
+      end
+    end
+    object tsNameControl: TTabSheet
+      Caption = 'Other'
+      TabVisible = False
+    end
+  end
+  object pBottom: TPanel
+    Left = 0
+    Height = 50
+    Top = 476
+    Width = 836
+    Align = alBottom
+    BevelOuter = bvNone
+    TabOrder = 1
+  end
+end

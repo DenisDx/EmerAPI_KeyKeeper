@@ -1,0 +1,83 @@
+object FrameSelectAddress: TFrameSelectAddress
+  Left = 0
+  Height = 127
+  Top = 0
+  Width = 443
+  ClientHeight = 127
+  ClientWidth = 443
+  TabOrder = 0
+  DesignLeft = 905
+  DesignTop = 294
+  object eAddress: TEdit
+    Left = 8
+    Height = 24
+    Top = 4
+    Width = 427
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = False
+    BorderSpacing.Left = 3
+    BorderSpacing.Top = 3
+    BorderSpacing.Right = 3
+    BorderSpacing.Bottom = 3
+    BorderSpacing.Around = 3
+    BorderSpacing.InnerBorder = 3
+    BorderSpacing.CellAlignHorizontal = ccaCenter
+    BorderSpacing.CellAlignVertical = ccaCenter
+    OnChange = eAddressChange
+    TabOrder = 0
+    Text = 'eAddress'
+  end
+  object pAddressInfo: TPanel
+    Left = 16
+    Height = 92
+    Top = 32
+    Width = 419
+    Anchors = [akTop, akLeft, akRight]
+    BevelOuter = bvNone
+    ClientHeight = 92
+    ClientWidth = 419
+    TabOrder = 1
+    object lAddressInfo: TLabel
+      Left = 8
+      Height = 17
+      Top = 24
+      Width = 244
+      Caption = 'Информация о выбранном адресе'
+      ParentColor = False
+    end
+    object lPayments: TLabel
+      Left = 8
+      Height = 17
+      Top = 49
+      Width = 300
+      Caption = 'Ранее не делалось платежей на этот адрес'
+      ParentColor = False
+    end
+    object chRefresh: TCheckBox
+      Left = 8
+      Height = 24
+      Top = 0
+      Width = 206
+      Caption = 'Обновлять информацию '
+      TabOrder = 0
+    end
+    object lCert: TLabel
+      Left = 8
+      Height = 17
+      Top = 72
+      Width = 187
+      Caption = 'Имеющиеся сертификаты:'
+      ParentColor = False
+    end
+    object chDecodeAddress: TCheckBox
+      Left = 232
+      Height = 24
+      Top = 0
+      Width = 170
+      Caption = 'Распознавать имена'
+      Checked = True
+      State = cbChecked
+      TabOrder = 1
+    end
+  end
+end

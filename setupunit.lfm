@@ -1,0 +1,298 @@
+object setUPForm: TsetUPForm
+  Left = 428
+  Height = 420
+  Top = 185
+  Width = 930
+  Caption = 'setUPForm'
+  ClientHeight = 420
+  ClientWidth = 930
+  Constraints.MinHeight = 420
+  Constraints.MinWidth = 900
+  OnKeyPress = FormKeyPress
+  OnMouseMove = FormMouseMove
+  OnShow = FormShow
+  Position = poOwnerFormCenter
+  LCLVersion = '1.8.4.0'
+  object Panel4: TPanel
+    Left = 0
+    Height = 370
+    Top = 0
+    Width = 930
+    Align = alClient
+    BevelOuter = bvNone
+    ClientHeight = 370
+    ClientWidth = 930
+    TabOrder = 0
+    object Panel3: TPanel
+      Left = 0
+      Height = 370
+      Top = 0
+      Width = 530
+      Align = alClient
+      BevelOuter = bvNone
+      ClientHeight = 370
+      ClientWidth = 530
+      TabOrder = 0
+      object Panel1: TPanel
+        Left = 0
+        Height = 80
+        Top = 0
+        Width = 530
+        Align = alTop
+        BevelOuter = bvNone
+        ClientHeight = 80
+        ClientWidth = 530
+        TabOrder = 0
+        object lTitle: TLabel
+          Left = 8
+          Height = 15
+          Top = 8
+          Width = 150
+          Caption = 'Please enter a new password'
+          ParentColor = False
+        end
+        object mMessage: TMemo
+          Left = 0
+          Height = 48
+          Top = 32
+          Width = 530
+          Align = alBottom
+          BorderStyle = bsNone
+          Color = clBtnFace
+          Lines.Strings = (
+            'mMessage'
+          )
+          ReadOnly = True
+          TabOrder = 0
+          TabStop = False
+        end
+      end
+      object Panel2: TPanel
+        Left = 0
+        Height = 112
+        Top = 80
+        Width = 530
+        Align = alTop
+        BevelOuter = bvNone
+        ClientHeight = 112
+        ClientWidth = 530
+        TabOrder = 1
+        object chShowGenerator: TCheckBox
+          Left = 304
+          Height = 19
+          Top = 8
+          Width = 155
+          Caption = 'show password generator'
+          OnChange = chShowGeneratorChange
+          TabOrder = 2
+        end
+        object ePassword1: TEdit
+          Left = 8
+          Height = 23
+          Top = 32
+          Width = 519
+          Anchors = [akTop, akLeft, akRight]
+          OnChange = ePassword1Change
+          TabOrder = 0
+          Text = 'ePassword1'
+        end
+        object ePassword2: TEdit
+          Left = 8
+          Height = 23
+          Top = 80
+          Width = 519
+          Anchors = [akTop, akLeft, akRight]
+          Color = clNone
+          MaxLength = 1024
+          OnChange = ePassword2Change
+          TabOrder = 1
+          Text = 'ePassword2'
+        end
+        object chShowPassword: TCheckBox
+          Left = 120
+          Height = 19
+          Top = 8
+          Width = 102
+          Caption = 'Show Password'
+          OnChange = chShowPasswordChange
+          TabOrder = 3
+        end
+        object lPassword1: TLabel
+          Left = 10
+          Height = 15
+          Top = 8
+          Width = 80
+          Caption = 'Enter password'
+          ParentColor = False
+        end
+        object lPassword2: TLabel
+          Left = 10
+          Height = 15
+          Top = 60
+          Width = 82
+          Caption = 'Verify password'
+          ParentColor = False
+        end
+        object chShowRate: TCheckBox
+          Left = 472
+          Height = 19
+          Top = 4
+          Width = 159
+          Caption = 'show password evaluation'
+          Checked = True
+          State = cbChecked
+          TabOrder = 4
+          Visible = False
+        end
+      end
+      inline PassRate1: TPassRate
+        Height = 178
+        Top = 192
+        Width = 530
+        Align = alClient
+        ClientHeight = 178
+        ClientWidth = 530
+        TabOrder = 2
+        inherited mInfo: TMemo
+          Height = 105
+          Width = 526
+          Lines.Strings = (
+            'mInfo'
+          )
+        end
+        inherited pbRate: TProgressBar
+          Width = 528
+        end
+        inherited lPasswordRate: TLabel
+          Width = 526
+        end
+      end
+    end
+    object gbGenerator: TGroupBox
+      Left = 530
+      Height = 370
+      Top = 0
+      Width = 400
+      Align = alRight
+      Caption = 'Password generator'
+      ClientHeight = 350
+      ClientWidth = 396
+      TabOrder = 1
+      inline createPassword1: TcreatePassword
+        Height = 300
+        Top = 50
+        Width = 396
+        Align = alTop
+        ClientHeight = 300
+        ClientWidth = 396
+        inherited rgSymbolSet: TRadioGroup
+          Height = 100
+          Width = 393
+          ClientHeight = 80
+          ClientWidth = 389
+        end
+        inherited cBipSet: TComboBox
+          Width = 233
+        end
+        inherited Panel1: TPanel
+          inherited rbCode3: TRadioButton
+            Enabled = True
+          end
+        end
+      end
+      object Panel6: TPanel
+        Left = 0
+        Height = 50
+        Top = 0
+        Width = 396
+        Align = alTop
+        BevelOuter = bvNone
+        ClientHeight = 50
+        ClientWidth = 396
+        TabOrder = 1
+        object bCreatePassword: TBitBtn
+          Left = 270
+          Height = 30
+          Top = 0
+          Width = 123
+          Caption = 'Create a password'
+          OnClick = bCreatePasswordClick
+          OnKeyPress = FormKeyPress
+          OnMouseMove = FormMouseMove
+          TabOrder = 0
+        end
+        object tbDif: TTrackBar
+          Left = 8
+          Height = 33
+          Top = 0
+          Width = 256
+          Max = 50
+          Min = 20
+          OnChange = tbDifChange
+          Position = 30
+          OnMouseMove = FormMouseMove
+          OnKeyPress = FormKeyPress
+          TabOrder = 1
+        end
+      end
+    end
+  end
+  object Panel5: TPanel
+    Left = 0
+    Height = 50
+    Top = 370
+    Width = 930
+    Align = alBottom
+    BevelOuter = bvNone
+    ClientHeight = 50
+    ClientWidth = 930
+    TabOrder = 1
+    object BitBtn1: TBitBtn
+      Left = 783
+      Height = 30
+      Top = 8
+      Width = 139
+      Anchors = [akTop, akRight]
+      Caption = 'Ok'
+      OnClick = BitBtn1Click
+      TabOrder = 0
+    end
+    object BitBtn2: TBitBtn
+      Left = 639
+      Height = 30
+      Top = 8
+      Width = 139
+      Anchors = [akTop, akRight]
+      Caption = 'Cancel'
+      OnClick = BitBtn2Click
+      TabOrder = 1
+    end
+    object BitBtn3: TBitBtn
+      Left = 8
+      Height = 30
+      Top = 8
+      Width = 144
+      Caption = 'Help'
+      TabOrder = 2
+    end
+  end
+  object tRefresh: TTimer
+    Enabled = False
+    Interval = 1
+    OnTimer = tRefreshTimer
+    left = 56
+    top = 24
+  end
+  object tbRandomizer: TTimer
+    Interval = 10
+    OnTimer = tbRandomizerTimer
+    left = 96
+  end
+  object tBlink: TTimer
+    Enabled = False
+    Interval = 333
+    OnTimer = tBlinkTimer
+    left = 259
+    top = 14
+  end
+end

@@ -1,0 +1,144 @@
+Итак, система немного переписана. Обновление затронуло мутации.
+Теперь в возвращаемом значении любой мутации сначала указывается модель, в мутациях ниже прокомментирую
+
+Мутация на создание группы транзакций
+mutation {
+  createtransactiongroup(
+    amount: Float,
+    comment: String,
+    name: String,
+    type: String,
+    user: String,
+    value: String
+  ) {
+	  //Вот здесь указывается возвращаемая модель
+    transactiongroup {
+      address: String
+      amount: Float
+      comment: String
+      id: ID
+      name: String
+      time: Int
+      type: String
+      user {
+		    ссылка на модель пользователя, т.е. тут можно запрашивать его поля
+		    name
+		    username
+      }
+      value: String
+    }
+  }
+}
+
+Мутация на создание транзакции
+mutation {
+  createtransaction(
+    amount: Float,
+    comment: String,
+    name: String,
+    type: String,
+    user: String,
+    value: String,
+    group: String
+  ) {
+    //Вот здесь указывается возвращаемая модель
+    transaction {
+      address: String
+      amount: Float
+      comment: String
+      dpo: String
+      id: ID
+      name: String
+      time: Int
+      type: String
+      user {
+		  ссылка на модель пользователя, т.е. тут можно запрашивать его поля
+      }
+      value: String
+      group {
+		    ссылка на модель группы, т.е. тут можно запрашивать её поля
+	    }
+    }
+  }
+}
+
+
+Запрос на получение списка групп транзакций
+query {
+  transactiongrouplist {
+    address: String
+    amount: Float
+    comment: String
+    id: ID
+    name: String
+    time: Int
+    type: String
+    user {
+	    ссылка на модель пользователя, т.е. тут можно запрашивать его поля
+	    name
+	    username
+    }
+    value: String
+  }
+}
+
+Запрос на получение группы транзакций
+query {
+  transactiongroupitem(id: String) {
+        address: String
+    amount: Float
+    comment: String
+    id: ID
+    name: String
+    time: Int
+    type: String
+    user {
+	    ссылка на модель пользователя, т.е. тут можно запрашивать его поля
+	    name
+	    username
+    }
+    value: String
+  }
+}
+
+Запрос на получение транзакций из группы
+query {
+  transactionlist(group:String) {
+    address: String
+    amount: Float
+    comment: String
+    dpo: String
+    id: ID
+    name: String
+    time: Int
+    type: String
+    user {
+	    ссылка на модель пользователя, т.е. тут можно запрашивать его поля
+    }
+    value: String
+    group {
+	    ссылка на модель группы, т.е. тут можно запрашивать её поля
+	  }
+  }
+}
+
+Запрос на получение одной транзакции
+query {
+  transactionitem(id:String) {
+    address: String
+    amount: Float
+    comment: String
+    dpo: String
+    id: ID
+    name: String
+    time: Int
+    type: String
+    user {
+	    ссылка на модель пользователя, т.е. тут можно запрашивать его поля
+    }
+    value: String
+    group {
+	    ссылка на модель группы, т.е. тут можно запрашивать её поля
+	  }
+  }
+}

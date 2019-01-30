@@ -1,0 +1,245 @@
+object EmerApiTestForm: TEmerApiTestForm
+  Left = 422
+  Height = 441
+  Top = 341
+  Width = 1008
+  Caption = 'EmerApiTestForm'
+  ClientHeight = 441
+  ClientWidth = 1008
+  LCLVersion = '1.8.4.0'
+  object GroupBox1: TGroupBox
+    Left = 0
+    Height = 144
+    Top = 8
+    Width = 424
+    Caption = 'Данные подключения'
+    ClientHeight = 124
+    ClientWidth = 420
+    TabOrder = 0
+    object Label1: TLabel
+      Left = 16
+      Height = 15
+      Top = 14
+      Width = 15
+      Caption = 'Url'
+      ParentColor = False
+    end
+    object Label2: TLabel
+      Left = 16
+      Height = 15
+      Top = 70
+      Width = 23
+      Caption = 'User'
+      ParentColor = False
+    end
+    object Label3: TLabel
+      Left = 16
+      Height = 15
+      Top = 100
+      Width = 23
+      Caption = 'Pass'
+      ParentColor = False
+    end
+    object Edit1: TEdit
+      Left = 96
+      Height = 23
+      Top = 8
+      Width = 320
+      Anchors = [akTop, akLeft, akRight]
+      TabOrder = 0
+      Text = 'https://emcdpo.info'
+    end
+    object Edit2: TEdit
+      Left = 96
+      Height = 23
+      Top = 64
+      Width = 320
+      Anchors = [akTop, akLeft, akRight]
+      TabOrder = 1
+      Text = 'guest'
+    end
+    object Edit3: TEdit
+      Left = 96
+      Height = 23
+      Top = 94
+      Width = 320
+      Anchors = [akTop, akLeft, akRight]
+      TabOrder = 2
+      Text = 'guest'
+    end
+    object Label4: TLabel
+      Left = 16
+      Height = 15
+      Top = 40
+      Width = 66
+      Caption = 'Login suburl'
+      ParentColor = False
+    end
+    object Edit4: TEdit
+      Left = 96
+      Height = 23
+      Top = 36
+      Width = 320
+      Anchors = [akTop, akLeft, akRight]
+      TabOrder = 3
+      Text = '/user/login'
+    end
+  end
+  object Button1: TButton
+    Left = 16
+    Height = 25
+    Top = 152
+    Width = 75
+    Caption = 'Login'
+    OnClick = Button1Click
+    TabOrder = 1
+  end
+  object Label5: TLabel
+    Left = 16
+    Height = 15
+    Top = 224
+    Width = 64
+    Caption = 'Set-Cookie: '
+    ParentColor = False
+  end
+  object Edit5: TEdit
+    Left = 96
+    Height = 23
+    Top = 216
+    Width = 323
+    TabOrder = 2
+  end
+  object Memo2: TMemo
+    Left = 16
+    Height = 138
+    Top = 248
+    Width = 403
+    Lines.Strings = (
+      'query {'
+      '    userconfig([name]) {'
+      '        name'
+      '        jsonvalue'
+      '    }'
+      '}'
+    )
+    TabOrder = 3
+  end
+  object Button2: TButton
+    Left = 16
+    Height = 25
+    Top = 392
+    Width = 75
+    Caption = 'Exec'
+    OnClick = Button2Click
+    TabOrder = 4
+  end
+  object Label6: TLabel
+    Left = 16
+    Height = 15
+    Top = 192
+    Width = 68
+    Caption = 'Query suburl'
+    ParentColor = False
+  end
+  object Edit6: TEdit
+    Left = 96
+    Height = 23
+    Top = 184
+    Width = 323
+    TabOrder = 5
+    Text = '/graphql'
+  end
+  object Button3: TButton
+    Left = 192
+    Height = 25
+    Top = 392
+    Width = 27
+    Caption = 'q1'
+    OnClick = Button3Click
+    TabOrder = 6
+  end
+  object Button4: TButton
+    Left = 248
+    Height = 25
+    Top = 392
+    Width = 27
+    Caption = 'q2'
+    OnClick = Button4Click
+    TabOrder = 7
+  end
+  object Button5: TButton
+    Left = 276
+    Height = 25
+    Top = 392
+    Width = 27
+    Caption = 'q3'
+    OnClick = Button5Click
+    TabOrder = 8
+  end
+  object Button6: TButton
+    Left = 304
+    Height = 25
+    Top = 392
+    Width = 27
+    Caption = 'q4'
+    OnClick = Button6Click
+    TabOrder = 9
+  end
+  object Button7: TButton
+    Left = 336
+    Height = 25
+    Top = 392
+    Width = 27
+    Caption = 'q5'
+    OnClick = Button7Click
+    TabOrder = 10
+  end
+  object Button8: TButton
+    Left = 396
+    Height = 25
+    Top = 392
+    Width = 27
+    Caption = 'q5'
+    TabOrder = 11
+  end
+  object PageControl1: TPageControl
+    Left = 432
+    Height = 440
+    Top = 0
+    Width = 575
+    ActivePage = TabSheet2
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    TabIndex = 1
+    TabOrder = 12
+    object TabSheet1: TTabSheet
+      Caption = 'HTML'
+      ClientHeight = 412
+      ClientWidth = 567
+      object Memo1: TMemo
+        Left = 0
+        Height = 412
+        Top = 0
+        Width = 567
+        Align = alClient
+        Lines.Strings = (
+          'Memo1'
+        )
+        TabOrder = 0
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'JSON'
+      ClientHeight = 412
+      ClientWidth = 567
+      object TreeView1: TTreeView
+        Left = 0
+        Height = 412
+        Top = 0
+        Width = 567
+        Align = alClient
+        Anchors = [akTop, akRight, akBottom]
+        TabOrder = 0
+      end
+    end
+  end
+end

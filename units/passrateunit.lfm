@@ -1,0 +1,59 @@
+object PassRate: TPassRate
+  Left = 0
+  Height = 118
+  Top = 0
+  Width = 313
+  ClientHeight = 118
+  ClientWidth = 313
+  TabOrder = 0
+  DesignLeft = 522
+  DesignTop = 484
+  object mInfo: TMemo
+    Left = 2
+    Height = 45
+    Top = 71
+    Width = 309
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    Color = clBtnFace
+    Lines.Strings = (
+      'mInfo'
+    )
+    ReadOnly = True
+    ScrollBars = ssAutoVertical
+    TabOrder = 0
+  end
+  object lExplanation: TLabel
+    Left = 2
+    Height = 15
+    Top = 49
+    Width = 64
+    Caption = 'Explanation:'
+    ParentColor = False
+  end
+  object pbRate: TProgressBar
+    Left = 0
+    Height = 20
+    Top = 23
+    Width = 311
+    Anchors = [akTop, akLeft, akRight]
+    Max = 50
+    Step = 0
+    TabOrder = 1
+  end
+  object lPasswordRate: TLabel
+    Left = 2
+    Height = 18
+    Top = 0
+    Width = 309
+    Anchors = [akTop, akLeft, akRight]
+    AutoSize = False
+    BorderSpacing.InnerBorder = 10
+    Caption = 'lPasswordRate'
+    Color = clBlack
+    Font.Color = clWhite
+    Font.Style = [fsBold]
+    ParentColor = False
+    ParentFont = False
+    Transparent = False
+  end
+end
