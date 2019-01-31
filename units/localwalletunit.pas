@@ -591,8 +591,8 @@ end;
 
 destructor tLocalWallet.destroy;
 begin
-  inherited;
   fThread.free;
+  inherited;
 end;
 
 function tLocalWallet.checkConnection:boolean;

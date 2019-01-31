@@ -50,7 +50,7 @@ end;
 procedure tEmerApiLocalWallet.asyncDoRawRequest(Thread:TEmerAPIBlockchainThread);
 var url:string;
     resp:TStringList;
-    FormData:TStringList;
+ //   FormData:TStringList;
     //mycookies:TStringList;
     client:TFPHTTPClient;
     ms:tMemoryStream;
@@ -59,7 +59,6 @@ var url:string;
 begin
   //ASYNC function!!!
   Thread.Result:='';
-
 
   s:='';
 
@@ -90,7 +89,7 @@ begin
   url:=url+':'+inttostr(connData.port);
 
 
-  FormData:=TStringList.create;
+ // FormData:=TStringList.create;
   resp:=TStringList.create;
   //mycookies:=TStringList.create;
   client:=TFPHTTPClient.Create(nil);
@@ -130,6 +129,7 @@ begin
     //Thread.result:=GetJSON(s);
 
   finally
+ //   FormData.free;
     client.Free;
     resp.free;
     //mycookies.free;

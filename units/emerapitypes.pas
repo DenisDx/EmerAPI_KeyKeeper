@@ -61,6 +61,7 @@ begin
   for i:=0 to fNotifyList.Count-1 do
      dispose(tpEmerAPINotification(fNotifyList[i]));
   fNotifyList.free;
+  inherited;
 end;
 
 procedure tEmerApiNotified.callNotify(tag:string);

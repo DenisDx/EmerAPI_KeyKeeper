@@ -908,6 +908,7 @@ begin
     finally
       Free;
       resp.free;
+      formdata.free;
     end;
 
   except

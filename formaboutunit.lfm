@@ -6,7 +6,8 @@ object FormAbout: TFormAbout
   Caption = 'About'
   ClientHeight = 325
   ClientWidth = 616
-  LCLVersion = '1.8.2.0'
+  OnShow = FormShow
+  LCLVersion = '1.8.4.0'
   object Panel1: TPanel
     Left = 0
     Height = 50

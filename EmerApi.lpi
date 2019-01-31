@@ -13,11 +13,12 @@
         <TextName Value="Emertech.Antifake.KeyKeeper"/>
       </XPManifest>
       <Icon Value="0"/>
-      <Resources Count="4">
+      <Resources Count="5">
         <Resource_0 FileName="img\icon1.png" Type="RCDATA" ResourceName="ICON1"/>
         <Resource_1 FileName="translation.txt" Type="RCDATA" ResourceName="TRANSLATION"/>
         <Resource_2 FileName="img\IMG1.png" Type="RCDATA" ResourceName="IMG1"/>
         <Resource_3 FileName="img\IMG2.png" Type="RCDATA" ResourceName="IMG2"/>
+        <Resource_4 FileName="README.md" Type="RCDATA" ResourceName="README"/>
       </Resources>
     </General>
     <BuildModes Count="1">
@@ -99,6 +100,7 @@
       <Unit8>
         <Filename Value="units\ucryptocut.pas"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="UCryptoCut"/>
       </Unit8>
       <Unit9>
         <Filename Value="units\UOpenSSL.pas"/>

@@ -252,7 +252,10 @@ begin
     dchanged:=dchanged or seValue.Modified;
 
   finally
-    eOwner.Enabled:=iAmOwner;
+    eOwner.ReadOnly:=not iAmOwner;
+    if iAmOwner
+      then eOwner.color:=clDefault
+      else eOwner.color:=clBtnFace;
     bUpdateName.Enabled:=(iAmOwner and dchanged) and (seValue.Text<>'') and (length(seValue.Text)<=20480);
     seDaysLeft.Enabled:=iAmOwner;
 

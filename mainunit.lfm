@@ -94,7 +94,7 @@ object MainForm: TMainForm
           Height = 176
           Top = 64
           Width = 592
-          HorzScrollBar.Page = 87
+          HorzScrollBar.Page = 188
           VertScrollBar.Page = 56
           Align = alClient
           ClientHeight = 172
@@ -118,6 +118,15 @@ object MainForm: TMainForm
               Caption = 'Add tsk'
               OnClick = BitBtn1Click
               TabOrder = 0
+            end
+            object Button1: TButton
+              Left = 88
+              Height = 25
+              Top = 0
+              Width = 96
+              Caption = '100Xgetbcinfo'
+              OnClick = Button1Click
+              TabOrder = 1
             end
           end
         end

@@ -32,6 +32,7 @@ type
     bRefreshBalance: TBitBtn;
     bRefreshTasks: TBitBtn;
     bShowQR: TBitBtn;
+    Button1: TButton;
     bViewTX: TBitBtn;
     bViewTasks: TBitBtn;
     eAddress: TEdit;
@@ -114,6 +115,7 @@ type
     procedure BitBtn1Click(Sender: TObject);
     procedure bRefreshBalanceClick(Sender: TObject);
     procedure bRefreshTasksClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
     procedure bViewTasksClick(Sender: TObject);
     procedure bViewTXClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -1316,6 +1318,14 @@ begin
       if emerAPI.EmerAPIConnetor.serverAPI.testedOk then
         EmerAPIServerTasks.updateFromServer;
 
+end;
+
+procedure TMainForm.Button1Click(Sender: TObject);
+var i:integer;
+begin
+  //D!!!
+  for i:=0 to 99 do
+    emerAPI.EmerAPIConnetor.walletAPI.sendWalletQueryAsync('getblockchaininfo',nil,{@myQueryDone}nil);
 end;
 
 procedure TMainForm.BitBtn1Click(Sender: TObject);

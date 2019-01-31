@@ -175,6 +175,7 @@ end;
 destructor tEmerAPIServerTaskGroup.destroy;
 begin
   Tasks.Free;
+  inherited;
 end;
 
 
@@ -447,6 +448,7 @@ destructor tEmerAPIServerTaskList.destroy;
 begin
   clearList;
   fItems.Free;
+  inherited;
 end;
 
 function tEmerAPIServerTaskList.getItem(Index: integer):tBaseEmerAPIServerTask;

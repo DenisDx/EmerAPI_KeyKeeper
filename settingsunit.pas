@@ -237,6 +237,7 @@ end;
 destructor tSettingsRecord.destroy;
 begin
   if fListValues<>nil then freeAndNil(fListValues);
+  inherited;
 end;
 
 function tSettingsRecord.getValue:variant;
@@ -484,6 +485,7 @@ var i:integer;
 begin
   for i:=0 to fSettings.Count-1 do tSettingsRecord(fSettings.Objects[i]).free;
   fSettings.Free;
+  inherited;
 end;
 
 procedure TSettings.saveParams(names:array of ansistring);

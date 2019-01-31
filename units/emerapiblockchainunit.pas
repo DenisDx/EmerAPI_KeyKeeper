@@ -237,6 +237,7 @@ destructor TEmerAPIBlockchainThread.destroy; //destroy params
 begin
   //if self=nil then exit;
   if params<>nil then params.free;
+  inherited;
 end;
 
 {

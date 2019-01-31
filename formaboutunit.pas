@@ -17,6 +17,7 @@ type
     mAbout: TMemo;
     Panel1: TPanel;
     procedure bCloseClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
 
   public
@@ -29,12 +30,29 @@ var
 implementation
 
 {$R *.lfm}
+{$IFDEF MSWINDOWS}
+  uses windows;
+
+  {$ENDIF}
 
 { TFormAbout }
 
 procedure TFormAbout.bCloseClick(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TFormAbout.FormShow(Sender: TObject);
+var
+      ResStream : TResourceStream;
+begin
+  ResStream := TResourceStream.Create(HInstance, 'README', PChar(RT_RCDATA));
+  try
+    mAbout.Lines.LoadFromStream(ResStream);
+  finally
+    FreeAndNil(ResStream);
+  end;
+
 end;
 
 end.
