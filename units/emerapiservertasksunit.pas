@@ -8,6 +8,8 @@ uses
   Classes, SysUtils, EmerAPIMain, emerapitypes, EmerAPIBlockchainUnit, fpjson;
 
 type
+tEmerAPIServerTaskValid=(eptvUnknown,eptvValid,eptvInvalid,eptvPart); //part for a group means some tasks are valid
+
 tEmerAPIServerTaskList=class;
 
 tBaseEmerAPIServerTask=class(tObject)
@@ -15,8 +17,15 @@ tBaseEmerAPIServerTask=class(tObject)
     fEmerAPI:tEmerAPI;
     fExecuted:boolean; //sent to BC. Will be removed by parent
     fExecutionDatetime:tDatetime;
+    fSuccessful:boolean; //set together with fExecuted
     fOwner:tEmerAPIServerTaskList;
-    function execute:boolean; virtual; abstract;
+    fOnDone:tNotifyEvent; //called if the task is done (sent to BC, for example, even not successeful)
+    fLastError:string;
+
+    fTaskValid:boolean; //is the task CAN be applied?
+    fTaskValidAt:tDateTime; //0 if not checked; etherwise time
+
+    function execute(onDone:tNotifyEvent=nil):boolean; virtual;
     function getExecuted:boolean; virtual; abstract; //for task: it was send. for group: all the tasks were sent
   public
     fUpdated:boolean; //set true on data loaded. One time.
@@ -35,50 +44,84 @@ tBaseEmerAPIServerTask=class(tObject)
     //  time: Int
     TaskType: String; //type
 
+    onTaskUpdated:tNotifyEvent;
+
     //
     function getDescription:string;  virtual; abstract;
     function fIsKnownName:boolean; virtual; abstract; //рекурсивно вызывает всех детей, если есть. Возвращает типировано ли имя
     function getTitle:string;  virtual; abstract;
     function getNameType:ansistring; virtual; abstract;//Возвращает имя с сигнатурой, например 'dns' или 'af:brand'
 
+    procedure validateTask(); virtual; abstract;
+
+    //stat
+    function getCost:qWord; virtual; abstract;
+
+    function getValid:tEmerAPIServerTaskValid; virtual; abstract;
+
     //  group: ссылка на группу, при запросе можно получать поля, например id
     property Executed:boolean read getExecuted;
+    property Successful:boolean read fSuccessful;
+    property LastError:string read fLastError;
+
     constructor create(mOwner:tEmerAPIServerTaskList);
 end;
 
 tEmerAPIServerTask=class(tBaseEmerAPIServerTask)
  private
+   procedure SendingError(Sender: TObject);
+   procedure Sent(Sender: TObject);
+
+   //procedure onAsyncQueryDoneHandler(sender:TEmerAPIBlockchainThread;result:tJsonData);
    procedure onAsyncQueryDoneHandler(sender:TEmerAPIBlockchainThread;result:tJsonData);
  public
-   function execute:boolean; override;
+   function getEmerAPI:tEmerAPI;
+   function getValid:tEmerAPIServerTaskValid; override;
+   procedure validateTask(); override;
+   procedure updateDataByParent(); //updates fields by parent task
+   function execute(onDone:tNotifyEvent=nil):boolean; override;
    function getExecuted:boolean; override;
+   function getCost:qWord; override;
 end;
 
 tEmerAPIServerTaskGroup=class(tBaseEmerAPIServerTask)
  private
   function getCount:integer;
   function getItem(Index: integer):tBaseEmerAPIServerTask;
+  procedure taskExecuted(sender: tObject);
  protected
    Tasks:tEmerAPIServerTaskList;
  public
    property Count:integer read getCount;
    property Items[Index: integer]:tBaseEmerAPIServerTask read getItem; default;
-   function execute:boolean; override;
+
+   property getTasks:tEmerAPIServerTaskList read Tasks;
+
+   function execute(onDone:tNotifyEvent=nil):boolean; override;
    function getExecuted:boolean; override;
    constructor create(mOwner:tEmerAPIServerTaskList);
-   destructor destroy;
+   destructor destroy; override;
+
+   function getValid:tEmerAPIServerTaskValid; override;
+   procedure validateTask(); override;
+   //stat
+   function getCost:qWord; override;
+   function getUniOwnerCount:integer;
+   function getOwnerByCount(address:ansistring='undefined'):integer;
 end;
 
 //update
 //error
 //newtask
 //taskremoved
+//taskUpdated  : single task has new information
 tEmerAPIServerTaskList=class(tEmerApiNotified)
 private
   fOwnerTask:tBaseEmerAPIServerTask;
   fEmerAPI:tEmerAPI;
   fLastUpdateTime:tDatetime;
   fItems:tList;
+  fValidateAfterCreate:boolean;
   function getItem(Index: integer):tBaseEmerAPIServerTask;
   function getCount:integer;
   procedure clearList;
@@ -87,31 +130,43 @@ private
   procedure myError(sender:tObject);
   procedure myNewTask(sender:tObject);
   procedure myTaskRemoved(sender:tObject);
+  procedure mytaskUpdated(sender:tObject);
 public
   property Count:integer read getCount;
   property Items[Index: integer]:tBaseEmerAPIServerTask read getItem; default;
+  property ValidateAfterCreate:boolean read fValidateAfterCreate write fValidateAfterCreate;
   procedure delete(Index: integer);
+  procedure validateTask(Index:integer=-1); //-1 for all
   procedure updateFromServer(groupID:ansistring='');
-  constructor create(mEmerAPI:tEmerAPI);
-  destructor destroy;
+  constructor create(mEmerAPI:tEmerAPI; setValidateAfterCreate:boolean=true);
+  destructor destroy; override;
 end;
 
 
 implementation
 
-uses HelperUnit;
+uses HelperUnit, EmerAPITransactionUnit, MainUnit{for getprivkey}, crypto, EmerTX, LazUTF8SysUtils;
 
 {tBaseEmerAPIServerTask}
 constructor tBaseEmerAPIServerTask.create(mOwner:tEmerAPIServerTaskList);
 begin
  inherited create;
  fOwner:=mOwner;
+ fLastError:='';
 end;
 
 
-{tEmerAPIServerTask}
-function tEmerAPIServerTask.execute:boolean;
+function tBaseEmerAPIServerTask.execute(onDone:tNotifyEvent=nil):boolean;
 begin
+ fonDone:=onDone;
+ fLastError:='';
+ result:=true;
+end;
+
+{tEmerAPIServerTask}
+function tEmerAPIServerTask.getCost:qWord;
+begin
+  result:=0;
 
 end;
 
@@ -120,10 +175,218 @@ begin
  result:=fExecuted;
 end;
 
-procedure tEmerAPIServerTask.onAsyncQueryDoneHandler(sender:TEmerAPIBlockchainThread;result:tJsonData);
+function tEmerAPIServerTask.getValid:tEmerAPIServerTaskValid;
 begin
-  //set fExecuted!
+ //eptvUnknown,eptvValid,eptvInvalid,eptvPart
+ if fTaskValidAt>0 then
+   if fTaskValid then
+     result:=eptvValid
+   else
+     result:=eptvInvalid
+ else begin
+   result:=eptvUnknown;
+ end;
 end;
+
+procedure tEmerAPIServerTask.onAsyncQueryDoneHandler(sender:TEmerAPIBlockchainThread;result:tJsonData);
+var e:tJsonData;
+    {s:string;
+    val,x:double;
+    nc,i,n:integer;
+    st:ansistring;
+    vR,vY,vS:double;
+    nameScript:tNameScript;
+    amount:integer;
+    }
+begin
+ if result=nil then //requery? failed?
+   exit; //ok. now just do nothing
+
+ if sender.id=('checkname:'+trim(NVSName)) then begin
+   e:=result.FindPath('result');
+   if e<>nil then
+      if e.IsNull then begin
+        //name is free
+        fTaskValidAt:=now;
+        fTaskValid:=true;
+        if assigned(fOwner) then fOwner.callNotify('taskUpdated');
+      end else begin
+        fTaskValidAt:=now;
+        fTaskValid:=false;
+        if assigned(fOwner) then fOwner.callNotify('taskUpdated');
+      end
+   else exit; //can't check //lNameExits.Caption:='Error: can''t find result in: '+result.AsJSON;
+ end;
+
+end;
+
+procedure tEmerAPIServerTask.validateTask();
+var nt:ansistring;
+begin
+ //check if the task is valid.
+ //set fTaskValidAt and fTaskValid
+{  if (NVSName='')
+     or (NVSValue='')
+     or (length(NVSName)>512)
+     or (length(NVSValue)>20480)
+     or (NVSDays<1)
+     or (ownerAddress='')
+     or ((time>1000000) and ((time<()) or (time>())))
+     or ((LockTime>1000000) and ((LockTime<()) or (LockTime>())))
+}
+  if (ownerAddress='')
+     or ((time>1000000) and ((time<(winTimeToUnixTime(nowUTC()))) or (time>(winTimeToUnixTime(nowUTC())+3000))))
+     or ((LockTime>1000000) and ({(LockTime<(winTimeToUnixTime(nowUTC())-3000)) or} (LockTime>(winTimeToUnixTime(nowUTC())+3000*100))))
+  then begin
+     fTaskValidAt:=now;
+     fTaskValid:=false;
+     if assigned(fOwner) then fOwner.callNotify('taskUpdated');
+     exit;
+  end;
+
+ if TaskType='NEW_NAME' then begin
+   //create name. We must check if the name is not exists
+   updateDataByParent;
+
+   if (NVSName='')
+     or (NVSValue='')
+     or (length(NVSName)>512)
+     or (length(NVSValue)>20480)
+     or (NVSDays<1)
+   then begin
+     fTaskValidAt:=now;
+     fTaskValid:=false;
+     if assigned(fOwner) then fOwner.callNotify('taskUpdated');
+     exit;
+   end;
+   //check
+
+   getEmerAPI.EmerAPIConnetor.sendWalletQueryAsync('name_show',getJSON('{name:"'+NVSName+'"}'),@onAsyncQueryDoneHandler,'checkname:'+NVSName);
+
+
+ end else begin//unknown task
+   fTaskValidAt:=0;
+   fTaskValid:=false;
+ end;
+end;
+
+procedure tEmerAPIServerTask.SendingError(Sender: TObject);
+begin
+  //if Sender is tEmerTransaction
+  //  then ShowMessageSafe('Sending error: '+tEmerTransaction(sender).lastError)
+  //  else ShowMessageSafe('Sending error');
+ fSuccessful:=false;
+ fExecuted:=true;
+ if Sender is tEmerTransaction
+    then fLastError:=tEmerTransaction(sender).lastError
+    else fLastError:='unknown sending error';
+
+ if assigned(fonDone) then fonDone(self);
+end;
+
+procedure tEmerAPIServerTask.Sent(Sender: TObject);
+begin
+   //ShowMessageSafe('Successfully sent');
+ fSuccessful:=true;
+ fExecuted:=true;
+ fLastError:='';
+
+ if assigned(fonDone) then fonDone(self);
+end;
+
+procedure tEmerAPIServerTask.updateDataByParent();
+begin
+ {
+ nName:=NVSName;
+ nValue:=NVSValue;
+ nDays:=NVSDays;
+ nAmount:=amount;
+ nOwnerAddress:=ownerAddress;
+ nTime:=time;
+ nLockTime:=LockTime;
+  }
+ if (fOwner<>nil) and (fOwner.fOwnerTask<>nil) then begin
+   if fOwner.fOwnerTask.NVSName<>'' then NVSName:=fOwner.fOwnerTask.NVSName;
+   if fOwner.fOwnerTask.NVSValue<>'' then NVSValue:=fOwner.fOwnerTask.NVSValue;
+   if fOwner.fOwnerTask.NVSDays>0 then NVSDays:=fOwner.fOwnerTask.NVSDays;
+   if fOwner.fOwnerTask.amount>0 then amount:=fOwner.fOwnerTask.amount;
+   if fOwner.fOwnerTask.time<>-1 then time:=fOwner.fOwnerTask.time;
+   if fOwner.fOwnerTask.LockTime<>-1 then LockTime:=fOwner.fOwnerTask.LockTime;
+ end;
+
+end;
+
+function tEmerAPIServerTask.getEmerAPI:tEmerAPI;
+begin
+  result:=fEmerAPI;
+  if result=nil then
+     if (fOwner<>nil) then result:=fOwner.fEmerAPI;
+
+  if result=nil then
+     if (fOwner<>nil) and (fOwner.fOwnerTask<>nil) then
+       result:=fOwner.fOwnerTask.fEmerAPI;
+
+  if result=nil then raise exception.Create('tEmerAPIServerTask.execute: EmerAPI is nil');
+end;
+
+function tEmerAPIServerTask.execute(onDone:tNotifyEvent=nil):boolean;
+var
+    //nName,nValue:ansistring;
+    //nDays,nAmount:qword;
+    //nOwnerAddress:ansistring;
+    //nTime:dWord;
+    //nLockTime:dWord;
+    tx:tEmerTransaction;
+    EmerAPI:tEmerAPI;
+begin
+  inherited;//fonDone:=onDone;
+  result:=false;
+
+  EmerAPI:=getEmerAPI;
+
+
+  {
+  data:
+
+
+  NVSName:ansistring;  - only for NAME_NEW, NAME_UPDATE, NAME_DELETE
+  NVSValue:ansistring; - only for NAME_NEW, NAME_UPDATE
+  NVSDays:qword;  - only for NAME_NEW, NAME_UPDATE
+  amount:qword;  - only for payments.
+  ownerAddress:ansistring; //address
+  time:dword;
+  LockTime:dword;
+  }
+
+  updateDataByParent;
+
+
+  if TaskType='NEW_NAME' then begin
+    if length(NVSName)>512 then exit;
+    if length(NVSValue)>20480 then exit;
+
+    tx:=tEmerTransaction.create(EmerAPI,true);
+
+    if not( (time=-1) or (time=0)) then tx.Time:=time;
+    if not( (LockTime=-1) or (LockTime=0)) then tx.LockTime:= LockTime;
+
+    try
+      tx.addOutput(tx.createNameScript(addressto21(ownerAddress),NVSName,NVSValue,NVSDays,True),EmerAPI.blockChain.MIN_TX_FEE);
+         //EmerAPI.blockChain.getNameOpFee(seDays.Value,opNum('OP_NAME_NEW'),length(nName)+length(nValue))
+      if tx.makeComplete then begin
+        if tx.signAllInputs(MainForm.PrivKey) then begin
+          tx.sendToBlockchain(EmerAPINotification(@Sent,'sent'));
+          tx.addNotify(EmerAPINotification(@SendingError,'error'));
+        end else begin fLastError:=('Can''t sign all transaction inputs using current key: '+tx.LastError); freeandnil(tx); exit; end;//else showMessageSafe('Can''t sign all transaction inputs using current key: '+tx.LastError);
+      end else begin fLastError:=('Can''t create transaction: '+tx.LastError); freeandnil(tx); exit; end; //showMessageSafe('Can''t create transaction: '+tx.LastError);
+    except
+      freeandnil(tx);
+      exit;
+    end;
+    result:=true;
+  end;
+end;
+
 
 {tEmerAPIServerTaskGroup}
 function tEmerAPIServerTaskGroup.getCount:integer;
@@ -140,9 +403,63 @@ begin
  result:=Tasks[Index];
 end;
 
-function tEmerAPIServerTaskGroup.execute:boolean;
+procedure tEmerAPIServerTaskGroup.taskExecuted(sender: tObject);
+var i:integer;
+    mySuccessful:boolean;
 begin
 
+ fSuccessful:=false;
+ mySuccessful:=true;
+ for i:=0 to Tasks.Count-1 do begin
+   if not tBaseEmerAPIServerTask(Tasks[i]).Executed then exit;
+   mySuccessful:= mySuccessful and tBaseEmerAPIServerTask(Tasks[i]).Successful;
+   if not tBaseEmerAPIServerTask(Tasks[i]).Successful then
+    fLastError:= fLastError + tBaseEmerAPIServerTask(Tasks[i]).LastError+'; ';
+ end;
+
+ fSuccessful:=mySuccessful;
+
+ if not assigned(fOnDone) then exit;
+ fOnDone(self);
+end;
+
+function tEmerAPIServerTaskGroup.execute(onDone:tNotifyEvent=nil):boolean;
+var i:integer;
+begin
+ inherited;
+ result:=true;
+ for i:=0 to Tasks.Count-1 do
+   if tBaseEmerAPIServerTask(Tasks[i]).getValid in [eptvValid,eptvPart] then
+     if not tBaseEmerAPIServerTask(Tasks[i]).Execute(@taskExecuted)
+       then result:=false;
+
+end;
+
+procedure tEmerAPIServerTaskGroup.validateTask();
+begin
+  Tasks.validateTask(-1);
+end;
+
+function tEmerAPIServerTaskGroup.getValid:tEmerAPIServerTaskValid;
+var i:integer;
+    ceptvValid,ceptvInvalid:integer;
+begin
+ result:=eptvUnknown;
+
+ //eptvUnknown,eptvValid,eptvInvalid,eptvPart
+
+ ceptvValid:=0;
+ ceptvInvalid:=0;
+ for i:=0 to Tasks.Count-1 do
+   case tBaseEmerAPIServerTask(Tasks[i]).getValid of
+     eptvUnknown:exit;
+     eptvValid:inc(ceptvValid);
+     eptvInvalid:inc(ceptvInvalid);
+   end;
+ if ceptvValid*ceptvInvalid>0 then result:=eptvPart
+    else if ceptvValid>0 then result:=eptvValid
+    else if ceptvInvalid>0 then result:=eptvInvalid;
+ //else just unknown or erroneous state
 end;
 
 function tEmerAPIServerTaskGroup.getExecuted:boolean;
@@ -155,6 +472,46 @@ begin
   result:=true;
 end;
 
+function tEmerAPIServerTaskGroup.getCost:qWord;
+var i:integer;
+begin
+  result:=0;
+  for i:=0 to Tasks.Count-1 do
+    result:=result + tBaseEmerAPIServerTask(Tasks[i]).getCost;
+end;
+
+function tEmerAPIServerTaskGroup.getUniOwnerCount:integer;
+var i:integer;
+    nl:tStringList;
+begin
+ result:=0;
+ if Tasks.Count=1 then begin
+    result:=1;
+    exit;
+ end;
+
+ nl:=tStringList.Create;
+ try
+ for i:=0 to Tasks.Count-1 do
+   if nl.IndexOf(tBaseEmerAPIServerTask(Tasks[i]).ownerAddress)<0 then begin
+      nl.Add(tBaseEmerAPIServerTask(Tasks[i]).ownerAddress);
+      result:=result + 1;
+   end;
+ finally
+   nl.free;
+ end;
+end;
+
+function tEmerAPIServerTaskGroup.getOwnerByCount(address:ansistring='undefined'):integer;
+var i:integer;
+begin
+  result:=0;
+  for i:=0 to Tasks.Count-1 do
+    if tBaseEmerAPIServerTask(Tasks[i]).ownerAddress=address then
+       result:=result + 1;
+end;
+
+
 constructor tEmerAPIServerTaskGroup.create(mOwner:tEmerAPIServerTaskList);
 begin
  inherited create(mOwner);
@@ -165,16 +522,19 @@ begin
 //error
 //newtask
 //taskremoved
+//taskUpdated
  Tasks.addNotify(EmerAPINotification(@(fOwner.myUpdate),'update',true));
  Tasks.addNotify(EmerAPINotification(@(fOwner.myError),'error',true));
  Tasks.addNotify(EmerAPINotification(@(fOwner.myNewTask),'newtask',true));
  Tasks.addNotify(EmerAPINotification(@(fOwner.myTaskRemoved),'taskremoved',true));
+ Tasks.addNotify(EmerAPINotification(@(fOwner.mytaskUpdated),'taskUpdated',true));
+
 
 end;
 
 destructor tEmerAPIServerTaskGroup.destroy;
 begin
-  Tasks.Free;
+  freeandnil(Tasks);
   inherited;
 end;
 
@@ -212,6 +572,12 @@ begin
  callNotify('taskremoved')
 end;
 
+procedure tEmerAPIServerTaskList.mytaskUpdated(sender:tObject);
+begin
+ callNotify('taskUpdated')
+end;
+
+
 procedure tEmerAPIServerTaskList.onAsyncQueryDoneHandler(sender:TEmerAPIBlockchainThread;result:tJsonData);
 var js,e:tJsonData;
     ja:tJSONArray;
@@ -226,6 +592,8 @@ var js,e:tJsonData;
     task:tEmerAPIServerTask;
     group:tEmerAPIServerTaskGroup;
     q:qword;
+
+    taskidx:integer;
 
     function safeString(e:tJsonData):string;
     begin
@@ -333,7 +701,7 @@ begin
 
              if task = nil then begin
                task:=tEmerAPIServerTask.create(self);
-               fItems.add(task);
+               taskidx:=fItems.add(task);
 
                //Comment:string;  //comment: String
                task.Comment:=safeString(ja[i].FindPath('comment'));
@@ -366,6 +734,7 @@ begin
                //TaskType: String; //type
                task.TaskType:=safeString(ja[i].FindPath('type'));
                task.fUpdated:=true;
+               if fValidateAfterCreate then validateTask(taskidx);
                callNotify('newtask');
              end;
            end;
@@ -422,11 +791,26 @@ begin
    ;
 end;
 
-constructor tEmerAPIServerTaskList.create(mEmerAPI:tEmerAPI);
+procedure tEmerAPIServerTaskList.validateTask(Index:integer=-1); //-1 for all
+var i:integer;
+begin
+ if (index<-1) or (index>=fItems.count) then raise exception.Create('tEmerAPIServerTaskList.validateTask: index out of bounds');
+
+ if index<0 then
+   for i:=0 to fItems.count-1 do
+     tBaseEmerAPIServerTask(fItems[i]).validateTask()
+ else
+   tBaseEmerAPIServerTask(fItems[index]).validateTask();
+
+
+end;
+
+constructor tEmerAPIServerTaskList.create(mEmerAPI:tEmerAPI; setValidateAfterCreate:boolean=true);
 begin
  inherited create();
  fEmerAPI:=mEmerAPI;
  fItems:=tList.Create;
+ fvalidateAfterCreate:=setValidateAfterCreate;
 end;
 
 procedure tEmerAPIServerTaskList.clearList;

@@ -10,6 +10,7 @@ object NameViewForm: TNameViewForm
   Constraints.MinWidth = 400
   OnActivate = FormActivate
   OnClose = FormClose
+  OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnShow = FormShow
   LCLVersion = '1.8.4.0'

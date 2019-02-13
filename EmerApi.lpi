@@ -10,7 +10,8 @@
       <ResourceType Value="res"/>
       <UseXPManifest Value="True"/>
       <XPManifest>
-        <TextName Value="Emertech.Antifake.KeyKeeper"/>
+        <TextName Value="EmerAPI / Antifake Key Keeper"/>
+        <TextDesc Value="User private key management application with wallet functions"/>
       </XPManifest>
       <Icon Value="0"/>
       <Resources Count="5">
@@ -43,7 +44,7 @@
         <PackageName Value="LCL"/>
       </Item3>
     </RequiredPackages>
-    <Units Count="66">
+    <Units Count="69">
       <Unit0>
         <Filename Value="EmerApi.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -451,6 +452,24 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="EmbededSignaturesUnit"/>
       </Unit65>
+      <Unit66>
+        <Filename Value="units\x509cert.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="X509cert"/>
+      </Unit66>
+      <Unit67>
+        <Filename Value="x509devunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="x509devform"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="x509devUnit"/>
+      </Unit67>
+      <Unit68>
+        <Filename Value="synemernvs.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="SynEmerNVS"/>
+      </Unit68>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

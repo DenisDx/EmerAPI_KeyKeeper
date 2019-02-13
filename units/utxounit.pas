@@ -53,8 +53,8 @@ type
     function memPoolTXReady:boolean;
     procedure updateUTXOByMempool();
   protected
-    procedure updateBlockchain;
-    procedure updateMempool;
+    function updateBlockchain:boolean;
+    function updateMempool:boolean;
     procedure clearUTXO();
     function getCount:integer;
     function getItem(Index:integer):tUTXO;
@@ -65,7 +65,7 @@ type
     property Count:integer read GetCount;
     property Items[Index:integer]:tUTXO read getItem; default;
     //procedure addNotify(eapiNotify:tEmerAPINotification);
-    procedure update(eapiNotify:tEmerAPINotification);
+    function update(eapiNotify:tEmerAPINotification):boolean;
     property blockChain:tBlockchain read fblockChain write fblockChain;
     property emerAPIConnector:TEmerAPIBlockchainProto read femerAPIConnector write femerAPIConnector;
     function giveToSpend(value:qword;lTxExclude:tStringList=nil;canUseMempool:boolean=true;optimization:tUTXOOptimization=uxoSaveCoinDaysOptimized):tList; //returns UTXO list to spend
@@ -345,12 +345,13 @@ end;
 
 
 
-procedure tUTXOList.update(eapiNotify:tEmerAPINotification);
+function tUTXOList.update(eapiNotify:tEmerAPINotification):boolean;
 begin
   addNotify(eapiNotify);
 
-  updateBlockchain;
-  updateMempool;
+  result:=true;
+  if not updateBlockchain then result:=false;
+  if not updateMempool then result:=false;
 end;
 
 function tUTXOList.giveToSpend(value:qword;lTxExclude:tStringList=nil;canUseMempool:boolean=true;optimization:tUTXOOptimization=uxoSaveCoinDaysOptimized):tList; //returns UTXO list to spend
@@ -674,9 +675,10 @@ begin
 
 end;
 
-procedure tUTXOList.updateBlockchain;
+function tUTXOList.updateBlockchain:boolean;
 var i:integer; s:AnsiString;
 begin
+ result:=false;
  if fEmerAPIConnector=nil then exit;
 
  if jsLastscantxoutset<>nil then freeandnil(jsLastscantxoutset);
@@ -688,22 +690,23 @@ begin
  if length(s)>0 then delete(s,length(s),1);
 
 
- EmerAPIConnector.sendWalletQueryAsync('scantxoutset',
+ result:=EmerAPIConnector.sendWalletQueryAsync('scantxoutset',
       GetJSON('{"action":"start",scanobjects:['+s+']}')
-   ,@onBlockchainData,'scantxoutset_'+fEmerAPIConnector.getNextID);
+   ,@onBlockchainData,'scantxoutset_'+fEmerAPIConnector.getNextID)<>nil;
 
 end;
 
-procedure tUTXOList.updateMempool;
+function tUTXOList.updateMempool():boolean;
 begin
+ result:=false;
  if fEmerAPIConnector=nil then exit;
  //if jsLastgetrawmempool<>nil then freeandnil(jsLastgetrawmempool);
  if fMempoolTXIDLlst<>nil then freeandnil(fMempoolTXIDLlst);
 
  //step 1. receiving mempool
- fEmerAPIConnector.sendWalletQueryAsync('getrawmempool',
+ result:=fEmerAPIConnector.sendWalletQueryAsync('getrawmempool',
     nil  //GetJSON('{"action":"start",scanobjects:['+s+']}')
-   ,@onBlockchainData,'getrawmempool_'+fEmerAPIConnector.getNextID);
+   ,@onBlockchainData,'getrawmempool_'+fEmerAPIConnector.getNextID)<>nil;
 
 
 end;

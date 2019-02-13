@@ -21,6 +21,7 @@ object PassRate: TPassRate
     ReadOnly = True
     ScrollBars = ssAutoVertical
     TabOrder = 0
+    TabStop = False
   end
   object lExplanation: TLabel
     Left = 2

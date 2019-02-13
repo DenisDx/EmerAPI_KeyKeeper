@@ -16,7 +16,8 @@ uses
   FrameNVSRecordUnit, FrameBaseNVSUnit, MempoolViewerUnit, memPoolUnit,
   EmerAPITransactionUnit, BaseTXUnit, FrameServerTaskUnit, MempoolViewerUnit2,
   HDNodeUnit, masssendingunit, FrameDigitalAssetUnit, AtomFormUnit,
-  FormAboutUnit, SplashFormUnit, SignMessageUnit, CheckSignatureUnit, unit1;
+  FormAboutUnit, SplashFormUnit, SignMessageUnit, CheckSignatureUnit,
+  x509devUnit, unit1;
 {$R *.res}
 
 begin
@@ -38,6 +39,7 @@ begin
   Application.CreateForm(TFormAbout, FormAbout);
   Application.CreateForm(TSignMessageForm, SignMessageForm);
   Application.CreateForm(TCheckSignatureForm, CheckSignatureForm);
+  //Application.CreateForm(Tx509devform, x509devform);
   //Application.CreateForm(TNameViewForm, NameViewForm);
   Application.Run;
 

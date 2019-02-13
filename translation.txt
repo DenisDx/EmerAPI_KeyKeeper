@@ -9,6 +9,30 @@
  'MainForm.gbStatus':{en:'Status',ru:'Статус'},
  'MainForm.miSettings':{en:'Settings',ru:'Настройки'},
 
+ 'MainForm.miAbout':{en:'About',ru:'О программе'},
+ 'MainForm.miExit':{en:'Exit',ru:'Выход'},
+ 'MainForm.miSystem':{en:'System',ru:'Система'},
+ 'MainForm.miServer':{en:'Server',ru:'Сервер'},
+ 'MainForm.miOpenWeb':{en:'Open web interface',ru:'Открыть веб-интерфейс сервера'},
+
+ 'MainForm.miTools':{en:'Tools',ru:'Инструменты'},
+
+ 'MainForm.miWallet':{en:'Wallet',ru:'Кошелек'},
+ 'MainForm.miWalletTransfer':{en:'Coins transfer',ru:'Перевод монет'},
+ 'MainForm.miWalletName':{en:'Create Digital Asset',ru:'Создать Цифровой Актив'},
+ 'MainForm.miWalletMassSend':{en:'Mass coin sending',ru:'Массовая отправка монет'},
+ 'MainForm.miWalletAtom':{en:'Atom contract',ru:'Атомарный контракт'},
+
+ 'MainForm.miAntifake':{en:'Antifake',ru:'Antifake'},
+
+ 'MainForm.miDevTools':{en:'Developer tools',ru:'Инструменты разработчика'},
+ 'MainForm.miEncryption':{en:'Encryption tools',ru:'Инструменты шифрования'},
+ 'MainForm.miTX':{en:'TX raw builder/decoder',ru:'Декодировщик и построитель сырых Транзакций'},
+ 'MainForm.miLog':{en:'Log window',ru:'Окно журнала'},
+ 'MainForm.miConsole':{en:'EmerAPI console',ru:'Консоль EmerAPI'},
+ 'MainForm.miMemPool':{en:'Mempool viewer',ru:'Просмотр Mempool'},
+ 'MainForm.miSimulateAction':{en:'Simulate Action',ru:'Имитировать Действие'},
+
 
  'MainForm.lPrivateKey':{en:'Private Key',ru:'Прив. Ключ'},
  'MainForm.lAddress':{en:'Address',ru:'Адрес'},
@@ -34,18 +58,19 @@
 
 
  'MainForm.bCopyAddress.Hint':{en:'Copy address to buffer',ru:'Копировать адрес в буфер'},
- 'MainForm.bRefreshBalance':{en:'Refresh tasks',ru:'Обновить задачи'},
  'MainForm.bViewTX.Hint':{en:'View the Digital Assets list',ru:'Просмотр списка цифровых активов'},
  'MainForm.bShowQR.Hint':{en:'Show QR code',ru:'Показать QR код'},
- 'MainForm.bRefreshTasks':{en:'Refresh balance',ru:'Обновить баланс'},
-
+ 'MainForm.bRefreshBalance':{en:'Refresh balance',ru:'Обновить баланс'},
+ 'MainForm.bRefreshTasks':{en:'Refresh tasks',ru:'Обновить задачи'},
 
  'MainForm.sbPK.UNLOCKED':{en:'UNLOCKED',ru:'РАЗБЛОКИРОВАН'},
  'MainForm.sbPK.LOCKED':{en:'LOCKED',ru:'ЗАБЛОКИРОВАН'},
  'MainForm.sbPK.ABSENT':{en:'ABSENT',ru:'ОТСУТСТВУЕТ'},
 
  'MainForm.sbLW.ACTIVE':{en:'ACTIVE',ru:'ПОДКЛЮЧЕН'},
+ 'MainForm.sbLW.Loading':{en:'LOADING...',ru:'ЗАГРУЗКА...'},
  'MainForm.sbServer.ACTIVE':{en:'ACTIVE',ru:'ПОДКЛЮЧЕН'},
+ 'MainForm.sbServer.LOADING':{en:'LOADING...',ru:'ЗАГРУЗКА...'},
  'MainForm.sbServer.GuestMODE':{en:'GUEST MODE',ru:'ГОСТЕВОЙ РЕЖИМ'},
 
  'SignMessageForm':{en:'Sign Message',ru:'Подписать сообщение'},
@@ -395,16 +420,53 @@
  ,'FrameDigitalAsset.Title.cert':{en:'CERTIFICATE: ',ru:'СЕРТИФИКАТ: '}
  ,'FrameDigitalAsset.Title.Empty':{en:'ALIAS OR UNKNOWN: ',ru:'ПСЕВДОНИМ ИЛИ НЕИЗВ: '}
 
+ ,'FrameDigitalAsset.Title.dpoBrand':{en:'DPO Brand: ',ru:'DPO Бренд: '}
+ ,'FrameDigitalAsset.Title.dpo':{en:'DPO item: ',ru:'DPO item: '}
+ ,'FrameDigitalAsset.Title.afOwner':{en:'Antifake owner: ',ru:'Antifake владелец: '}
+ ,'FrameDigitalAsset.Title.afProduct':{en:'Antifake product: ',ru:'Antifake продукт: '}
+ ,'FrameDigitalAsset.Title.afLot':{en:'Antifake lot: ',ru:'Antifake партия:'}
+ ,'FrameDigitalAsset.Title.afUnknown':{en:'Antifake UNKNOWN:',ru:'Antifake НЕИЗВЕСТНЫЙ ТИП: '}
+
  ,'FrameDigitalAsset.Title.Undetected':{en:'UNKNOWN: ',ru:'НЕИЗВЕСТНО: '}
 
 
  ,'TFrameServerTask.OP_NAMENEW_ONE':{en:'Create: ',ru:'Создать: '}
  ,'TFrameServerTask.Create_Unknown_Name':{en:'Name: ',ru:'Имя: '}
  ,'TFrameServerTask.Create_DPO_record':{en:'DPO record: ',ru:'DPO запись: '}
+ ,'TFrameServerTask.bDetails':{en:'Details',ru:'Подробнее'}
+ ,'TFrameServerTask.bDelete':{en:'Delete',ru:'Удалить'}
+ ,'TFrameServerTask.bDelete.Hint':{en:'Permanently delete the tasks from the server queue',ru:'Удалить записи из очереди задач сервера навсегда'}
+ ,'TFrameServerTask.bExecute':{en:'Execute',ru:'Выполнить'}
+ ,'TFrameServerTask.bExecute.Hint':{en:'Perform operations in blockchain',ru:'Выполнить операции в блокчейне'}
+ ,'TFrameServerTask.lTotalNames':{en:'Records count:',ru:'Количество записей:'}
+ ,'TFrameServerTask.lTotalOwners':{en:'Owners count:',ru:'Количество владельцев:'}
+ ,'TFrameServerTask.lTotalCost':{en:'Total cost (EMC):',ru:'Стоимость (EMC):'}
+ ,'TFrameServerTask.lOwnedCount':{en:'Belong to your:',ru:'Принадлежит Вам:'}
 
 
- ,'FrameCreateName.NameIsFree':{en:'Name is not registered yet',ru:'Имя свободно для регистрации'}
- ,'FrameCreateName.NameIsDelegated':{en:' has registered the name till ',ru:' зарегистрировал имя до '}
+ ,'tFrameCreateName.NameIsFree':{en:'Name is not registered yet',ru:'Имя свободно для регистрации'}
+ ,'tFrameCreateName.NameIsDelegated':{en:' has registered the name till ',ru:' зарегистрировал имя до '}
+ ,'tFrameCreateName.lLoadTemplate':{en:'Load template:',ru:'Загрузить шаблон:'}
+ ,'tFrameCreateName.cLoadTemplate':{en:'Select template...',ru:'Выберите шаблон...'}
+ ,'tFrameCreateName.Templates.YourName':{en:'YourName',ru:'ВашеИмя'}
+
+ ,'tFrameCreateName.Templates.dnsName':{en:'dns:insertyourdomain.here',ru:'dns:вставьтевашдомен.сюда'}
+ ,'tFrameCreateName.Templates.dnsValue':{en:'A=127.0.0.1',ru:'A=127.0.0.1'}
+ ,'tFrameCreateName.Templates.sshName':{en:'ssh:YourName',ru:'ssh:ВашеИмя'}
+ ,'tFrameCreateName.Templates.sshValue':{en:'*Insert your ssh certificate here (a string like \"ssh-rsa AAA........\") or a link to another name with an @ symbol (for example, \"@AnotherName\"). You can insert multiple records, separating them with | (for example, \"user1|user2|user3\") to creating a group*',ru:'*вставьте сюда Ваш ssh сертификат (строка вида \"ssh-rsa AAA........\") или ссылку на другое имя с символа @ (например, \"@AnotherName\"). Можно вставлять несколько записей, разделяя их знаком | (например, \"user1|user2|user3\")*'}
+ ,'tFrameCreateName.Templates.sslName':{en:'ssl:YourCertificateSerialInhex',ru:'ssl:СерийныйНомерВашегоСертификатаВhex'}
+ ,'tFrameCreateName.Templates.sslValue':{en:'sha256=*insert sha256 hash of your SSL certificate here in hex (low case)*',ru:'sha256=*вставьте сюда sha256 хеш Вашего SSL сертификата (hex, маленькие буквы)*'}
+ ,'tFrameCreateName.Templates.enumName':{en:'enum:YourPhoneNumberInternational:0',ru:'enum:ВашТелефонВМеждународномФормате:0'}
+ ,'tFrameCreateName.Templates.enumValue':{en:'SIG=*fill the fields separated by | :verifier|signature E2U+sip=PRI1|PRI2|RegExp*',ru:'SIG=*Заполните поля, разделенные знаком | : verifier|signature E2U+sip=PRI1|PRI2|RegExp*'}
+
+ ,'tFrameCreateName.Templates.dpoBrandName':{en:'dpo:BrandName',ru:'dpo:НаименованиеБренда'}
+ ,'tFrameCreateName.Templates.dpoBrandValue':{en:'URL=',ru:'URL='}
+ ,'tFrameCreateName.Templates.dpoName':{en:'dpo:BrandName:SerialNumber:0',ru:'dpo:НаименованиеБренда:СерийныйНомер:0'}
+ ,'tFrameCreateName.Templates.dpoValue':{en:'Signature=*InsertBrandSignatureHere*',ru:'Signature=*ВставьтеПодписьБрендаСюда*'}
+ ,'tFrameCreateName.Templates.docName':{en:'doc:YourDocumentIDorSha256Hash',ru:'doc:ИдентификаторВашегоДокументаИлиSha256Хеш'}
+ ,'tFrameCreateName.Templates.docValue':{en:'TITLE=*Put document title here. This is not a required field.*',ru:'TITLE=*Втавьте сюда заголовок документа. Это не обязательное поле.*'}
+ ,'tFrameCreateName.Templates.certName':{en:'cert:AddressOr&NameOr@Hash:type:0',ru:'cert:АдресИли&ИмяИли@Хеш:Тип:0'}
+ ,'tFrameCreateName.Templates.certValue':{en:'*ISSUER=*UssuerName*\n*EXDATE=*ExpirationDate*\nSIGN=*IssuersSignature*',ru:'*ISSUER=*ВставьтеИмяИздателя*\n*EXDATE=*ВставьтеДатуИстечения*\nSIGN=*ВставьтеПодписьИздателя*'}
 
  ,'NameViewForm.lInfo.myTask':{en:'Task for create an asset (owned by you): ',ru:'Задача создание записи (Вашей): '}
  ,'NameViewForm.lInfo.myNVS':{en:'NVS asset (owned by you): ',ru:'NVS запись (Ваша): '}
@@ -418,7 +480,8 @@
  ,'NameViewForm.msgWrongAddress':{en:'Wrong new owner address',ru:'Новый адрес пользователя неверен'}
  ,'NameViewForm.msgWrongAddressSig':{en:'New owner address is belong to another network',ru:'Введенный новый адрес владельца имени принадлежит другой сети'}
  ,'NameViewForm.msgSendToBC':{en:'The changes are sent to blockchain. It will take some time (up to 20 minutes) to update.',ru:'Сделанные изменения отправлены в блокчейн. Потребуется некоторое время (до 20 минут) для обновления.'}
-
+ ,'NameViewForm.Caption.TaskNewName':{en:'Create asset: ',ru:'Создать актив: '}
+ ,'NameViewForm.eOwner.myTask':{en:' (your address)',ru:' (Ваш адрес)'}
 
  ,'AtomForm':{en:'Atom Contract',ru:'Атомарный Контракт'}
  ,'AtomForm.NameNotLoaded':{en:'Please paste contract from buffer',ru:'Вставьте контракт из буфера'}
@@ -444,4 +507,6 @@
  ,'AtomForm.lState':{en:'State',ru:'Состояние'}
  ,'AtomForm.lContractResume':{en:'Resume',ru:'Краткая информация'}
 
+ ,'WalletBasicsForm':{en:'Wallet basics',ru:'Базовые операции кошелька'}
+ ,'PleaseWait':{en:'Please wait',ru:'Пожалуйста, подождите'}
 }

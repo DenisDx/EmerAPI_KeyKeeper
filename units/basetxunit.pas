@@ -18,9 +18,6 @@ uses
 type
 tbaseTX=class;
 
-
-
-
 tBaseTXI=class(tObject)
 private
   fLastHashToSign:ansistring;
@@ -91,8 +88,8 @@ tbaseTX=class (tEmerApiNotified)
 
   public
     lastError:string;
-    property LockTime:dword read fLockTime;
-    property Time:dword read fTime;
+    property LockTime:dword read fLockTime write fLockTime;
+    property Time:dword read fTime write fTime;
     property Version:dword read fVersion;
 
     property insCount:integer read getInsCount;

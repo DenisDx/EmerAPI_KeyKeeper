@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ComCtrls,
-  ExtCtrls, PayToAddressFrameUnit, frameCreateNameUnit;
+  ExtCtrls, PayToAddressFrameUnit, frameCreateNameUnit, localizzzeUnit;
 
 type
 
@@ -40,6 +40,8 @@ procedure TWalletBasicsForm.FormShow(Sender: TObject);
 begin
   FramePayToAddress1.init(nil);
   FrameCreateName1.init(nil);
+
+  localizzze(self);
 end;
 
 

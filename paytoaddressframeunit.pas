@@ -76,7 +76,7 @@ begin
     //ttx addInputs - Добавляет входы по выходам... добавляет желания. может сама добавить сдачу на еще один вход
     //если передан change address
     if tx.makeComplete then begin//add inputs, send change back to myself
-     MainForm.MenuItem21Click(nil);
+     MainForm.miTXClick(nil);
      CreateRawTXForm.LoadbinTX(packTX(tx.getTTX));
    end else showMessageSafe('Can''t create transaction: '+tx.LastError);
 

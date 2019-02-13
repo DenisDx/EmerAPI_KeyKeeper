@@ -50,7 +50,7 @@ var h:integer;
         result:=result + '..';
       end;
     end;
-var s:ansistring;
+var s,s2:ansistring;
     st:string;
 begin
 
@@ -73,7 +73,53 @@ begin
 
     end else
     if s='af' then begin
+      if pos(':',st)>0
+            then s2:=copy(st,1,pos(':',st)-1)
+            else s2:='';
+      if s2<>'' then
+        delete(st,1,length(s2)+1);
 
+      //af:owner:<name>[:<N>]
+      //af:product:<name>:[<N>]
+      //af:lot:<name>:[<N>]
+      if s2='owner' then begin
+        pTitle.Caption:=adjustName(
+         localizzzeString('FrameDigitalAsset.Title.afOwner','Antifake OWNER: ')
+          +st
+        );
+      end else
+      if s2='product' then begin
+        pTitle.Caption:=adjustName(
+         localizzzeString('FrameDigitalAsset.Title.afProduct','Antifake PRODUCT: ')
+          +st
+        );
+      end else
+      if s2='lot' then begin
+        pTitle.Caption:=adjustName(
+         localizzzeString('FrameDigitalAsset.Title.afLot','Antifake LOT: ')
+          +st
+        );
+      end else begin
+        pTitle.Caption:=adjustName(
+          localizzzeString('FrameDigitalAsset.Title.afUnknown','Antifake unknown: ')
+           +st
+         );
+      end;
+
+    end else
+    if s='dpo' then begin
+      if pos(':',st)>0 then begin
+        //item
+        pTitle.Caption:=adjustName(
+         localizzzeString('FrameDigitalAsset.Title.dpo','DPO ITEM: ')
+          +st
+        );
+      end else begin
+         pTitle.Caption:=adjustName(
+          localizzzeString('FrameDigitalAsset.Title.dpoBrand','DPO BRAND: ')
+           +st
+         );
+      end;
 
     end else
     if s='ssl' then begin

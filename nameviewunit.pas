@@ -8,7 +8,7 @@ uses
   Classes, SysUtils, FileUtil, SynEdit, SynCompletion, SynHighlighterAny,
   SynHighlighterIni, Forms, Controls, Graphics, Dialogs, ExtCtrls,
   NVSRecordUnit, EmerAPIServerTasksUnit, LMessages, ComCtrls, Buttons, StdCtrls,
-  Spin, EmerAPIBlockchainUnit, fpjson, jsonparser;
+  Spin, EmerAPIBlockchainUnit, fpjson, jsonparser, SynEmerNVS;
 
 type
 
@@ -44,6 +44,7 @@ type
     procedure eOwnerChange(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
+    procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure seValueChange(Sender: TObject);
@@ -52,6 +53,7 @@ type
     procedure nvsSent(Sender: TObject);
     procedure nvsError(Sender: TObject);
   private
+    SynEmerNVSSyn:tSynEmerNVSSyn;
     procedure updateView(sender:tObject);
     procedure myQueryDone(sender:TEmerAPIBlockchainThread;result:tJsonData);
   public
@@ -144,7 +146,11 @@ begin
   Application.CreateForm(TNameViewForm, NameViewForm);
   NameViewFormList.AddObject(BaseEmerAPIServerTask.NVSName,NameViewForm);
   NameViewForm.BaseEmerAPIServerTask:=BaseEmerAPIServerTask;
-  NameViewForm.Caption:=BaseEmerAPIServerTask.NVSName;
+
+  if BaseEmerAPIServerTask.TaskType='NEW_NAME' then
+    NameViewForm.Caption:=localizzzeString('NameViewForm.Caption.TaskNewName','Create asset: ') + BaseEmerAPIServerTask.NVSName
+  else
+    NameViewForm.Caption:=BaseEmerAPIServerTask.NVSName;
 
   setFormPosition(NameViewForm);
 
@@ -265,7 +271,12 @@ begin
 
   end;
 
-
+  if (pos(':',eName.Text)>0) then begin
+    setSynHighliterByName(SynEmerNVSSyn,eName.Text);
+    seValue.Highlighter:=SynEmerNVSSyn;
+  end
+  else
+    seValue.Highlighter:=nil;
 
 end;
 
@@ -296,7 +307,10 @@ begin
      else
        lInfo.Caption:=localizzzeString('NameViewForm.lInfo.myTask','Task for create an asset (owned by other(s)):');
 
-     eOwner.Text:=buf2Base58Check(mainForm.globals.AddressSig+BaseEmerAPIServerTask.ownerAddress);
+     if BaseEmerAPIServerTask.ownerAddress<>'' then
+       eOwner.Text:=buf2Base58Check(mainForm.globals.AddressSig+BaseEmerAPIServerTask.ownerAddress)
+     else
+       eOwner.Text:=mainForm.eAddress.text{+localizzzeString('NameViewForm.eOwner.myTask',' (your address)')};
 
      seDaysLeft.Value:=BaseEmerAPIServerTask.NVSDays;
      seDaysLeft.MinValue:=0;
@@ -436,10 +450,19 @@ begin
   SuicideTimer.Enabled:=true;
 end;
 
+procedure TNameViewForm.FormCreate(Sender: TObject);
+begin
+
+if SynEmerNVSSyn=nil then SynEmerNVSSyn:=tSynEmerNVSSyn.Create(self);
+end;
+
 procedure TNameViewForm.FormDestroy(Sender: TObject);
 begin
   if LastActivatedNameViewForm=self then
     LastActivatedNameViewForm:=nil;
+
+  if SynEmerNVSSyn<>nil then
+    freeandnil(SynEmerNVSSyn);
 end;
 
 

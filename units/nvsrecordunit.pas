@@ -69,9 +69,211 @@ tNVSRecord= class ({tEmerApiNotified}tBaseTXO) //tEmerApiNotified? tObject?
     procedure AsyncRequestDone(sender:TEmerAPIBlockchainThread;result:tJsonData);//update_: write fDeepness, fSpending, ftxid, fn, fScriptToSign, fvalue, fHeight  load_:
 end;
 
+function verifyNVSName(name:ansistring; EmerAPI:tEmerAPI=nil):boolean;
+
 implementation
 
 uses EmerTX, crypto, math, mainUnit, CryptoLib4PascalConnectorUnit;
+
+
+function verifyNVSName(name:ansistring; EmerAPI:tEmerAPI=nil):boolean;
+var i:integer;
+    ntype:ansistring;
+    s:ansistring;
+
+    const
+      certTypes:array[0..5] of ansistring =
+      ('all','list','cert','id','doc','af');
+
+    function isInArray(v:ansistring; arr:array of ansistring):boolean;
+    var i:integer;
+    begin
+      result:=true;
+
+      for i:=0 to length(arr)-1 do
+        if arr[i]=v then exit;
+
+      result:=false;
+    end;
+
+    function pullPart(var s:ansistring;sep:char=':'):ansistring;
+    var i:integer;
+    begin
+      result:=''; if s='' then exit;
+      i:=length(s);
+      while (i>0) do
+        if s[i]=sep then begin
+           result:=copy(s,i+1,length(s)-i);
+           delete(s,i,length(s)-i+1);
+           exit;
+        end else dec(i);
+      result:=s; s:='';
+    end;
+
+    function popPart(var s:ansistring;sep:char=':'):ansistring;
+    var i:integer;
+    begin
+      i:=pos(sep,s);
+      if i<1 then begin
+         result:=s;
+         s:='';
+      end else begin
+         result:=copy(s,1,i-1);
+         delete(s,1,i);
+      end;
+    end;
+    type setofchar=set of char;
+    function validSet(s:ansistring;aset:setofchar):boolean;
+    var i:integer;
+    begin
+      result:=false;
+      if s='' then exit;
+      for i:=1 to length(s) do if not (s[i] in aset) then exit;
+      result:=true;
+    end;
+
+    function checkHex(s:ansistring):boolean;
+    begin
+      result:=validSet(s,['0'..'9','a'..'z']);
+    end;
+    function checkDec(s:ansistring):boolean;
+    begin
+      result:=validSet(s,['0'..'9']);
+    end;
+
+    function checkEmail(s:ansistring):boolean;
+    var i:integer;
+    begin
+      result:=false;
+      if not validSet(popPart(s,'@'),['0'..'9','a'..'z','.','-','_']) then exit;
+      //domain
+      if s='' then exit;
+      if s[length(s)]='.' then exit;
+      while s<>'' do
+         if not validSet(popPart(s,'.'),['0'..'9','a'..'z','-']) then exit;
+
+      result:=true;
+    end;
+
+    const
+      code64set=['0'..'9','a'..'z','A'..'Z','+','/','='];
+begin
+  //if we have EmerAPI we can provide deep verification
+  result := true;
+
+  i:=pos(':',name);
+  if i<1 then exit;
+
+  ntype:=copy(name,1,i-1);
+  delete(name,1,i);
+  {
+  ,senmDNS
+  ,senmSSH
+  ,senmSSL
+  ,senmENUMER
+  ,senmDPORoot
+  ,senmDPO
+  ,senmDOC
+  ,senmCERT
+
+  +infocard
+  +blog
+  +af
+  +notar  //notar:name:email:notarizationCreateTime
+  }
+
+  result:=false;
+  if nType='dns' then begin
+    //xxxx.xxx.[coin/emc/bazar/lib]
+    if length(name)<5 then exit;
+    if (copy(name,length(name)-4,5)<>'.coin')
+       and
+       (copy(name,length(name)-3,4)<>'.emc')
+       and
+       (copy(name,length(name)-5,6)<>'.bazar')
+       and
+       (copy(name,length(name)-3,4)<>'.lib')
+       then exit;
+    if name[1]='.' then exit;
+    if pos('..',name)>0 then exit;
+    for i:=1 to length(name) do if not (name[i] in ['a'..'z','0'..'9','-','.']) then exit;
+    result:=true;
+  end else if nType='ssh' then begin
+    result:=true;
+  end else if nType='ssl' then begin
+    {
+    for i:=1 to length(name) if not (name[i] in ['a'..'f','0'..'9']) then exit;
+    result:=true;
+    }
+    result:=validSet(name,['0'..'9','a'..'f']);
+  end else if nType='enum' then begin
+    //"name" : "enum:12027139373:0"     формат E164, без плюса
+    i:=pos(':',name);
+    s:=copy(name,1,i-1);
+    delete(name,1,i);
+
+    for i:=1 to length(s) do if not (s[i] in ['0'..'9']) then exit;
+    for i:=1 to length(name) do if not (name[i] in ['0'..'9']) then exit;
+    result:=true;
+  end else if nType='dpo' then begin
+    //root or not
+    i:=pos(':',name);
+    if i<1 then begin
+        result:=true;
+        exit;
+    end;
+    //not root
+    //brand:serial:n
+    delete(name,1,i);
+    i:=pos(':',name);
+    if i<1 then exit;
+    delete(name,1,i);
+    for i:=1 to length(name) do if not (name[i] in ['0'..'9']) then exit;
+    result:=true;
+  end else if nType='cert' then begin
+    //cert:<&имя или адрес или @code64>:<type>:<n>
+    if not validSet(pullPart(name),['0'..'9']) then exit;
+    s:=pullPart(name);
+    if not isInArray(s,certTypes) then exit;
+
+    if name='' then exit;
+    //&name or address or @code64
+    if name[1]='&' then begin
+       delete(name,1,1);
+       if not verifyNVSName(name,EmerAPI) then exit;
+    end else if name[1]='@' then begin
+       delete(name,1,1);
+       if not validSet(name,code64set) then exit;
+    end else if addressto20(name)='' then exit;
+    result:=true;
+  end else if nType='infocard' then begin
+    result:=validSet(name,['0'..'9','a'..'f']);
+  end else if nType='af' then begin
+    //af:product:<name>
+    //af:owner
+    //af:lot:<name>
+
+    result:=true;
+  end else if nType='notar' then begin
+    //notar:name:email:notarizationCreateTime
+    s:=popPart(name);
+    if (length(s)<>128) or (not validSet(s,['0'..'9','a'..'f'])) then exit;
+
+    s:=popPart(name);
+    if pos('@',s)>0 then begin
+      if not checkEmail(s) then exit;
+    end else
+      if (length(s)<>128) or (not validSet(s,['0'..'9','a'..'f'])) then exit;
+
+    result:=(validSet(name,['0'..'9']));
+  end else if nType='blogger' then begin
+    //blogger:username    http://privateblog.net/
+    result:=name<>'';
+  end else if nType='blog' then begin
+    result:=name<>'';
+  end{ else result:=false};
+end;
+
 {tNVSRecord}
 
 

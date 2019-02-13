@@ -18,9 +18,20 @@ type
     bDetails: TBitBtn;
     Edit1: TEdit;
     Edit2: TEdit;
+    eTotalNames: TEdit;
+    eTotalCost: TEdit;
+    eTotalOwners: TEdit;
+    eOwnedCount: TEdit;
+    ilAdvCon: TImageList;
     Label1: TLabel;
     Label2: TLabel;
+    lOwnedCount: TLabel;
+    lTotalNames: TLabel;
+    lTotalCost: TLabel;
+    lTotalOwners: TLabel;
     meComment: TMemo;
+    pAdvanced: TPanel;
+    pStat: TPanel;
     pName: TPanel;
     pButtons: TPanel;
     pTitle: TPanel;
@@ -30,23 +41,32 @@ type
     sbDelete: TSpeedButton;
     sbExecute: TSpeedButton;
     sbDetails: TSpeedButton;
+    sbTasks: TScrollBox;
+    Splitter1: TSplitter;
+    procedure sbAdvConClick(Sender: TObject);
     procedure sbCloseClick(Sender: TObject);
     procedure sbDeleteClick(Sender: TObject);
     procedure sbDetailsClick(Sender: TObject);
     procedure sbExecuteClick(Sender: TObject);
   private
 
+    fTaskDefColorText:ansistring;
   public
+    Advanced:boolean;
     EmerAPIServerTaskGroup:tEmerAPIServerTaskGroup;
     titleFullText:string;
+    procedure taskExecuted(Sender: TObject);
+    procedure setAdvanced(newAdvanced:boolean);
+    procedure TasksUpdated(sender: tObject);
     function init(mEmerAPIServerTaskGroup:tBaseEmerAPIServerTask):integer;
     procedure refreshView(Sender: TObject);
+    procedure showAdvancedInfo;
     procedure down;
   end;
 
 implementation
 
-uses localizzzeunit, MainUnit, HelperUnit, Math, NameViewUnit;
+uses localizzzeunit, MainUnit, HelperUnit, Math, NameViewUnit, emerapitypes;
 
 {$R *.lfm}
 
@@ -55,6 +75,65 @@ begin
   //hide. Hide the frame for next program start.
   visible:=false;
 end;
+
+procedure TFrameServerTask.setAdvanced(newAdvanced:boolean);
+var h,th:integer;
+begin
+
+  if EmerAPIServerTaskGroup=nil then exit;
+
+  if Advanced
+  then
+    meComment.Visible:=trim(EmerAPIServerTaskGroup.Comment)<>''
+  else
+    meComment.Visible:=false;
+
+  if Advanced=newAdvanced then exit;
+  Advanced:=newAdvanced;
+
+  pName.Visible:=false;
+  pButtons.Visible:=Advanced;
+  pStat.Visible:=Advanced;
+
+  sbTasks.Visible:=Advanced;
+  Splitter1.Visible:=sbTasks.Visible and meComment.Visible;
+
+  pAdvanced.Visible:=sbTasks.Visible or meComment.Visible;
+
+  if Splitter1.Visible then Splitter1.Top:=meComment.Height+1;
+
+  h:=pTitle.Height;
+
+  if pName.Visible then h:=h+pName.Height;
+
+  if pButtons.Visible then h:=h+pButtons.Height;
+
+  if pStat.Visible then h:=h+pStat.Height;
+
+  th:=0;
+  if sbTasks.Visible then
+     th:=min(28*7+10,EmerAPIServerTaskGroup.Count*28);
+  if Splitter1.Visible then th:=th+Splitter1.Height;
+  if meComment.Visible then th:=th+meComment.Height;
+  //pAdvanced.Height:=th;
+
+  if pAdvanced.Visible then h:=h+th{pAdvanced.Height};
+
+  height:=h;
+
+
+  if Advanced
+    then ilAdvCon.GetBitmap(1,sbAdvCon.Glyph)
+    else ilAdvCon.GetBitmap(0,sbAdvCon.Glyph);
+
+  if advanced then showAdvancedInfo;
+end;
+
+procedure TFrameServerTask.sbAdvConClick(Sender: TObject);
+begin
+  setAdvanced(not Advanced);
+end;
+
 
 procedure TFrameServerTask.sbDeleteClick(Sender: TObject);
 begin
@@ -67,14 +146,29 @@ begin
   ShowNameViewForm(EmerAPIServerTaskGroup);
 end;
 
+procedure TFrameServerTask.taskExecuted(Sender: TObject);
+begin
+  if not (Sender is tEmerAPIServerTaskGroup) then exit;
+  if (Sender as tEmerAPIServerTaskGroup).Executed
+    then
+      if (Sender as tEmerAPIServerTaskGroup).Successful
+        then visible:=false
+        else pTitle.Color:=getNameColor(ansiuppercase('executionFailed'))
+    else pTitle.Color:=getNameColor(ansiuppercase('executionFailed'));
+
+
+
+end;
+
 procedure TFrameServerTask.sbExecuteClick(Sender: TObject);
 begin
   //execute
-  EmerAPIServerTaskGroup.execute;
+  EmerAPIServerTaskGroup.execute(@taskExecuted);
   pTitle.Color:=getNameColor(ansiuppercase('execution'));
 end;
 
 procedure TFrameServerTask.refreshView(Sender: TObject);
+{
 function adjustName(s:string):string;
 var n:integer;
 begin
@@ -88,11 +182,41 @@ begin
     end;
     result:=result + '..';
   end;
-end;
+end;}
+function adjustName(s:string):string;
+var n:integer;
+    const bcount=6;
 begin
-pTitle.Caption:=adjustName(titleFullText);
+  result:=s;
+  if pTitle.Canvas.TextWidth(result)>(pTitle.Width-(sbDetails.Width*bcount+7)) then begin
+    while (length(result)>5) and (pTitle.Canvas.TextWidth(result+'..')>(pTitle.Width-(sbDetails.Width*bcount+7))) do
+    begin
+     n:=(pTitle.Canvas.TextWidth(result+'..') - (pTitle.Width-(sbDetails.Width*4+3))) div pTitle.Canvas.TextWidth('W');
+     if n<1 then n:=1;
+     if n>length(result) then n:=length(result)-5;
+     delete(result,length(result)-n+1,n)
+    end;
+    result:=result + '..';
+  end;
 end;
 
+begin
+  pTitle.Caption:=adjustName(titleFullText);
+
+  sbExecute.Enabled:=false;
+  case EmerAPIServerTaskGroup.getValid of
+    eptvUnknown:pTitle.Color:=getNameColor('TASK_VALID_UNKNOWN');
+    eptvValid:begin pTitle.Color:=getNameColor(fTaskDefColorText); sbExecute.Enabled:=true; end;
+    eptvInvalid:pTitle.Color:=getNameColor('TASK_INVALID');
+    eptvPart:begin pTitle.Color:=getNameColor('TASK_PARTIAL_VALID'); sbExecute.Enabled:=true; end;
+  end;
+end;
+
+
+procedure TFrameServerTask.TasksUpdated(sender: tObject);
+begin
+  refreshView(sender);
+end;
 
 function TFrameServerTask.init(mEmerAPIServerTaskGroup:tBaseEmerAPIServerTask):integer;
 var s:string;
@@ -124,6 +248,8 @@ begin
 
   EmerAPIServerTaskGroup:=tEmerAPIServerTaskGroup(mEmerAPIServerTaskGroup);
 
+  if (EmerAPIServerTaskGroup<>nil) and (EmerAPIServerTaskGroup.getTasks<>nil)
+    then EmerAPIServerTaskGroup.getTasks.addNotify(EmerAPINotification(@TasksUpdated,'taskUpdated',true));
 
   //PAY - платежная
   //NEW_NAME - новое имя
@@ -144,6 +270,8 @@ begin
 //    time:dword;
 //    LockTime:dword;
 
+  localizzze(self);
+
   addlist:=tStringList.Create;
 
   try
@@ -157,7 +285,8 @@ begin
     if addlist.Count>1 then oaddrc58:=''
     else if addlist.Count=1 then oaddrc58:=addlist[0];
 
-    pTitle.Color:=getNameColor(ansiuppercase(EmerAPIServerTaskGroup.TaskType));
+    fTaskDefColorText:=ansiuppercase(EmerAPIServerTaskGroup.TaskType);
+    //pTitle.Color:=fTaskDefColor;
 
     if ansiuppercase(EmerAPIServerTaskGroup.TaskType)='PAY' then begin
        transferTotal:=0;
@@ -178,7 +307,7 @@ begin
        else
        if isMyAddress(oaddrc58) then begin
           s:=localizzzeString(uppercase('TFrameServerTask.PAY_TO_MYSELF'),' myself');
-          pTitle.Color:=getNameColor('PAY_TO_MYSELF');
+          fTaskDefColorText:='PAY_TO_MYSELF';
        end
        else
          s:=oaddrc58;
@@ -229,11 +358,12 @@ begin
 
 
 
-
+    advanced:=false;
 
     meComment.Text:=EmerAPIServerTaskGroup.Comment;
     meComment.Visible:=trim(meComment.Text)<>'';
 
+    pStat.Visible:=false;
 
     pButtons.Visible:=false;
 
@@ -255,8 +385,25 @@ begin
   refreshView(nil);
 end;
 
+procedure TFrameServerTask.showAdvancedInfo;
+begin
+  if not advanced then exit;
+
+  if EmerAPIServerTaskGroup=nil then exit;
+
+
+  eTotalNames.text:=inttostr(EmerAPIServerTaskGroup.count);
+  eTotalOwners.text:=inttostr(EmerAPIServerTaskGroup.getUniOwnerCount);
+  eTotalCost.text:=myfloattostr(EmerAPIServerTaskGroup.getCost/1000000);
+  eOwnedCount.text:=inttostr(EmerAPIServerTaskGroup.getOwnerByCount()+ EmerAPIServerTaskGroup.getOwnerByCount(MainForm.eAddress.Text));
+end;
+
+
 procedure TFrameServerTask.down;
 begin
+  if (EmerAPIServerTaskGroup<>nil) and (EmerAPIServerTaskGroup.getTasks<>nil)
+    then EmerAPIServerTaskGroup.getTasks.removeNotify(EmerAPINotification(@TasksUpdated,'taskUpdated',true));
+      //EmerAPIServerTaskGroup.getTasks.addNotify(EmerAPINotification(@TasksUpdated,'taskUpdated',true));
 
 end;
 

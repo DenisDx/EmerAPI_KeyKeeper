@@ -83,7 +83,7 @@ function bignumToBufZ(bn:PBIGNUM): ansistring;
 function bufToBigNum(const Value: ansistring):PBIGNUM;
 
 function addressto20(const address:ansistring):AnsiString;
-function addressto21(const address:ansistring;const addressSig:ansistring):AnsiString;
+function addressto21(const address:ansistring;addressSig:ansistring=''):AnsiString;
 function addressto58(const address:ansistring;const addressSig:ansistring):AnsiString;
 
 function IsValidPublicKey(PubKey: TECDSA_Public): Boolean;
@@ -2116,8 +2116,16 @@ begin
   else result:=addressto20(base58ToBufCheck(address));
 end;
 
-function addressto21(const address:ansistring;const addressSig:ansistring):AnsiString;
+function addressto21(const address:ansistring;addressSig:ansistring=''):AnsiString;
 begin
+  if addressSig='' then
+     if length(address)=21
+          then addressSig:=address[1]
+          else if length(address)>21 then
+             addressSig:=base58ToBufCheck(address)[1];
+
+  if addressSig='' then raise exception.create('addressto21: singature not defined');
+
   if address='' then result:='' else
     result:=addressSig+addressto20(address);
 end;

@@ -45,6 +45,7 @@ procedure debugConsoleShow(msg:string);
 var
   i:integer;
   f:boolean;
+  const MaxLen = 4096;
 begin
   if DebugConsoleForm<>nil then
     if DebugConsoleForm.visible then begin
@@ -62,8 +63,8 @@ begin
 
       if DebugConsoleForm.chTime.checked then
         msg:=timeToStr(now)+': '+msg;
-      if DebugConsoleForm.chCutLong.checked then if length(msg)>1020 then begin
-          SetLength(msg,1020);
+      if DebugConsoleForm.chCutLong.checked then if length(msg)>MaxLen then begin
+          SetLength(msg,MaxLen);
           msg:=msg+'...';
       end;
       DebugConsoleForm.meDebugConsole.Lines.Append(msg);

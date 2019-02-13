@@ -82,9 +82,15 @@ begin
 end;
 
 function myFloatToStr(v:double):ansistring;
+var FormatSettings: TFormatSettings;
 begin
-  DefaultFormatSettings.DecimalSeparator := '.' ;
-  result:=floatToStr(v);
+  //DefaultFormatSettings.DecimalSeparator := '.' ;
+  FormatSettings:=DefaultFormatSettings;
+  FormatSettings.DecimalSeparator := '.' ;
+  FormatSettings.ThousandSeparator:=#0;
+  //result:=floatToStr(v,FormatSettings);
+  result:=FormatFloat('0.######',v,FormatSettings);
+
 end;
 
 function CleanFileName(const InputString: string): string;

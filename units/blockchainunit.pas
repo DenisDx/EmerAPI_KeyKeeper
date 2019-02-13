@@ -25,6 +25,10 @@ type
     fLastPoWRewardBlock:dword;
     fchain:string;
 
+    fTopRewardBlockScaned:dword; //the top block of the last succ frame
+    fMaxPoSRewardBlockFrameTop,fMaxPoSRewardBlockFrameBottom:dword; //scan frame borders.  fMaxPoSRewardBlockFrameBottom has already checked; fMaxPoSRewardBlockFrameTop perhaps only scheduled
+
+
     fListForUpdateBits:dword;//bits: 0: fHeight.fPoWDif 1: fLastPoWReward, fLastPoWRewardBlock
 
     procedure AsyncAddressInfoDone(sender:TEmerAPIBlockchainThread;result:tJsonData);
@@ -42,7 +46,9 @@ type
 
     function addressIsValid(address:ansistring):boolean;
 
-    procedure update(eapiNotify:tEmerAPINotification; forceUpdate:boolean=false);
+    function isReady:boolean;
+
+    function update(eapiNotify:tEmerAPINotification; forceUpdate:boolean=false):boolean; //returns if was setter to updare
     function MIN_TX_FEE:dword;
     property WifID:char read fWifID;
     property AddressSig:char read fAddressSig;
@@ -81,6 +87,11 @@ end;
 function tBlockChain.MIN_TX_FEE:dword;
 begin
   result:=100;
+end;
+
+function tBlockChain.isReady:boolean;
+begin
+  result:=fLastPoWReward>0;
 end;
 
 procedure tBlockChain.AsyncAddressInfoDone(sender:TEmerAPIBlockchainThread;result:tJsonData);
@@ -127,9 +138,21 @@ begin
     e:=result.FindPath('result.chain');
     if e<>nil then fchain:=e.asString else fchain:='';
 
-    fListForUpdateBits:=fListForUpdateBits or 1;
-    if (fListForUpdateBits and 2)=0 then //next step!
-        fEmerAPIConnetor.sendWalletQueryAsync('getblockhash',GetJSON('{"height":'+inttostr(fheight)+'}'),@AsyncAddressInfoDone,'getblockhash');
+    //do we need to dig for PoW reward?
+    if fheight<>fTopRewardBlockScaned then begin
+      //Yes, we have a new height.
+      //but maybe we are in the process.
+      //in this case we will stop digging when (fMaxPoSRewardBlockFrameBottom=0) and (fMaxPoSRewardBlockFrameTop<>block)
+
+      fMaxPoSRewardBlockFrameTop:=fheight; //new scan!
+      fMaxPoSRewardBlockFrameBottom:=0; //new scan!
+
+      fListForUpdateBits:=fListForUpdateBits or 1;
+      if (fListForUpdateBits and 2)=0 then begin//next step!
+          //start digging
+          fEmerAPIConnetor.sendWalletQueryAsync('getblockhash',GetJSON('{"height":'+inttostr(fheight)+'}'),@AsyncAddressInfoDone,'getblockhash');
+      end;
+    end;
 
     callNotify('getblockchaininfo');
   end else
@@ -162,26 +185,56 @@ begin
       //PoW block found!
 
       e:=result.FindPath('result.mint');
-      if e<>nil then fLastPoWReward:=trunc(myStrToFloat(e.AsString)*COIN) else fLastPoWReward:=0;
+      if e<>nil
+        then fLastPoWReward:=trunc(myStrToFloat(e.AsString)*COIN)
+        else fLastPoWReward:=0;
       e:=result.FindPath('result.height');
       if e<>nil then fLastPoWRewardBlock:=e.asInteger else fLastPoWRewardBlock:=0;
 
       if fLastPoWReward*fLastPoWRewardBlock>0 then begin
         fLastUpdateTime:=now;
         fListForUpdateBits:=fListForUpdateBits or 2;
+        fTopRewardBlockScaned:=fMaxPoSRewardBlockFrameTop;
         callNotify('update');
       end else begin
         fListForUpdateBits:=0;
+        fTopRewardBlockScaned:=fMaxPoSRewardBlockFrameTop;
         callNotify('updateError');
       end;
+
+      fMaxPoSRewardBlockFrameTop:=0;
+      fMaxPoSRewardBlockFrameBottom:=0;
+
     end else begin
       //must dig dipper
+
       e:=result.FindPath('result.height');
       if e=nil then begin
         callNotify('updateError');
         fListForUpdateBits:=0;
         exit;
       end;
+
+      if ((fMaxPoSRewardBlockFrameBottom=0) and (fMaxPoSRewardBlockFrameTop<>e.AsInteger))
+         or
+        ((fMaxPoSRewardBlockFrameBottom<>(e.AsInteger+1)) and (fMaxPoSRewardBlockFrameBottom<>0))
+      then begin
+        //we are not in the current frame
+        callNotify('updateError');
+        fListForUpdateBits:=0;
+        exit;
+      end;
+
+      //we can stop scan if fTopRewardBlockScaned = e.AsInteger -1 : we have seen it already
+      if fTopRewardBlockScaned = (e.AsInteger -1) then begin
+        fTopRewardBlockScaned := e.AsInteger;
+        callNotify('update');
+        fMaxPoSRewardBlockFrameTop:=0;
+        fMaxPoSRewardBlockFrameBottom:=0;
+        exit;
+      end;
+
+      fMaxPoSRewardBlockFrameBottom:=e.AsInteger;
       blockn:=e.AsInteger-1;
       if (fListForUpdateBits and 2)=0 then //next step!
         fEmerAPIConnetor.sendWalletQueryAsync('getblockhash',GetJSON('{"height":'+inttostr(blockn)+'}'),@AsyncAddressInfoDone,'getblockhash');
@@ -210,11 +263,11 @@ begin
    ;
 end;
 
-procedure tBlockChain.update(eapiNotify:tEmerAPINotification; forceUpdate:boolean=false);
+function tBlockChain.update(eapiNotify:tEmerAPINotification; forceUpdate:boolean=false):boolean;
 begin
   addNotify(eapiNotify);
   fListForUpdateBits:=0;//bits: 0: fHeight.fPoWDif 1: fLastPoWReward, fLastPoWRewardBlock . query chain: //getblockchaininfo.blocks (blocks->fHeight,fchain, PoWDif) -> [getblockhash height:fheight (hash) -> getblock  blockhash:hash (?"flags": "proof-of-work" =>)
-  fEmerAPIConnetor.sendWalletQueryAsync('getblockchaininfo',nil,@AsyncAddressInfoDone,'getblockchaininfo');
+  result:=fEmerAPIConnetor.sendWalletQueryAsync('getblockchaininfo',nil,@AsyncAddressInfoDone,'getblockchaininfo')<>nil;
 end;
 
 
@@ -260,6 +313,7 @@ begin
 
   }
 
+ if fLastPoWReward=0 then raise exception.Create('tBlockChain.getNameOpFee: fLastPoWReward=0');
 
  if (op = opNum('OP_NAME_DELETE')) then begin
    result:=MIN_TX_FEE;

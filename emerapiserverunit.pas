@@ -418,6 +418,9 @@ begin
   //call Wallet-type query
   result:=sendQueryAsync(method,params,callBack,id,forceRecheck);
 
+  //if self=nil then exit; //D!!?
+  if result=nil then exit;
+
   new(ud);
   ud^.EmerAPIServerQueryType:=esqWallet;
   result.userData:=ud;

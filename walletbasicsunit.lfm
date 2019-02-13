@@ -13,9 +13,9 @@ object WalletBasicsForm: TWalletBasicsForm
     Height = 476
     Top = 0
     Width = 836
-    ActivePage = tsPay
+    ActivePage = tsCreateName
     Align = alClient
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     object tsPay: TTabSheet
       Caption = 'Transfer coins'
@@ -46,6 +46,26 @@ object WalletBasicsForm: TWalletBasicsForm
             inherited pAddressInfo: TPanel
               Width = 800
               ClientWidth = 800
+              inherited lAddressInfo: TLabel
+                Height = 15
+                Width = 192
+              end
+              inherited lPayments: TLabel
+                Height = 15
+                Width = 234
+              end
+              inherited chRefresh: TCheckBox
+                Height = 19
+                Width = 162
+              end
+              inherited lCert: TLabel
+                Height = 15
+                Width = 149
+              end
+              inherited chDecodeAddress: TCheckBox
+                Height = 19
+                Width = 132
+              end
             end
           end
         end
@@ -71,6 +91,9 @@ object WalletBasicsForm: TWalletBasicsForm
           inherited eName: TEdit
             Width = 812
           end
+          inherited cLoadTemplate: TComboBox
+            Width = 540
+          end
         end
         inherited Panel2: TPanel
           Top = 373
@@ -82,15 +105,12 @@ object WalletBasicsForm: TWalletBasicsForm
           Width = 828
           ClientHeight = 221
           ClientWidth = 828
-          inherited meValue: TMemo
-            Height = 156
-            Width = 812
-            Lines.Strings = (
-              'meValue'
-            )
-          end
           inherited lValueStat: TLabel
-            Top = 197
+            Top = 202
+          end
+          inherited seValue: TSynEdit
+            Height = 166
+            Width = 812
           end
         end
       end

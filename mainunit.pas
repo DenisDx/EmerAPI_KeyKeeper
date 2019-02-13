@@ -5,11 +5,13 @@ unit MainUnit;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  Menus, ExtCtrls, Buttons, ComCtrls, UOpenSSL, UOpenSSLdef, Crypto, fpjson,
-  jsonparser, EmerAPIBlockchainMergedUnit, EmerAPIBlockchainUnit, EmerAPIMain,
-  emerapitypes, CryptoLib4PascalConnectorUnit, EmerAPIServerTasksUnit,
-  FrameServerTaskUnit, HDNodeUnit, EmerAPIServerUnit;
+  Classes, SysUtils, FileUtil, SynHighlighterAny, Forms, Controls, Graphics,
+  Dialogs, StdCtrls, Menus, ExtCtrls, Buttons, ComCtrls, UOpenSSL, UOpenSSLdef,
+  Crypto, fpjson, jsonparser, EmerAPIBlockchainMergedUnit,
+  EmerAPIBlockchainUnit, EmerAPIMain, emerapitypes,
+  CryptoLib4PascalConnectorUnit, EmerAPIServerTasksUnit, FrameServerTaskUnit,
+  HDNodeUnit, EmerAPIServerUnit, SynEditHighlighter, SynHighlighterHTML,
+  synhighlighterunixshellscript, SynEmerNVS;
 
 type
   tglobals=record
@@ -54,7 +56,7 @@ type
     lNames: TLabel;
     lTasks: TLabel;
     MainMenu: TMainMenu;
-    MenuItem1: TMenuItem;
+    miSystem: TMenuItem;
     MenuItem10: TMenuItem;
     MenuItem11: TMenuItem;
     MenuItem12: TMenuItem;
@@ -65,31 +67,32 @@ type
     MenuItem17: TMenuItem;
     MenuItem18: TMenuItem;
     MenuItem19: TMenuItem;
-    MenuItem2: TMenuItem;
-    MenuItem20: TMenuItem;
-    MenuItem21: TMenuItem;
-    MenuItem22: TMenuItem;
-    MenuItem23: TMenuItem;
-    MenuItem24: TMenuItem;
-    MenuItem25: TMenuItem;
-    MenuItem26: TMenuItem;
-    MenuItem27: TMenuItem;
-    MenuItem28: TMenuItem;
-    MenuItem29: TMenuItem;
-    MenuItem30: TMenuItem;
+    miExit: TMenuItem;
+    miEncryption: TMenuItem;
+    miTX: TMenuItem;
+    miLog: TMenuItem;
+    miConsole: TMenuItem;
+    miOpenWeb: TMenuItem;
+    miMemPool: TMenuItem;
+    miWalletMassSend: TMenuItem;
+    miWalletAtom: TMenuItem;
+    miAbout: TMenuItem;
+    miWalletName: TMenuItem;
+    miSimulateAction: TMenuItem;
     MenuItem31: TMenuItem;
     MenuItem32: TMenuItem;
     MenuItem33: TMenuItem;
+    MenuItem34: TMenuItem;
     miCheckSignature: TMenuItem;
     miSignMessage: TMenuItem;
     MenuItem9: TMenuItem;
     miDevTools: TMenuItem;
-    MenuItem3: TMenuItem;
+    miAntifake: TMenuItem;
     miSettings: TMenuItem;
-    MenuItem4: TMenuItem;
-    MenuItem5: TMenuItem;
-    MenuItem6: TMenuItem;
-    MenuItem7: TMenuItem;
+    miServer: TMenuItem;
+    miTools: TMenuItem;
+    miWallet: TMenuItem;
+    miWalletTransfer: TMenuItem;
     MenuItem8: TMenuItem;
     mLog: TMemo;
     Panel1: TPanel;
@@ -126,20 +129,21 @@ type
     procedure KeyUpAppHandler(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure MenuItem20Click(Sender: TObject);
-    procedure MenuItem21Click(Sender: TObject);
-    procedure MenuItem22Click(Sender: TObject);
-    procedure MenuItem23Click(Sender: TObject);
-    procedure MenuItem24Click(Sender: TObject);
-    procedure MenuItem25Click(Sender: TObject);
-    procedure MenuItem26Click(Sender: TObject);
-    procedure MenuItem27Click(Sender: TObject);
-    procedure MenuItem28Click(Sender: TObject);
-    procedure MenuItem29Click(Sender: TObject);
-    procedure MenuItem2Click(Sender: TObject);
+    procedure miEncryptionClick(Sender: TObject);
+    procedure miTXClick(Sender: TObject);
+    procedure miLogClick(Sender: TObject);
+    procedure miConsoleClick(Sender: TObject);
+    procedure miOpenWebClick(Sender: TObject);
+    procedure miMemPoolClick(Sender: TObject);
+    procedure miWalletMassSendClick(Sender: TObject);
+    procedure miWalletAtomClick(Sender: TObject);
+    procedure miAboutClick(Sender: TObject);
+    procedure miWalletNameClick(Sender: TObject);
+    procedure miExitClick(Sender: TObject);
     procedure MenuItem32Click(Sender: TObject);
     procedure MenuItem33Click(Sender: TObject);
-    procedure MenuItem7Click(Sender: TObject);
+    procedure MenuItem34Click(Sender: TObject);
+    procedure miWalletTransferClick(Sender: TObject);
     procedure MenuItem9Click(Sender: TObject);
     procedure miCheckSignatureClick(Sender: TObject);
     procedure miSettingsClick(Sender: TObject);
@@ -155,6 +159,7 @@ type
     procedure onWalletDisconnected(sender:tObject);
     procedure onWalletConnected(sender:tObject);
     procedure onServerDisconnected(sender:tObject);
+    procedure onBlockchainUpdated(sender:tObject);
     procedure onServerConnected(sender:tObject);
     procedure EmerAPIServerTasksUpdated(sender:tObject);
     procedure UTXOUpdated(sender:tObject);
@@ -176,6 +181,7 @@ type
     fonAnswerDataSig:ansistring;
     fonAnswerDataNet:ansistring;
 
+    emerAPIisReadyWaitCounter:integer;
 
     //!!procedure setPrivKey(value:ansistring);
     procedure onAnswer(sender:tObject;mr:tModalResult;mtag:ansistring);
@@ -225,6 +231,8 @@ function getNameColor(op:ansistring):tColor;
 
 function isMyAddress(c58Address:ansistring):boolean;
 
+procedure setSynHighliterByName(SynEmerNVSSyn:TSynEmerNVSSyn;name:ansistring);
+
 implementation
 
 {$R *.lfm}
@@ -240,7 +248,46 @@ uses SettingsUnit,Localizzzeunit, questionUnit, MasterPasswordWizardUnit, setUPU
    ,HelpRedirector
    ,SignMessageUnit
    ,CheckSignatureUnit
+   ,x509devunit
    ;
+
+
+procedure setSynHighliterByName(SynEmerNVSSyn:TSynEmerNVSSyn;name:ansistring);
+var pref:ansistring;
+    i:integer;
+begin
+  if SynEmerNVSSyn=nil then exit;
+
+  i:=pos(':',name);
+  if i<1 then pref:=''
+  else begin
+    pref:=copy(name,1,i-1);
+    delete(name,1,i);
+  end;
+
+  if pref='dns' then
+    SynEmerNVSSyn.Mode:=senmDNS
+  else if pref='ssh' then
+    SynEmerNVSSyn.Mode:=senmSSH
+  else if pref='ssl' then
+    SynEmerNVSSyn.Mode:=senmSSL
+  else if pref='enum' then
+    SynEmerNVSSyn.Mode:=senmENUMER
+  else if (pref='dpo') and (pos(':',name)<1) then
+    SynEmerNVSSyn.Mode:=senmDPORoot
+  else if pref='dpo' then
+    SynEmerNVSSyn.Mode:=senmDPO
+  else if pref='doc' then
+    SynEmerNVSSyn.Mode:=senmDOC
+  else if pref='cert' then
+    SynEmerNVSSyn.Mode:=senmCERT
+  else
+    SynEmerNVSSyn.Mode:=senmAny;
+
+
+
+end;
+
 
 var taskCounterCounter:integer=1;
 function taskCounter:string;
@@ -266,6 +313,7 @@ begin
   else if uppercase(trim(op))='PROLONG_NAME'    then result:=RGBToColor($F0,$F0,$C0)
 
   else if uppercase(trim(op))='EXECUTION'    then result:=RGBToColor($C0,$C0,$C0)
+  else if uppercase(trim(op))='EXECUTIONFAILED'    then result:=RGBToColor($D0,$20,$20)
 
   //PAY - платежная
   //NEW_NAME - новое имя
@@ -292,6 +340,10 @@ begin
   else if uppercase(trim(op))='AF_LOT'    then result:=RGBToColor($E0,$E0,$F0)
 
   //else if trim(op)=''    then result:=RGBToColor($A0,$A0,$A0)
+
+  else if trim(op)='TASK_VALID_UNKNOWN' then result:=RGBToColor($A0,$A0,$A0)
+  else if trim(op)='TASK_INVALID' then result:=RGBToColor($F0,$20,$20)
+  else if trim(op)='TASK_PARTIAL_VALID' then result:=RGBToColor($A0,$80,$80)
 
 
 end;
@@ -506,7 +558,7 @@ begin
  // updatePKstate(nil);
 end;
 
-procedure TMainForm.MenuItem2Click(Sender: TObject);
+procedure TMainForm.miExitClick(Sender: TObject);
 begin
   Close;
 end;
@@ -530,7 +582,15 @@ begin
 
 end;
 
-procedure TMainForm.MenuItem7Click(Sender: TObject);
+procedure TMainForm.MenuItem34Click(Sender: TObject);
+begin
+  if x509devform=nil then
+    Application.CreateForm(Tx509devform, x509devform);
+
+  x509devform.Show;
+end;
+
+procedure TMainForm.miWalletTransferClick(Sender: TObject);
 begin
   WalletBasicsForm.PageControl1.PageIndex:=0;
   if not WalletBasicsForm.Visible
@@ -684,10 +744,18 @@ begin
 
 
   if emerAPI<>nil then
-    if emerAPI.EmerAPIConnetor.testedOk then begin
+    if emerAPI.EmerAPIConnetor.testedOk then
+    begin
        //emerAPI.UTXOList.update(EmerAPINotification(@walletInformationUpdated,'',true));
        //emerAPI.blockChain.update(EmerAPINotification(@walletInformationUpdated,'',true));
-      emerAPI.update(EmerAPINotification(@walletInformationUpdated,'',true));
+
+      if emerAPI.isReady or (emerAPIisReadyWaitCounter>10) or (emerAPIisReadyWaitCounter<0) then begin
+        if emerAPI.update(EmerAPINotification(@walletInformationUpdated,'',true))
+        //if emerAPI.EmerAPIConnetor.testedOk
+            then emerAPIisReadyWaitCounter:=0
+            else emerAPIisReadyWaitCounter:=-1; //do not wait if not connected
+        //emerAPIisReadyWaitCounter:=0;
+      end else inc(emerAPIisReadyWaitCounter);
 
       {emerAPI.blockChain.sendWalletQueryAsync('scantxoutset',
        //['start','[{"address" : "'+eAddress.Text+'" }]']
@@ -725,18 +793,32 @@ end;
 
 procedure TMainForm.onWalletConnected(sender:tObject);
 begin
-  sbLW.Caption:=localizzzeString('MainForm.sbLW.ACTIVE','ACTIVE');
+  //sbLW.Caption:=localizzzeString('MainForm.sbLW.ACTIVE','ACTIVE');
+  onBlockchainUpdated(sender);
   ilLamps.GetBitmap(2,imLW.Picture.Bitmap);
   showWalletInfo;
 end;
 
+procedure TMainForm.onBlockchainUpdated(sender:tObject);
+begin
+ if Settings.getValue('EmerAPI_Server_Use') and EmerAPI.EmerAPIConnetor.serverAPI.testedOk then
+  if not Settings.getValue('EMERAPI_SERVER_GUEST_ONLY') then
+    if EmerAPI.isReady then sbServer.Caption:=localizzzeString('MainForm.sbServer.ACTIVE','ACTIVE')
+                       else sbServer.Caption:=localizzzeString('MainForm.sbServer.LOADING','LOADING')
+  else
+    if EmerAPI.isReady then sbServer.Caption:=localizzzeString('MainForm.sbServer.GuestMODE','GUEST MODE')
+                       else sbServer.Caption:=localizzzeString('MainForm.sbServer.LOADING','LOADING');
+
+ if Settings.getValue('USE_LOCAL_WALLET') and EmerAPI.EmerAPIConnetor.serverAPI.testedOk then
+   if EmerAPI.isReady then
+      sbLW.Caption:=localizzzeString('MainForm.sbLW.ACTIVE','ACTIVE')
+   else
+     sbLW.Caption:=localizzzeString('MainForm.sbLW.Loading','LOADING');
+end;
+
 procedure TMainForm.onServerConnected(sender:tObject);
 begin
-  if not Settings.getValue('EMERAPI_SERVER_GUEST_ONLY') then
-    sbServer.Caption:=localizzzeString('MainForm.sbServer.ACTIVE','ACTIVE')
-  else
-    sbServer.Caption:=localizzzeString('MainForm.sbServer.GuestMODE','GUEST MODE');
-
+  onBlockchainUpdated(sender);
   ilLamps.GetBitmap(2,imServer.Picture.Bitmap);
   showWalletInfo;
 end;
@@ -1130,6 +1212,7 @@ begin
   if emerAPI=nil then begin
      //blockChain:=tEmerAPIBlockchainMerged.Create(ConnDataWallet,ConnDataServer)
     emerAPI:=temerAPI.Create(ConnDataWallet,ConnDataServer,mNetwork,getNetwork.wif, getNetwork.pubKeySig);
+    emerAPIisReadyWaitCounter:=-1;
   end else begin
     emerAPI.EmerAPIConnetor.connDataServer:=ConnDataServer;
     emerAPI.EmerAPIConnetor.connDataWallet:=connDataWallet;
@@ -1165,7 +1248,8 @@ begin
   emerAPI.EmerAPIConnetor.serverAPI.onConnect:=@onServerConnected;
   emerAPI.EmerAPIConnetor.serverAPI.onDisconnect:=@onServerDisconnected;
 
-
+  emerAPI.blockChain.addNotify(EmerAPINotification(@onBlockchainUpdated,'update',true));
+  emerAPI.blockChain.addNotify(EmerAPINotification(@onBlockchainUpdated,'updateError',true));
 
  result:=true;
 
@@ -1231,6 +1315,8 @@ begin
   debugMeasures:=tStringList.create;
 
   application.AddOnKeyDownHandler(@KeyUpAppHandler);
+
+  //SynEmerNVSSyn:=tSynEmerNVSSyn.create(self);
 end;
 
 procedure TMainForm.FormDestroy(Sender: TObject);
@@ -1242,6 +1328,8 @@ begin
   if debugMeasures<>nil then debugMeasures.free;
 
   Settings.free;
+
+  //SynEmerNVSSyn.free;
 end;
 
 function TMainForm.FormHelp(Command: Word; Data: PtrInt; var CallHelp: Boolean
@@ -1307,6 +1395,7 @@ end;
 
 procedure TMainForm.bRefreshBalanceClick(Sender: TObject);
 begin
+  emerAPIisReadyWaitCounter:=-1;
   showWalletInfo();
 end;
 
@@ -1327,6 +1416,7 @@ begin
   for i:=0 to 99 do
     emerAPI.EmerAPIConnetor.walletAPI.sendWalletQueryAsync('getblockchaininfo',nil,{@myQueryDone}nil);
 end;
+
 
 procedure TMainForm.BitBtn1Click(Sender: TObject);
 var tmp:TFrameServerTask;
@@ -1406,7 +1496,7 @@ begin
   if (Settings.PubKey='') and (PrivKey='') then timerAskForMP.enabled:=true;
 end;
 
-procedure TMainForm.MenuItem20Click(Sender: TObject);
+procedure TMainForm.miEncryptionClick(Sender: TObject);
 begin
 
   if cryptoTestForm=nil then
@@ -1426,7 +1516,7 @@ begin
 
 end;
 
-procedure TMainForm.MenuItem21Click(Sender: TObject);
+procedure TMainForm.miTXClick(Sender: TObject);
 begin
   if CreateRawTXForm=nil then
     Application.CreateForm(TCreateRawTXForm, CreateRawTXForm);
@@ -1446,27 +1536,27 @@ begin
     CreateRawTXForm.Show;
 end;
 
-procedure TMainForm.MenuItem22Click(Sender: TObject);
+procedure TMainForm.miLogClick(Sender: TObject);
 begin
   if DebugConsoleForm=nil then
     Application.CreateForm(TDebugConsoleForm, DebugConsoleForm);
   DebugConsoleForm.show;
 end;
 
-procedure TMainForm.MenuItem23Click(Sender: TObject);
+procedure TMainForm.miConsoleClick(Sender: TObject);
 begin
   if EmerAPIDebugConsoleForm=nil then
     Application.CreateForm(TEmerAPIDebugConsoleForm, EmerAPIDebugConsoleForm);
   EmerAPIDebugConsoleForm.Show;
 end;
 
-procedure TMainForm.MenuItem24Click(Sender: TObject);
+procedure TMainForm.miOpenWebClick(Sender: TObject);
 begin
   //OpenDocument(Settings.getValue('EMERAPI_SERVER_ADDRESS'));
   OpenURL(Settings.getValue('EMERAPI_SERVER_ADDRESS'));
 end;
 
-procedure TMainForm.MenuItem25Click(Sender: TObject);
+procedure TMainForm.miMemPoolClick(Sender: TObject);
 begin
   if MempoolViewerForm2=nil then
   Application.CreateForm(TMempoolViewerForm2, MempoolViewerForm2);
@@ -1479,22 +1569,22 @@ begin
     MempoolViewerForm2.Show;
 end;
 
-procedure TMainForm.MenuItem26Click(Sender: TObject);
+procedure TMainForm.miWalletMassSendClick(Sender: TObject);
 begin
   MassSendingForm.show;
 end;
 
-procedure TMainForm.MenuItem27Click(Sender: TObject);
+procedure TMainForm.miWalletAtomClick(Sender: TObject);
 begin
   ShowAtomForm(nil);
 end;
 
-procedure TMainForm.MenuItem28Click(Sender: TObject);
+procedure TMainForm.miAboutClick(Sender: TObject);
 begin
   FormAbout.show;
 end;
 
-procedure TMainForm.MenuItem29Click(Sender: TObject);
+procedure TMainForm.miWalletNameClick(Sender: TObject);
 begin
   WalletBasicsForm.PageControl1.PageIndex:=1;
   if not WalletBasicsForm.Visible

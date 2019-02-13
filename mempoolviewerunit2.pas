@@ -67,6 +67,7 @@ begin
    n:=StringGrid1.RowCount;
    if (n=2) and (StringGrid1.Cells[1,1]='') then n:=1;
    for i:=0 to emerAPI.mempool.Count-1 do
+     if emerAPI.mempool[i]<>nil then  //D!!?
      if StringGrid1.Cols[1].IndexOf(uppercase(bufToHex(emerAPI.mempool[i].getTXID)))<0 then
      begin
        //add
@@ -223,7 +224,7 @@ begin
   if s='' then exit;
 
 
-  MainForm.MenuItem21Click(nil);
+  MainForm.miTXClick(nil);
   CreateRawTXForm.Edit6.text:=s;
   CreateRawTXForm.Button8Click(nil);
 

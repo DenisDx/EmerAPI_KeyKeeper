@@ -132,6 +132,7 @@ implementation
 {$R *.lfm}
 uses Crypto, {$IFDEF MSWINDOWS}
   windows,
+  ComCtrls,
 
   {$ENDIF} settingsunit, helperUnit;
 
@@ -295,7 +296,9 @@ var i:integer;
   function sig(obj:TComponent):ansistring;
   begin
     if obj.Owner<>nil then begin
-      result:=uppercase(obj.Owner.Name);
+      if obj.Owner is tFrame
+       then result:=uppercase(obj.Owner.ClassName)
+       else result:=uppercase(obj.Owner.Name);
       if pos('_',result)>0 then result:=copy(uppercase(obj.Owner.Name),1,pos('_',result)-1);
     end
     else
@@ -318,6 +321,7 @@ begin
   else if obj is TComboBox then localizzzeStrings(sig(obj),TComboBox(obj).Items)
   else if obj is TComboBoxEx then localizzzeComboEx(sig(obj),TComboBoxEx(obj) )
   else if obj is tLabel then (obj as tLabel).Caption:=localizzzeString(sig(obj),(obj as tLabel).Caption)
+  else if obj is TTabSheet then (obj as TTabSheet).Caption:=localizzzeString(sig(obj),(obj as TTabSheet).Caption)
   else if obj is tBitBtn then begin
      (obj as tBitBtn).Caption := localizzzeString(sig(obj),(obj as tBitBtn).Caption);
      (obj as tBitBtn).Hint := localizzzeString(sig(obj)+'.hint',(obj as tBitBtn).Hint);

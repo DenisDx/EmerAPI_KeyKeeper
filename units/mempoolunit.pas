@@ -39,8 +39,8 @@ tMempool=class(tEmerApiNotified)
 
     procedure updateCalled(sender:tObject);
 
-    procedure update(eapiNotify:tEmerAPINotification; forceUpdate:boolean=false);overload;
-    procedure update;overload;
+    function update(eapiNotify:tEmerAPINotification; forceUpdate:boolean=false):boolean;overload;
+    function update:boolean;overload;
     function findName(NVSname:ansistring):tbaseTXO;//:tNVSRecord; //finding LAST tx with the name. Returns tTXO object or nil. DO NOT free it
     function indexOf(txid:ansistring):integer;
     //function indexOfName(NVSname:ansistring):integer;
@@ -54,21 +54,26 @@ uses crypto, CryptoLib4PascalConnectorUnit;
 
 procedure tMempool.updateCalled(sender:tObject);
 begin
-  fEmerApiConnector.sendWalletQueryAsync('getrawmempool',
-   nil  //GetJSON('{"action":"start",scanobjects:['+s+']}')
-  ,@onBlockchainData,'getrawmempool_'+fEmerApiConnector.getNextID);
+  update;
 end;
 
 
-procedure tMempool.update(eapiNotify:tEmerAPINotification; forceUpdate:boolean=false);
+function tMempool.update(eapiNotify:tEmerAPINotification; forceUpdate:boolean=false):boolean;
 begin
   addNotify(eapiNotify);
-  updateCalled(nil);
+  //result:=updateCalled(nil);
+  result:=update();
 end;
 
-procedure tMempool.update;
+function tMempool.update:boolean;
 begin
-  updateCalled(nil);
+ //sadas updateCalled(nil);
+ result:=
+ fEmerApiConnector.sendWalletQueryAsync('getrawmempool',
+  nil  //GetJSON('{"action":"start",scanobjects:['+s+']}')
+ ,@onBlockchainData,'getrawmempool_'+fEmerApiConnector.getNextID)
+ <>nil;
+
 end;
 
 function tMempool.Count:integer;

@@ -567,7 +567,7 @@ object MainForm: TMainForm
           Height = 34
           Top = 121
           Width = 184
-          Caption = 'Refresh Server Data'
+          Caption = 'Refresh Tasks'
           Glyph.Data = {
             0E060000424D1006000000000000360000002800000016000000160000000100
             180000000000DA050000120B0000120B00000000000000000000FFFFFFFFFFFF
@@ -697,29 +697,29 @@ object MainForm: TMainForm
   object MainMenu: TMainMenu
     left = 24
     top = 440
-    object MenuItem1: TMenuItem
+    object miSystem: TMenuItem
       Caption = 'System'
       object miSettings: TMenuItem
         Caption = 'Settings'
         OnClick = miSettingsClick
       end
-      object MenuItem28: TMenuItem
+      object miAbout: TMenuItem
         Caption = 'About'
-        OnClick = MenuItem28Click
+        OnClick = miAboutClick
       end
-      object MenuItem2: TMenuItem
+      object miExit: TMenuItem
         Caption = 'Exit'
-        OnClick = MenuItem2Click
+        OnClick = miExitClick
       end
     end
-    object MenuItem4: TMenuItem
+    object miServer: TMenuItem
       Caption = 'EmerAPI server'
-      object MenuItem24: TMenuItem
+      object miOpenWeb: TMenuItem
         Caption = 'Open Web interface'
-        OnClick = MenuItem24Click
+        OnClick = miOpenWebClick
       end
     end
-    object MenuItem5: TMenuItem
+    object miTools: TMenuItem
       Caption = 'Tools'
       object MenuItem8: TMenuItem
         Caption = 'Сообщения'
@@ -768,58 +768,60 @@ object MainForm: TMainForm
       end
       object miSignMessage: TMenuItem
         Caption = 'Sign Message'
+        Visible = False
         OnClick = miSignMessageClick
       end
     end
-    object MenuItem6: TMenuItem
+    object miWallet: TMenuItem
       Caption = 'Wallet'
-      object MenuItem7: TMenuItem
+      object miWalletTransfer: TMenuItem
         Caption = 'Wallet basics : transfer coins'
-        OnClick = MenuItem7Click
+        OnClick = miWalletTransferClick
       end
-      object MenuItem29: TMenuItem
+      object miWalletName: TMenuItem
         Caption = 'Wallet basics: create asset'
-        OnClick = MenuItem29Click
+        OnClick = miWalletNameClick
       end
-      object MenuItem26: TMenuItem
+      object miWalletMassSend: TMenuItem
         Caption = 'Mass sending'
-        OnClick = MenuItem26Click
+        OnClick = miWalletMassSendClick
       end
-      object MenuItem27: TMenuItem
+      object miWalletAtom: TMenuItem
         Caption = 'Load Atom Contract'
-        OnClick = MenuItem27Click
+        OnClick = miWalletAtomClick
       end
     end
-    object MenuItem3: TMenuItem
+    object miAntifake: TMenuItem
       Caption = 'Antifake'
     end
     object miDevTools: TMenuItem
       Caption = 'Developer Tools'
-      object MenuItem20: TMenuItem
+      object miEncryption: TMenuItem
         Caption = 'Encryption tools'
-        OnClick = MenuItem20Click
+        OnClick = miEncryptionClick
       end
-      object MenuItem21: TMenuItem
+      object miTX: TMenuItem
         Caption = 'TX raw builder/decoder'
-        OnClick = MenuItem21Click
+        OnClick = miTXClick
       end
-      object MenuItem22: TMenuItem
+      object miLog: TMenuItem
         Caption = 'Open Log Window'
-        OnClick = MenuItem22Click
+        OnClick = miLogClick
       end
-      object MenuItem23: TMenuItem
+      object miConsole: TMenuItem
         Caption = 'Open EmerAPI Debuging Console'
-        OnClick = MenuItem23Click
+        OnClick = miConsoleClick
       end
       object MenuItem9: TMenuItem
         Caption = 'Mempool viewer'
+        Visible = False
         OnClick = MenuItem9Click
       end
-      object MenuItem25: TMenuItem
+      object miMemPool: TMenuItem
         Caption = 'Mempool viewer 2'
-        OnClick = MenuItem25Click
+        OnClick = miMemPoolClick
       end
-      object MenuItem30: TMenuItem
+      object miSimulateAction: TMenuItem
         Caption = 'Simulate action'
         object MenuItem31: TMenuItem
           Caption = 'Network settings'
@@ -832,6 +834,11 @@ object MainForm: TMainForm
             OnClick = MenuItem33Click
           end
         end
+      end
+      object MenuItem34: TMenuItem
+        Caption = 'x509 tools'
+        Visible = False
+        OnClick = MenuItem34Click
       end
     end
   end

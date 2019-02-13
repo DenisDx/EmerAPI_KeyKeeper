@@ -61,7 +61,7 @@ begin
   if s='' then exit;
 
 
-  MainForm.MenuItem21Click(nil);
+  MainForm.miTXClick(nil);
   CreateRawTXForm.Edit6.text:=s;
   CreateRawTXForm.Button8Click(nil);
 

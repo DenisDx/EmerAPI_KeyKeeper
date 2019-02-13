@@ -25,13 +25,16 @@ type
    UTXOList:tUTXOList;
    mempool:tMempool;
    addresses:tStringList;
+
+   function isReady:boolean;
+
    constructor Create(wConnDataWallet:tWalletConnectionData;wConnDataServer:tEmerApiServerSettings;mNetwork:string='';mWifID:char=#0;mAddressSig:char=#0);
    destructor destroy;
 
    procedure finalize;
    procedure setAddresses(newAddresses:tStringList);
    procedure setAddress(address:ansistring);
-   procedure update(eapiNotify:tEmerAPINotification);
+   function update(eapiNotify:tEmerAPINotification):boolean;
 
    procedure onNotify(sender:tObject);
 
@@ -51,6 +54,18 @@ uses HelperUnit, math, LazUTF8SysUtils;
 
 
 {tEmerAPI}
+function tEmerAPI.isReady:boolean;
+begin
+  result:=
+     (not fWaitingForupdateUTXO)
+     and
+     (not fWaitingForgetblockchaininfo)
+     and
+     (not fWaitingforUpdateMempool)
+     and ((EmerAPIConnetor<>nil) and EmerAPIConnetor.testedOk)
+     and (BlockChain.isReady)
+end;
+
 procedure tEmerAPI.setAddresses(newAddresses:tStringList);
 begin
   UTXOList.setAddresses(newAddresses);
@@ -108,7 +123,7 @@ begin
 
 end;
 
-procedure tEmerAPI.update(eapiNotify:tEmerAPINotification);
+function tEmerAPI.update(eapiNotify:tEmerAPINotification):boolean;
 begin
    //notificatiob must be called when ALL requests done.
    addNotify(eapiNotify);
@@ -119,15 +134,16 @@ begin
    fWaitingForgetblockchaininfo:=true;
    fWaitingforUpdateMempool:=true;
 
+   result:=true;
 
    eapiNotify.tag:='updateUTXO';
-   UTXOList.update(eapiNotify);
+   if not UTXOList.update(eapiNotify) then result:=false;
 
    eapiNotify.tag:='getblockchaininfo';
-   BlockChain.update(eapiNotify);
+   if not BlockChain.update(eapiNotify) then result:=false;
 
    eapiNotify.tag:='update';
-   Mempool.update(eapiNotify);
+   if not Mempool.update(eapiNotify) then result:=false;
 
 
 end;
@@ -153,11 +169,11 @@ end;
 
 destructor tEmerAPI.destroy;
 begin
-  EmerAPIConnetor.Free;
-  blockChain.free;
-  mempool.Free;
-  UTXOList.Free;
-  addresses.Free;
+  freeandnil(EmerAPIConnetor);
+  freeandnil(blockChain);
+  freeandnil(mempool);
+  freeandnil(UTXOList);
+  freeandnil(addresses);
   inherited;
 end;
 
