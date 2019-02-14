@@ -132,9 +132,8 @@ implementation
 {$R *.lfm}
 uses Crypto, {$IFDEF MSWINDOWS}
   windows,
-  ComCtrls,
 
-  {$ENDIF} settingsunit, helperUnit;
+  {$ENDIF} ComCtrls, settingsunit, helperUnit;
 
 {  CHANGET INTO NEW WAY $R resources.rc}
 
