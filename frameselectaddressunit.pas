@@ -134,8 +134,10 @@ begin
   updateTime.Enabled:=false;
   ac:=EmerAPI.blockChain.addressIsValid(eAddress.Text);
 
-  if (not ac) and (chDecodeAddress.Checked) then
+  if (not ac) and (chDecodeAddress.Checked) and (trim(eAddress.Text)<>'') then
      emerAPI.EmerAPIConnetor.sendWalletQueryAsync('name_show',getJSON('{name:"'+trim(eAddress.Text)+'"}'),@AsyncAddressInfoDone,'checkname:'+trim(eAddress.Text));
+
+  if trim(eAddress.Text)='' then fLastAddressFromAlias:='';
 
   if not ac then exit;
   if not chRefresh.Checked then exit;

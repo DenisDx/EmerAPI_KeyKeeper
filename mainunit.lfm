@@ -1,10 +1,10 @@
 object MainForm: TMainForm
-  Left = 793
+  Left = 1204
   Height = 562
-  Top = 327
+  Top = 104
   Width = 600
   Caption = 'EmerAPI / Antifake Key Keeper'
-  ClientHeight = 542
+  ClientHeight = 562
   ClientWidth = 600
   Color = clWindow
   Constraints.MinHeight = 400
@@ -20,18 +20,18 @@ object MainForm: TMainForm
   object gbLog: TGroupBox
     Left = 0
     Height = 106
-    Top = 436
+    Top = 456
     Width = 600
     Align = alBottom
     Caption = 'Log'
-    ClientHeight = 86
-    ClientWidth = 596
+    ClientHeight = 84
+    ClientWidth = 592
     TabOrder = 0
     object mLog: TMemo
       Left = 0
-      Height = 86
+      Height = 84
       Top = 0
-      Width = 596
+      Width = 592
       Align = alClient
       Lines.Strings = (
         'mLog'
@@ -41,17 +41,17 @@ object MainForm: TMainForm
   end
   object pMain: TPanel
     Left = 0
-    Height = 431
+    Height = 451
     Top = 0
     Width = 600
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 431
+    ClientHeight = 451
     ClientWidth = 600
     TabOrder = 1
     object pcMain: TPageControl
       Left = 0
-      Height = 268
+      Height = 288
       Top = 163
       Width = 600
       ActivePage = tsActions
@@ -61,26 +61,26 @@ object MainForm: TMainForm
       OnChange = pcMainChange
       object tsActions: TTabSheet
         Caption = 'Actions'
-        ClientHeight = 240
-        ClientWidth = 592
+        ClientHeight = 249
+        ClientWidth = 594
         object gbHint: TGroupBox
           Left = 0
           Height = 64
           Top = 0
-          Width = 592
+          Width = 594
           Align = alTop
           Caption = 'Hint'
-          ClientHeight = 44
-          ClientWidth = 588
+          ClientHeight = 42
+          ClientWidth = 586
           Color = cl3DLight
           ParentColor = False
           TabOrder = 0
           Visible = False
           object ScrollBox2: TScrollBox
             Left = 0
-            Height = 44
+            Height = 42
             Top = 0
-            Width = 588
+            Width = 586
             HorzScrollBar.Page = 1
             VertScrollBar.Page = 1
             Align = alClient
@@ -91,24 +91,24 @@ object MainForm: TMainForm
         end
         object sbActions: TScrollBox
           Left = 0
-          Height = 176
+          Height = 185
           Top = 64
-          Width = 592
-          HorzScrollBar.Page = 188
+          Width = 594
+          HorzScrollBar.Page = 192
           VertScrollBar.Page = 56
           Align = alClient
-          ClientHeight = 172
-          ClientWidth = 588
+          ClientHeight = 170
+          ClientWidth = 579
           TabOrder = 1
           object gbTest: TGroupBox
             Left = 0
             Height = 56
             Top = 0
-            Width = 588
+            Width = 579
             Align = alTop
             Caption = 'TEST AREA'
-            ClientHeight = 36
-            ClientWidth = 584
+            ClientHeight = 34
+            ClientWidth = 571
             TabOrder = 0
             object BitBtn1: TBitBtn
               Left = 8
@@ -182,17 +182,17 @@ object MainForm: TMainForm
         end
         object lLocalWallet: TLabel
           Left = 10
-          Height = 15
+          Height = 16
           Top = 110
-          Width = 65
+          Width = 78
           Caption = 'Local wallet:'
           ParentColor = False
         end
         object lPrivateKey: TLabel
           Left = 10
-          Height = 15
+          Height = 16
           Top = 10
-          Width = 60
+          Width = 72
           Caption = 'Private key:'
           ParentColor = False
         end
@@ -217,9 +217,9 @@ object MainForm: TMainForm
         end
         object lAddress: TLabel
           Left = 176
-          Height = 15
+          Height = 16
           Top = 8
-          Width = 45
+          Width = 55
           Caption = 'Address:'
           ParentColor = False
         end
@@ -359,9 +359,9 @@ object MainForm: TMainForm
         end
         object lBalance: TLabel
           Left = 398
-          Height = 15
+          Height = 16
           Top = 60
-          Width = 102
+          Width = 122
           Caption = 'Spendable balance:'
           ParentColor = False
         end
@@ -393,9 +393,9 @@ object MainForm: TMainForm
         end
         object lNames: TLabel
           Left = 270
-          Height = 15
+          Height = 16
           Top = 60
-          Width = 40
+          Width = 47
           Caption = 'Names:'
           ParentColor = False
         end
@@ -536,17 +536,17 @@ object MainForm: TMainForm
         end
         object lEmerAPIServer: TLabel
           Left = 11
-          Height = 15
+          Height = 16
           Top = 60
-          Width = 77
+          Width = 95
           Caption = 'Current server:'
           ParentColor = False
         end
         object lTasks: TLabel
           Left = 176
-          Height = 15
+          Height = 16
           Top = 60
-          Width = 31
+          Width = 40
           Caption = 'Tasks:'
           ParentColor = False
         end
@@ -809,7 +809,7 @@ object MainForm: TMainForm
     Cursor = crVSplit
     Left = 0
     Height = 5
-    Top = 431
+    Top = 451
     Width = 600
     Align = alBottom
     ResizeAnchor = akBottom

@@ -416,6 +416,7 @@
  ,'TFrameSelectAddress.chDecodeAddress':{en:'Pay to alias',ru:'Платить по псевдонимам'}
  ,'TFrameSelectAddress.lAddressInfo':{en:'*Unknown address*',ru:'*Неизвестный адрес*'}
  ,'TFrameSelectAddress.lAddressInfo.Found':{en:'Address: ',ru:'Адрес: '}
+ ,'TFrameSelectAddress.lAddressInfo.Empty':{en:'Enter address or alias',ru:'Введите адрес или псевдноним'}
  ,'TFrameSelectAddress.lPayments':{en:'',ru:''}
  ,'TFrameSelectAddress.lCert':{en:'',ru:''}
  ,'TFrameSelectAddress.lCert.wait':{en:'Please wait...',ru:'Пожалуйста, подождите...'}
