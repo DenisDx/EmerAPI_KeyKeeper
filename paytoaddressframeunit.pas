@@ -17,7 +17,7 @@ type
     bSend: TBitBtn;
     eValue: TEdit;
     FrameSelectAddress1: TFrameSelectAddress;
-    Label1: TLabel;
+    lBalance: TLabel;
     lPayee: TLabel;
     lAmount: TLabel;
     pTop: TPanel;
@@ -34,7 +34,7 @@ type
 
 implementation
 
-uses MainUnit, settingsUnit, helperUnit, EmerAPIMain, emertx, CreateRawTXunit, EmerApiTypes, EmerAPITransactionUnit;
+uses MainUnit, settingsUnit, helperUnit, EmerAPIMain, emertx, CreateRawTXunit, EmerApiTypes, EmerAPITransactionUnit, Localizzzeunit;
 
 {$R *.lfm}
 
@@ -153,6 +153,9 @@ begin
    sDevShowTX.Visible:=Settings.getValue('Dev_Mode_ON');
    eValue.Text:='';
    FrameSelectAddress1.init(visualdata);
+
+   localizzze(self);
+   lBalance.Caption:=localizzzeString('TFramePayToAddress.lBalance.startIfBalance','Balance')+' '+MainForm.eBalance.Text+' EMC' ;
 
 end;
 

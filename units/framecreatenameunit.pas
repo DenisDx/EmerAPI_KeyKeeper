@@ -19,9 +19,9 @@ type
     bViewName: TBitBtn;
     cLoadTemplate: TComboBox;
     eName: TEdit;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
+    lValue: TLabel;
+    lName: TLabel;
+    lDays: TLabel;
     lLoadTemplate: TLabel;
     lFullStat: TLabel;
     lNameStat: TLabel;

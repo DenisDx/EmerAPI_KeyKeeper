@@ -63,12 +63,12 @@ begin
   e:=result.FindPath('result');
   if e<>nil then
      if e.IsNull then begin
-       lAddressInfo.Caption:=localizzzeString('FrameSelectAddress.lAddressInfo','Address information: ');
+       lAddressInfo.Caption:=localizzzeString('TFrameSelectAddress.lAddressInfo','Address information: ');
        fLastAddressFromAlias:='';
        if fprevaddresscorrect then if assigned(fonAddressChanged) then fonAddressChanged(self); fprevaddresscorrect:=false;
      end else
      try
-       lAddressInfo.Caption:=localizzzeString('FrameSelectAddress.lAddressInfo.Found','Address: '+e.FindPath('address').AsString);
+       lAddressInfo.Caption:=localizzzeString('TFrameSelectAddress.lAddressInfo.Found','Address: ')+e.FindPath('address').AsString;
        fLastAddressFromAlias:=e.FindPath('address').AsString;
        if assigned(fonAddressChanged) then fonAddressChanged(self); fprevaddresscorrect:=true;
 {       lNameExits.Caption:=
@@ -77,12 +77,12 @@ begin
          + datetostr(trunc(now() + e.FindPath('expires_in').AsInt64/175 ));
        bViewName.Enabled:=true;}
      except
-       lAddressInfo.Caption:=localizzzeString('FrameSelectAddress.lAddressInfo','Address information: ');
+       lAddressInfo.Caption:=localizzzeString('TFrameSelectAddress.lAddressInfo','Address information: ');
        fLastAddressFromAlias:='';
        if fprevaddresscorrect then if assigned(fonAddressChanged) then fonAddressChanged(self); fprevaddresscorrect:=false;
      end
   else begin
-    lAddressInfo.Caption:=localizzzeString('FrameSelectAddress.lAddressInfo','Address information: ');
+    lAddressInfo.Caption:=localizzzeString('TFrameSelectAddress.lAddressInfo','Address information: ');
     fLastAddressFromAlias:='';
     if fprevaddresscorrect then if assigned(fonAddressChanged) then fonAddressChanged(self); fprevaddresscorrect:=false;
   end;
@@ -99,7 +99,7 @@ procedure TFrameSelectAddress.eAddressChange(Sender: TObject);
 var
   ac:boolean;
 begin
-   lAddressInfo.Caption:=localizzzeString('FrameSelectAddress.lAddressInfo','Address information: ');
+   lAddressInfo.Caption:=localizzzeString('TFrameSelectAddress.lAddressInfo','Address information: ');
    fLastAddressFromAlias:='';
 
    ac:=EmerAPI.blockChain.addressIsValid(eAddress.Text);
@@ -113,16 +113,16 @@ begin
    fPrevAddressCorrect:=ac;
    if ac then begin
      if chRefresh.Checked then begin
-        lPayments.Caption:=localizzzeString('FrameSelectAddress.lPayments.wait','Please wait...');
-        lCert.Caption:=localizzzeString('FrameSelectAddress.lCert.wait','Please wait...');
+        lPayments.Caption:=localizzzeString('TFrameSelectAddress.lPayments.wait','Please wait...');
+        lCert.Caption:=localizzzeString('TFrameSelectAddress.lCert.wait','Please wait...');
         if updateTime<>nil then updateTime.Enabled:=true;
      end else begin
-         lPayments.Caption:=localizzzeString('FrameSelectAddress.lPayments.NoUpdate','*Online update turned off*');
-         lCert.Caption:=localizzzeString('FrameSelectAddress.lCert.NoUpdate','*Online update turned off*');
+         lPayments.Caption:=localizzzeString('TFrameSelectAddress.lPayments.NoUpdate','*Online update turned off*');
+         lCert.Caption:=localizzzeString('TFrameSelectAddress.lCert.NoUpdate','*Online update turned off*');
      end;
    end else begin
-     lPayments.Caption:=localizzzeString('FrameSelectAddress.lPayments.InvalidAddress','*Address you entered is not valid*');
-     lCert.Caption:=localizzzeString('FrameSelectAddress.lCert.InvalidAddress','*Address you entered is not valid*');
+     lPayments.Caption:=localizzzeString('TFrameSelectAddress.lPayments.InvalidAddress','*Address you entered is not valid*');
+     lCert.Caption:=localizzzeString('TFrameSelectAddress.lCert.InvalidAddress','*Address you entered is not valid*');
    end;
    if assigned(fonAddressChanged) then fonAddressChanged(self);
 end;
@@ -189,6 +189,7 @@ begin
      updateTime.OnTimer:=@updateTimerTimer;
    end;
    fLastAddressFromAlias:='';
+   localizzze(self);
 end;
 
 end.

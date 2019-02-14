@@ -246,7 +246,7 @@ begin
        //iAmOwner:=EmerAPI.addresses.IndexOf(buf2Base58Check(mainForm.globals.AddressSig+BaseEmerAPIServerTask.ownerAddress))>=0;
        //if not iAmOwner then exit;
 
-       dchanged:=dchanged or (eOwner.Text<>buf2Base58Check(mainForm.globals.AddressSig+BaseEmerAPIServerTask.ownerAddress));
+       dchanged:=dchanged or (eOwner.Text<>buf2Base58Check(mainForm.globals.AddressSig+addressto20(BaseEmerAPIServerTask.ownerAddress)));
        lOwnerWarning.Visible:=dchanged;
 
        dchanged:=true; iAmOwner:=true; //any time can create the task!
@@ -302,13 +302,13 @@ begin
      eName.Text:=BaseEmerAPIServerTask.NVSName;
      seValue.Text:=BaseEmerAPIServerTask.NVSValue;
 
-     if EmerAPI.addresses.IndexOf(buf2Base58Check(mainForm.globals.AddressSig+BaseEmerAPIServerTask.ownerAddress))>=0 then
+     if EmerAPI.addresses.IndexOf(buf2Base58Check(mainForm.globals.AddressSig+addressto20(BaseEmerAPIServerTask.ownerAddress)))>=0 then
        lInfo.Caption:=localizzzeString('NameViewForm.lInfo.myTask','Task for create an asset (owned by you):')
      else
        lInfo.Caption:=localizzzeString('NameViewForm.lInfo.myTask','Task for create an asset (owned by other(s)):');
 
-     if BaseEmerAPIServerTask.ownerAddress<>'' then
-       eOwner.Text:=buf2Base58Check(mainForm.globals.AddressSig+BaseEmerAPIServerTask.ownerAddress)
+     if (BaseEmerAPIServerTask.ownerAddress<>'') and (BaseEmerAPIServerTask.ownerAddress<>'undefined') then
+       eOwner.Text:=buf2Base58Check(mainForm.globals.AddressSig+addressto20(BaseEmerAPIServerTask.ownerAddress))
      else
        eOwner.Text:=mainForm.eAddress.text{+localizzzeString('NameViewForm.eOwner.myTask',' (your address)')};
 

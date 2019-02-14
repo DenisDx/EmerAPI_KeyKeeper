@@ -45,8 +45,8 @@
  'MainForm.miSignMessage':{en:'Sign a message for external verification services ...',ru:'Подписать сообщение для внешних сервисов проверки...'},
  'MainForm.miCheckSignature':{en:'Check / sign message...',ru:'Проверить / подписать сообщение...'},
 
- 'MainForm.tsAssets':{en:'Assets',ru:'Активы'},
- 'MainForm.tsActions':{en:'Actions',ru:'Действия'},
+ 'MainForm.tsAssets':{en:'Digital assets',ru:'Цифровые активы'},
+ 'MainForm.tsActions':{en:'Recommended actions',ru:'Рекомендуемые действия'},
 
  'MainForm.DevModeOn':{
    en:'<HTML><BODY><H2>Developer Mode ON</H2><p>Attention!</p><p>In developer mode, many security checks are disabled, for example, restrictions on the minimum length and quality of the password are removed. In addition, secret information is provided in a number of open windows.</p><p><b>DO NOT WORK WITH REAL DEVELOPER DATA</b></p></BODY></HTML>',
@@ -412,12 +412,29 @@
 
 
 
+ ,'TFrameSelectAddress.chRefresh':{en:'Refresh information',ru:'Обновлять информацию'}
+ ,'TFrameSelectAddress.chDecodeAddress':{en:'Pay to alias',ru:'Платить по псевдонимам'}
+ ,'TFrameSelectAddress.lAddressInfo':{en:'*Unknown address*',ru:'*Неизвестный адрес*'}
+ ,'TFrameSelectAddress.lAddressInfo.Found':{en:'Address: ',ru:'Адрес: '}
+ ,'TFrameSelectAddress.lPayments':{en:'',ru:''}
+ ,'TFrameSelectAddress.lCert':{en:'',ru:''}
+ ,'TFrameSelectAddress.lCert.wait':{en:'Please wait...',ru:'Пожалуйста, подождите...'}
+ ,'TFrameSelectAddress.lPayments.wait':{en:'Please wait...',ru:'Пожалуйста, подождите...'}
+ ,'TFrameSelectAddress.lCert.NoUpdate':{en:'*Online update turned off*',ru:'*Обновление отключено*'}
+ ,'TFrameSelectAddress.lPayments.InvalidAddress':{en:'*Address you entered is not valid*',ru:'*Введенный адрес ошибочен*'}
+
+
+ ,'TFramePayToAddress.lPayee':{en:'Payee: ',ru:'Получатель перевода: '}
+ ,'TFramePayToAddress.lAmount':{en:'Amount to transfer: ',ru:'Сумма перевода: '}
+ ,'TFramePayToAddress.bSend':{en:'Send',ru:'Отправить'}
+ ,'TFramePayToAddress.lBalance.startIfBalance':{en:'Your balance: ',ru:'Ваш текущий баланс: '}
 
  ,'FrameDigitalAsset.Title.dns':{en:'DNS: ',ru:'DNS: '}
  ,'FrameDigitalAsset.Title.ssl':{en:'SSL: ',ru:'SSL: '}
  ,'FrameDigitalAsset.Title.ssh':{en:'SSH: ',ru:'SSH: '}
  ,'FrameDigitalAsset.Title.blog':{en:'Blog: ',ru:'Блог: '}
  ,'FrameDigitalAsset.Title.cert':{en:'CERTIFICATE: ',ru:'СЕРТИФИКАТ: '}
+ ,'FrameDigitalAsset.Title.doc':{en:'DOCUMENT: ',ru:'ДОКУМЕНТ: '}
  ,'FrameDigitalAsset.Title.Empty':{en:'ALIAS OR UNKNOWN: ',ru:'ПСЕВДОНИМ ИЛИ НЕИЗВ: '}
 
  ,'FrameDigitalAsset.Title.dpoBrand':{en:'DPO Brand: ',ru:'DPO Бренд: '}
@@ -428,6 +445,9 @@
  ,'FrameDigitalAsset.Title.afUnknown':{en:'Antifake UNKNOWN:',ru:'Antifake НЕИЗВЕСТНЫЙ ТИП: '}
 
  ,'FrameDigitalAsset.Title.Undetected':{en:'UNKNOWN: ',ru:'НЕИЗВЕСТНО: '}
+ ,'FrameDigitalAsset.Title.Erroneous':{en:'[ERRONEOUS]: ',ru:'[ОШИБОЧНЫЙ]: '}
+ ,'FrameDigitalAsset.Title.Invalid':{en:'[INVALID]: ',ru:'[НЕДЕЙСТВИТЕЛЬНЫЙ]: '}
+ ,'FrameDigitalAsset.Title.Expired':{en:'[EXPIRED]: ',ru:'[ИСТЕКШИЙ]: '}
 
 
  ,'TFrameServerTask.OP_NAMENEW_ONE':{en:'Create: ',ru:'Создать: '}
@@ -450,6 +470,11 @@
  ,'tFrameCreateName.cLoadTemplate':{en:'Select template...',ru:'Выберите шаблон...'}
  ,'tFrameCreateName.Templates.YourName':{en:'YourName',ru:'ВашеИмя'}
 
+ ,'tFrameCreateName.lDays':{en:'Validity (days)',ru:'Период регистрации (дней)'}
+ ,'tFrameCreateName.lName':{en:'Name of the digital asset',ru:'Имя цифрового актива'}
+ ,'tFrameCreateName.lValue':{en:'Value (text)',ru:'Текст актива'}
+ ,'tFrameCreateName.bSend':{en:'Create the asset',ru:'Создать цифровой актив'}
+
  ,'tFrameCreateName.Templates.dnsName':{en:'dns:insertyourdomain.here',ru:'dns:вставьтевашдомен.сюда'}
  ,'tFrameCreateName.Templates.dnsValue':{en:'A=127.0.0.1',ru:'A=127.0.0.1'}
  ,'tFrameCreateName.Templates.sshName':{en:'ssh:YourName',ru:'ssh:ВашеИмя'}
@@ -466,7 +491,7 @@
  ,'tFrameCreateName.Templates.docName':{en:'doc:YourDocumentIDorSha256Hash',ru:'doc:ИдентификаторВашегоДокументаИлиSha256Хеш'}
  ,'tFrameCreateName.Templates.docValue':{en:'TITLE=*Put document title here. This is not a required field.*',ru:'TITLE=*Втавьте сюда заголовок документа. Это не обязательное поле.*'}
  ,'tFrameCreateName.Templates.certName':{en:'cert:AddressOr&NameOr@Hash:type:0',ru:'cert:АдресИли&ИмяИли@Хеш:Тип:0'}
- ,'tFrameCreateName.Templates.certValue':{en:'*ISSUER=*UssuerName*\n*EXDATE=*ExpirationDate*\nSIGN=*IssuersSignature*',ru:'*ISSUER=*ВставьтеИмяИздателя*\n*EXDATE=*ВставьтеДатуИстечения*\nSIGN=*ВставьтеПодписьИздателя*'}
+ ,'tFrameCreateName.Templates.certValue':{en:'*ISSUER=*UssuerName*\n*EXDATE=*ExpirationDate YYYYMMDD*\nSIGN=*IssuersSignature*',ru:'*ISSUER=*ВставьтеИмяИздателя*\n*EXDATE=*ВставьтеДатуИстечения ГГГГММДД*\nSIGN=*ВставьтеПодписьИздателя*'}
 
  ,'NameViewForm.lInfo.myTask':{en:'Task for create an asset (owned by you): ',ru:'Задача создание записи (Вашей): '}
  ,'NameViewForm.lInfo.myNVS':{en:'NVS asset (owned by you): ',ru:'NVS запись (Ваша): '}
@@ -508,5 +533,8 @@
  ,'AtomForm.lContractResume':{en:'Resume',ru:'Краткая информация'}
 
  ,'WalletBasicsForm':{en:'Wallet basics',ru:'Базовые операции кошелька'}
+ ,'WalletBasicsForm.tsCreateName':{en:'Create digital asset',ru:'Создать цифровой актив'}
+ ,'WalletBasicsForm.tsPay':{en:'Transfer coins (pay)',ru:'Перевод монет (платеж)'}
+
  ,'PleaseWait':{en:'Please wait',ru:'Пожалуйста, подождите'}
 }

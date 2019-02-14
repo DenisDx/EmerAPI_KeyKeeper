@@ -30,6 +30,7 @@ type
 
   TMainForm = class(TForm)
     bCopyAddress: TBitBtn;
+    bPay: TBitBtn;
     BitBtn1: TBitBtn;
     bRefreshBalance: TBitBtn;
     bRefreshTasks: TBitBtn;
@@ -37,6 +38,7 @@ type
     Button1: TButton;
     bViewTX: TBitBtn;
     bViewTasks: TBitBtn;
+    bCreateAsset: TBitBtn;
     eAddress: TEdit;
     eBalance: TEdit;
     eNamesCount: TEdit;
@@ -1430,6 +1432,7 @@ begin
 
 
 end;
+
 
 procedure TMainForm.bCopyAddressClick(Sender: TObject);
 begin

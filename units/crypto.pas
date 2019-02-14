@@ -1079,21 +1079,6 @@ begin
 end;
 *)
 
-{
-function CreatePrivateKeyFromHexa(hexa : AnsiString; EC_OpenSSL_NID : Word =CT_NID_secp256k1) : PEC_KEY;
-var bn : PBIGNUM;
-begin
-  Result := nil;
-  bn := BN_new();
-  try
-   if BN_hex2bn(@bn,PAnsiChar(hexa))=0 then Raise Exception.Create('Invalid Hexadecimal value:'+hexa);
-   result:= CreatePrivateKey(bn,EC_OpenSSL_NID);
-  finally
-   BN_free(bn);
-  end;
-  //Result := True;
-end;
-}
 
 function CreatePrivateKeyFromStrBuf(buf : AnsiString) : ansistring;
 begin

@@ -109,9 +109,13 @@ lib/
 
 *.zip
 *.rar
+*.7z
 
 #ignore dependends:
 #CryptoLib4Pascal
 #generics.collections
 #HashLib4Pascal
 #SimpleBaseLib4Pascal
+
+EmerAPI.dmg
+EmerApi

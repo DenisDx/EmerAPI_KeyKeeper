@@ -52,9 +52,14 @@ var h:integer;
     end;
 var s,s2:ansistring;
     st:string;
+    pref:string;
 begin
 
+
+  pref:='';
   s:=fNVSRecord.NVSName;
+  if not verifyNVSName(s) then pref:=localizzzeString('FrameDigitalAsset.Title.Erroneous','ERROR: ');
+
     st:=s;
     if pos(':',s)>0
       then s:=copy(s,1,pos(':',s)-1)
@@ -66,7 +71,7 @@ begin
     pTitle.Color:=getNameColor(s);
 
     if s='' then begin
-      pTitle.Caption:=adjustName(
+      pTitle.Caption:=adjustName(pref+
         localizzzeString('FrameDigitalAsset.Title.Empty','ALIAS OR UNKNOWN: ')
         +st
       );
@@ -83,24 +88,24 @@ begin
       //af:product:<name>:[<N>]
       //af:lot:<name>:[<N>]
       if s2='owner' then begin
-        pTitle.Caption:=adjustName(
+        pTitle.Caption:=adjustName(pref+
          localizzzeString('FrameDigitalAsset.Title.afOwner','Antifake OWNER: ')
           +st
         );
       end else
       if s2='product' then begin
-        pTitle.Caption:=adjustName(
+        pTitle.Caption:=adjustName(pref+
          localizzzeString('FrameDigitalAsset.Title.afProduct','Antifake PRODUCT: ')
           +st
         );
       end else
       if s2='lot' then begin
-        pTitle.Caption:=adjustName(
+        pTitle.Caption:=adjustName(pref+
          localizzzeString('FrameDigitalAsset.Title.afLot','Antifake LOT: ')
           +st
         );
       end else begin
-        pTitle.Caption:=adjustName(
+        pTitle.Caption:=adjustName(pref+
           localizzzeString('FrameDigitalAsset.Title.afUnknown','Antifake unknown: ')
            +st
          );
@@ -110,12 +115,12 @@ begin
     if s='dpo' then begin
       if pos(':',st)>0 then begin
         //item
-        pTitle.Caption:=adjustName(
+        pTitle.Caption:=adjustName(pref+
          localizzzeString('FrameDigitalAsset.Title.dpo','DPO ITEM: ')
           +st
         );
       end else begin
-         pTitle.Caption:=adjustName(
+         pTitle.Caption:=adjustName(pref+
           localizzzeString('FrameDigitalAsset.Title.dpoBrand','DPO BRAND: ')
            +st
          );
@@ -123,7 +128,7 @@ begin
 
     end else
     if s='ssl' then begin
-      pTitle.Caption:=adjustName(
+      pTitle.Caption:=adjustName(pref+
         localizzzeString('FrameDigitalAsset.Title.ssl','SSL: ')
         +st
       );
@@ -131,21 +136,29 @@ begin
     end else
 
     if s='dns' then begin
-      pTitle.Caption:=adjustName(
+
+      pTitle.Caption:=adjustName(pref+
         localizzzeString('FrameDigitalAsset.Title.dns','DNS: ')
         +st
       );
 
     end else
     if s='blog' then begin
-      pTitle.Caption:=adjustName(
+      pTitle.Caption:=adjustName(pref+
         localizzzeString('FrameDigitalAsset.Title.blog','Blog: ')
         +st
       );
 
     end else
-    if s='cert' then begin
+    if s='doc' then begin
       pTitle.Caption:=adjustName(
+        localizzzeString('FrameDigitalAsset.Title.doc','DOCUMENT: ')
+        +st
+      );
+
+    end else
+    if s='cert' then begin
+      pTitle.Caption:=adjustName(pref+
         localizzzeString('FrameDigitalAsset.Title.cert','CERTIFICATE: ')
         +st
       );
