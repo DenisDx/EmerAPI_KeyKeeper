@@ -18,6 +18,8 @@ object FrameServerTask: TFrameServerTask
     BorderStyle = bsSingle
     ClientHeight = 24
     ClientWidth = 467
+    Font.Color = clBlack
+    ParentFont = False
     TabOrder = 0
     OnDblClick = sbAdvConClick
     object sbClose: TSpeedButton

@@ -589,72 +589,78 @@ begin
 
   //!!if trim(data)='' then exit;  '' means error. But we will call onDone
 
-  ddr:=decodeResponse(data,dData);
-  if ddr<>ddrSuccesseful then begin
-    //if js<>nil then js.free;
-    case ddr of
-      ddrWrongPrivKey: raise exception.Create('wrong private key. Cannot decode server response');
-      ddrWrongAESKey: raise exception.Create('wrong AES key. Cannot decode server response');
-      //ddrBinaryData: raise exception.Create('binary data received. Cannot decode server JSON response');
-    else
-      raise exception.Create('unknown server response');
+  if data<>'' then begin
+
+    ddr:=decodeResponse(data,dData);
+    if ddr<>ddrSuccesseful then begin
+      //if js<>nil then js.free;
+      case ddr of
+        ddrWrongPrivKey: raise exception.Create('wrong private key. Cannot decode server response');
+        ddrWrongAESKey: raise exception.Create('wrong AES key. Cannot decode server response');
+        //ddrBinaryData: raise exception.Create('binary data received. Cannot decode server JSON response');
+      else
+        raise exception.Create('unknown server response');
+      end;
     end;
-  end;
-  data:=dData;
+    data:=dData;
 
 
-  ud:=tpServerThreadUserData(Thread.userData);
-  if ud<>nil then
-     if ud^.EmerAPIServerQueryType=esqWallet then begin
-       //unpack data
-       try
-         /// !!!  data:=changeNone(data); //TODO:JSON
-         //js:=GetJSON(data);
-         // tDecodeDataResult=(ddrSuccesseful,ddrWrongData,ddrWrongPrivKey,ddrWrongAESKey, ddrBinaryData);
-         (*
-         ddr:=decodeDataJSON(data,js);
-         if ddr<>ddrSuccesseful then begin
-           if js<>nil then js.free;
-           case ddr of
-             ddrWrongPrivKey: raise exception.Create('wrong private key. Cannot decode server response');
-             ddrWrongAESKey: raise exception.Create('wrong AES key. Cannot decode server response');
-             ddrBinaryData: raise exception.Create('binary data received. Cannot decode server JSON response');
-           else
-             raise exception.Create('unknown server response');
-           end;
-         end; *)
-         js:=GetJSON(data);
+    ud:=tpServerThreadUserData(Thread.userData);
+    if ud<>nil then
+       if ud^.EmerAPIServerQueryType=esqWallet then begin
+         //unpack data
          try
-           // {"data":{"getblockchaininfo":{"answer":" ......
-           //e:=js.FindPath('data.'+makeUpMethod(Thread.method)+'.answer');
-           e:=js.FindPath('data.callwalletfunction.answer');
-           if e<>nil then
-              data:=e.AsString//!!!TEST stripcslashes(e.AsString)
-           else begin
-             if pos('{"errors":',data)=1 then begin
-               e:=js.FindPath('errors[0].message');
-               if e<>nil then
-                  Thread.lastError:=e.AsString
-               else
-                  Thread.lastError:='tEmerApiServer.ThreadHasData: Can''t parse error: '+data;
-             end else
-               Thread.lastError:='tEmerApiServer.ThreadHasData: Can''t find result in JSON data: '+data;
-             ThreadError(Thread,Thread.lastError);
-             data:='';
+           /// !!!  data:=changeNone(data); //TODO:JSON
+           //js:=GetJSON(data);
+           // tDecodeDataResult=(ddrSuccesseful,ddrWrongData,ddrWrongPrivKey,ddrWrongAESKey, ddrBinaryData);
+           (*
+           ddr:=decodeDataJSON(data,js);
+           if ddr<>ddrSuccesseful then begin
+             if js<>nil then js.free;
+             case ddr of
+               ddrWrongPrivKey: raise exception.Create('wrong private key. Cannot decode server response');
+               ddrWrongAESKey: raise exception.Create('wrong AES key. Cannot decode server response');
+               ddrBinaryData: raise exception.Create('binary data received. Cannot decode server JSON response');
+             else
+               raise exception.Create('unknown server response');
+             end;
+           end; *)
+           js:=GetJSON(data);
+           try
+             // {"data":{"getblockchaininfo":{"answer":" ......
+             //e:=js.FindPath('data.'+makeUpMethod(Thread.method)+'.answer');
+             e:=js.FindPath('data.callwalletfunction.answer');
+             if e<>nil then
+                data:=e.AsString//!!!TEST stripcslashes(e.AsString)
+             else begin
+               if pos('{"errors":',data)=1 then begin
+                 e:=js.FindPath('errors[0].message');
+                 if e<>nil then
+                    Thread.lastError:=e.AsString
+                 else
+                    Thread.lastError:='tEmerApiServer.ThreadHasData: Can''t parse error: '+data;
+               end else
+                 Thread.lastError:='tEmerApiServer.ThreadHasData: Can''t find result in JSON data: '+data;
+               ThreadError(Thread,Thread.lastError);
+               data:='';
+             end;
+           //data:=
+           finally
+             js.Free;
            end;
-         //data:=
-         finally
-           js.Free;
+         except
+           Thread.lastError:= 'tEmerApiServer.ThreadHasData: Can''t unpack JSON data: '+data;
+           ThreadError(Thread,Thread.lastError);
+           data:='';
          end;
-       except
-         Thread.lastError:= 'tEmerApiServer.ThreadHasData: Can''t unpack JSON data: '+data;
-         ThreadError(Thread,Thread.lastError);
-         data:='';
+       end else begin
+           Thread.result:=data;
        end;
-     end else begin
-         Thread.result:=data;
-     end;
 
+  end else begin//if data<>''
+   Thread.lastError:= 'tEmerApiServer.ThreadHasData: No data received: ';
+   ThreadError(Thread,Thread.lastError);
+  end;
 
   //for catch login data
   if Thread.EmerAPIBlockchainThreadType=ebtPreparation then  begin

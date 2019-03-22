@@ -121,6 +121,8 @@ function restorePubKeyFromSign(sign:ansistring;Digest:ansistring):ansistring;
 
 function ECDSAMessageSignature(PrivKey: ansistring; const digest: AnsiString): AnsiString; //sign message
 
+Const CT_Base58 : AnsiString = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+
 implementation
 uses UOpenSSL, UCryptoCut
   ,HlpIHash
@@ -1725,7 +1727,7 @@ end;
 
 
 //======================================================
-Const CT_Base58 : AnsiString = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+
 
 
 {

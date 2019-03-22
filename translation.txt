@@ -1,4 +1,4 @@
-{ 'help':{en:'help',ru:'помощь',zh:'支援'},
+{ 'help':{en:'help',ru:'помощь',zh:'支援',ua:'допомога'},
 
  'bHelp':{en:'Help',ru:'Помощь'},
  'bYes':{en:'Yes',ru:'Да'},
@@ -11,7 +11,7 @@
 
  'MainForm.miAbout':{en:'About',ru:'О программе'},
  'MainForm.miExit':{en:'Exit',ru:'Выход'},
- 'MainForm.miSystem':{en:'System',ru:'Система'},
+ 'MainForm.miSystem':{en:'System',ru:'Система',ua:'Система'},
  'MainForm.miServer':{en:'Server',ru:'Сервер'},
  'MainForm.miOpenWeb':{en:'Open web interface',ru:'Открыть веб-интерфейс сервера'},
 
@@ -73,6 +73,8 @@
  'MainForm.sbServer.LOADING':{en:'LOADING...',ru:'ЗАГРУЗКА...'},
  'MainForm.sbServer.GuestMODE':{en:'GUEST MODE',ru:'ГОСТЕВОЙ РЕЖИМ'},
 
+ 'MainForm.JSONRPC_CANT_START_MESSAGE':{en:'JSON RPC Server can not be started: ',ru:'Ошибка запуска сервера JSON RPC: '},
+
  'SignMessageForm':{en:'Sign Message',ru:'Подписать сообщение'},
  'SignMessageForm.lDocForSign':{en:'Text for sign',ru:'Текст для подписи'},
  'SignMessageForm.chIgnoreSigns':{en:'Ignore EMSIGN signatures',ru:'Игнорировать подписи формата EMSIGN'},
@@ -125,8 +127,11 @@
 
  'QuestionForm.AskForMPTitle':{en:'Do you want to set up Master Password now?',ru:'Вы хотите задать Мастер-Пароль сейчас?'},
 
- 'QuestionForm.cLanguage.en':{en:'English',ru:'English'},
- 'QuestionForm.cLanguage.ru':{en:'Русский',ru:'Русский'},
+ 'QuestionForm.cLanguage.en':{en:'English',ru:'English',zh:'English',ua:'English'},
+ 'QuestionForm.cLanguage.ru':{en:'Русский',ru:'Русский',zh:'Русский',ua:'Русский'},
+ 'QuestionForm.cLanguage.zh':{en:'中文',ru:'中文',zh:'中文',ua:'中文'},
+ 'QuestionForm.cLanguage.ua':{en:'Українська',ru:'Українська',zh:'Українська',ua:'Українська'},
+
  'QuestionForm.bHelp':{en:'Help',ru:'Справка'},
 
  'MessageHelpTopicIsNotFound':{
@@ -229,8 +234,19 @@
  'SettingsForm.lMaxSimConWallet':{en:'Max. simultaneous connections',ru:' Макс. число подключений'},   
  'SettingsForm.lMaxSimConServer':{en:'Max. simultaneous connections',ru:' Макс. число подключений'},    
   
- 
- 
+ 'SettingsForm.sssDev_Bip32_path':{en:'HD key derive path',ru:'Путь HD ключей'},
+ 'SettingsForm.sssDev_Bip32_salt':{en:'HD key salt',ru:'Соль HD ключей'},
+
+ 'SettingsForm.ssbHide_To_Tray':{en:'Hide to tray',ru:'Сворачивать в трей'},
+
+ 'SettingsForm.gJSONRPC':{en:'JSONRPC remote connection',ru:'JSONRPC удаленное подключение'},
+ 'SettingsForm.ssbJSONPRC_allowed':{en:'Allow JSONRPC connection',ru:'Разрешить подключение по JSONRPC'},
+ 'SettingsForm.lJSONPRC_port':{en:'JSONRPC port',ru:'JSONRPC порт'},
+ 'SettingsForm.lJSONPRC_timeout':{en:'JSONRPC timeout',ru:'JSONRPC таймаут'},
+ 'SettingsForm.ssbJSONRPC_Allow_Nonlocal':{en:'Allow non-local connections',ru:'Разрешить внешние подключения'},
+ 'SettingsForm.ssbJSONRPC_filter_commands':{en:'Allow only commands:',ru:'Разрешить только команды:'},
+ 'SettingsForm.ssbJSONRPC_Allow_Only':{en:'Allow only for IPs:',ru:'Разрешить только IP адреса:'},
+
  
  'SettingsForm.msgSetUPnow':{
    en:'The option to save a key pair on this computer is enabled.\nTo securely store a key pair (private key), you must set a user password.\nIf the password is not set, saving will not occur.\nThis password will be requested each time you connect to the server or perform payment transactions.\nYou can use the password generator to create a secure password.',
@@ -249,9 +265,10 @@
    ru:'<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\" /></head> <BODY><H2>Пароль Пользователя недостаточно надежен</H2>Пароль пользователя, выбранный Вами, недостаточно надежен.<BR>Необходимо задать пароль пользователя с оценкой не менее 20 баллов, рекомендовано - не менее 25 баллов.</BODY></HTML>'
   },
 
- 'SettingsForm.sssLanguage.en':{en:'English',ru:'English',zh:'English'},
- 'SettingsForm.sssLanguage.ru':{en:'Русский',ru:'Русский'},
- 'SettingsForm.sssLanguage.zh':{en:'中文',ru:'中文',zh:'中文'}
+ 'SettingsForm.sssLanguage.en':{en:'English',ru:'English',zh:'English',ua:'English'},
+ 'SettingsForm.sssLanguage.ru':{en:'Русский',ru:'Русский',zh:'Русский',ua:'Русский'},
+ 'SettingsForm.sssLanguage.zh':{en:'中文',ru:'中文',zh:'中文',ua:'中文'},
+ 'SettingsForm.sssLanguage.ua':{en:'Українська',ru:'Українська',zh:'Українська',ua:'Українська'}
  
  ,'setUPForm.lExplain':{
    en:'Some fields have invalid values.\nPlease correct the values:',
@@ -477,7 +494,7 @@
  ,'tFrameCreateName.bSend':{en:'Create the asset',ru:'Создать цифровой актив'}
 
  ,'tFrameCreateName.Templates.dnsName':{en:'dns:insertyourdomain.here',ru:'dns:вставьтевашдомен.сюда'}
- ,'tFrameCreateName.Templates.dnsValue':{en:'A=127.0.0.1',ru:'A=127.0.0.1'}
+ ,'tFrameCreateName.Templates.dnsValue':{en:'A=127.0.0.1|TTL=6000',ru:'A=127.0.0.1|TTL=6000'}
  ,'tFrameCreateName.Templates.sshName':{en:'ssh:YourName',ru:'ssh:ВашеИмя'}
  ,'tFrameCreateName.Templates.sshValue':{en:'*Insert your ssh certificate here (a string like \"ssh-rsa AAA........\") or a link to another name with an @ symbol (for example, \"@AnotherName\"). You can insert multiple records, separating them with | (for example, \"user1|user2|user3\") to creating a group*',ru:'*вставьте сюда Ваш ssh сертификат (строка вида \"ssh-rsa AAA........\") или ссылку на другое имя с символа @ (например, \"@AnotherName\"). Можно вставлять несколько записей, разделяя их знаком | (например, \"user1|user2|user3\")*'}
  ,'tFrameCreateName.Templates.sslName':{en:'ssl:YourCertificateSerialInhex',ru:'ssl:СерийныйНомерВашегоСертификатаВhex'}
@@ -538,4 +555,84 @@
  ,'WalletBasicsForm.tsPay':{en:'Transfer coins (pay)',ru:'Перевод монет (платеж)'}
 
  ,'PleaseWait':{en:'Please wait',ru:'Пожалуйста, подождите'}
+
+ ,'MainForm.imAFCreateForPrinting':{en:'Create data package for label printing',ru:'Создание пакета документов для типографии'}
+ ,'AFCreateForPrintingForm':{en:'Create data package for label printing',ru:'Создание пакета документов для типографии'}
+ ,'AFCreateForPrintingForm.lStep1':{en:'Step 1: Choose the data source',ru:'Шаг 1: укажите, откуда получить данные'}
+ ,'AFCreateForPrintingForm.lStep2':{en:'Step 2: Choose general data and the data required for creation',ru:'Шаг 2: Определите общие данные и данные для генерации'}
+ ,'AFCreateForPrintingForm.lStep3':{en:'Step 3: Choose what is needed to be created',ru:'Шаг 3: укажите, что требуется создать'}
+
+ ,'AFCreateForPrintingForm.Messages.FileNotExist':{en:'Source file does not exist',ru:'Исходный файл не существует'}
+ ,'AFCreateForPrintingForm.Messages.LotNotSelected':{en:'Please select lot',ru:'Пожалуйста выберите лот'}
+ ,'AFCreateForPrintingForm.lInformation1.SerialVolume':{en:'Capacity: ',ru:'Емкость: '}
+ ,'AFCreateForPrintingForm.lInformation1.LotNotSelected':{en:'Lot not selected',ru:'Партия товара не выбрана'}
+ ,'AFCreateForPrintingForm.lInformation1.WrongLot':{en:'Incorrect value in Lot asset',ru:'Ошибочная запись партии товара'}
+ ,'AFCreateForPrintingForm.lInformation1.PleaseWait':{en:'Please wait for data to load',ru:'Пожалуйста, подождите окончания загрузки данных'}
+
+ ,'AFCreateForPrintingForm.rbIterRange':{en:'Create by range: ',ru:'Создать по диапазону: '}
+ ,'AFCreateForPrintingForm.rbIterFile':{en:'Create by file: ',ru:'Создать по файлу: '}
+ ,'AFCreateForPrintingForm.rbIterLot':{en:'Create by lot: ',ru:'Создать по партии: '}
+ ,'AFCreateForPrintingForm.lInformation':{en:'Information: ',ru:'Информация: '}
+ ,'AFCreateForPrintingForm.lBrand':{en:'Brand: ',ru:'Бренд: '}
+
+ ,'AFCreateForPrintingForm.chCreatePrivateCSV':{en:'Create CSV file with secret codes: ',ru:'Создать CSV файл с секретными кодами: '}
+ ,'AFCreateForPrintingForm.chCreatePublicCSV':{en:'Create public CSV file: ',ru:'Создать публичный CSV файл: '}
+ ,'AFCreateForPrintingForm.chCreatePrintCSV':{en:'Create CSV file for printing factory',ru:'Создать CSV файл для типографии'}
+ ,'AFCreateForPrintingForm.chCreateQR1':{en:'Save public QR code to folder: ',ru:'Сохранить открытый QR код в каталог: '}
+ ,'AFCreateForPrintingForm.chCreateQR2':{en:'Save secret QR code to folder: ',ru:'Сохранить секретный QR код в каталог: '}
+
+ ,'AFCreateForPrintingForm.chCreateNVSrecords':{en:'Create blockchain record (needs time!)',ru:'Создать записи в блокчейн (потребует времени!)'}
+ ,'AFCreateForPrintingForm.chCreateNVSrecordsOwnedByMe':{en:'Create blockchain records owned by me (NOT RECOMMENDED)',ru:'Овладеть создаваемыми записями (НЕ РЕКОМЕНДУЕТСЯ)'}
+ ,'AFCreateForPrintingForm.chLogErrorSerialsToFile':{en:'Save erroneous serials to file (RECOMMENDED): ',ru:'Сохранить ошибочные номера в файл (РЕКОМЕНДУЕТСЯ) '}
+ ,'AFCreateForPrintingForm.bEditCustomFields':{en:'Edit custom fields',ru:'Редактировать пользовательские поля'}
+ ,'AFCreateForPrintingForm.chAddCustomFields':{en:'Add custom fields',ru:'Добавить пользовательские поля'}
+ ,'AFCreateForPrintingForm.chCreateBrandField':{en:'Link brand',ru:'Добавить поле бренда'}
+ ,'AFCreateForPrintingForm.chCreateParentField':{en:'Add parent link',ru:'Добавить ссылку на родителя'}
+ ,'AFCreateForPrintingForm.chCreateParentLotField':{en:'Ling lot',ru:'Добавить ссылку на партию'}
+ ,'AFCreateForPrintingForm.chCreateProductField':{en:'Link product',ru:'Добавить ссылку на продукт'}
+
+ ,'AFCreateForPrintingForm.chCheckNamesIfFree':{en:'Check if the name is free and increment the suffix if it is necessary',ru:'Проверять, свободно ли имя, и увеличивать суффик имени если необходимо'}
+ ,'AFCreateForPrintingForm.chAddRandomSuffix':{en:'Add random name suffix',ru:'Добавлять случайный суффикс к имени'}
+
+ ,'AFCreateForPrintingForm.cBrand.Manual':{en:'Manual add brand name',ru:'Указать имя бренда вручную'}
+ ,'AFCreateForPrintingForm.lBrandManual':{en:'Brand NVS name:',ru:'NVS имя бренда: '}
+ ,'AFCreateForPrintingForm.lBrandManualComment':{en:'Attention! Be very careful when manually entering the brand name.\nThe dpo prefix is not necessary.',ru:'Внимание! Будьте очень внимательны при ручном вводе имени бренда.\nПрефикс dpo вводить не нужно.'}
+
+ ,'AFCreateForPrintingForm.chPubAddName':{en:'Add NVS name',ru:'Добавить NVS имя'}
+ ,'AFCreateForPrintingForm.chPubAddValue':{en:'Add NVS Value',ru:'Добавить NVS Value'}
+ ,'AFCreateForPrintingForm.chPubAddBrand':{en:'Add Brand',ru:'Добавить Бренд'}
+ ,'AFCreateForPrintingForm.chPubAddAddress':{en:'Add Blockchain Address',ru:'Добавить адрес в блокчейне'}
+
+ ,'AFCreateForPrintingForm.chPrivAddName':{en:'Add NVS name',ru:'Добавить NVS имя'}
+ ,'AFCreateForPrintingForm.chPrivAddValue':{en:'Add NVS Value',ru:'Добавить NVS Value'}
+ ,'AFCreateForPrintingForm.chPrivAddBrand':{en:'Add Brand',ru:'Добавить бренд'}
+ ,'AFCreateForPrintingForm.chPrivAddAddress':{en:'Add Blockchain Address',ru:'Добавить адрес в блокчейне'}
+
+ ,'AFCreateForPrintingForm.chFolderPackage':{en:'Use one folder for all files: ',ru:'Один каталог для всех файлов: '}
+
+ ,'AFCreateForPrintingForm.msg.PleaseSetFileName':{en:'Please select the filename',ru:'Пожалуйста, укажите имя файла'}
+ ,'AFCreateForPrintingForm.msg.PleaseSetFolder':{en:'Please select the folder for save the data',ru:'Пожалуйста, укажите имя каталога для сохранения данных'}
+
+ ,'AFCreateForPrintingForm.msg.BrandMustBeSet':{en:'You must define brand',ru:'Вы должны определить бренд'}
+ ,'AFCreateForPrintingForm.msg.BrandMustBeYour':{en:'To create entries in the blockchain, the brand must belong to you or the private key of the owner`s address must be specified.',ru:'Для создания записей в блокчейне бренд должен принадлежать Вам или должен быть задан приватный ключ адреса- владельца'}
+
+ ,'AFCreateForPrintingForm.lTextQR1':{en:'public QR code text template:',ru:'Шаблон текста открытого QR кода:'}
+ ,'AFCreateForPrintingForm.lTextQR2':{en:'private QR code text template:',ru:'Шаблон текста закрытого QR кода:'}
+
+ ,'AFCreateForPrintingForm.lSecretLength':{en:'Secret code length ',ru:'Длина секретного слова '}
+
+ ,'AFCreateForPrintingForm.bDemo1':{en:'Demo1: 10 records in blockchain',ru:'Демо 1: Десять записей в блокчейн'}
+ ,'AFCreateForPrintingForm.bDemo1.Desc':{en:'Demo1: 10 records in blockchain',ru:'Демо 1: Десять записей в блокчейн'}
+
+ ,'AFCreateForPrintingForm.bCreate':{en:'Create',ru:'Создать'}
+ ,'AFCreateForPrintingForm.bCreate.Start':{en:'Create',ru:'Создать'}
+ ,'AFCreateForPrintingForm.bCreate.Stop':{en:'Stop',ru:'Остановить'}
+ ,'AFCreateForPrintingForm.bCreate.Stopping':{en:'Stopping...',ru:'Остановка...'}
+ ,'AFCreateForPrintingForm.bClose':{en:'Close',ru:'Закрыть'}
+
+ ,'NVSValueEditForm':{en:'NVS value editor',ru:'Редактор NVS Value'}
+ ,'NVSValueEditForm.bClose':{en:'Cancel and close',ru:'Отменить и закрыть'}
+ ,'NVSValueEditForm.bSave':{en:'Save and close',ru:'Сохранить и закрыть'}
+
+
 }

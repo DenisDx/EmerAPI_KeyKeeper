@@ -73,6 +73,18 @@ type
     bRestoreKeypair: TBitBtn;
     bConfigureWallet: TButton;
     Button2: TButton;
+    lJSONPRC_timeout: TLabel;
+    ssiJSONPRC_timeout: TSpinEdit;
+    sssJSONRPC_allow_IPs: TEdit;
+    sssJSONRPC_allowed_commands: TEdit;
+    ssbJSONRPC_Allow_Only: TCheckBox;
+    ssbJSONRPC_filter_commands: TCheckBox;
+    lJSONPRC_port: TLabel;
+    ssbJSONRPC_Allow_Nonlocal: TCheckBox;
+    ssiJSONPRC_port: TSpinEdit;
+    ssbJSONPRC_allowed: TCheckBox;
+    gJSONRPC: TGroupBox;
+    ssbHide_To_Tray: TCheckBox;
     lssiEMERAPI_SERVER_Refresh_period: TLabel;
     XXssbEmerAPI_Server_Login_Username: TRadioButton;
     ssbEmerAPI_Server_Login_Address: TRadioButton;
@@ -903,6 +915,7 @@ begin
     MainForm.miDevTools.Visible:=nullToBool(Settings.getValue('Dev_Mode_ON'));
     MainForm.updateInfoTimer.Interval:=Settings.getValue('EMERAPI_SERVER_Refresh_period')*1000;
     MainForm.showWalletInfo();
+    MainForm.checkJSONRPCserver();
 end;
 
 {

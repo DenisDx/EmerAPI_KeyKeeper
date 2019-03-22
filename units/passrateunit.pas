@@ -90,7 +90,9 @@ begin
   else if rate<1025 then pbRate.Color:=clGreen
   else pbRate.Color:=clBlack;
  }
-       if rate<7.5 then lPasswordrate.Caption:=localizzzeString('setUPForm.lpmt.Terrible','Terrible password, it is not acceptable ( rate ')+inttostr(trunc(rate))+')'
+
+  if fCurrentPass='' then lPasswordrate.Caption:=localizzzeString('setUPForm.lpmt.EnterPassword','Please enter password')
+  else if rate<7.5 then lPasswordrate.Caption:=localizzzeString('setUPForm.lpmt.Terrible','Terrible password, it is not acceptable ( rate ')+inttostr(trunc(rate))+')'
   else if rate<15 then lPasswordrate.Caption:=localizzzeString('setUPForm.lpmt.VeryBad','Very bad password, use it only for protect from strangers ( rate ')+inttostr(trunc(rate))+')'
   else if rate<20 then lPasswordrate.Caption:=localizzzeString('setUPForm.lpmt.Bad','Bad password, better to make it stronger ( rate ')+inttostr(trunc(rate))+')'
   else if rate<25 then lPasswordrate.Caption:=localizzzeString('setUPForm.lpmt.Avg','Less or more acceptable, but better to stronger it ( rate ')+inttostr(trunc(rate))+')'

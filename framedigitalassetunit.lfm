@@ -12,6 +12,8 @@ inherited FrameDigitalAsset: TFrameDigitalAsset
     Caption = 'pTitle'
     ClientHeight = 28
     ClientWidth = 320
+    Font.Color = clBlack
+    ParentFont = False
     TabOrder = 0
     object sbDetails: TSpeedButton
       Left = 1

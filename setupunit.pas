@@ -115,6 +115,8 @@ procedure TsetUPForm.tBlinkTimer(Sender: TObject);
 begin
   tBlink.Enabled:=false;
   ePassword1.Color:=clDefault;
+  ePassword1.Font.Color:=clDefault;
+  ePassword2.Font.Color:=clDefault;
   ePassword2Change(nil);
 end;
 
@@ -194,7 +196,11 @@ begin
   then ModalResult:=mrOk
   else begin
     ePassword1.Color:=clRed;
-    if ePassword2.Enabled then ePassword2.Color:=clRed;
+    ePassword1.Font.Color:=clBlack;
+    if ePassword2.Enabled then begin
+      ePassword2.Color:=clRed;
+      ePassword2.Font.Color:=clBlack;
+    end;
     tBlink.Enabled:=true;
   end;
 end;
@@ -233,8 +239,8 @@ end;
 procedure TsetUPForm.ePassword2Change(Sender: TObject);
 begin
   if (ePassword2.Text<>ePassword1.Text) and (ePassword2.Text<>'') and ePassword2.enabled
-    then ePassword2.Color:=clRed
-    else ePassword2.Color:=clDefault;
+    then begin ePassword2.Color:=clRed; ePassword2.Font.Color:=clBlack; end
+    else begin ePassword2.Color:=clDefault; ePassword2.Font.Color:=clDefault; end;
 end;
 
 procedure TsetUPForm.FormKeyPress(Sender: TObject; var Key: char);

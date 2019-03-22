@@ -6,12 +6,15 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, SynHighlighterAny, Forms, Controls, Graphics,
-  Dialogs, StdCtrls, Menus, ExtCtrls, Buttons, ComCtrls, UOpenSSL, UOpenSSLdef,
+  Dialogs, StdCtrls, Menus, ExtCtrls, Buttons, ComCtrls, // UOpenSSL, UOpenSSLdef,
   Crypto, fpjson, jsonparser, EmerAPIBlockchainMergedUnit,
   EmerAPIBlockchainUnit, EmerAPIMain, emerapitypes,
   CryptoLib4PascalConnectorUnit, EmerAPIServerTasksUnit, FrameServerTaskUnit,
   HDNodeUnit, EmerAPIServerUnit, SynEditHighlighter, SynHighlighterHTML,
-  synhighlighterunixshellscript, SynEmerNVS;
+  synhighlighterunixshellscript, SynEmerNVS
+
+  ,jsonrpc
+  ;
 
 type
   tglobals=record
@@ -58,6 +61,10 @@ type
     lNames: TLabel;
     lTasks: TLabel;
     MainMenu: TMainMenu;
+    imAFCreateForPrinting: TMenuItem;
+    miCreatePubLotFile: TMenuItem;
+    miCreatePrivateLotFile: TMenuItem;
+    miLotFiles: TMenuItem;
     miSystem: TMenuItem;
     MenuItem10: TMenuItem;
     MenuItem11: TMenuItem;
@@ -120,6 +127,7 @@ type
     procedure BitBtn1Click(Sender: TObject);
     procedure bRefreshBalanceClick(Sender: TObject);
     procedure bRefreshTasksClick(Sender: TObject);
+    procedure bShowQRClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure bViewTasksClick(Sender: TObject);
     procedure bViewTXClick(Sender: TObject);
@@ -128,9 +136,13 @@ type
     procedure FormDestroy(Sender: TObject);
     function FormHelp(Command: Word; Data: PtrInt; var CallHelp: Boolean
       ): Boolean;
+    procedure imAFCreateForPrintingClick(Sender: TObject);
     procedure KeyUpAppHandler(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormResize(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure JSONRPCServerThreadErrorHandler(Sender:tObject);
+    procedure checkJSONRPCserver;
+    procedure miLotFilesClick(Sender: TObject);
     procedure miEncryptionClick(Sender: TObject);
     procedure miTXClick(Sender: TObject);
     procedure miLogClick(Sender: TObject);
@@ -198,6 +210,7 @@ type
 
   public
     debugMeasures:tStringList;
+    JSONRPCServer:TJSONRPCServer;
     procedure debugCleanMeasures;
     procedure debugShowLastMeasure;
     procedure debugStart(atag:string);
@@ -251,6 +264,9 @@ uses SettingsUnit,Localizzzeunit, questionUnit, MasterPasswordWizardUnit, setUPU
    ,SignMessageUnit
    ,CheckSignatureUnit
    ,x509devunit
+   ,addressQRunit
+   ,AFCreateForPrintingUnit
+
    ;
 
 
@@ -803,19 +819,24 @@ end;
 
 procedure TMainForm.onBlockchainUpdated(sender:tObject);
 begin
- if Settings.getValue('EmerAPI_Server_Use') and EmerAPI.EmerAPIConnetor.serverAPI.testedOk then
-  if not Settings.getValue('EMERAPI_SERVER_GUEST_ONLY') then
-    if EmerAPI.isReady then sbServer.Caption:=localizzzeString('MainForm.sbServer.ACTIVE','ACTIVE')
-                       else sbServer.Caption:=localizzzeString('MainForm.sbServer.LOADING','LOADING')
-  else
-    if EmerAPI.isReady then sbServer.Caption:=localizzzeString('MainForm.sbServer.GuestMODE','GUEST MODE')
-                       else sbServer.Caption:=localizzzeString('MainForm.sbServer.LOADING','LOADING');
 
- if Settings.getValue('USE_LOCAL_WALLET') and EmerAPI.EmerAPIConnetor.serverAPI.testedOk then
+ if Settings.getValue('EmerAPI_Server_Use') and EmerAPI.EmerAPIConnetor.serverAPI.testedOk then
+   if not Settings.getValue('EMERAPI_SERVER_GUEST_ONLY') then
+     if EmerAPI.isReady then sbServer.Caption:=localizzzeString('MainForm.sbServer.ACTIVE','ACTIVE')
+                        else sbServer.Caption:=localizzzeString('MainForm.sbServer.LOADING','LOADING')
+   else
+     if EmerAPI.isReady then sbServer.Caption:=localizzzeString('MainForm.sbServer.GuestMODE','GUEST MODE')
+                        else sbServer.Caption:=localizzzeString('MainForm.sbServer.LOADING','LOADING')
+ else
+    sbServer.Caption:='NOT CONNECTED';
+
+ if Settings.getValue('USE_LOCAL_WALLET') and EmerAPI.EmerAPIConnetor.walletAPI.testedOk then
    if EmerAPI.isReady then
       sbLW.Caption:=localizzzeString('MainForm.sbLW.ACTIVE','ACTIVE')
    else
-     sbLW.Caption:=localizzzeString('MainForm.sbLW.Loading','LOADING');
+     sbLW.Caption:=localizzzeString('MainForm.sbLW.Loading','LOADING')
+  else
+     sbLW.Caption:='NOT CONNECTED';
 end;
 
 procedure TMainForm.onServerConnected(sender:tObject);
@@ -1331,6 +1352,7 @@ begin
 
   Settings.free;
 
+  if JSONRPCServer<>nil then freeandnil(JSONRPCServer); //JSONRPCServerThread.Terminate;
   //SynEmerNVSSyn.free;
 end;
 
@@ -1338,6 +1360,11 @@ function TMainForm.FormHelp(Command: Word; Data: PtrInt; var CallHelp: Boolean
   ): Boolean;
 begin
   showHelpTag();
+end;
+
+procedure TMainForm.imAFCreateForPrintingClick(Sender: TObject);
+begin
+  AFCreateForPrintingForm.show;
 end;
 
 procedure TMainForm.KeyUpAppHandler(Sender: TObject; var Key: Word; Shift: TShiftState
@@ -1409,6 +1436,11 @@ begin
       if emerAPI.EmerAPIConnetor.serverAPI.testedOk then
         EmerAPIServerTasks.updateFromServer;
 
+end;
+
+procedure TMainForm.bShowQRClick(Sender: TObject);
+begin
+  ShowQRCode(eAddress.text);
 end;
 
 procedure TMainForm.Button1Click(Sender: TObject);
@@ -1497,6 +1529,33 @@ begin
   Splitter1.Visible:=  Settings.getValue('Dev_Mode_ON');
 
   if (Settings.PubKey='') and (PrivKey='') then timerAskForMP.enabled:=true;
+
+  //fphttpserver, fpHTTP, fpWeb
+  checkJSONRPCserver;
+end;
+
+procedure TMainForm.JSONRPCServerThreadErrorHandler(Sender:tObject);
+begin
+  if Sender is TJSONRPCServer then
+    showMessageSafe(localizzzeString('MainForm.JSONRPC_CANT_START_MESSAGE','JSON RPC Server can not be started: ')+(Sender as TJSONRPCServer).LastError);
+end;
+
+procedure TMainForm.checkJSONRPCserver;
+begin
+  if Settings.getValue('JSONPRC_allowed') then
+    if JSONRPCServer=nil then begin
+       JSONRPCServer:=TJSONRPCServer.Create();
+       JSONRPCServer.addNotify(EmerAPINotification(@JSONRPCServerThreadErrorHandler,'error',true));
+    end;
+
+  if JSONRPCServer<>nil then
+    JSONRPCServer.checkState;
+
+end;
+
+procedure TMainForm.miLotFilesClick(Sender: TObject);
+begin
+
 end;
 
 procedure TMainForm.miEncryptionClick(Sender: TObject);
@@ -1677,7 +1736,7 @@ begin
 
   timerAskForLib.Enabled:=false;
   exit; //!!!!!!!!
-
+  {
   //CurrentLanguage:='en';
   AskQuestionInit();
   QuestionForm.FileNameEdit.Visible:=true;
@@ -1737,7 +1796,7 @@ begin
      //4. Attempt to obtain PrivKey or PubKey
      if (Settings.PubKey='') and (PrivKey='') then timerAskForMP.enabled:=true;
   end;
-
+  }
 end;
 
 procedure TMainForm.onAnswer(sender:tObject;mr:tModalResult;mtag:ansistring);

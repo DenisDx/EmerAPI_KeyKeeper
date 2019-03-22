@@ -1,4 +1,4 @@
-EmerAPI KeyKeeper 0.0.5
+EmerAPI KeyKeeper 0.0.6
 =================
 
 EmerAPI / Antifake Key Keeper
@@ -31,6 +31,11 @@ SimpleBaseLib4Pascal >= v1.4 <https://github.com/Xor-el/SimpleBaseLib4Pascal>
 This "Software" is Licensed Under  **`MIT License (MIT)`** .
 
 ##Version history
+
+0.0.6
+Multiple changes
+JSON RPC limited support
+DPO / antifake serial record creation
 
 0.0.5 
 Multiple changes

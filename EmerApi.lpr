@@ -17,7 +17,7 @@ uses
   EmerAPITransactionUnit, BaseTXUnit, FrameServerTaskUnit, MempoolViewerUnit2,
   HDNodeUnit, masssendingunit, FrameDigitalAssetUnit, AtomFormUnit,
   FormAboutUnit, SplashFormUnit, SignMessageUnit, CheckSignatureUnit,
-  x509devUnit, unit1;
+  x509devUnit, addressQRunit, AFCreateForPrintingunit{, unit1} , NVSValueEdit;
 {$R *.res}
 
 begin
@@ -39,6 +39,9 @@ begin
   Application.CreateForm(TFormAbout, FormAbout);
   Application.CreateForm(TSignMessageForm, SignMessageForm);
   Application.CreateForm(TCheckSignatureForm, CheckSignatureForm);
+  Application.CreateForm(TAddressQRForm, AddressQRForm);
+  Application.CreateForm(TAFCreateForPrintingForm, AFCreateForPrintingForm);
+  Application.CreateForm(TNVSValueEditForm, NVSValueEditForm);
   //Application.CreateForm(Tx509devform, x509devform);
   //Application.CreateForm(TNameViewForm, NameViewForm);
   Application.Run;

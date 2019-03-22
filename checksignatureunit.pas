@@ -99,7 +99,7 @@ begin
      end;
 
      lbResult.Items.Append(s);
-     eSignature.Color:=clGray;
+     eSignature.Color:=clGray; eSignature.Font.Color:=clBlack;
      bRemoveSign.Enabled:=false;
      bSign.Enabled:=false;
      exit;
@@ -124,10 +124,10 @@ begin
       try
         //sList.Append(base64ToBuf(trim(eSignature.Text)));
         sList.Append('-----EMSIGN='+trim(eSignature.Text)+'-----');
-        eSignature.Color:=clWhite;
+        eSignature.Color:=clWhite; eSignature.Font.Color:=clBlack;
       except
-        eSignature.Color:=$CCCCFF;
-      end else eSignature.Color:=clDefault;
+        eSignature.Color:=$CCCCFF; eSignature.Font.Color:=clBlack;
+      end else begin eSignature.Color:=clDefault; eSignature.Font.Color:=clDefault; end;
 
     lbResult.Items.Clear;
     for i:=0 to sList.Count-1 do begin

@@ -1,10 +1,10 @@
 object MainForm: TMainForm
-  Left = 1204
+  Left = 1120
   Height = 562
-  Top = 104
+  Top = 124
   Width = 600
   Caption = 'EmerAPI / Antifake Key Keeper'
-  ClientHeight = 562
+  ClientHeight = 542
   ClientWidth = 600
   Color = clWindow
   Constraints.MinHeight = 400
@@ -20,18 +20,18 @@ object MainForm: TMainForm
   object gbLog: TGroupBox
     Left = 0
     Height = 106
-    Top = 456
+    Top = 436
     Width = 600
     Align = alBottom
     Caption = 'Log'
-    ClientHeight = 84
-    ClientWidth = 592
+    ClientHeight = 86
+    ClientWidth = 596
     TabOrder = 0
     object mLog: TMemo
       Left = 0
-      Height = 84
+      Height = 86
       Top = 0
-      Width = 592
+      Width = 596
       Align = alClient
       Lines.Strings = (
         'mLog'
@@ -41,17 +41,17 @@ object MainForm: TMainForm
   end
   object pMain: TPanel
     Left = 0
-    Height = 451
+    Height = 431
     Top = 0
     Width = 600
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 451
+    ClientHeight = 431
     ClientWidth = 600
     TabOrder = 1
     object pcMain: TPageControl
       Left = 0
-      Height = 288
+      Height = 268
       Top = 163
       Width = 600
       ActivePage = tsActions
@@ -61,26 +61,26 @@ object MainForm: TMainForm
       OnChange = pcMainChange
       object tsActions: TTabSheet
         Caption = 'Actions'
-        ClientHeight = 249
-        ClientWidth = 594
+        ClientHeight = 240
+        ClientWidth = 592
         object gbHint: TGroupBox
           Left = 0
           Height = 64
           Top = 0
-          Width = 594
+          Width = 592
           Align = alTop
           Caption = 'Hint'
-          ClientHeight = 42
-          ClientWidth = 586
+          ClientHeight = 44
+          ClientWidth = 588
           Color = cl3DLight
           ParentColor = False
           TabOrder = 0
           Visible = False
           object ScrollBox2: TScrollBox
             Left = 0
-            Height = 42
+            Height = 44
             Top = 0
-            Width = 586
+            Width = 588
             HorzScrollBar.Page = 1
             VertScrollBar.Page = 1
             Align = alClient
@@ -91,24 +91,24 @@ object MainForm: TMainForm
         end
         object sbActions: TScrollBox
           Left = 0
-          Height = 185
+          Height = 176
           Top = 64
-          Width = 594
-          HorzScrollBar.Page = 192
+          Width = 592
+          HorzScrollBar.Page = 188
           VertScrollBar.Page = 56
           Align = alClient
-          ClientHeight = 170
-          ClientWidth = 579
+          ClientHeight = 172
+          ClientWidth = 588
           TabOrder = 1
           object gbTest: TGroupBox
             Left = 0
             Height = 56
             Top = 0
-            Width = 579
+            Width = 588
             Align = alTop
             Caption = 'TEST AREA'
-            ClientHeight = 34
-            ClientWidth = 571
+            ClientHeight = 36
+            ClientWidth = 584
             TabOrder = 0
             object BitBtn1: TBitBtn
               Left = 8
@@ -182,17 +182,17 @@ object MainForm: TMainForm
         end
         object lLocalWallet: TLabel
           Left = 10
-          Height = 16
+          Height = 15
           Top = 110
-          Width = 78
+          Width = 65
           Caption = 'Local wallet:'
           ParentColor = False
         end
         object lPrivateKey: TLabel
           Left = 10
-          Height = 16
+          Height = 15
           Top = 10
-          Width = 72
+          Width = 60
           Caption = 'Private key:'
           ParentColor = False
         end
@@ -217,9 +217,9 @@ object MainForm: TMainForm
         end
         object lAddress: TLabel
           Left = 176
-          Height = 16
+          Height = 15
           Top = 8
-          Width = 55
+          Width = 45
           Caption = 'Address:'
           ParentColor = False
         end
@@ -354,14 +354,14 @@ object MainForm: TMainForm
             F2FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF0000
           }
           Layout = blGlyphTop
+          OnClick = bShowQRClick
           TabOrder = 2
-          Visible = False
         end
         object lBalance: TLabel
           Left = 398
-          Height = 16
+          Height = 15
           Top = 60
-          Width = 122
+          Width = 102
           Caption = 'Spendable balance:'
           ParentColor = False
         end
@@ -393,9 +393,9 @@ object MainForm: TMainForm
         end
         object lNames: TLabel
           Left = 270
-          Height = 16
+          Height = 15
           Top = 60
-          Width = 47
+          Width = 40
           Caption = 'Names:'
           ParentColor = False
         end
@@ -536,17 +536,17 @@ object MainForm: TMainForm
         end
         object lEmerAPIServer: TLabel
           Left = 11
-          Height = 16
+          Height = 15
           Top = 60
-          Width = 95
+          Width = 77
           Caption = 'Current server:'
           ParentColor = False
         end
         object lTasks: TLabel
           Left = 176
-          Height = 16
+          Height = 15
           Top = 60
-          Width = 40
+          Width = 31
           Caption = 'Tasks:'
           ParentColor = False
         end
@@ -809,7 +809,7 @@ object MainForm: TMainForm
     Cursor = crVSplit
     Left = 0
     Height = 5
-    Top = 451
+    Top = 431
     Width = 600
     Align = alBottom
     ResizeAnchor = akBottom
@@ -913,6 +913,20 @@ object MainForm: TMainForm
     end
     object miAntifake: TMenuItem
       Caption = 'Antifake'
+      object miLotFiles: TMenuItem
+        Caption = 'Lot files'
+        OnClick = miLotFilesClick
+        object miCreatePrivateLotFile: TMenuItem
+          Caption = 'Create Private Lot file'
+        end
+        object miCreatePubLotFile: TMenuItem
+          Caption = 'Create Public Lot File'
+        end
+      end
+      object imAFCreateForPrinting: TMenuItem
+        Caption = 'imAFCreateForPrinting'
+        OnClick = imAFCreateForPrintingClick
+      end
     end
     object miDevTools: TMenuItem
       Caption = 'Developer Tools'

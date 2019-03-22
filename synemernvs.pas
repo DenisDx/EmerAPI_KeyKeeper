@@ -33,14 +33,17 @@ uses
     ,senmCERT
    );
 
-  TtkTokenKind = (tkKey,tkSpace,tkSymbol,tkString{,tkIdentifier},tkNull,tkValue, tkWarning, tkUknownKey, tkUndefKey,tkInvalidValue);
+  TtkTokenKind = (tkKey,tkSpace,tkSymbol,tkString,tkSeparator,tkNull,tkValue, tkWarning, tkUknownKey, tkUndefKey,tkInvalidValue);
   TRangeState = (
     rsKey,  //before =
     rsUnKnown, //unknown
     rsValue, //value after =
+    rtSeparator, //separator
     rsText,  //reserved
     rsParam  //reserved
   );
+
+  setofchar=set of char;
 
   TProcTableProc = procedure of object;
   TIdentFuncTableFunc = function: TtkTokenKind of object;
@@ -98,6 +101,8 @@ uses
     function checkText(value:ansistring):TtkTokenKind;
 
     function isNameValueValue:boolean;
+
+    function getStopSet:setofchar;
 
   protected
     //function GetIdentChars: TSynIdentChars; override;
@@ -546,6 +551,12 @@ begin
   if mode=senmDNS then begin
      if (fKey='A') then
        if trim(value)='127.0.0.1' then result := tkWarning;
+     if (fKey='TTL') then
+        try
+          strtoint(value)
+        except
+          result := tkInvalidValue;
+        end;
   end;
   if mode=senmSSL then begin
      if (fKey='sha256') then
@@ -587,10 +598,23 @@ begin
 
 end;
 
+function TSynEmerNVSSyn.getStopSet:setofchar;
+begin
+  case mode of
+    senmDNS: result:=[#0..#31,'|'];
+
+  else
+    result:=[#0..#31];
+  end;
+
+end;
+
 procedure TSynEmerNVSSyn.IdentProc;
 var
   R: LongInt;
+var StopSet:set of char;
 begin
+  StopSet := getStopSet;
   {
   fTokenID := IdentKind((fLine + Run));
   inc(Run, fStringLen);
@@ -613,12 +637,12 @@ begin
       if isNameValueValue then begin
         repeat
           Inc(Run);
-        until (fLine[Run] In [#0..#31{#32}, '=']);
+        until (fLine[Run] In (StopSet + ['='])) ;
 
         if fLine[Run]='=' then begin
           fRange := rsKey;
-          fTokenID :=checkKey(copy(fLine,R,Run-R));
-          if fTokenID=tkKey then fKey:=copy(fLine,R,Run-R);
+          fTokenID :=checkKey(copy(fLine,R+1,Run-R));
+          if fTokenID=tkKey then fKey:=copy(fLine,R+1,Run-R);
           {
           if checkKey(copy(fLine,R,Run-R))
             then begin
@@ -633,7 +657,7 @@ begin
       end else begin
         repeat
           Inc(Run);
-        until (fLine[Run] In [#0..#31]);
+        until (fLine[Run] In StopSet);
         fRange := rsValue;
         fTokenID := checkValue(copy(fLine,R,Run-R+1));
       end;
@@ -647,15 +671,24 @@ begin
       fRange := rsValue;
       fTokenID := tkSymbol;
     end;
-  else
-
+  rtSeparator: begin
     repeat
       Inc(Run);
-    until (fLine[Run] In [#0..#31]);
+    until (not (fLine[Run] In StopSet)) or (fLine[Run]=#0);
+    fTokenID := tkSeparator;// checkValue(copy(fLine,R+1,Run-R));
+    fKey:='';
+    fRange:=rsUnknown;
+  end
+  else
+    //read value
+    repeat
+      Inc(Run);
+    until (fLine[Run] In StopSet);
 
     fTokenID := checkValue(copy(fLine,R+1,Run-R));
     fKey:='';
 
+    fRange:=rtSeparator;
   end;
 
 end;
@@ -682,8 +715,11 @@ begin
 end;
 
 procedure TSynEmerNVSSyn.keyProc;
-const StopSet = [#0..#31, '='];
+//const StopSet = [#0..#31, '='];
+var StopSet:set of char;
 begin
+  StopSet := getStopSet+['='];
+
   if fLine[Run] in (StopSet) then begin
     fProcTable[fLine[Run]];
     exit;
@@ -695,10 +731,13 @@ begin
 end;
 
 procedure TSynEmerNVSSyn.ValueProc;
-const StopSet = [#0..#31];
+//const StopSet = [#0..#31];
 var
   i: Integer;
+  StopSet:set of char;
 begin
+  StopSet := getStopSet;
+
   if fLine[Run] in (StopSet) then begin
     fProcTable[fLine[Run]];
     exit;

@@ -330,8 +330,8 @@ begin
     seValue.Highlighter:=nil;
 
   if verifyNVSName(eName.Text)
-      then eName.Color:=clDefault
-      else eName.Color:=clYellow;
+      then begin eName.Color:=clDefault; eName.Font.Color:=clDefault end
+      else begin eName.Color:=clYellow; eName.Color:=clBlack; end;
 
 end;
 

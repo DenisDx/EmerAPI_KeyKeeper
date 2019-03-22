@@ -66,6 +66,7 @@ tBaseTXO=class(tEmerApiNotified)
     function isName:boolean;
     function isValidName:boolean;
     function getNVSName:ansistring; //'' if not a name tx
+    function getNVSValue:ansistring; //'' if not a name tx
     function getReceiver:ansistring; //who is receiver?
     function getType:ansichar;
     constructor create;
@@ -220,6 +221,16 @@ end;
 //begin
 //  result:=fOwner.fOuts.IndexOf(self);
 //end;
+function tbaseTXO.getNVSValue:ansistring; //'' if not-name
+var NameScript:tNameScript;
+begin
+  result:='';
+
+  if isName then begin
+    NameScript:=nameScriptDecode(fScript);
+    result:=NameScript.Value;
+  end;
+end;
 
 function tbaseTXO.getNVSName:ansistring; //'' if not-name
 var NameScript:tNameScript;

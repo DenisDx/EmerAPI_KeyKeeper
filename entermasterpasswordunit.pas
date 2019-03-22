@@ -58,6 +58,8 @@ begin
     else begin
       eMasterPassword.Color:=clRed;
       eAddress.Color:=clRed;
+      eMasterPassword.Font.Color:=clBlack;
+      eAddress.Font.Color:=clBlack;
       BlinkTimer.enabled:=true;
     end;
 end;
@@ -384,6 +386,8 @@ begin
   BlinkTimer.enabled:=false;
   eMasterPassword.Color:=clDefault;
   eAddress.Color:=clBtnFace;
+  eMasterPassword.Font.Color:=clDefault;
+  eAddress.Font.Color:=clDefault;
 end;
 
 procedure TEnterMasterPasswordFrame.chShowMasterPasswordChange(Sender: TObject);

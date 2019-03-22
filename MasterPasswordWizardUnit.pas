@@ -14,6 +14,7 @@ type
   { TMasterPasswordWizardForm }
 
   TMasterPasswordWizardForm = class(TForm)
+    createPassword1: TcreatePassword;
     tsConnectServerPanelCombobox: TComboBox;
     Panel12: TPanel;
     tsServerConnected: TTabSheet;
@@ -50,7 +51,6 @@ type
     tsSetPassDoneFinishPanel: TPanel;
     tsSetUserPasschShowPassword: TCheckBox;
     tsCreateMasterPassFreeFormchShowPassword: TCheckBox;
-    createPassword1: TcreatePassword;
     EnterMasterPasswordFrame2: TEnterMasterPasswordFrame;
     tsCreateMasterPassFreeFormEdit2: TEdit;
     tsCreateMasterPassFreeFormlPassword2: TLabel;

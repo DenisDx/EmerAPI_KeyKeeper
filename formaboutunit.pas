@@ -5,8 +5,8 @@ unit FormAboutUnit;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, ExtCtrls,
-  StdCtrls, Buttons;
+  Classes, SysUtils, FileUtil, SynEdit, Forms, Controls, Graphics, Dialogs,
+  ExtCtrls, StdCtrls, Buttons;
 
 type
 
@@ -14,8 +14,8 @@ type
 
   TFormAbout = class(TForm)
     bClose: TBitBtn;
-    mAbout: TMemo;
     Panel1: TPanel;
+    seInfo: TSynEdit;
     procedure bCloseClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
   private
@@ -45,10 +45,22 @@ end;
 procedure TFormAbout.FormShow(Sender: TObject);
 var
       ResStream : TResourceStream;
+      //s:string;
 begin
   ResStream := TResourceStream.Create(HInstance, 'README', PChar(RT_RCDATA));
   try
-    mAbout.Lines.LoadFromStream(ResStream);
+
+    seInfo.Lines.LoadFromStream(ResStream);
+
+    {
+    //ResStream.Position:=0;
+    setLength(s,ResStream.Size);
+    ResStream.Read(s[1],length(s));
+    mAbout.ReadOnly:=false;
+    mAbout.Text:='!!!!';//trim(s);
+    mAbout.ReadOnly:=true;
+    //mAbout.Lines.LoadFromStream(ResStream);
+    }
   finally
     FreeAndNil(ResStream);
   end;

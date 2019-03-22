@@ -6,8 +6,8 @@ object FrameCreateName: TFrameCreateName
   ClientHeight = 398
   ClientWidth = 672
   TabOrder = 0
-  DesignLeft = 476
-  DesignTop = 288
+  DesignLeft = 634
+  DesignTop = 345
   object Panel1: TPanel
     Left = 0
     Height = 152

@@ -44,7 +44,7 @@
         <PackageName Value="LCL"/>
       </Item3>
     </RequiredPackages>
-    <Units Count="69">
+    <Units Count="92">
       <Unit0>
         <Filename Value="EmerApi.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -470,6 +470,110 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="SynEmerNVS"/>
       </Unit68>
+      <Unit69>
+        <Filename Value="QRCodeGenLib4Pascal\QRCodeGenLib\src\Include\QRCodeGenLib.inc"/>
+        <IsPartOfProject Value="True"/>
+      </Unit69>
+      <Unit70>
+        <Filename Value="QRCodeGenLib4Pascal\QRCodeGenLib\src\Include\QRCodeGenLibHelper.inc"/>
+        <IsPartOfProject Value="True"/>
+      </Unit70>
+      <Unit71>
+        <Filename Value="QRCodeGenLib4Pascal\QRCodeGenLib\src\Interfaces\QlpIQrCode.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit71>
+      <Unit72>
+        <Filename Value="QRCodeGenLib4Pascal\QRCodeGenLib\src\Interfaces\QlpIQrSegment.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit72>
+      <Unit73>
+        <Filename Value="QRCodeGenLib4Pascal\QRCodeGenLib\src\Interfaces\QlpIQrTemplate.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit73>
+      <Unit74>
+        <Filename Value="QRCodeGenLib4Pascal\QRCodeGenLib\src\Interfaces\QlpIReedSolomonGenerator.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit74>
+      <Unit75>
+        <Filename Value="QRCodeGenLib4Pascal\QRCodeGenLib\src\QRCodeGen\QlpBitBuffer.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit75>
+      <Unit76>
+        <Filename Value="QRCodeGenLib4Pascal\QRCodeGenLib\src\QRCodeGen\QlpQrCode.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit76>
+      <Unit77>
+        <Filename Value="QRCodeGenLib4Pascal\QRCodeGenLib\src\QRCodeGen\QlpQrCodeCommons.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit77>
+      <Unit78>
+        <Filename Value="QRCodeGenLib4Pascal\QRCodeGenLib\src\QRCodeGen\QlpQrSegment.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit78>
+      <Unit79>
+        <Filename Value="QRCodeGenLib4Pascal\QRCodeGenLib\src\QRCodeGen\QlpQrSegmentMode.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit79>
+      <Unit80>
+        <Filename Value="QRCodeGenLib4Pascal\QRCodeGenLib\src\QRCodeGen\QlpQrTemplate.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit80>
+      <Unit81>
+        <Filename Value="QRCodeGenLib4Pascal\QRCodeGenLib\src\QRCodeGen\QlpReedSolomonGenerator.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit81>
+      <Unit82>
+        <Filename Value="QRCodeGenLib4Pascal\QRCodeGenLib\src\Utils\QlpArrayUtils.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit82>
+      <Unit83>
+        <Filename Value="QRCodeGenLib4Pascal\QRCodeGenLib\src\Utils\QlpBits.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit83>
+      <Unit84>
+        <Filename Value="QRCodeGenLib4Pascal\QRCodeGenLib\src\Utils\QlpConverters.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit84>
+      <Unit85>
+        <Filename Value="QRCodeGenLib4Pascal\QRCodeGenLib\src\Utils\QlpGuard.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit85>
+      <Unit86>
+        <Filename Value="QRCodeGenLib4Pascal\QRCodeGenLib\src\Utils\QlpQRCodeGenLibTypes.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit86>
+      <Unit87>
+        <Filename Value="addressqrunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="AddressQRForm"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="addressQRunit"/>
+      </Unit87>
+      <Unit88>
+        <Filename Value="afcreateforprintingunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="AFCreateForPrintingForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="AFCreateForPrintingUnit"/>
+      </Unit88>
+      <Unit89>
+        <Filename Value="jsonrpc.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit89>
+      <Unit90>
+        <Filename Value="antifakehelperunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="AntifakeHelperUnit"/>
+      </Unit90>
+      <Unit91>
+        <Filename Value="nvsvalueedit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="NVSValueEditForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="NVSValueEdit"/>
+      </Unit91>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -479,11 +583,14 @@
       <Filename Value="EmerApi"/>
     </Target>
     <SearchPaths>
-      <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="units;CryptoLib4Pascal\CryptoLib\src\Interfaces;HashLib4Pascal\HashLib\src\Interfaces;HashLib4Pascal\HashLib\src\Utils;CryptoLib4Pascal\CryptoLib\src\Utils;generics.collections\src;CryptoLib4Pascal\CryptoLib\src\Security;HashLib4Pascal\HashLib\src\Base;HashLib4Pascal\HashLib\src\Nullable;HashLib4Pascal\HashLib\src\NullDigest;HashLib4Pascal\HashLib\src\Checksum;HashLib4Pascal\HashLib\src\Hash32;HashLib4Pascal\HashLib\src\Hash64;HashLib4Pascal\HashLib\src\Hash128;HashLib4Pascal\HashLib\src\Crypto;HashLib4Pascal\HashLib\src\Interfaces\IBlake2BConfigurations;HashLib4Pascal\HashLib\src\Interfaces\IBlake2SConfigurations;HashLib4Pascal\HashLib\src\Crypto\Blake2BConfigurations;HashLib4Pascal\HashLib\src\Crypto\Blake2SConfigurations;HashLib4Pascal\HashLib\src\KDF;CryptoLib4Pascal\CryptoLib\src\Crypto\Digests;CryptoLib4Pascal\CryptoLib\src\Asn1\Pkcs;CryptoLib4Pascal\CryptoLib\src\Asn1;CryptoLib4Pascal\CryptoLib\src\Utils\Helpers;CryptoLib4Pascal\CryptoLib\src\Utils\IO;CryptoLib4Pascal\CryptoLib\src\Math;CryptoLib4Pascal\CryptoLib\src\Utils\Collections;CryptoLib4Pascal\CryptoLib\src\Utils\Encoders;SimpleBaseLib4Pascal\SimpleBaseLib\src\Bases;SimpleBaseLib4Pascal\SimpleBaseLib\src\Utils;CryptoLib4Pascal\CryptoLib\src\Asn1\RossStandart;CryptoLib4Pascal\CryptoLib\src\Asn1\Oiw;CryptoLib4Pascal\CryptoLib\src\Asn1\Nist;CryptoLib4Pascal\CryptoLib\src\Asn1\X509;CryptoLib4Pascal\CryptoLib\src\Asn1\X9;CryptoLib4Pascal\CryptoLib\src\Asn1\Sec;CryptoLib4Pascal\CryptoLib\src\Asn1\TeleTrust;CryptoLib4Pascal\CryptoLib\src\Asn1\Misc;CryptoLib4Pascal\CryptoLib\src\Asn1\Iana;CryptoLib4Pascal\CryptoLib\src\Asn1\Eac;CryptoLib4Pascal\CryptoLib\src\Asn1\CryptoPro;CryptoLib4Pascal\CryptoLib\src\Asn1\Bsi;CryptoLib4Pascal\CryptoLib\src\Crypto\Prng;CryptoLib4Pascal\CryptoLib\src\Crypto\Signers;CryptoLib4Pascal\CryptoLib\src\Crypto\Parsers;CryptoLib4Pascal\CryptoLib\src\Crypto\Parameters;CryptoLib4Pascal\CryptoLib\src\Crypto\Modes;CryptoLib4Pascal\CryptoLib\src\Crypto\Macs;CryptoLib4Pascal\CryptoLib\src\Crypto\Generators;CryptoLib4Pascal\CryptoLib\src\Crypto\Engines;CryptoLib4Pascal\CryptoLib\src\Crypto\EC;CryptoLib4Pascal\CryptoLib\src\Crypto\Agreement;CryptoLib4Pascal\CryptoLib\src\Utils\Rng;CryptoLib4Pascal\CryptoLib\src\Utils\Randoms;CryptoLib4Pascal\CryptoLib\src\Math\EC;CryptoLib4Pascal\CryptoLib\src\Math\Field;CryptoLib4Pascal\CryptoLib\src\Math\Raw;CryptoLib4Pascal\CryptoLib\src\Math\EC\Abc;CryptoLib4Pascal\CryptoLib\src\Math\EC\Custom;CryptoLib4Pascal\CryptoLib\src\Math\EC\Endo;CryptoLib4Pascal\CryptoLib\src\Math\EC\Multiplier;CryptoLib4Pascal\CryptoLib\src\Crypto;CryptoLib4Pascal\CryptoLib\src\Math\EC\Custom\Sec;CryptoLib4Pascal\CryptoLib\src\Crypto\Paddings"/>
+      <IncludeFiles Value="$(ProjOutDir);QRCodeGenLib4Pascal\QRCodeGenLib\src\Include"/>
+      <OtherUnitFiles Value="units;CryptoLib4Pascal\CryptoLib\src\Interfaces;HashLib4Pascal\HashLib\src\Interfaces;HashLib4Pascal\HashLib\src\Utils;CryptoLib4Pascal\CryptoLib\src\Utils;generics.collections\src;CryptoLib4Pascal\CryptoLib\src\Security;HashLib4Pascal\HashLib\src\Base;HashLib4Pascal\HashLib\src\Nullable;HashLib4Pascal\HashLib\src\NullDigest;HashLib4Pascal\HashLib\src\Checksum;HashLib4Pascal\HashLib\src\Hash32;HashLib4Pascal\HashLib\src\Hash64;HashLib4Pascal\HashLib\src\Hash128;HashLib4Pascal\HashLib\src\Crypto;HashLib4Pascal\HashLib\src\Interfaces\IBlake2BConfigurations;HashLib4Pascal\HashLib\src\Interfaces\IBlake2SConfigurations;HashLib4Pascal\HashLib\src\Crypto\Blake2BConfigurations;HashLib4Pascal\HashLib\src\Crypto\Blake2SConfigurations;HashLib4Pascal\HashLib\src\KDF;CryptoLib4Pascal\CryptoLib\src\Crypto\Digests;CryptoLib4Pascal\CryptoLib\src\Asn1\Pkcs;CryptoLib4Pascal\CryptoLib\src\Asn1;CryptoLib4Pascal\CryptoLib\src\Utils\Helpers;CryptoLib4Pascal\CryptoLib\src\Utils\IO;CryptoLib4Pascal\CryptoLib\src\Math;CryptoLib4Pascal\CryptoLib\src\Utils\Collections;CryptoLib4Pascal\CryptoLib\src\Utils\Encoders;SimpleBaseLib4Pascal\SimpleBaseLib\src\Bases;SimpleBaseLib4Pascal\SimpleBaseLib\src\Utils;CryptoLib4Pascal\CryptoLib\src\Asn1\RossStandart;CryptoLib4Pascal\CryptoLib\src\Asn1\Oiw;CryptoLib4Pascal\CryptoLib\src\Asn1\Nist;CryptoLib4Pascal\CryptoLib\src\Asn1\X509;CryptoLib4Pascal\CryptoLib\src\Asn1\X9;CryptoLib4Pascal\CryptoLib\src\Asn1\Sec;CryptoLib4Pascal\CryptoLib\src\Asn1\TeleTrust;CryptoLib4Pascal\CryptoLib\src\Asn1\Misc;CryptoLib4Pascal\CryptoLib\src\Asn1\Iana;CryptoLib4Pascal\CryptoLib\src\Asn1\Eac;CryptoLib4Pascal\CryptoLib\src\Asn1\CryptoPro;CryptoLib4Pascal\CryptoLib\src\Asn1\Bsi;CryptoLib4Pascal\CryptoLib\src\Crypto\Prng;CryptoLib4Pascal\CryptoLib\src\Crypto\Signers;CryptoLib4Pascal\CryptoLib\src\Crypto\Parsers;CryptoLib4Pascal\CryptoLib\src\Crypto\Parameters;CryptoLib4Pascal\CryptoLib\src\Crypto\Modes;CryptoLib4Pascal\CryptoLib\src\Crypto\Macs;CryptoLib4Pascal\CryptoLib\src\Crypto\Generators;CryptoLib4Pascal\CryptoLib\src\Crypto\Engines;CryptoLib4Pascal\CryptoLib\src\Crypto\EC;CryptoLib4Pascal\CryptoLib\src\Crypto\Agreement;CryptoLib4Pascal\CryptoLib\src\Utils\Rng;CryptoLib4Pascal\CryptoLib\src\Utils\Randoms;CryptoLib4Pascal\CryptoLib\src\Math\EC;CryptoLib4Pascal\CryptoLib\src\Math\Field;CryptoLib4Pascal\CryptoLib\src\Math\Raw;CryptoLib4Pascal\CryptoLib\src\Math\EC\Abc;CryptoLib4Pascal\CryptoLib\src\Math\EC\Custom;CryptoLib4Pascal\CryptoLib\src\Math\EC\Endo;CryptoLib4Pascal\CryptoLib\src\Math\EC\Multiplier;CryptoLib4Pascal\CryptoLib\src\Crypto;CryptoLib4Pascal\CryptoLib\src\Math\EC\Custom\Sec;CryptoLib4Pascal\CryptoLib\src\Crypto\Paddings;QRCodeGenLib4Pascal\QRCodeGenLib\src\Interfaces;QRCodeGenLib4Pascal\QRCodeGenLib\src\QRCodeGen;QRCodeGenLib4Pascal\QRCodeGenLib\src\Utils"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>
+      <Debugging>
+        <UseExternalDbgSyms Value="True"/>
+      </Debugging>
       <Options>
         <Win32>
           <GraphicApplication Value="True"/>

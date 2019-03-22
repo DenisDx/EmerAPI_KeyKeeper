@@ -24,9 +24,9 @@ object cryptoTestForm: TcryptoTestForm
     Height = 697
     Top = 0
     Width = 811
-    ActivePage = TabSheet3
+    ActivePage = TabSheet2
     Align = alClient
-    TabIndex = 2
+    TabIndex = 1
     TabOrder = 1
     object TabSheet1: TTabSheet
       Caption = 'Addresses and keys'
