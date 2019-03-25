@@ -5,7 +5,7 @@ EmerAPI / Antifake Key Keeper
 By Denis
 <https://github.com/DenisDx/EmerAPI_KeyKeeper>
 
-Copyright (Ñ) EmerAPI Developers, Emertech Limited
+Copyright (c) EmerAPI Developers, Emertech Limited
 This is experimental software.
 This app is a prototype.
 

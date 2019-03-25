@@ -65,8 +65,8 @@ type
 
   TSettingsForm = class(TForm)
     bCloseAndSave: TBitBtn;
-    BitBtn4: TBitBtn;
-    BitBtn5: TBitBtn;
+    bLoadPrivKey: TBitBtn;
+    bChangeUserPass: TBitBtn;
     bReRead: TBitBtn;
     bCloseNoSave: TBitBtn;
     bSetEmerAPIDefault: TBitBtn;
@@ -128,9 +128,9 @@ type
     sssLocal_Wallet_RPC_Address: TLabeledEdit;
     sssLanguage: TComboBox;
     gMainSettings: TGroupBox;
-    GroupBox2: TGroupBox;
+    fPrivKeyPass: TGroupBox;
     gLocalWallet: TGroupBox;
-    GroupBox4: TGroupBox;
+    eEmerAPIServer: TGroupBox;
     GroupBox5: TGroupBox;
     Label1: TLabel;
     Label2: TLabel;
@@ -149,8 +149,10 @@ type
     sssEmerAPI_Server_adv_Cookie_Name: TLabeledEdit;
     Panel1: TPanel;
     ScrollBox1: TScrollBox;
+    procedure bChangeUserPassClick(Sender: TObject);
     procedure bCloseAndSaveClick(Sender: TObject);
     procedure bCloseNoSaveClick(Sender: TObject);
+    procedure bLoadPrivKeyClick(Sender: TObject);
     procedure bReReadClick(Sender: TObject);
     procedure bRestoreKeypairClick(Sender: TObject);
     procedure bSetEmerAPIDefaultClick(Sender: TObject);
@@ -189,7 +191,11 @@ implementation
 
 {$R *.lfm}
 
-uses localizzzeUnit, HelperUnit, Variants, crypto, CryptoLib4PascalConnectorUnit, QuestionUnit, lclintf, askformpunit, UOpenSSL, setupunit, passwordHelper, lazUTF8;
+uses localizzzeUnit, HelperUnit, Variants, crypto, CryptoLib4PascalConnectorUnit, QuestionUnit, lclintf, askformpunit, UOpenSSL, setupunit, passwordHelper, lazUTF8
+
+  ,askForUPUnit
+  //,QuestionUnit
+  ;
 
 const
   NamePrefix = 'ss';
@@ -761,9 +767,60 @@ begin
   end;
 end;
 
+procedure TSettingsForm.bChangeUserPassClick(Sender: TObject);
+var s:string;
+    decKey:ansistring;
+    i:integer;
+begin
+
+  if Settings.PrivKey='' then begin
+     showMessageSafe('You don''t have any Master Password saved');
+     exit;
+  end;
+
+  s:=askForUP();
+  if s='' then exit;
+
+  try
+    decKey:=Decrypt_AES256(Settings.PrivKey,s);
+  except
+    s:='';
+  end;
+
+  if s='' then begin
+    s:=askForUP('AskForUPForm.WrongPassword');
+    try
+      decKey:=Decrypt_AES256(Settings.PrivKey,s);
+    except
+      s:='';
+    end;
+  end;
+
+  if s='' then exit;
+
+  //save decKey decKey
+  s:=createUP('SettingsForm.msgSetUPnow');
+  if s<>'' then begin
+    Settings.PrivKey:=Encrypt_AES256(decKey,s);
+    for i:=1 to length(decKey) do decKey[i]:=chr(i mod 123);
+
+    with AskQuestionTag(self,nil,'SettingsForm.MsgUPChanged') do begin
+      bOk.Visible:=true;
+      bOk.setFocus;
+      Update;
+    end;
+  end;
+
+end;
+
 procedure TSettingsForm.bCloseNoSaveClick(Sender: TObject);
 begin
   Close;
+end;
+
+procedure TSettingsForm.bLoadPrivKeyClick(Sender: TObject);
+begin
+
 end;
 
 procedure TSettingsForm.bReReadClick(Sender: TObject);

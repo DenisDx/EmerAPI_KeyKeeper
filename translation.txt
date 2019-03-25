@@ -253,6 +253,12 @@
    ru:'Опция сохранения ключевой пары на этом компьютере включена.\nДля безопасного хранения Ключевой Пары требуется задать пароль пользователя.\nЕсли пароль не будет задан, сохранение не произойдет.\nЭтот пароль будет запрашиваться при каждом подключении к серверу или выполнении платежных операций.\nВы можете использовать генератор паролей для создания безопасного пароля.'
    
  },
+
+ 'SettingsForm.MsgUPChanged':{
+   en:'<H3>New user password is set, but not saved.</H3>Save the settings for the new password to take effect.',
+   ru:'<H3>Новый пароль пользователя задан, но не сохранен.</H3>Сохраните настройки для вступления нового пароля в силу.'
+ },
+
   'MessageInfoWeakMasterPassword':{
    en:'The Master Password you entered is not secure enough. We recommend creating a new Master Password and transferring all digital assets to the new address. Using low-security passwords compromises the security of your data. See the details in the help system.',
    ru:'Использованный мастер- пароль недостаточно надежен.\nМы рекомендуем создать новый мастер- пароль и перенести все цифровые активы на новый адрес. Использование низконадежных паролей ставит под угрозу безопасность Ваших данных. Смотрите подробности в справочной системе.'
@@ -574,6 +580,7 @@
  ,'AFCreateForPrintingForm.rbIterLot':{en:'Create by lot: ',ru:'Создать по партии: '}
  ,'AFCreateForPrintingForm.lInformation':{en:'Information: ',ru:'Информация: '}
  ,'AFCreateForPrintingForm.lBrand':{en:'Brand: ',ru:'Бренд: '}
+ ,'AFCreateForPrintingForm.lInformation1.BrandError':{en:'Brand finding error: ',ru:'Ошибка нахождения бренда: '}
 
  ,'AFCreateForPrintingForm.chCreatePrivateCSV':{en:'Create CSV file with secret codes: ',ru:'Создать CSV файл с секретными кодами: '}
  ,'AFCreateForPrintingForm.chCreatePublicCSV':{en:'Create public CSV file: ',ru:'Создать публичный CSV файл: '}
@@ -591,7 +598,9 @@
  ,'AFCreateForPrintingForm.chCreateParentLotField':{en:'Ling lot',ru:'Добавить ссылку на партию'}
  ,'AFCreateForPrintingForm.chCreateProductField':{en:'Link product',ru:'Добавить ссылку на продукт'}
 
- ,'AFCreateForPrintingForm.chCheckNamesIfFree':{en:'Check if the name is free and increment the suffix if it is necessary',ru:'Проверять, свободно ли имя, и увеличивать суффик имени если необходимо'}
+ ,'AFCreateForPrintingForm.lLeaseTime':{en:'The duration of the name lease (days)',ru:'Длительность аренды имени, дней'}
+
+ ,'AFCreateForPrintingForm.chCheckNamesIfFree':{en:'Check if the name is free and increment the suffix if it is necessary (requires time)',ru:'Проверять, свободно ли имя, и увеличивать суффик имени если необходимо (требует времени)'}
  ,'AFCreateForPrintingForm.chAddRandomSuffix':{en:'Add random name suffix',ru:'Добавлять случайный суффикс к имени'}
 
  ,'AFCreateForPrintingForm.cBrand.Manual':{en:'Manual add brand name',ru:'Указать имя бренда вручную'}
@@ -610,6 +619,8 @@
 
  ,'AFCreateForPrintingForm.chFolderPackage':{en:'Use one folder for all files: ',ru:'Один каталог для всех файлов: '}
 
+ ,'AFCreateForPrintingForm.chSignValue':{en:'(Re)sign value',ru:'(Пере)подписывать value'}
+
  ,'AFCreateForPrintingForm.msg.PleaseSetFileName':{en:'Please select the filename',ru:'Пожалуйста, укажите имя файла'}
  ,'AFCreateForPrintingForm.msg.PleaseSetFolder':{en:'Please select the folder for save the data',ru:'Пожалуйста, укажите имя каталога для сохранения данных'}
 
@@ -622,8 +633,11 @@
  ,'AFCreateForPrintingForm.lSecretLength':{en:'Secret code length ',ru:'Длина секретного слова '}
 
  ,'AFCreateForPrintingForm.bDemo1':{en:'Demo1: 10 records in blockchain',ru:'Демо 1: Десять записей в блокчейн'}
- ,'AFCreateForPrintingForm.bDemo1.Desc':{en:'Demo1: 10 records in blockchain',ru:'Демо 1: Десять записей в блокчейн'}
-
+ ,'AFCreateForPrintingForm.bDemo2':{en:'Demo2: based on a lot',ru:'Демо 2: На основе партии'}
+ ,'AFCreateForPrintingForm.bDemo3':{en:'Demo3: 1000 serials set',ru:'Демо 3: 1000 серийных номеров'}
+ ,'AFCreateForPrintingForm.bDemo1.Desc':{en:'Demo1: 10 records in blockchain',ru:'<H3>Пример 1</H3><font color=red>Внимание! Данный пример при запуске создаст реальные записи в блокчейн. Не запускайте его на исполнение!</font><H4>Решаемая задача</H4>Создание в блокчейн серии DPO записей<H4>Описание</H4>Данный пример создает в блокчейне 10 записей в формате DPO для бренда, имеющегося в системе<br>Если бренд в системе отсутствует, он не будет выбран.<br>Никакие файлы не будут созданы<br><H4>Что следует задать</H4><li><ul>Диапазон серийных номеров</ul><ul>Бренд-  владелец товара.</ul></li>'}
+ ,'AFCreateForPrintingForm.bDemo2.Desc':{en:'Demo2',ru:'<H3>Пример 2</H3><H4>Решаемая задача</H4>Antifake: Создание полного набора документов в папку, без генерации в блокчейне<H4>Описание</H4>Предполагается, что Вы - владелец объекта \"бренд\", и этот бренд принадлежит Вашему адресу.<br>Кроме этого, существует объект Antifake \"лот\", который также принадлежит Вашему адресу.<br><br>Будут выбраны первый объекты из списка в качестве примера.<br>Если у Вас нет ни одного лота или ни одного бренда, пример не сможет быть запущен.<br><br>Все документы будут загружены в папку с именем \"demo2\", которая будет создана в папке с приложением.<br>Вы можете изменить это, указав желаемую папку.<br><br>Будут созданы:<ul><li><b>private.csv</b> со всей информацией, необходимой для генерации. Далее записи в блокчейне смогут быть созданы на базе этого файла.</li><li><b>public.csv</b> - файл для загрузки на сервер antifake. В нем не содержится секретной информации</li><li><b>print.csv</b> - файл для отправки в типографию. В нем содержится вся секретная информация, необходимая для создания этикеток</li><li>Папка <b>QR1</b> будет содержать QR-коды, предназначенные для открытой части этикетки товара. Все данные для генерации кода также содержатся в файле print.csv, файлы могут быть предоставлены для удобства типографии</li><li>Папка <b>QR2</b> будет содержать QR-коды, предназначенные для скрытой части этикетки товара. Все данные для генерации кода также содержатся в файле print.csv, файлы могут быть предоставлены для удобства типографии</li><li>если в процессе создания возникнут ошибки, они будут сохранены в файле <b>errors.csv</b> - файл для отправки в типографию. </li></ul><H4>Дополнительная информация</H4>Данный файл рассчитан на двухступенчатую генерацию (записи  не создаются в блокчейн сразу, а могут быть быть созданы позднее на основе файла private.csv<br>Для защиты от возможных сквотеров имена будут иметь случайный суффикс (включена опция <font color=green>\"Добавлять случайны суффикс к имени\"</font>).<br>Тем не менее, будет проводится проверка существования каждой записи в блокчейне и изменение суффикса в случае, если такое имя уже есть. Эта проверка требует времени, Вы можете отключить ее для ускорения процесса (отключив функцию <font color=green>\"проверять, свободно ли имя\"</font>)<br>Если будет принято решение создавать записи в блокчейне сразу (будет включена опция <font color=green>\"Создавать записи в блокчейн\"</font> - генерацию случайного суффикса можно отключить.<br>'}
+ ,'AFCreateForPrintingForm.bDemo3.Desc':{en:'Demo3',ru:'<H3>Пример 3</H3>'}
  ,'AFCreateForPrintingForm.bCreate':{en:'Create',ru:'Создать'}
  ,'AFCreateForPrintingForm.bCreate.Start':{en:'Create',ru:'Создать'}
  ,'AFCreateForPrintingForm.bCreate.Stop':{en:'Stop',ru:'Остановить'}
@@ -634,5 +648,6 @@
  ,'NVSValueEditForm.bClose':{en:'Cancel and close',ru:'Отменить и закрыть'}
  ,'NVSValueEditForm.bSave':{en:'Save and close',ru:'Сохранить и закрыть'}
 
+ ,'AFCreateForPrintingForm.tAFRequest.CantResolve':{en:'Can not resolve name path: ',ru:'Невозможно разрешить наследование имени: '}
 
 }

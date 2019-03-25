@@ -915,6 +915,7 @@ object MainForm: TMainForm
       Caption = 'Antifake'
       object miLotFiles: TMenuItem
         Caption = 'Lot files'
+        Visible = False
         OnClick = miLotFilesClick
         object miCreatePrivateLotFile: TMenuItem
           Caption = 'Create Private Lot file'

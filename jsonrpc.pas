@@ -206,11 +206,12 @@ end;
 destructor TJSONRPCServer.destroy;
 begin
 
-  if (JSONRPCServerThread<>nil) and (JSONRPCServerThread.Server.Active) then begin
+  if (JSONRPCServerThread<>nil) and (JSONRPCServerThread.Server<>nil) and (JSONRPCServerThread.Server.Active) then begin
     JSONRPCServerThread.FreeOnTerminate:=true;
     JSONRPCServerThread.Server.Active:=false;
     pingself(JSONRPCServerThread.Server.Port);
-  end;
+  end else
+  if (JSONRPCServerThread<>nil) then JSONRPCServerThread.FreeOnTerminate:=true;
 
   //freeandnil(JSONRPCServerThread);
   inherited;

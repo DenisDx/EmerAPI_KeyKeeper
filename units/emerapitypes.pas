@@ -74,7 +74,10 @@ begin
        or
        (tpEmerAPINotification(fNotifyList[i])^.tag=tag)
     then begin
-      tpEmerAPINotification(fNotifyList[i])^.proc(self);
+      try
+        tpEmerAPINotification(fNotifyList[i])^.proc(self);
+      except
+      end;
       if tpEmerAPINotification(fNotifyList[i])^.permanent
         then inc(i)
         else begin

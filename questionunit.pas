@@ -591,7 +591,10 @@ end;
 procedure TQuestionForm.QuestionPanelKillTimerTimer(Sender: TObject);
 begin
   while QuestionPanelKillList.Count>0 do begin
-    TQuestionPanel(QuestionPanelKillList[0]).free;
+    try
+      TQuestionPanel(QuestionPanelKillList[0]).free;
+    except
+    end;
     QuestionPanelKillList.delete(0);
   end;
 

@@ -1,10 +1,10 @@
 object SettingsForm: TSettingsForm
-  Left = 972
-  Height = 658
-  Top = 204
+  Left = 594
+  Height = 685
+  Top = 143
   Width = 649
   Caption = 'SettingsForm'
-  ClientHeight = 658
+  ClientHeight = 685
   ClientWidth = 649
   OnClose = FormClose
   OnCreate = FormCreate
@@ -54,13 +54,13 @@ object SettingsForm: TSettingsForm
   end
   object ScrollBox1: TScrollBox
     Left = 0
-    Height = 608
+    Height = 635
     Top = 50
     Width = 649
     HorzScrollBar.Page = 628
-    VertScrollBar.Page = 604
+    VertScrollBar.Page = 631
     Align = alClient
-    ClientHeight = 604
+    ClientHeight = 631
     ClientWidth = 628
     TabOrder = 1
     object gMainSettings: TGroupBox
@@ -113,10 +113,10 @@ object SettingsForm: TSettingsForm
         TabOrder = 2
       end
     end
-    object GroupBox2: TGroupBox
+    object fPrivKeyPass: TGroupBox
       Left = 0
       Height = 200
-      Top = 1048
+      Top = 780
       Width = 628
       Align = alBottom
       Caption = 'Private Key And Security Settings'
@@ -129,7 +129,6 @@ object SettingsForm: TSettingsForm
         Hint = 'check if you want to save private key to this computer'
         Top = 0
         Width = 200
-        AutoSize = False
         Caption = 'Keep private key on this computer'
         OnChange = ssbKeep_Private_KeyChange
         TabOrder = 0
@@ -139,12 +138,11 @@ object SettingsForm: TSettingsForm
         Height = 15
         Top = 24
         Width = 424
-        AutoSize = False
         Caption = 'If you checked this, your private key will be stored on this PC. Hence, if someone'
         ParentColor = False
       end
       object bRestoreKeypair: TBitBtn
-        Left = 3
+        Left = 2
         Height = 30
         Top = 80
         Width = 616
@@ -152,20 +150,23 @@ object SettingsForm: TSettingsForm
         OnClick = bRestoreKeypairClick
         TabOrder = 1
       end
-      object BitBtn4: TBitBtn
+      object bLoadPrivKey: TBitBtn
         Left = 3
         Height = 30
         Top = 112
         Width = 616
         Caption = 'Load (import) a private key and protect it by User Password'
+        Enabled = False
+        OnClick = bLoadPrivKeyClick
         TabOrder = 2
       end
-      object BitBtn5: TBitBtn
+      object bChangeUserPass: TBitBtn
         Left = 3
         Height = 30
         Top = 144
         Width = 616
         Caption = 'Change User Password'
+        OnClick = bChangeUserPassClick
         TabOrder = 3
       end
       object ssbLockKPAfter: TCheckBox
@@ -173,12 +174,11 @@ object SettingsForm: TSettingsForm
         Height = 19
         Top = 48
         Width = 109
-        AutoSize = False
         Caption = 'Lock Private Key '
         TabOrder = 4
       end
       object ssiLockKPAfterMin: TSpinEdit
-        Left = 216
+        Left = 292
         Height = 23
         Top = 44
         Width = 138
@@ -192,7 +192,6 @@ object SettingsForm: TSettingsForm
         Height = 15
         Top = 52
         Width = 104
-        AutoSize = False
         Caption = 'minutes after usage'
         ParentColor = False
       end
@@ -200,7 +199,7 @@ object SettingsForm: TSettingsForm
     object gLocalWallet: TGroupBox
       Left = 0
       Height = 280
-      Top = 768
+      Top = 336
       Width = 628
       Align = alBottom
       Caption = 'Local wallet'
@@ -229,8 +228,9 @@ object SettingsForm: TSettingsForm
         Left = 224
         Height = 25
         Top = 2
-        Width = 384
+        Width = 400
         Caption = 'Configure Wallet for remore acceess (Admin)'
+        Enabled = False
         TabOrder = 1
       end
       object ssiLocal_Wallet_RPC_Port: TLabeledEdit
@@ -386,10 +386,10 @@ object SettingsForm: TSettingsForm
         Value = 1
       end
     end
-    object GroupBox4: TGroupBox
+    object eEmerAPIServer: TGroupBox
       Left = 0
       Height = 268
-      Top = 500
+      Top = 980
       Width = 628
       Align = alBottom
       Caption = 'EmerAPI server'
@@ -729,7 +729,7 @@ object SettingsForm: TSettingsForm
     object gDevSettings: TGroupBox
       Left = 0
       Height = 164
-      Top = 336
+      Top = 616
       Width = 628
       Align = alBottom
       Caption = 'Dev options'
