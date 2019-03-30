@@ -16,7 +16,8 @@ type
     chShowMasterPassword: TCheckBox;
     eMasterPassword: TEdit;
     eAddress: TEdit;
-    Label1: TLabel;
+    lMasterPassword: TLabel;
+    lComment: TLabel;
     lAssignedAddress: TLabel;
     lAddressInfo: TLabel;
     pBip39Helper: TPanel;
@@ -53,8 +54,18 @@ uses PasswordHelper, crypto, CryptoLib4PascalConnectorUnit, UOpenSSLdef, UOpenSS
 function TEnterMasterPasswordFrame.getPrivKey:string;
 begin
   result:='';
+  if eMasterPassword.text='' then exit;
   if MasterPasswordValid(eMasterPassword.text,Settings.getValue('Dev_Mode_ON') and chlegacyMode.checked)
-    then result:=eMasterPassword.text
+    then
+
+      if Settings.getValue('Dev_Mode_ON') and chlegacyMode.checked then begin
+         result:=DoSha256(trim(eMasterPassword.Text)); //eMasterPassword.text
+      end else begin
+        mainForm.loadHDNodeFromBip(hd,smartExtractBIP32pass(trim(eMasterPassword.Text)));
+        if hd.isValid then begin
+          result:=hd.getPrivateKey;
+        end;
+      end
     else begin
       eMasterPassword.Color:=clRed;
       eAddress.Color:=clRed;
@@ -236,7 +247,7 @@ begin
     //show address
     if Settings.getValue('Dev_Mode_ON') and chlegacyMode.checked then begin
       //PrivateKey:=CreatePrivateKeyFromStrBuf(DoSha256(trim(eMasterPassword.Text)));
-      PrivateKey:=DoSha256(trim(eMasterPassword.Text));
+      PrivateKey:=getPrivKey; //DoSha256(trim(eMasterPassword.Text))
       pubKey:=GetPublicKey(PrivateKey);
       //if pubKeyValid
       if (length(pubkey.x)<>32) or (length(pubkey.y)<>32) then begin
@@ -247,6 +258,14 @@ begin
 
       setAddress(publicKey2Address(pubKey,globals.AddressSig,true));
     end else begin
+
+      PrivateKey:=getPrivKey; //will set hd.getAddressCode58
+      if PrivateKey<>'' then setAddress(hd.getAddressCode58) else begin
+        lAddressInfo.caption:='';
+        setAddress(localizzzeString('msgMasterPasswordHasWrongPK','THERE IS NO POSSIBLE ADDRESS'));
+        exit;
+      end;
+      {
       mainForm.loadHDNodeFromBip(hd,smartExtractBIP32pass(trim(eMasterPassword.Text)));
       if hd.isValid then begin
         setAddress(hd.getAddressCode58);
@@ -254,7 +273,8 @@ begin
         lAddressInfo.caption:='';
         setAddress(localizzzeString('msgMasterPasswordHasWrongPK','THERE IS NO POSSIBLE ADDRESS'));
         exit;
-      end;
+      end;}
+
     end;
 
 

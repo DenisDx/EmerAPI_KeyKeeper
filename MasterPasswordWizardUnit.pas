@@ -15,6 +15,8 @@ type
 
   TMasterPasswordWizardForm = class(TForm)
     createPassword1: TcreatePassword;
+    EnterMasterPasswordFrame1: TEnterMasterPasswordFrame;
+    EnterMasterPasswordFrame2: TEnterMasterPasswordFrame;
     tsConnectServerPanelCombobox: TComboBox;
     Panel12: TPanel;
     tsServerConnected: TTabSheet;
@@ -51,7 +53,6 @@ type
     tsSetPassDoneFinishPanel: TPanel;
     tsSetUserPasschShowPassword: TCheckBox;
     tsCreateMasterPassFreeFormchShowPassword: TCheckBox;
-    EnterMasterPasswordFrame2: TEnterMasterPasswordFrame;
     tsCreateMasterPassFreeFormEdit2: TEdit;
     tsCreateMasterPassFreeFormlPassword2: TLabel;
     tsCreateMasterPassFreeFormEdit1: TEdit;
@@ -64,7 +65,6 @@ type
     tsSetPassDoneFinish: TTabSheet;
     tsSetPassDoneContinue: TTabSheet;
     tsCreateMasterPass12wEditW1: TEdit;
-    EnterMasterPasswordFrame1: TEnterMasterPasswordFrame;
     tsSetUserPassEdit1: TEdit;
     tsSetUserPassEdit2: TEdit;
     tsCreateMasterPass12wEditW10: TEdit;
@@ -291,6 +291,8 @@ var i:integer;
 begin
   result:=false;
 
+  try
+
   if MasterPasswordWizardForm.MainPageControl.ActivePage<>nil then
     if assigned(MasterPasswordWizardForm.MainPageControl.ActivePage.OnHide)
       then MasterPasswordWizardForm.MainPageControl.ActivePage.OnHide(nil);
@@ -326,6 +328,10 @@ begin
 
   else exit;
 
+
+ finally
+    MainForm.CheckAdvices(MasterPasswordWizardForm);
+ end;
  MasterPasswordWizardForm.MainPageControl.ShowTabs:=false;
  result:=MasterPasswordWizardForm.ShowModal=mrOk;
 end;
@@ -505,6 +511,10 @@ begin
   EnterMasterPasswordFrame2.onPasswordChanged:=@EnterMasterPasswordFrame2PasswordChanged;
   if EnterMasterPasswordFrame2.eMasterPassword.CanSetFocus then
     EnterMasterPasswordFrame2.eMasterPassword.SetFocus;
+
+  EnterMasterPasswordFrame2.lAssignedAddress.Visible:=false;
+  EnterMasterPasswordFrame2.eAddress.Visible:=false;
+
 end;
 
 procedure TMasterPasswordWizardForm.tsConnectServerPanelChSelectServerClick(
@@ -1396,6 +1406,8 @@ begin
 
   //!!! bNext.Enabled:=normalizeBip(EnterMasterPasswordFrame2.eMasterPassword.Text)=tsCreateMasterPass12wLastSavedPass;
   bNext.Enabled:=smartExtractBIP32pass(EnterMasterPasswordFrame2.eMasterPassword.Text)=smartExtractBIP32pass(tsCreateMasterPassLastSavedPass);
+  EnterMasterPasswordFrame2.lAssignedAddress.Visible:=bNext.Enabled;
+  EnterMasterPasswordFrame2.eAddress.Visible:=bNext.Enabled;
 end;
 
 

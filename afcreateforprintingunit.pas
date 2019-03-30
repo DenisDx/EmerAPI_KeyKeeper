@@ -906,12 +906,8 @@ begin
 end;
 
 procedure tSerialIterator.intSetKeys(Sender:tSerialIteratorEl);
-var s:string;
-    i:integer;
 begin
-  s:=Sender.serial+Sender.Secret;
-  for i:=0 to 31999 do s:=doSha256(s);
-  Sender.PrivKey:=s;
+  Sender.PrivKey:=createDPOPrivKey(Sender.serial+Sender.Secret);
 
   Sender.PubKey:=pubKeyToBuf(GetPublicKey(Sender.PrivKey));
 

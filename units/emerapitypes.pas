@@ -41,6 +41,7 @@ tEmerApiNotified = class(tObject)
   protected
     procedure callNotify(tag:string); virtual;
   public
+    tagString:string; //general purpose
     procedure addNotify(eapiNotify:tEmerAPINotification); virtual;
     procedure removeNotify(eapiNotify:tEmerAPINotification); virtual;
     constructor create;

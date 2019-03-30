@@ -312,7 +312,8 @@ begin
        for i:=0 to tJSONArray(e).Count-1 do begin
          fMempoolTXIDLlst.Append(hexToBuf(tJSONArray(e)[i].AsString));
          //step 2. receiving all tx from the mempool
-         fEmerAPIConnector.sendWalletQueryAsync('getrawtransaction',
+          if fEmerAPIConnector<>nil then
+          fEmerAPIConnector.sendWalletQueryAsync('getrawtransaction',
              getJSON('{txid:"'+tJSONArray(e)[i].AsString+'"}')
             ,@onBlockchainData,'getrawtransactionPull_'+fEmerAPIConnector.getNextID);
        end;
@@ -651,6 +652,7 @@ begin
   //if fUTXOlist=nil then exit;
   for i:=0 to fUTXOlist.Count-1 do
     tUTXO(fUTXOlist.Objects[i]).free;
+    //freeandnil(tUTXO(fUTXOlist.Objects[i]));
   fUTXOlist.Clear;
 end;
 

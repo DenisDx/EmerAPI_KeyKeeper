@@ -1,0 +1,291 @@
+object TakePossessionForm: TTakePossessionForm
+  Left = 580
+  Height = 537
+  Top = 279
+  Width = 832
+  Caption = 'Take possession'
+  ClientHeight = 537
+  ClientWidth = 832
+  Constraints.MinHeight = 500
+  Constraints.MinWidth = 500
+  OnClose = FormClose
+  OnShow = FormShow
+  LCLVersion = '1.8.2.0'
+  object sbAssets: TScrollBox
+    Left = 0
+    Height = 57
+    Top = 430
+    Width = 832
+    HorzScrollBar.Page = 1
+    VertScrollBar.Page = 1
+    Align = alClient
+    TabOrder = 0
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 31
+    Top = 0
+    Width = 832
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 31
+    ClientWidth = 832
+    TabOrder = 1
+    object lTakePossession: TLabel
+      Left = 8
+      Height = 17
+      Top = 8
+      Width = 110
+      Caption = 'lTakePossession'
+      ParentColor = False
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Height = 63
+    Top = 65
+    Width = 832
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 63
+    ClientWidth = 832
+    TabOrder = 2
+    object eSerial: TEdit
+      Left = 161
+      Height = 27
+      Top = 0
+      Width = 184
+      OnChange = refreshView
+      TabOrder = 0
+      Text = 'eSerial'
+    end
+    object lSerial: TLabel
+      Left = 16
+      Height = 17
+      Top = 8
+      Width = 42
+      Caption = 'lSerial'
+      ParentColor = False
+    end
+    object lPassword: TLabel
+      Left = 16
+      Height = 17
+      Top = 40
+      Width = 70
+      Caption = 'lPassword'
+      ParentColor = False
+    end
+    object ePassword: TEdit
+      Left = 161
+      Height = 27
+      Top = 32
+      Width = 184
+      OnChange = refreshView
+      TabOrder = 1
+      Text = 'ePassword'
+    end
+  end
+  object Panel3: TPanel
+    Left = 0
+    Height = 33
+    Top = 162
+    Width = 832
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 33
+    ClientWidth = 832
+    TabOrder = 3
+    object lPrivateKey: TLabel
+      Left = 15
+      Height = 17
+      Top = 10
+      Width = 76
+      Caption = 'lPrivateKey'
+      ParentColor = False
+    end
+    object ePrivateKey: TEdit
+      Left = 160
+      Height = 27
+      Top = 2
+      Width = 668
+      Anchors = [akTop, akLeft, akRight]
+      OnChange = refreshView
+      TabOrder = 0
+      Text = 'ePrivateKey'
+    end
+  end
+  object Panel4: TPanel
+    Left = 0
+    Height = 76
+    Top = 229
+    Width = 832
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 76
+    ClientWidth = 832
+    TabOrder = 4
+    object Panel5: TPanel
+      Left = 0
+      Height = 76
+      Top = 0
+      Width = 832
+      Align = alClient
+      BevelOuter = bvNone
+      ClientHeight = 76
+      ClientWidth = 832
+      TabOrder = 0
+      inline EnterMasterPasswordFrame1: TEnterMasterPasswordFrame
+        Height = 76
+        Width = 832
+        Align = alClient
+        ClientHeight = 76
+        ClientWidth = 832
+        inherited eMasterPassword: TEdit
+          Top = 26
+          Width = 667
+        end
+        inherited pBip39Helper: TPanel
+          Top = 52
+          Width = 667
+        end
+        inherited lAssignedAddress: TLabel
+          Top = 85
+        end
+        inherited eAddress: TEdit
+          Top = 81
+          Width = 667
+        end
+        inherited lAddressInfo: TLabel
+          Top = 110
+        end
+        inherited chLegacyMode: TCheckBox
+          Top = 110
+        end
+      end
+    end
+  end
+  object Panel6: TPanel
+    Left = 0
+    Height = 125
+    Top = 305
+    Width = 832
+    Align = alTop
+    BevelOuter = bvNone
+    ClientHeight = 125
+    ClientWidth = 832
+    TabOrder = 5
+    object lTakePossession1: TLabel
+      Left = 8
+      Height = 17
+      Top = 16
+      Width = 31
+      Caption = 'lInfo'
+      ParentColor = False
+    end
+    object lTakePossession2: TLabel
+      Left = 8
+      Height = 17
+      Top = 40
+      Width = 31
+      Caption = 'lInfo'
+      ParentColor = False
+    end
+    object lTakePossession3: TLabel
+      Left = 8
+      Height = 17
+      Top = 62
+      Width = 31
+      Caption = 'lInfo'
+      ParentColor = False
+    end
+    object bRequestAssets: TBitBtn
+      Left = 8
+      Height = 30
+      Top = 88
+      Width = 336
+      Caption = 'bRequestAssets'
+      OnClick = bRequestAssetsClick
+      TabOrder = 0
+    end
+  end
+  object Panel7: TPanel
+    Left = 0
+    Height = 50
+    Top = 487
+    Width = 832
+    Align = alBottom
+    BevelOuter = bvNone
+    ClientHeight = 50
+    ClientWidth = 832
+    TabOrder = 6
+    object bTakePossession: TBitBtn
+      Left = 8
+      Height = 38
+      Top = 8
+      Width = 336
+      Anchors = [akLeft, akBottom]
+      Caption = 'bTakePossession'
+      OnClick = bTakePossessionClick
+      TabOrder = 0
+    end
+    object bClose: TBitBtn
+      Left = 625
+      Height = 38
+      Top = 8
+      Width = 203
+      Anchors = [akRight, akBottom]
+      Caption = 'bClose'
+      OnClick = bCloseClick
+      TabOrder = 1
+    end
+    object chShowInTxViewer: TCheckBox
+      Left = 352
+      Height = 24
+      Top = 21
+      Width = 309
+      Caption = 'Show in TX viewer instead of sending to BC'
+      TabOrder = 2
+    end
+  end
+  object rbTakePrivateKey: TRadioButton
+    Left = 5
+    Height = 24
+    Top = 133
+    Width = 822
+    Align = alTop
+    BorderSpacing.Around = 5
+    Caption = 'rbTakePrivateKey'
+    OnChange = refreshView
+    TabOrder = 8
+  end
+  object rbTakeMasterPassword: TRadioButton
+    Left = 5
+    Height = 24
+    Top = 200
+    Width = 822
+    Align = alTop
+    BorderSpacing.Around = 5
+    Caption = 'rbTakeMasterPassword'
+    OnChange = refreshView
+    TabOrder = 9
+  end
+  object rbTakeSerialPassword: TRadioButton
+    Left = 5
+    Height = 24
+    Top = 36
+    Width = 822
+    Align = alTop
+    BorderSpacing.Around = 5
+    Caption = 'rbTakeSerialPassword'
+    Checked = True
+    OnChange = refreshView
+    TabOrder = 7
+  end
+  object timerUpdate: TTimer
+    Enabled = False
+    Interval = 50
+    OnTimer = timerUpdateTimer
+    left = 229
+    top = 18
+  end
+end

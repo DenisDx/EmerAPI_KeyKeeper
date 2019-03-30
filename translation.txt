@@ -23,7 +23,7 @@
  'MainForm.miWalletMassSend':{en:'Mass coin sending',ru:'Массовая отправка монет'},
  'MainForm.miWalletAtom':{en:'Atom contract',ru:'Атомарный контракт'},
 
- 'MainForm.miAntifake':{en:'Antifake',ru:'Antifake'},
+ 'MainForm.miAntifake':{en:'DPO / Antifake',ru:'DPO / Antifake'},
 
  'MainForm.miDevTools':{en:'Developer tools',ru:'Инструменты разработчика'},
  'MainForm.miEncryption':{en:'Encryption tools',ru:'Инструменты шифрования'},
@@ -72,6 +72,19 @@
  'MainForm.sbServer.ACTIVE':{en:'ACTIVE',ru:'ПОДКЛЮЧЕН'},
  'MainForm.sbServer.LOADING':{en:'LOADING...',ru:'ЗАГРУЗКА...'},
  'MainForm.sbServer.GuestMODE':{en:'GUEST MODE',ru:'ГОСТЕВОЙ РЕЖИМ'},
+
+ 'MainForm.lRegisterOnServer':{en:'Register on the server! Get tokens for transactions*!',ru:'Зарегистрируйтесь на сервере! Получите токены для совершения операций*!'},
+ 'MainForm.lRegisterOnServer2':{en:'Choose one of the servers depending on your needs\nRegistration on the server is NOT REQUIRED to work with the application.',ru:'Выберите один из серверов в зависимости от потребностей\nРегистрация на сервере НЕ ЯВЛЯЕТСЯ обязательной для работы с приложением'},
+ 'MainForm.lRegisterOnServerCmt':{en:'*servers do not always provide free tokens for registering digital assets',ru:'*сервера не всегда предоставляют бесплатные токены для регистрации цифровых активов'},
+
+ 'MainForm.bRegisterServer1':{en:'Register on EmerAPI.info',ru:'Регистрация на EmerAPI.info'},
+ 'MainForm.lRegisterServerComment1':{en:'Official server of the EmerAPI project',ru:'Официальный сервер проекта EmerAPI'},
+ 'MainForm.bRegisterServer2':{en:'Register on emcdpo.info',ru:'Регистрация на emcdpo.info'},
+ 'MainForm.lRegisterServerComment2':{en:'Antifake project server (forgery protection and supply chains)',ru:'Сервер проекта Antifake (защита от подделки и логистические цепочки)'},
+
+ 'MainForm.lRegisterMasterPassword':{en:'Most of functions require the Master Password to be set',ru:'Для работы большинства функций программы требуется задать Мастер- Пароль'},
+ 'MainForm.bRegisterMasterPassword':{en:'Create or Restore Master Password',ru:'Создать или Восстановить Мастер Пароль'},
+
 
  'MainForm.JSONRPC_CANT_START_MESSAGE':{en:'JSON RPC Server can not be started: ',ru:'Ошибка запуска сервера JSON RPC: '},
 
@@ -433,6 +446,10 @@
    ru:'<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\" /></head> <BODY><H2>Всё прошло прекрасно! </H2><p>Связь с сервером EmerAPI / Antifake успешно сконфигурирована.</p><p>Мастер настроил соединение с сервером таким образом:</p><ul><li>Ключ шифрования данных для доступа к серверу сохранен на этом компьютере. Вам не потребуется вводить пароль пользователя после каждой загрузки программы.</li><li>Программа сконфигурирована для подключения к серверу после запуска</li><li>Подключение к серверу будет происходить с использованием публичного ключа.</li></ul><p>Вы можете отменить сохранение сессионного ключа на этом компьютере, установив галочку внизу страницы. В этом случае после каждого запуска программы для подключения к серверу придется вводить Пароль Пользователя.</p></BODY></HTML>'
  }
 
+ ,'TEnterMasterPasswordFrame.lComment':{en:'Enter the words of the Master Password separated by a space. Enter selects the first suggested word.',ru:'Введите слова Mастер- Пароля через пробел. Ввод выбирает первое предложенное слово.'}
+ ,'TEnterMasterPasswordFrame.lMasterPassword':{en:'Master Password',ru:'Мастер- Пароль'}
+ ,'TEnterMasterPasswordFrame.chShowMasterPassword':{en:'Show',ru:'Показывать'}
+ ,'TEnterMasterPasswordFrame.lAssignedAddress':{en:'Assigned address',ru:'Связанный адрес'}
 
 
  ,'TFrameSelectAddress.chRefresh':{en:'Refresh information',ru:'Обновлять информацию'}
@@ -460,6 +477,8 @@
  ,'FrameDigitalAsset.Title.cert':{en:'CERTIFICATE: ',ru:'СЕРТИФИКАТ: '}
  ,'FrameDigitalAsset.Title.doc':{en:'DOCUMENT: ',ru:'ДОКУМЕНТ: '}
  ,'FrameDigitalAsset.Title.Empty':{en:'ALIAS OR UNKNOWN: ',ru:'ПСЕВДОНИМ ИЛИ НЕИЗВ: '}
+ ,'FrameDigitalAsset.Title.Expired':{en:'EXPIRED: ',ru:'ИСТЕКЛО: '}
+ ,'FrameDigitalAsset.Title.SoonExpiration':{en:'EXPIRES SOON: ',ru:'СКОРО ИСТЕЧЕТ: '}
 
  ,'FrameDigitalAsset.Title.dpoBrand':{en:'DPO Brand: ',ru:'DPO Бренд: '}
  ,'FrameDigitalAsset.Title.dpo':{en:'DPO item: ',ru:'DPO item: '}
@@ -521,6 +540,7 @@
  ,'NameViewForm.lInfo.myNVS':{en:'NVS asset (owned by you): ',ru:'NVS запись (Ваша): '}
  ,'NameViewForm.lInfo.Task':{en:'Task for create an asset (owned by other(s)): ',ru:'Задача создание записи (чужой/чужих): '}
  ,'NameViewForm.lInfo.NVS':{en:'NVS asset (owned by other): ',ru:'NVS запись (чужая): '}
+ ,'NameViewForm.lInfo.Expired':{en:'NAME EXPIRED: ',ru:'ИМЯ ИСТЕКЛО: '}
  ,'NameViewForm.lOwnerWarning':{en:'WARNING! Changing the owner you lose control of this asset!',ru:'ВНИМАНИЕ! Изменив владельца, Вы потеряете контроль над этим активом!'}
  ,'NameViewForm.eOwner':{en:'Owner',ru:'Владелец'}
  ,'NameViewForm.lDaysLeft':{en:'Days left (approximately)',ru:'Дней осталось (примерно)'}
@@ -562,7 +582,9 @@
 
  ,'PleaseWait':{en:'Please wait',ru:'Пожалуйста, подождите'}
 
- ,'MainForm.imAFCreateForPrinting':{en:'Create data package for label printing',ru:'Создание пакета документов для типографии'}
+ ,'MainForm.imAFCreateForPrinting':{en:'Create data package / NVS records',ru:'Создание пакета документов / записей NVS'}
+ ,'MainForm.miBecomeOwner':{en:'Become the owner of a digital asset',ru:'Овладеть цифровым активом'}
+
  ,'AFCreateForPrintingForm':{en:'Create data package for label printing',ru:'Создание пакета документов для типографии'}
  ,'AFCreateForPrintingForm.lStep1':{en:'Step 1: Choose the data source',ru:'Шаг 1: укажите, откуда получить данные'}
  ,'AFCreateForPrintingForm.lStep2':{en:'Step 2: Choose general data and the data required for creation',ru:'Шаг 2: Определите общие данные и данные для генерации'}
@@ -644,10 +666,34 @@
  ,'AFCreateForPrintingForm.bCreate.Stopping':{en:'Stopping...',ru:'Остановка...'}
  ,'AFCreateForPrintingForm.bClose':{en:'Close',ru:'Закрыть'}
 
+ ,'AFCreateForPrintingForm.msg.LotNotSelected':{en:'<H3>Lot not selected</H3>You must choose a lot to continue',ru:'<H3>Лот не выбран</H3> Для продолжения работы Вы должны выбрать существующую партию товара.'}
+
  ,'NVSValueEditForm':{en:'NVS value editor',ru:'Редактор NVS Value'}
  ,'NVSValueEditForm.bClose':{en:'Cancel and close',ru:'Отменить и закрыть'}
  ,'NVSValueEditForm.bSave':{en:'Save and close',ru:'Сохранить и закрыть'}
 
  ,'AFCreateForPrintingForm.tAFRequest.CantResolve':{en:'Can not resolve name path: ',ru:'Невозможно разрешить наследование имени: '}
 
+ ,'TakePossessionForm':{en:'Take possession of assets',ru:'Завладеть цифровыми активами'}
+ ,'TakePossessionForm.lTakePossession':{en:'Select the data to restore Private Key',ru:'Выберите, по каким данным следует восстановить Приватный Ключ'}
+ ,'TakePossessionForm.lTakePossession1':{en:'Associated address:',ru:'Связанный с указанными данными адрес: '}
+ ,'TakePossessionForm.lTakePossession2':{en:'Address balance:',ru:'Баланс на адресе: '}
+ ,'TakePossessionForm.lTakePossession3':{en:'Digital assets on the address:',ru:'Цифровых активов на адресе: '}
+ ,'TakePossessionForm.lTakePossession1.InvalidPrivateKey':{en:'Invalid private key.',ru:'Ошибочный приватный ключ.'}
+ ,'TakePossessionForm.lTakePossession1.InvalidCred':{en:'Invalid key data',ru:'Ошибочные данные приватного ключа'}
+ ,'TakePossessionForm.lTakePossession2.PressButton':{en:'Press the button to request a list of assets.',ru:'Нажмите кнопку для запроса списка активов'}
+
+
+ ,'TakePossessionForm.rbTakeSerialPassword':{en:'Use Serial Number + Password (DPO / Antifake)',ru:'Использовать серийный номер + пароль (DPO / Antifake)'}
+ ,'TakePossessionForm.lSerial':{en:'Serial Number',ru:'Серийный номер'}
+ ,'TakePossessionForm.lPassword':{en:'Password',ru:'Пароль'}
+ ,'TakePossessionForm.rbTakePrivateKey':{en:'Use Private Key',ru:'Использовать Приватный Ключ'}
+ ,'TakePossessionForm.lPrivateKey':{en:'Private key',ru:'Приватный ключ'}
+ ,'TakePossessionForm.rbTakeMasterPassword':{en:'Use Master Password',ru:'Использовать Мастер Пароль'}
+ ,'TakePossessionForm.bTakePossession':{en:'Take Possession of ALL assets',ru:'Завладеть всеми активами'}
+ ,'TakePossessionForm.bClose':{en:'Close',ru:'Закрыть'}
+
+ ,'TakePossessionForm.messageTransferError':{en:'Asset transfer error: ',ru:'Ошибка смены собственника цифрового актива: '}
+ ,'TakePossessionForm.messageTransferDone':{en:'The change in ownership of digital assets is complete. It is required to wait for the completion of entering data into the blockchain.',ru:'Изменение собственника цифровых активов завершено. Требуется подожать для окончания внесения данных в блокчейн.'}
+ ,'TakePossessionForm.bRequestAssets':{en:'Request digital assets list',ru:'Запросить список цифровых активов'}
 }

@@ -183,17 +183,20 @@ begin
     //adding fee
     amount:=amount - getFee();
 
-    //ok,let's add UTXO
-    if UTXOList=nil
-      then lUTXO:=fEmerAPI.UTXOList.giveToSpend(-amount,lTxExclude)
-      else lUTXO:=UTXOList.giveToSpend(-amount,lTxExclude);
-    try
-      for i:=0 to lUTXO.Count-1 do begin
-        addInput(tUTXO(lUTXO[i]).txid,tUTXO(lUTXO[i]).nOut,tUTXO(lUTXO[i]).value,tUTXO(lUTXO[i]).Script); //adds one input.
-        amount:=amount+tUTXO(lUTXO[i]).value;
+    //ok,let's add UTXO if amount < 0
+
+    if amount<0 then begin
+      if UTXOList=nil
+        then lUTXO:=fEmerAPI.UTXOList.giveToSpend(-amount,lTxExclude)
+        else lUTXO:=UTXOList.giveToSpend(-amount,lTxExclude);
+      try
+        for i:=0 to lUTXO.Count-1 do begin
+          addInput(tUTXO(lUTXO[i]).txid,tUTXO(lUTXO[i]).nOut,tUTXO(lUTXO[i]).value,tUTXO(lUTXO[i]).Script); //adds one input.
+          amount:=amount+tUTXO(lUTXO[i]).value;
+        end;
+      finally
+        if lUTXO<>nil then lUTXO.Free;
       end;
-    finally
-      if lUTXO<>nil then lUTXO.Free;
     end;
     result:=  true;
     //send change to address (use first EmerAPI address if not selected)

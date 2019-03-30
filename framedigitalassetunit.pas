@@ -28,6 +28,10 @@ type
     procedure updateView(sender:tObject); override;
   end;
 
+const
+  ExpirationWarning=7;
+
+
 implementation
 
 {$R *.lfm}
@@ -68,7 +72,17 @@ begin
     if s<>'' then
       delete(st,1,length(s)+1);
 
-    pTitle.Color:=getNameColor(s);
+    if NVSRecord.DaysLeft>0 then
+      if NVSRecord.DaysLeft>ExpirationWarning
+         then pTitle.Color:=getNameColor(s)
+         else begin
+           pTitle.Color:=getNameColor('*expiresoon*');
+           pref:=pref+localizzzeString('FrameDigitalAsset.Title.SoonExpiration','EXPIRE SOON: ');
+         end
+          else begin
+            pTitle.Color:=getNameColor('*expired*');
+            pref:=pref+localizzzeString('FrameDigitalAsset.Title.Expired','EXPIRED: ');
+          end;
 
     if s='' then begin
       pTitle.Caption:=adjustName(pref+
@@ -151,7 +165,7 @@ begin
 
     end else
     if s='doc' then begin
-      pTitle.Caption:=adjustName(
+      pTitle.Caption:=adjustName(pref+
         localizzzeString('FrameDigitalAsset.Title.doc','DOCUMENT: ')
         +st
       );
@@ -165,7 +179,7 @@ begin
 
     end else
     begin//raw nve
-      pTitle.Caption:=adjustName(
+      pTitle.Caption:=adjustName(pref+
         localizzzeString('FrameDigitalAsset.Title.Undetected','UNKNOWN: ')
         +s+':'+st
       );

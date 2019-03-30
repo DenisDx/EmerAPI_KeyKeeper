@@ -860,7 +860,7 @@ begin
     Settings.PubKey:='';
   end;
 
-  MainForm.showWalletInfo;
+  MainForm.showWalletInfo; MainForm.CheckAdvices(self);
   //Попросим ввести пароль пользователя (новый), если требуется сохранение пароля?
   //Может, пользователь захочет шифрануть сразу?
   if ssbKeep_Private_Key.Checked then
@@ -946,7 +946,7 @@ begin
        pubKey:=GetPublicKey(MainForm.PrivKey);
        Settings.PubKey:=pubKeyToBuf(pubKey);
 
-       MainForm.showWalletInfo();
+       MainForm.showWalletInfo(); MainForm.CheckAdvices(self);
      end;
   end;
 
@@ -973,6 +973,7 @@ begin
     MainForm.updateInfoTimer.Interval:=Settings.getValue('EMERAPI_SERVER_Refresh_period')*1000;
     MainForm.showWalletInfo();
     MainForm.checkJSONRPCserver();
+    MainForm.CheckAdvices(self);
 end;
 
 {

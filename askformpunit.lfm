@@ -45,36 +45,29 @@ object askForMPForm: TaskForMPForm
     Align = alTop
     ClientWidth = 577
     TabOrder = 3
-    inherited Label1: TLabel
-      Height = 15
-      Width = 89
+    inherited lMasterPassword: TLabel
+      Top = 32
     end
     inherited eMasterPassword: TEdit
-      Height = 23
-      Width = 436
+      Top = 28
+      Width = 412
     end
     inherited pBip39Helper: TPanel
+      Top = 51
       Width = 412
     end
     inherited lAssignedAddress: TLabel
-      Height = 15
-      Width = 94
+      Top = 86
     end
     inherited eAddress: TEdit
-      Height = 23
-      Width = 436
-    end
-    inherited chShowMasterPassword: TCheckBox
-      Height = 19
-      Width = 49
+      Top = 82
+      Width = 412
     end
     inherited lAddressInfo: TLabel
-      Height = 15
-      Width = 66
+      Top = 116
     end
     inherited chLegacyMode: TCheckBox
-      Height = 19
-      Width = 91
+      Top = 112
     end
   end
 end

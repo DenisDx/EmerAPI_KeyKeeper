@@ -123,6 +123,8 @@ function ECDSAMessageSignature(PrivKey: ansistring; const digest: AnsiString): A
 
 Const CT_Base58 : AnsiString = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
 
+function createDPOPrivKey(const s:string):ansistring;
+
 implementation
 uses UOpenSSL, UCryptoCut
   ,HlpIHash
@@ -147,6 +149,13 @@ begin
 end;
 
 
+function createDPOPrivKey(const s:string):ansistring;
+var i:integer;
+begin
+  result:=s;
+  for i:=0 to 31999 do result:=doSha256(result);
+
+end;
 
 //typedef struct {
 //      uint32_t s[8];

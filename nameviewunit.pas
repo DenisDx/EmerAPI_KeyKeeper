@@ -262,7 +262,7 @@ begin
     if iAmOwner
       then eOwner.color:=clDefault
       else eOwner.color:=clBtnFace;
-    bUpdateName.Enabled:=(iAmOwner and dchanged) and (seValue.Text<>'') and (length(seValue.Text)<=20480);
+    bUpdateName.Enabled:=(iAmOwner and dchanged) and (seValue.Text<>'') and (length(seValue.Text)<=20480) {and ((NVSRecord=nil) or (NVSRecord.DaysLeft>0)){}};
     seDaysLeft.Enabled:=iAmOwner;
 
     if bUpdateName.Enabled and (c>0) then
@@ -293,6 +293,12 @@ begin
       lInfo.Caption:=localizzzeString('NameViewForm.lInfo.myNVS','NVS asset (owned by you):')
     else
       lInfo.Caption:=localizzzeString('NameViewForm.lInfo.NVS','NVS asset (owned by other):');
+
+    if (NVSRecord.DaysLeft<1) then begin
+       lInfo.Caption:= localizzzeString('NameViewForm.lInfo.Expired','NAME EXPIRED: ') + lInfo.Caption;
+       lInfo.Font.Color:=clRed;
+    end else lInfo.Font.Color:=clDefault;
+
 
     eOwner.Text:=buf2Base58Check(mainForm.globals.AddressSig+NVSRecord.ownerAddress);
 
@@ -489,8 +495,11 @@ begin
    if NVSRecord<>nil then
      if freeOnClose then
        freeAndNil(NVSRecord)
-     else
-       NVSRecord.removeNotify(EmerAPINotification(@updateView,'',true));
+     else try
+       if NVSRecord<>nil then
+         NVSRecord.removeNotify(EmerAPINotification(@updateView,'',true));
+     except
+     end;
 
    free;
 end;

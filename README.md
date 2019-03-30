@@ -1,4 +1,4 @@
-EmerAPI KeyKeeper 0.0.6
+EmerAPI KeyKeeper 0.0.7
 =================
 
 EmerAPI / Antifake Key Keeper
@@ -11,6 +11,7 @@ This app is a prototype.
 
 This software includes:
 CryptoLib Library (Copyright (c) 2018 - 20XX Ugochukwu Mmaduekwe, Github Repository <https://github.com/Xor-el> )
+and other great libraries from him (see below)
 
 http://emerAPI.info
 http://emcdpo.info
@@ -25,12 +26,20 @@ CryptoLib4Pascal <https://github.com/Xor-el/CryptoLib4Pascal>
 generics.collections For FreePascal v3.0.x <https://github.com/maciej-izak/generics.collections>
 HashLib4Pascal >= v2.5 <https://github.com/Xor-el/HashLib4Pascal>
 SimpleBaseLib4Pascal >= v1.4 <https://github.com/Xor-el/SimpleBaseLib4Pascal>
+QRCodeGenLib4Pascal <https://github.com/Xor-el/QRCodeGenLib4Pascal>
 
 ##License
 
 This "Software" is Licensed Under  **`MIT License (MIT)`** .
 
 ##Version history
+
+0.0.7
+Multiple GUI changes
+Take Asset Possession service
+Expiring names are flagged
+TX bug fixes 
+
 
 0.0.6
 Multiple changes

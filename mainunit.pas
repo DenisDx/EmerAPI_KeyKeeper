@@ -33,12 +33,16 @@ type
 
   TMainForm = class(TForm)
     bCopyAddress: TBitBtn;
+    bRegisterServer1: TBitBtn;
     bPay: TBitBtn;
     BitBtn1: TBitBtn;
     bRefreshBalance: TBitBtn;
     bRefreshTasks: TBitBtn;
+    bRegisterServer2: TBitBtn;
+    bRegisterMasterPassword: TBitBtn;
     bShowQR: TBitBtn;
     Button1: TButton;
+    Button2: TButton;
     bViewTX: TBitBtn;
     bViewTasks: TBitBtn;
     bCreateAsset: TBitBtn;
@@ -53,15 +57,22 @@ type
     imLW: TImage;
     imPK: TImage;
     imServer: TImage;
+    lRegisterOnServer: TLabel;
     lEmerAPIServer: TLabel;
     lPrivateKey: TLabel;
     lLocalWallet: TLabel;
     lAddress: TLabel;
     lBalance: TLabel;
     lNames: TLabel;
+    lRegisterMasterPassword: TLabel;
+    lRegisterServerComment1: TLabel;
+    lRegisterServerComment2: TLabel;
+    lRegisterOnServerCmt: TLabel;
+    lRegisterOnServer2: TLabel;
     lTasks: TLabel;
     MainMenu: TMainMenu;
     imAFCreateForPrinting: TMenuItem;
+    miBecomeOwner: TMenuItem;
     miCreatePubLotFile: TMenuItem;
     miCreatePrivateLotFile: TMenuItem;
     miLotFiles: TMenuItem;
@@ -105,6 +116,8 @@ type
     MenuItem8: TMenuItem;
     mLog: TMemo;
     Panel1: TPanel;
+    pRegisterMasterPassword: TPanel;
+    pRegisterOnServer: TPanel;
     pcMain: TPageControl;
     pMain: TPanel;
     pTop: TPanel;
@@ -116,6 +129,7 @@ type
     ScrollBox2: TScrollBox;
     Splitter1: TSplitter;
     realignTimer: TTimer;
+    TimerStatusUpdate: TTimer;
     tsAssets: TTabSheet;
     tsActions: TTabSheet;
     tShowMessageSafe: TTimer;
@@ -127,8 +141,12 @@ type
     procedure BitBtn1Click(Sender: TObject);
     procedure bRefreshBalanceClick(Sender: TObject);
     procedure bRefreshTasksClick(Sender: TObject);
+    procedure bRegisterMasterPasswordClick(Sender: TObject);
+    procedure bRegisterServer1Click(Sender: TObject);
+    procedure bRegisterServer2Click(Sender: TObject);
     procedure bShowQRClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
     procedure bViewTasksClick(Sender: TObject);
     procedure bViewTXClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -142,6 +160,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure JSONRPCServerThreadErrorHandler(Sender:tObject);
     procedure checkJSONRPCserver;
+    procedure miBecomeOwnerClick(Sender: TObject);
     procedure miLotFilesClick(Sender: TObject);
     procedure miEncryptionClick(Sender: TObject);
     procedure miTXClick(Sender: TObject);
@@ -176,6 +195,7 @@ type
     procedure onBlockchainUpdated(sender:tObject);
     procedure onServerConnected(sender:tObject);
     procedure EmerAPIServerTasksUpdated(sender:tObject);
+    procedure TimerStatusUpdateTimer(Sender: TObject);
     procedure UTXOUpdated(sender:tObject);
     procedure tLockMPTimer(Sender: TObject);
     procedure tShowMessageSafeTimer(Sender: TObject);
@@ -227,6 +247,7 @@ type
     function getNetwork:tNetworkData;
     procedure deletePrivKey;
     property PrivKey:ansistring read getMainPrivKey; //write setPrivKey;
+    procedure CheckAdvices(Sender:tObject);
   end;
 
 var
@@ -266,7 +287,7 @@ uses SettingsUnit,Localizzzeunit, questionUnit, MasterPasswordWizardUnit, setUPU
    ,x509devunit
    ,addressQRunit
    ,AFCreateForPrintingUnit
-
+   ,TakePossessionUnit
    ;
 
 
@@ -362,6 +383,9 @@ begin
   else if trim(op)='TASK_VALID_UNKNOWN' then result:=RGBToColor($A0,$A0,$A0)
   else if trim(op)='TASK_INVALID' then result:=RGBToColor($F0,$20,$20)
   else if trim(op)='TASK_PARTIAL_VALID' then result:=RGBToColor($A0,$80,$80)
+
+  else if trim(op)='*expired*' then result:=RGBToColor($C0,$A0,$A0)
+  else if trim(op)='*expiresoon*' then result:=RGBToColor($C0,$C0,$A0)
 
 
 end;
@@ -717,10 +741,17 @@ var //pubKey:TECDSA_Public;
    eNamesCount.Enabled:=e;
    bRefreshBalance.Enabled:=e;
    bViewTX.Enabled:=e;
+   bCreateAsset.Enabled:=e;
    bRefreshTasks.Enabled:=e;
    eTasksCount.Enabled:=e;
    bViewTasks.Enabled:=e;
    lTasks.Enabled:=e;
+
+   bPay.Enabled:=e;
+   miAntifake.Enabled:=e;
+   miWallet.Enabled:=e;
+   miTools.Enabled:=e;
+   miServer.Enabled:=e;
  end;
 
  var cap:string;
@@ -817,9 +848,36 @@ begin
   showWalletInfo;
 end;
 
+procedure TMainForm.TimerStatusUpdateTimer(Sender: TObject);
+begin
+  if Settings.getValue('EmerAPI_Server_Use') and EmerAPI.EmerAPIConnetor.serverAPI.testedOk then
+    if not Settings.getValue('EMERAPI_SERVER_GUEST_ONLY') then
+      if EmerAPI.isReady then sbServer.Caption:=localizzzeString('MainForm.sbServer.ACTIVE','ACTIVE')
+                         else sbServer.Caption:=localizzzeString('MainForm.sbServer.LOADING','LOADING')
+    else
+      if EmerAPI.isReady then sbServer.Caption:=localizzzeString('MainForm.sbServer.GuestMODE','GUEST MODE')
+                         else sbServer.Caption:=localizzzeString('MainForm.sbServer.LOADING','LOADING')
+  else
+     sbServer.Caption:='NOT CONNECTED';
+
+  if Settings.getValue('USE_LOCAL_WALLET') and EmerAPI.EmerAPIConnetor.walletAPI.testedOk then
+    if EmerAPI.isReady then
+       sbLW.Caption:=localizzzeString('MainForm.sbLW.ACTIVE','ACTIVE')
+    else
+      sbLW.Caption:=localizzzeString('MainForm.sbLW.Loading','LOADING')
+   else
+      sbLW.Caption:='NOT CONNECTED';
+   CheckAdvices(nil);
+
+   TimerStatusUpdate.Enabled:=(not EmerAPI.isReady) and (EmerAPI.EmerAPIConnetor.serverAPI.testedOk or EmerAPI.EmerAPIConnetor.walletAPI.testedOk);
+end;
+
+
 procedure TMainForm.onBlockchainUpdated(sender:tObject);
 begin
-
+  TimerStatusUpdateTimer(nil);
+ //TimerStatusUpdate.Enabled:=true;
+{
  if Settings.getValue('EmerAPI_Server_Use') and EmerAPI.EmerAPIConnetor.serverAPI.testedOk then
    if not Settings.getValue('EMERAPI_SERVER_GUEST_ONLY') then
      if EmerAPI.isReady then sbServer.Caption:=localizzzeString('MainForm.sbServer.ACTIVE','ACTIVE')
@@ -837,6 +895,8 @@ begin
      sbLW.Caption:=localizzzeString('MainForm.sbLW.Loading','LOADING')
   else
      sbLW.Caption:='NOT CONNECTED';
+  CheckAdvices(nil);
+  }
 end;
 
 procedure TMainForm.onServerConnected(sender:tObject);
@@ -1438,9 +1498,28 @@ begin
 
 end;
 
+procedure TMainForm.bRegisterMasterPasswordClick(Sender: TObject);
+begin
+  ShowWizardForm('domp');
+  CheckAdvices(nil);
+end;
+
+procedure TMainForm.bRegisterServer1Click(Sender: TObject);
+begin
+  Settings.setValue('EMERAPI_SERVER_ADDRESS','http://EmerAPI.info');
+  ShowWizardForm('doServerConnect');
+end;
+
+procedure TMainForm.bRegisterServer2Click(Sender: TObject);
+begin
+ Settings.setValue('EMERAPI_SERVER_ADDRESS','http://emcdpo.info');
+ ShowWizardForm('doServerConnect');
+
+end;
+
 procedure TMainForm.bShowQRClick(Sender: TObject);
 begin
-  ShowQRCode(eAddress.text);
+  ShowQRCode('emercoin:'+eAddress.text);
 end;
 
 procedure TMainForm.Button1Click(Sender: TObject);
@@ -1449,6 +1528,11 @@ begin
   //D!!!
   for i:=0 to 99 do
     emerAPI.EmerAPIConnetor.walletAPI.sendWalletQueryAsync('getblockchaininfo',nil,{@myQueryDone}nil);
+end;
+
+procedure TMainForm.Button2Click(Sender: TObject);
+begin
+  TimerStatusUpdateTimer(nil);
 end;
 
 
@@ -1551,6 +1635,11 @@ begin
   if JSONRPCServer<>nil then
     JSONRPCServer.checkState;
 
+end;
+
+procedure TMainForm.miBecomeOwnerClick(Sender: TObject);
+begin
+  TakePossessionForm.Show;
 end;
 
 procedure TMainForm.miLotFilesClick(Sender: TObject);
@@ -1804,7 +1893,7 @@ begin
   //CurrentLanguage:='en';
   //if AskQuestionTag('MessageAskForCreateOrEnterMPNow')=mrYes
   if (mr=mrYes) and (mtag='MessageAskForCreateOrEnterMPNow')
-    then ShowWizardForm('doall');
+    then ShowWizardForm('domp');
 
   if (mr=mrYes) and (mtag='MessageAskForLoginToServer')
     then openURL(fLastOpenURLLing);
@@ -1870,9 +1959,24 @@ begin
 
   //CurrentLanguage:='en';
   if AskQuestionTag('MessageAskForCreateOrEnterMPNow')=mrYes
-    then ShowWizardForm('doall');
+    then ShowWizardForm('domp');
   localizzze(self);
   localizzze(MainMenu);
+  CheckAdvices(nil);
+end;
+
+procedure TMainForm.CheckAdvices(Sender:tObject);
+begin
+  //shows advices
+  //1. if we have a private key, but guest mode, advice pRegisterOnServer
+  if (Settings=nil) or (EmerAPI=nil) then exit;
+
+
+  pRegisterMasterPassword.visible := Settings.getValue('Priv_Key')='';
+
+  pRegisterOnServer.visible := (Settings.getValue('Priv_Key')<>'') and Settings.getValue('EmerAPI_Server_Use') {and EmerAPI.EmerAPIConnetor.serverAPI.testedOk} and Settings.getValue('EMERAPI_SERVER_GUEST_ONLY');
+
+
 end;
 
 end.
