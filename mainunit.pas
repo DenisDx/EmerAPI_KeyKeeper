@@ -366,8 +366,10 @@ begin
   else if trim(op)='ssh'    then result:=RGBToColor($F0,$C0,$F0)
   else if trim(op)='ssl'    then result:=RGBToColor($F0,$F0,$C0)
   else if trim(op)='dpo'    then result:=RGBToColor($E0,$F0,$E0)
-  else if trim(op)='cert'    then result:=RGBToColor($80,$F0,$A0)
+  else if trim(op)='doc'    then result:=RGBToColor($D0,$C0,$F0)
+  else if trim(op)='cert'    then result:=RGBToColor($A0,$F0,$D0)
   else if trim(op)='blog'    then result:=RGBToColor($80,$D0,$A0)
+  else if trim(op)='enum'    then result:=RGBToColor($A0,$D0,$80)
 
 
   //AF
@@ -1452,6 +1454,7 @@ begin
         Update;
       end;
     miDevTools.Visible:=Settings.getValue('Dev_Mode_ON');
+    gbLog.Visible:=Settings.getValue('Dev_Mode_ON');
   end;
   if (key=112) then
      showHelpTag();
@@ -1508,13 +1511,14 @@ procedure TMainForm.bRegisterServer1Click(Sender: TObject);
 begin
   Settings.setValue('EMERAPI_SERVER_ADDRESS','http://EmerAPI.info');
   ShowWizardForm('doServerConnect');
+  CheckAdvices(nil);
 end;
 
 procedure TMainForm.bRegisterServer2Click(Sender: TObject);
 begin
  Settings.setValue('EMERAPI_SERVER_ADDRESS','http://emcdpo.info');
  ShowWizardForm('doServerConnect');
-
+ CheckAdvices(nil);
 end;
 
 procedure TMainForm.bShowQRClick(Sender: TObject);
@@ -1606,6 +1610,7 @@ begin
    }
 
   miDevTools.Visible:=Settings.getValue('Dev_Mode_ON');
+  gbLog.Visible:=Settings.getValue('Dev_Mode_ON');
   showWalletInfo;
 
   gbTest.Visible:=  Settings.getValue('Dev_Mode_ON');
@@ -1616,6 +1621,7 @@ begin
 
   //fphttpserver, fpHTTP, fpWeb
   checkJSONRPCserver;
+  CheckAdvices(nil);
 end;
 
 procedure TMainForm.JSONRPCServerThreadErrorHandler(Sender:tObject);
@@ -1782,6 +1788,7 @@ begin
   if not Settings.getValue('Use_Local_Wallet')
     then ShowWizardForm('doWalletConnect')
     else SetAndCheckBlockchain(true,false,true);
+ CheckAdvices(nil);
 end;
 
 
@@ -1803,6 +1810,7 @@ begin
     //unset: set!
     //MasterPasswordWizardForm.show;
     ShowWizardForm('domp');
+    CheckAdvices(nil);
   end;
   updatePKstate(nil);
 end;
@@ -1817,6 +1825,7 @@ begin
      )
     then ShowWizardForm('doServerConnect')
     else SetAndCheckBlockchain(false,true,true);
+  CheckAdvices(nil);
 end;
 
 procedure TMainForm.timerAskForLibTimer(Sender: TObject);
@@ -1893,7 +1902,7 @@ begin
   //CurrentLanguage:='en';
   //if AskQuestionTag('MessageAskForCreateOrEnterMPNow')=mrYes
   if (mr=mrYes) and (mtag='MessageAskForCreateOrEnterMPNow')
-    then ShowWizardForm('domp');
+    then begin ShowWizardForm('domp'); CheckAdvices(nil); end;
 
   if (mr=mrYes) and (mtag='MessageAskForLoginToServer')
     then openURL(fLastOpenURLLing);

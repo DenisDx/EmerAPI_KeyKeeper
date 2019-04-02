@@ -473,6 +473,7 @@
  ,'FrameDigitalAsset.Title.dns':{en:'DNS: ',ru:'DNS: '}
  ,'FrameDigitalAsset.Title.ssl':{en:'SSL: ',ru:'SSL: '}
  ,'FrameDigitalAsset.Title.ssh':{en:'SSH: ',ru:'SSH: '}
+ ,'FrameDigitalAsset.Title.enum':{en:'ENUMER: ',ru:'ENUMER: '}
  ,'FrameDigitalAsset.Title.blog':{en:'Blog: ',ru:'Блог: '}
  ,'FrameDigitalAsset.Title.cert':{en:'CERTIFICATE: ',ru:'СЕРТИФИКАТ: '}
  ,'FrameDigitalAsset.Title.doc':{en:'DOCUMENT: ',ru:'ДОКУМЕНТ: '}

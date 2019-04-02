@@ -271,6 +271,8 @@ begin
     result:=name<>'';
   end else if nType='blog' then begin
     result:=name<>'';
+  end else if nType='doc' then begin
+     result:=name<>'';
   end{ else result:=false};
 end;
 

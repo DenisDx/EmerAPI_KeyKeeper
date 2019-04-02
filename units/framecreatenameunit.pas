@@ -331,7 +331,7 @@ begin
 
   if verifyNVSName(eName.Text)
       then begin eName.Color:=clDefault; eName.Font.Color:=clDefault end
-      else begin eName.Color:=clYellow; eName.Color:=clBlack; end;
+      else begin eName.Color:=clYellow; eName.Font.Color:=clBlack; end;
 
 end;
 

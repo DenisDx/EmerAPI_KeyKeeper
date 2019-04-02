@@ -6,8 +6,8 @@ object FrameCreateName: TFrameCreateName
   ClientHeight = 398
   ClientWidth = 672
   TabOrder = 0
-  DesignLeft = 634
-  DesignTop = 345
+  DesignLeft = 475
+  DesignTop = 287
   object Panel1: TPanel
     Left = 0
     Height = 152
@@ -20,15 +20,15 @@ object FrameCreateName: TFrameCreateName
     TabOrder = 0
     object lName: TLabel
       Left = 8
-      Height = 15
+      Height = 17
       Top = 64
-      Width = 32
+      Width = 40
       Caption = 'Name'
       ParentColor = False
     end
     object eName: TEdit
       Left = 8
-      Height = 23
+      Height = 27
       Top = 88
       Width = 656
       Anchors = [akTop, akLeft, akRight]
@@ -38,23 +38,23 @@ object FrameCreateName: TFrameCreateName
     end
     object lNameStat: TLabel
       Left = 64
-      Height = 15
+      Height = 17
       Top = 115
-      Width = 55
+      Width = 72
       Caption = 'lNameStat'
       ParentColor = False
     end
     object lDays: TLabel
       Left = 8
-      Height = 15
+      Height = 17
       Top = 6
-      Width = 25
+      Width = 32
       Caption = 'Days'
       ParentColor = False
     end
     object seDays: TSpinEdit
       Left = 8
-      Height = 23
+      Height = 27
       Top = 32
       Width = 192
       MaxValue = 2147483647
@@ -65,9 +65,9 @@ object FrameCreateName: TFrameCreateName
     end
     object lNameExits: TLabel
       Left = 64
-      Height = 15
+      Height = 17
       Top = 136
-      Width = 58
+      Width = 77
       Caption = 'lNameExits'
       ParentColor = False
     end
@@ -133,19 +133,19 @@ object FrameCreateName: TFrameCreateName
     end
     object lLoadTemplate: TLabel
       Left = 280
-      Height = 15
+      Height = 17
       Top = 6
-      Width = 78
+      Width = 101
       Caption = 'lLoadTemplate'
       ParentColor = False
     end
     object cLoadTemplate: TComboBox
       Left = 280
-      Height = 23
+      Height = 27
       Top = 32
       Width = 384
       Anchors = [akTop, akLeft, akRight]
-      ItemHeight = 15
+      ItemHeight = 0
       ItemIndex = 0
       Items.Strings = (
         'Select template...'
@@ -194,9 +194,9 @@ object FrameCreateName: TFrameCreateName
     end
     object lFullStat: TLabel
       Left = 64
-      Height = 15
+      Height = 17
       Top = 4
-      Width = 42
+      Width = 56
       Caption = 'lFullStat'
       ParentColor = False
     end
@@ -213,17 +213,17 @@ object FrameCreateName: TFrameCreateName
     TabOrder = 1
     object lValue: TLabel
       Left = 8
-      Height = 15
+      Height = 17
       Top = 8
-      Width = 31
+      Width = 42
       Caption = 'Value:'
       ParentColor = False
     end
     object lValueStat: TLabel
       Left = 64
-      Height = 15
-      Top = 152
-      Width = 51
+      Height = 17
+      Top = 150
+      Width = 70
       Anchors = [akLeft, akBottom]
       Caption = 'lValueStat'
       ParentColor = False

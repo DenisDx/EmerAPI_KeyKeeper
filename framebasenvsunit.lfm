@@ -3,8 +3,7 @@ object FrameBaseNVS: TFrameBaseNVS
   Height = 240
   Top = 0
   Width = 320
-  LCLVersion = '1.8.4.0'
   TabOrder = 0
-  DesignLeft = 668
-  DesignTop = 254
+  DesignLeft = 501
+  DesignTop = 211
 end

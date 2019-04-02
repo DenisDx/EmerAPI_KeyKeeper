@@ -148,7 +148,13 @@ begin
       );
 
     end else
+    if s='ssh' then begin
+      pTitle.Caption:=adjustName(pref+
+        localizzzeString('FrameDigitalAsset.Title.ssh','SSH: ')
+        +st
+      );
 
+    end else
     if s='dns' then begin
 
       pTitle.Caption:=adjustName(pref+
@@ -162,7 +168,12 @@ begin
         localizzzeString('FrameDigitalAsset.Title.blog','Blog: ')
         +st
       );
-
+    end else
+    if s='enum' then begin
+      pTitle.Caption:=adjustName(pref+
+        localizzzeString('FrameDigitalAsset.Title.enum','enum: ')
+        +st
+      );
     end else
     if s='doc' then begin
       pTitle.Caption:=adjustName(pref+

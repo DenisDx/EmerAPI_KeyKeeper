@@ -1,7 +1,7 @@
 object MainForm: TMainForm
-  Left = 1118
+  Left = 838
   Height = 557
-  Top = 147
+  Top = 122
   Width = 600
   Caption = 'EmerAPI / Antifake Key Keeper'
   ClientHeight = 534

@@ -1,7 +1,7 @@
 object TakePossessionForm: TTakePossessionForm
-  Left = 580
+  Left = 435
   Height = 537
-  Top = 279
+  Top = 232
   Width = 832
   Caption = 'Take possession'
   ClientHeight = 537
@@ -280,6 +280,7 @@ object TakePossessionForm: TTakePossessionForm
     Checked = True
     OnChange = refreshView
     TabOrder = 7
+    TabStop = True
   end
   object timerUpdate: TTimer
     Enabled = False
