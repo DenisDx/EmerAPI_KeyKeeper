@@ -34,10 +34,12 @@ This "Software" is Licensed Under  **`MIT License (MIT)`** .
 
 ##Version history
 
-0.0.7.1
+0.0.8
+"Add coins to DPO object" option
 GUI changes
 minor bug fixes
 add "re-read translation.txt" button for make translation process easier
+tx name_update fee fixes for no days addition
 
 0.0.7
 Multiple GUI changes

@@ -614,6 +614,8 @@
  ,'AFCreateForPrintingForm.chCreateNVSrecords':{en:'Create blockchain record (needs time!)',ru:'Создать записи в блокчейн (потребует времени!)'}
  ,'AFCreateForPrintingForm.chCreateNVSrecordsOwnedByMe':{en:'Create blockchain records owned by me (NOT RECOMMENDED)',ru:'Овладеть создаваемыми записями (НЕ РЕКОМЕНДУЕТСЯ)'}
  ,'AFCreateForPrintingForm.chLogErrorSerialsToFile':{en:'Save erroneous serials to file (RECOMMENDED): ',ru:'Сохранить ошибочные номера в файл (РЕКОМЕНДУЕТСЯ) '}
+ ,'AFCreateForPrintingForm.chCreateNVSrecordsAddCoins':{en:'Add coins to the asset:',ru:'Добавить монет к активу:'}
+ ,'AFCreateForPrintingForm.chCreateNVSrecordsAddCoins.Hint':{en:'Specify how many EMC coins should be added to the EmerDPO object you are creating.\nThe added coins will be passed on to the person who owns the NVS record (e.g. the buyer of the product)\nIn addition, if at least 0.0001 EMC is added, the buyer will not need to receive coins to become the owner of the Digital Asset',ru:'Укажите, какое количество монет EMC следует добавить к создаваемому объекту EmerDPO.\nДобавленные монеты будут переданы тому, кто завладеет NVS записью (например, покупателю продукции)\nКроме того, если добавлено хотя бы 0.0001 EMC, покупателю не потребуется получать монет для того, чтобы стать владельцем Цифрового Актива'}
  ,'AFCreateForPrintingForm.bEditCustomFields':{en:'Edit custom fields',ru:'Редактировать пользовательские поля'}
  ,'AFCreateForPrintingForm.chAddCustomFields':{en:'Add custom fields',ru:'Добавить пользовательские поля'}
  ,'AFCreateForPrintingForm.chCreateBrandField':{en:'Link brand',ru:'Добавить поле бренда'}

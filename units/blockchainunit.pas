@@ -340,7 +340,8 @@ begin
 
  //txMinFee = sqrt(txMinFee / CENT) * CENT; // square root is taken of the number of cents.
  //txMinFee += (int)((name.size() + value.size()) / 128) * CENT; // 1 cent per 128 bytes
- result:=trunc(sqrt(result div CENT)+1) * CENT;
+ if result>0 then //20190407 fix
+   result:=trunc(sqrt(result div CENT)+1) * CENT;
  result:= result + txtLen div 128 * CENT;
 
 

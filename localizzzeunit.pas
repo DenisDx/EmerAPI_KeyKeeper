@@ -306,6 +306,7 @@ var i:integer;
     if result<>'' then result:=result+'.';
     result:=result+uppercase(obj.Name);
   end;
+  var hint:string;
 begin
 
   if obj is TWinControl then
@@ -323,7 +324,7 @@ begin
   else if obj is TTabSheet then (obj as TTabSheet).Caption:=localizzzeString(sig(obj),(obj as TTabSheet).Caption)
   else if obj is tBitBtn then begin
      (obj as tBitBtn).Caption := localizzzeString(sig(obj),(obj as tBitBtn).Caption);
-     (obj as tBitBtn).Hint := localizzzeString(sig(obj)+'.hint',(obj as tBitBtn).Hint);
+     //(obj as tBitBtn).Hint := localizzzeString(sig(obj)+'.hint',(obj as tBitBtn).Hint);
   end
   else if obj is tGroupBox then (obj as tGroupBox).Caption:=localizzzeString(sig(obj),(obj as tGroupBox).Caption)
 
@@ -337,6 +338,15 @@ begin
     (obj as tMenuItem).Caption:=localizzzeString(sig(obj),(obj as tMenuItem).Caption);
     for i:=0 to tMenuItem(obj).Count -1 do
        localizzze(tMenuItem(obj).Items[i]);
+  end;
+
+  //Hint addition
+  if obj is TControl then begin
+    hint := localizzzeString(sig(obj)+'.hint',(obj as TControl).Hint);
+    if hint<>'' then begin
+      (obj as TControl).Hint:=hint;
+      (obj as TControl).ShowHint:=true;
+    end;
   end;
 end;
 

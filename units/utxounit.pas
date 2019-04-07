@@ -27,9 +27,11 @@ type
 
   tUTXOListStat=record
      spendable:qword;
-     spendableInMemPool:qword;
-     spendableLockedInMemPool:qword;
+     //spendableInMemPool:qword;
+     //spendableLockedInMemPool:qword;
+     spendableinNames:qword;
      nameCount:integer;
+     //expiredNameCount:integer;
      utxoCount:integer;
 
      lastUpdateTime:tDateTime;
@@ -638,8 +640,14 @@ begin
         tUTXO(fUTXOlist.Objects[i]).fvalue;
      result.utxoCount:=result.utxoCount+1;
    end;
-   if tUTXO(fUTXOlist.Objects[i]).isName then
-     result.nameCount:=result.nameCount+1;
+   if tUTXO(fUTXOlist.Objects[i]).isName then begin
+
+     //if tUTXO(fUTXOlist.Objects[i]).isValidName then begin
+       result.nameCount:=result.nameCount+1;
+       if fBlockchain<>nil then
+         result.spendableinNames:=result.spendableinNames+max(0,tUTXO(fUTXOlist.Objects[i]).value-fBlockchain.MIN_TX_FEE);
+     //end;
+   end;
  end;
 
  result.lastUpdateTime:=min(fLastUpdateTimeTX,fLastUpdateTimePool)

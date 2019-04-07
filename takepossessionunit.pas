@@ -231,7 +231,7 @@ begin
 
    with fTargetUTXOList.getStat do begin
      lTakePossession1.Caption:=localizzzeString('TakePossessionForm.lTakePossession1','')+''+fTargetUTXOList.tagString;
-     lTakePossession2.Caption:=localizzzeString('TakePossessionForm.lTakePossession2','') + myFloatToStr(spendable/1000000);
+     lTakePossession2.Caption:=localizzzeString('TakePossessionForm.lTakePossession2','') + myFloatToStr((spendable+spendableinNames)/1000000);
      lTakePossession3.Caption:=localizzzeString('TakePossessionForm.lTakePossession3','') + intToStr(nameCount);
      bTakePossession.Enabled:= (fTargetUTXOList<>nil) and (fTargetUTXOList.Count>0) and (lastAddress=fTargetUTXOList.tagString);
      bRequestAssets.Enabled:=false;

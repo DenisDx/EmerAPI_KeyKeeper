@@ -128,6 +128,7 @@ type
     optNVSValueParent:ansistring;
     optNVSValueParentLot:ansistring;
 
+    optAddCoins:qword;
 
     property Range:ansistring read fRange;
 
@@ -205,6 +206,7 @@ type
     chCreateBrandField: TCheckBox;
     chCreateNVSrecords: TCheckBox;
     chCreateNVSrecordsOwnedByMe: TCheckBox;
+    chCreateNVSrecordsAddCoins: TCheckBox;
     chCreateParentField: TCheckBox;
     chCreateParentLotField: TCheckBox;
     chCreatePrintCSV: TCheckBox;
@@ -236,6 +238,7 @@ type
     eIteratorRange: TEdit;
     eTextQR1: TEdit;
     eTextQR2: TEdit;
+    seCreateNVSrecordsAddCoins: TFloatSpinEdit;
     fnCreatePublicCSV: TFileNameEdit;
     fncreatePrintCSV: TFileNameEdit;
     fnIteraror: TFileNameEdit;
@@ -1081,7 +1084,7 @@ begin
 
   tx:=tEmerTransaction.create(emerAPI,true);
   try
-    tx.addOutput(tx.createNameScript(address,Sender.nvsName,Sender.nvsValue,optDays,True),emerAPI.blockChain.MIN_TX_FEE);
+    tx.addOutput(tx.createNameScript(address,Sender.nvsName,Sender.nvsValue,optDays,True),emerAPI.blockChain.MIN_TX_FEE+optAddCoins);
     if tx.makeComplete then begin
       if tx.signAllInputs(MainForm.PrivKey) then begin
         tx.sendToBlockchain(EmerAPINotification(@(Sender.Sent),'sent'));
@@ -1377,6 +1380,8 @@ begin
   fcLastSerial:='';
   fcRangeEnd:='';
   fcRange:='';
+
+  optAddCoins:=0;
 end;
 
 destructor tSerialIterator.destroy; //override;
@@ -1625,6 +1630,8 @@ begin
   chSignValue.Checked:=true;
 
   seLeaseTime.Value:=10000;
+  seCreateNVSrecordsAddCoins.Value:=0.0001;
+  chCreateNVSrecordsAddCoins.Checked:=false;
 
   bCreate.Enabled:=false;
 
@@ -1815,6 +1822,9 @@ begin
 
   chCreateNVSrecordsOwnedByMe.enabled:=chCreateNVSrecords.Checked;
   seLeaseTime.enabled:=chCreateNVSrecords.Checked;
+
+  chCreateNVSrecordsAddCoins.enabled:=chCreateNVSrecords.Checked;
+  seCreateNVSrecordsAddCoins.enabled:=chCreateNVSrecords.Checked and chCreateNVSrecordsAddCoins.Checked;
 
 
   chSignValue.Enabled:=true;
@@ -2195,6 +2205,9 @@ begin
 
       if chCreateNVSrecordsOwnedByMe.checked then fIterator.optOwnerIsMe:=true;
       fIterator.optDays:=seLeaseTime.Value;
+
+      if chCreateNVSrecordsAddCoins.Checked then
+        fIterator.optAddCoins:=round(1000000*seCreateNVSrecordsAddCoins.Value);
 
       fIterator.utxoUpdated:=true;
 
