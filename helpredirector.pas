@@ -10,7 +10,7 @@ uses
 function showHelpTag(tag:string='';ParentForm:tForm=nil;addData:string='';level:integer=0):boolean;
 function getHelpServerAddress():string;
 
-var helpTagsString:string ='{root:"",keeper_passwords_general:""'
+var helpTagsString:string ='{root:"https://emerapi.info",keeper_passwords_general:"https://emerapi.info/article/5ca467343666ac304f4beff4"'
    +',MainForm:{_:"",eAddress:"http://emercoin.com"}'
    +',MessageAskForCreateOrEnterMPNow:"help://keeper_passwords_general"'
 

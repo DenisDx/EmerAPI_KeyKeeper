@@ -4,7 +4,7 @@ object MainForm: TMainForm
   Top = 122
   Width = 600
   Caption = 'EmerAPI / Antifake Key Keeper'
-  ClientHeight = 534
+  ClientHeight = 537
   ClientWidth = 600
   Color = clWindow
   Constraints.MinHeight = 400
@@ -16,20 +16,20 @@ object MainForm: TMainForm
   OnHelp = FormHelp
   OnResize = FormResize
   OnShow = FormShow
-  LCLVersion = '1.8.2.0'
+  LCLVersion = '1.8.4.0'
   object gbLog: TGroupBox
     Left = 0
     Height = 106
-    Top = 428
+    Top = 431
     Width = 600
     Align = alBottom
     Caption = 'Log'
-    ClientHeight = 87
+    ClientHeight = 86
     ClientWidth = 596
     TabOrder = 0
     object mLog: TMemo
       Left = 0
-      Height = 87
+      Height = 86
       Top = 0
       Width = 596
       Align = alClient
@@ -41,17 +41,17 @@ object MainForm: TMainForm
   end
   object pMain: TPanel
     Left = 0
-    Height = 423
+    Height = 426
     Top = 0
     Width = 600
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 423
+    ClientHeight = 426
     ClientWidth = 600
     TabOrder = 1
     object pcMain: TPageControl
       Left = 0
-      Height = 260
+      Height = 263
       Top = 163
       Width = 600
       ActivePage = tsActions
@@ -61,26 +61,26 @@ object MainForm: TMainForm
       OnChange = pcMainChange
       object tsActions: TTabSheet
         Caption = 'Actions'
-        ClientHeight = 229
-        ClientWidth = 596
+        ClientHeight = 235
+        ClientWidth = 592
         object gbHint: TGroupBox
           Left = 0
           Height = 64
           Top = 0
-          Width = 596
+          Width = 592
           Align = alTop
           Caption = 'Hint'
-          ClientHeight = 45
-          ClientWidth = 592
+          ClientHeight = 44
+          ClientWidth = 588
           Color = cl3DLight
           ParentColor = False
           TabOrder = 0
           Visible = False
           object ScrollBox2: TScrollBox
             Left = 0
-            Height = 45
+            Height = 44
             Top = 0
-            Width = 592
+            Width = 588
             HorzScrollBar.Page = 1
             VertScrollBar.Page = 1
             Align = alClient
@@ -91,24 +91,24 @@ object MainForm: TMainForm
         end
         object sbActions: TScrollBox
           Left = 0
-          Height = 165
+          Height = 171
           Top = 64
-          Width = 596
-          HorzScrollBar.Page = 456
-          VertScrollBar.Page = 163
+          Width = 592
+          HorzScrollBar.Page = 500
+          VertScrollBar.Page = 167
           Align = alClient
-          ClientHeight = 163
-          ClientWidth = 581
+          ClientHeight = 167
+          ClientWidth = 571
           TabOrder = 1
           object gbTest: TGroupBox
             Left = 0
             Height = 56
             Top = 0
-            Width = 581
+            Width = 571
             Align = alTop
             Caption = 'TEST AREA'
-            ClientHeight = 37
-            ClientWidth = 577
+            ClientHeight = 36
+            ClientWidth = 567
             TabOrder = 0
             object BitBtn1: TBitBtn
               Left = 8
@@ -121,7 +121,7 @@ object MainForm: TMainForm
             end
             object Button1: TButton
               Left = 88
-              Height = 25
+              Height = 30
               Top = 0
               Width = 96
               Caption = '100Xgetbcinfo'
@@ -129,30 +129,39 @@ object MainForm: TMainForm
               TabOrder = 1
             end
             object Button2: TButton
-              Left = 246
-              Height = 25
-              Top = 3
-              Width = 75
-              Caption = 'Button2'
+              Left = 192
+              Height = 30
+              Top = 0
+              Width = 96
+              Caption = 'test2'
               OnClick = Button2Click
               TabOrder = 2
+            end
+            object Button3: TButton
+              Left = 296
+              Height = 30
+              Top = 0
+              Width = 200
+              Caption = 're-read translation.txt'
+              OnClick = Button3Click
+              TabOrder = 3
             end
           end
           object pRegisterOnServer: TPanel
             Left = 0
             Height = 200
             Top = 56
-            Width = 581
+            Width = 571
             Align = alTop
             BevelOuter = bvNone
             ClientHeight = 200
-            ClientWidth = 581
+            ClientWidth = 571
             TabOrder = 1
             object lRegisterOnServer: TLabel
               Left = 8
-              Height = 17
+              Height = 15
               Top = 6
-              Width = 134
+              Width = 104
               Caption = 'lRegisterOnServer'
               Font.Style = [fsBold]
               ParentColor = False
@@ -160,18 +169,18 @@ object MainForm: TMainForm
             end
             object lRegisterOnServerCmt: TLabel
               Left = 40
-              Height = 17
-              Top = 182
-              Width = 150
+              Height = 15
+              Top = 184
+              Width = 116
               Anchors = [akLeft, akBottom]
               Caption = 'lRegisterOnServerCmt'
               ParentColor = False
             end
             object lRegisterOnServer2: TLabel
               Left = 8
-              Height = 17
+              Height = 15
               Top = 29
-              Width = 130
+              Width = 99
               Caption = 'lRegisterOnServer2'
               ParentColor = False
             end
@@ -195,17 +204,17 @@ object MainForm: TMainForm
             end
             object lRegisterServerComment1: TLabel
               Left = 40
-              Height = 17
+              Height = 15
               Top = 103
-              Width = 177
+              Width = 137
               Caption = 'lRegisterServerComment1'
               ParentColor = False
             end
             object lRegisterServerComment2: TLabel
               Left = 40
-              Height = 17
+              Height = 15
               Top = 159
-              Width = 177
+              Width = 137
               Caption = 'lRegisterServerComment2'
               ParentColor = False
             end
@@ -214,17 +223,17 @@ object MainForm: TMainForm
             Left = 0
             Height = 61
             Top = 256
-            Width = 581
+            Width = 571
             Align = alTop
             BevelOuter = bvNone
             ClientHeight = 61
-            ClientWidth = 581
+            ClientWidth = 571
             TabOrder = 2
             object lRegisterMasterPassword: TLabel
               Left = 8
-              Height = 17
+              Height = 15
               Top = 6
-              Width = 183
+              Width = 141
               Caption = 'lRegisterMasterPassword'
               Font.Style = [fsBold]
               ParentColor = False
@@ -293,17 +302,17 @@ object MainForm: TMainForm
         end
         object lLocalWallet: TLabel
           Left = 10
-          Height = 17
+          Height = 15
           Top = 110
-          Width = 84
+          Width = 65
           Caption = 'Local wallet:'
           ParentColor = False
         end
         object lPrivateKey: TLabel
           Left = 10
-          Height = 17
+          Height = 15
           Top = 10
-          Width = 78
+          Width = 60
           Caption = 'Private key:'
           ParentColor = False
         end
@@ -328,9 +337,9 @@ object MainForm: TMainForm
         end
         object lAddress: TLabel
           Left = 176
-          Height = 17
+          Height = 15
           Top = 8
-          Width = 60
+          Width = 45
           Caption = 'Address:'
           ParentColor = False
         end
@@ -470,9 +479,9 @@ object MainForm: TMainForm
         end
         object lBalance: TLabel
           Left = 398
-          Height = 17
+          Height = 15
           Top = 60
-          Width = 130
+          Width = 102
           Caption = 'Spendable balance:'
           ParentColor = False
         end
@@ -504,9 +513,9 @@ object MainForm: TMainForm
         end
         object lNames: TLabel
           Left = 270
-          Height = 17
+          Height = 15
           Top = 60
-          Width = 51
+          Width = 40
           Caption = 'Names:'
           ParentColor = False
         end
@@ -647,17 +656,17 @@ object MainForm: TMainForm
         end
         object lEmerAPIServer: TLabel
           Left = 11
-          Height = 17
+          Height = 15
           Top = 60
-          Width = 100
+          Width = 77
           Caption = 'Current server:'
           ParentColor = False
         end
         object lTasks: TLabel
           Left = 176
-          Height = 17
+          Height = 15
           Top = 60
-          Width = 41
+          Width = 31
           Caption = 'Tasks:'
           ParentColor = False
         end
@@ -920,7 +929,7 @@ object MainForm: TMainForm
     Cursor = crVSplit
     Left = 0
     Height = 5
-    Top = 423
+    Top = 426
     Width = 600
     Align = alBottom
     ResizeAnchor = akBottom

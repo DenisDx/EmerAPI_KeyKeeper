@@ -43,6 +43,7 @@ type
     bShowQR: TBitBtn;
     Button1: TButton;
     Button2: TButton;
+    Button3: TButton;
     bViewTX: TBitBtn;
     bViewTasks: TBitBtn;
     bCreateAsset: TBitBtn;
@@ -147,6 +148,7 @@ type
     procedure bShowQRClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
     procedure bViewTasksClick(Sender: TObject);
     procedure bViewTXClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -1537,6 +1539,60 @@ end;
 procedure TMainForm.Button2Click(Sender: TObject);
 begin
   TimerStatusUpdateTimer(nil);
+end;
+
+procedure TMainForm.Button3Click(Sender: TObject);
+var i,j:integer;
+    s:string;
+    t:TJSONData;
+    ResStream : TResourceStream;
+    fs:tFileStream;
+
+    newLocalizzzeData :TJSONObject;
+begin
+ if fileexists(extractFilePath(application.ExeName)+'translation.txt') then
+   try
+     fs:=tFileStream.Create(extractFilePath(application.ExeName)+'translation.txt',fmOpenRead);
+     setLength(s,fs.Size);
+     fs.Read(s[1],length(s));
+   finally
+     FreeAndNil(fs);
+   end
+ else begin
+  showMessageSafe('You must put translation.txt file into the program''s folder');
+ end;
+
+
+//  mLanguageData.Lines.Clear;
+ try
+  t := GetJSON(changeQuotes(s));
+  try
+    newLocalizzzeData := TJSONObject.Create;
+
+    for i:=0 to t.Count-1 do begin
+      tJsonObject(newLocalizzzeData).Add(
+       trim(AnsiUpperCase(tJsonObject(t).Names[i]))
+       ,
+       t.Items[i].Clone
+      );
+      for j:=0 to tJsonObject(t.Items[i]).Count-1 do
+         if languages.IndexOf(tJsonObject(t.Items[i]).Names[j])<0
+            then languages.add(tJsonObject(t.Items[i]).Names[j]);
+    end;
+
+  finally
+    t.Free;
+  end;
+
+  LocalizzzeData.Free;
+  LocalizzzeData:=newLocalizzzeData;
+
+  localizzze(self);
+  localizzze(MainMenu);
+ except
+   on e: exception do
+     showMessageSafe('Incorrect JSON file: '+e.message);
+ end;
 end;
 
 

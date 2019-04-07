@@ -613,7 +613,7 @@
     </Other>
   </CompilerOptions>
   <Debugging>
-    <Exceptions Count="3">
+    <Exceptions Count="4">
       <Item1>
         <Name Value="EAbort"/>
         <Enabled Value="False"/>
@@ -626,6 +626,10 @@
         <Name Value="EFOpenError"/>
         <Enabled Value="False"/>
       </Item3>
+      <Item4>
+        <Name Value="EScannerError"/>
+        <Enabled Value="False"/>
+      </Item4>
     </Exceptions>
   </Debugging>
 </CONFIG>

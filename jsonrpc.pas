@@ -659,7 +659,12 @@ begin
 
           s:='';
 
-          if (fQData[1]<>'') and (fQData[1]<>'hex') and (fQData[1]<>'base64') then begin
+          if (fQData[1]<>'') and (fQData[1]<>'hex') and (fQData[1]<>'base64') then
+          begin
+            doneError('Invalid valuetype for '+fMethod,RPC_INVALID_PARAMS);
+            fRequestDone:=true;
+          end else
+          begin
             //!!!! if fQData[1]<>'' then s:=',valuetype:"'+fQData[1]+'"';
             if fQData[2]<>'' then
               s:=',valuetype:"'+fQData[1]+'"';
@@ -668,9 +673,6 @@ begin
 
             emerAPI.EmerAPIConnetor.sendWalletQueryAsync('name_show',getJSON('{name:"'+fQData[0]+'"'+s+'}'),@AsyncRequestDone,'name_show:'+trim(fQData[0]));
 
-          end else begin
-            doneError('Invalid valuetype for '+fMethod,RPC_INVALID_PARAMS);
-            fRequestDone:=true;
           end;
         end;
 
