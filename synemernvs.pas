@@ -536,7 +536,7 @@ begin
     //senmSSH:
     senmSSL: if key<>'sha256' then result := tkUknownKey;
     senmENUMER: if key<>'SIG' then result := tkUknownKey;
-    senmDPORoot: result := tkUknownKey;
+    //senmDPORoot: result := tkUknownKey;
     senmDPO: if not findKey(key,dpoKeys) then result := tkUknownKey;
     senmDOC: if not findKey(key,docKeys,true) then result := tkUknownKey;
     senmCERT: if not findKey(key,certKeys,true) then result := tkUknownKey;

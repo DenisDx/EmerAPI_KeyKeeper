@@ -439,11 +439,12 @@ begin
     if not tsServerConnectedChDontSave.Checked then begin
       Settings.setValue('EmerAPI_Server_Save_yum_l',true);
       Settings.setValue('EMERAPI_SERVER_GUEST_ONLY',false);
-      Settings.saveParams(['EmerAPI_Server_adv_SessionKey','EmerAPI_Server_Login_Address','EmerAPI_Server_adv_yum_l','EmerAPI_Server_Save_yum_l','EMERAPI_SERVER_GUEST_ONLY']);
-      if tsConnectServerPanelChSelectServer.Checked then begin
+
+      if tsConnectServerPanelChSelectServer.Checked then
          Settings.setValue('EMERAPI_SERVER_ADDRESS',tsServerLoginAddress);
-         Settings.saveParams(['EMERAPI_SERVER_ADDRESS']);
-      end;
+
+      Settings.saveParams(['EMERAPI_SERVER_ADDRESS','EmerAPI_Server_adv_SessionKey','EmerAPI_Server_Login_Address','EmerAPI_Server_adv_yum_l','EmerAPI_Server_Save_yum_l','EMERAPI_SERVER_GUEST_ONLY']);
+
     end else begin
       //erase info
       s1:=Settings.getValue('EmerAPI_Server_adv_SessionKey');

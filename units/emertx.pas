@@ -312,13 +312,13 @@ uses USha256, UOpenSSL, PodbiralkaUnit
 
 function scriptDataBufToText(buf:ansistring;decodeText:boolean=false):ansistring;
 var i,n:integer;
-const symbols  = [' ','!','@','$','%','^','&','*','(',')','-','_','=','+','"',';',':','\','|','/','?','.',',','>','<','~','''','{','}','[',']','a'..'z','A'..'Z','0'..'9']; //'A'..'Я','а'..'я',
+const symbols  = [' ','!','@','$','%','^','&','*','(',')','-','_','=','+','"',';',':','\','|','/','?','.',',','>','<','~','''','{','}','[',']','a'..'z','A'..'Z','0'..'9'{,#10,#13}]; //'A'..'Я','а'..'я',
 begin
   if decodeText then begin
     n:=0;
-    for i:=1 to length(buf) do if not (buf[i] in symbols) then inc(n);
+    for i:=1 to length(buf) do if not (buf[i] in (symbols + [#10,#13])) then inc(n);
 
-    if (n<3) and (n/length(buf)<0.3) then begin
+    if (length(buf)>1) and (n/length(buf)<0.3) then begin
       result:='';
       for i:=1 to length(buf) do
         if buf[i] in symbols

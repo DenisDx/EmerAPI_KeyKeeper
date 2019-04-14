@@ -699,4 +699,22 @@
  ,'TakePossessionForm.messageTransferError':{en:'Asset transfer error: ',ru:'Ошибка смены собственника цифрового актива: '}
  ,'TakePossessionForm.messageTransferDone':{en:'The change in ownership of digital assets is complete. It is required to wait for the completion of entering data into the blockchain.',ru:'Изменение собственника цифровых активов завершено. Требуется подожать для окончания внесения данных в блокчейн.'}
  ,'TakePossessionForm.bRequestAssets':{en:'Request digital assets list',ru:'Запросить список цифровых активов'}
+
+ ,'tEmerAPIServerTask.YouDontOwnPrivateKeyForSigning':{en:'You do not own a private key to sign NVS value',ru:'Вы не владеете приватным ключем для подписи NVS значения'}
+ ,'tEmerAPIServerTask.TimeIsOver':{en:'The time to complete this task has expired',ru:'Время, в течении которого можно было исполнить эту задачу, истекло'}
+ ,'tEmerAPIServerTask.YouDontOwnAsset':{en:'You do not own the Digital Asset required to sign the record being created. The name of the asset: ',ru:'Вы не владеете Цифровым Активом, необходимым для подписи создаваемой записи. Имя актива: '}
+
+ ,'tEmerAPIServerTask.UnknownTask':{en:'Unknown task type',ru:'Неизвестный тип задачи'}
+ ,'tEmerAPIServerTask.TheNameIsEmpty':{en:'The name of the Digital Asset is blank',ru:'Имя Цифрового Актива пустое'}
+ ,'tEmerAPIServerTask.TheValueIsEmpty':{en:'Value of the Digital Asset is empty',ru:'Значение (Value) Цифрового Актива пустое'}
+ ,'tEmerAPIServerTask.TheNameIsTooLong':{en:'Digital Asset name too long (max. length 512 bytes)',ru:'Имя цифрового актива слишком длинное (макс длина 512 байт)'}
+ ,'tEmerAPIServerTask.TheValueIsTooLong':{en:'Digital Asset value too long (max length 20480 bytes)',ru:'Значение цифрового актива слишком длинное (макс длина 20480 байт)'}
+ ,'tEmerAPIServerTask.TheTimePeriodIsTooShort':{en:'The duration of the Digital Asset`s Name lease is too short',ru:'Длительность аренды имени Цифрового Актива слишком короткое'}
+ ,'tEmerAPIServerTask.nameAlreadyExists':{en:'The name of the Digital Asset is already reserved: ',ru:'Имя Цифрового Актива уже зарезервировано: '}
+
+ ,'MessageAskNameDeleteConfirmation':{en:'<H3>Deletion: Are you sure?</H3><br>The Digital Asset will be deleted.<br>You will lose control of this asset.<br>Another user will be able to register this asset after that.',ru:'<H3>Удаление: Вы уверены?</H3><br>Выбранный Цифровой Актив будет удален.<br>Вы потеряете контроль над этим активом.<br>Другой пользователь сможет зарегистрировать этот актив после этого.'}
+ ,'MainForm.lAssetsFilter':{en:'Digital Assets Filter',ru:'Фильтр Цифровых Aктивов'}
+ ,'MainForm.lAssetsFilterShowFirst':{en:'Show first',ru:'Показывать первые'}
+ ,'MainForm.chAssetsFilterShowExpired':{en:'Show expired',ru:'Показывать истекшие'}
+ ,'MainForm.bAssetsFilterRebuild':{en:'Rebuild',ru:'Перестроить'}
 }

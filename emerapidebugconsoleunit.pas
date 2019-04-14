@@ -15,6 +15,8 @@ type
   TEmerAPIDebugConsoleForm = class(TForm)
     BitBtn1: TBitBtn;
     BitBtn10: TBitBtn;
+    bAddTask: TBitBtn;
+    bAddGroup: TBitBtn;
     BitBtn2: TBitBtn;
     BitBtn3: TBitBtn;
     BitBtn4: TBitBtn;
@@ -40,6 +42,8 @@ type
     Splitter1: TSplitter;
     Splitter2: TSplitter;
     twAnswer: TTreeView;
+    procedure bAddGroupClick(Sender: TObject);
+    procedure bAddTaskClick(Sender: TObject);
     procedure BitBtn10Click(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
@@ -341,10 +345,16 @@ begin
     end;
     else begin
       //autodetect
-      decodeParams;
-      //if qType=esqWallet then begin
-        emerAPI.EmerAPIConnetor.sendQueryAsync(method,params,@myQueryDone);
-      //end;
+      if (pos('mutation',trim(lowercase(mRequest.Text)))=1) or (pos('query',trim(lowercase(mRequest.Text)))=1) then begin
+        method:=mRequest.Text;
+        ud:=tpServerThreadUserData(emerAPI.EmerAPIConnetor.serverAPI.sendQueryAsync(method,params,@myQueryDone).userData);
+        if ud<>nil then ud^.EmerAPIServerQueryType:=esqServer;
+      end else begin
+        decodeParams;
+        //if qType=esqWallet then begin
+          emerAPI.EmerAPIConnetor.sendQueryAsync(method,params,@myQueryDone);
+        //end;
+      end;
     end;
   end;
 end;
@@ -470,6 +480,47 @@ begin
   mRequest.text:='query { transactionlist { address   id  amount } }';
 
 
+end;
+
+procedure TEmerAPIDebugConsoleForm.bAddTaskClick(Sender: TObject);
+begin
+
+  mRequest.lines.Clear;
+  mRequest.lines.append(
+  'mutation {'#13#10+
+  '  createtransaction('#13#10+
+  '    name: "test",'#13#10+
+  '    value:"test1\r\ntest2\r\ntest3",'#13#10+
+  '    group: "INSERT_GROUP_ID_HERE"'#13#10+
+  '  ) {'#13#10+
+  '    transaction {'#13#10+
+  '      name'#13#10+
+  '      value'#13#10+
+  '      id'#13#10+
+  '    }'#13#10+
+  '  }'#13#10+
+  '}'#13#10
+  );
+
+
+
+end;
+
+procedure TEmerAPIDebugConsoleForm.bAddGroupClick(Sender: TObject);
+begin
+  mRequest.lines.Clear;
+  mRequest.lines.append(
+  'mutation {'#13#10+
+  'createtransactiongroup('#13#10+
+  '    name: "NAME",'#13#10+
+  '    type:"NEW_NAME"'#13#10+
+  '  ) {'#13#10+
+  '    transactiongroup {'#13#10+
+  '      id'#13#10+
+  '    }'#13#10+
+  '  }'#13#10+
+  '}'#13#10
+)
 end;
 
 procedure TEmerAPIDebugConsoleForm.BitBtn2Click(Sender: TObject);

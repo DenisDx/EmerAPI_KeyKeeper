@@ -1,4 +1,4 @@
-EmerAPI KeyKeeper 0.0.8
+EmerAPI KeyKeeper 0.0.8.3
 =================
 
 EmerAPI / Antifake Key Keeper
@@ -33,6 +33,16 @@ QRCodeGenLib4Pascal <https://github.com/Xor-el/QRCodeGenLib4Pascal>
 This "Software" is Licensed Under  **`MIT License (MIT)`** .
 
 ##Version history
+0.0.8.3
+Bug fixes
+Digital Assets filtering
+
+0.0.8.2
+Tasks execution improvements
+Tasks highlighting improvements
+
+0.0.8.1
+fixed bug with server selection	
 
 0.0.8
 "Add coins to DPO object" option

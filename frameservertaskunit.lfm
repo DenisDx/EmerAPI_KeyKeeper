@@ -470,6 +470,14 @@ object FrameServerTask: TFrameServerTask
       OnClick = sbDeleteClick
       TabOrder = 2
     end
+    object chDebug: TCheckBox
+      Left = 8
+      Height = 19
+      Top = 1
+      Width = 153
+      Caption = 'Show TX but don''t create'
+      TabOrder = 3
+    end
   end
   object pAdvanced: TPanel
     Left = 0
@@ -613,8 +621,8 @@ object FrameServerTask: TFrameServerTask
   object ilAdvCon: TImageList
     Height = 22
     Width = 22
-    left = 184
-    top = 8
+    left = 200
+    top = 72
     Bitmap = {
       4C69020000001600000016000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
       FF00FCF3F2FFF2C9C2FFDE8171FFD45642FFD2503AFFD25139FFD25139FFD250

@@ -25,8 +25,12 @@ tBaseEmerAPIServerTask=class(tObject)
     fTaskValid:boolean; //is the task CAN be applied?
     fTaskValidAt:tDateTime; //0 if not checked; etherwise time
 
+    fValidateTaskPeriod:integer; //seconds
+
     function execute(onDone:tNotifyEvent=nil):boolean; virtual;
     function getExecuted:boolean; virtual; abstract; //for task: it was send. for group: all the tasks were sent
+
+    procedure setValidateTaskPeriod(value:integer); virtual; abstract;
   public
     fUpdated:boolean; //set true on data loaded. One time.
 
@@ -46,6 +50,13 @@ tBaseEmerAPIServerTask=class(tObject)
 
     onTaskUpdated:tNotifyEvent;
 
+    signByAddress:ansistring; //don't need to sign if empty. could be overriden by signByName
+    signByName:ansistring; //Name's owner must sign. Overwrites signByAddress
+    signPreffix:ansistring; //'*' or 'F-'
+    signParName:ansistring; //'Signature' or 'SIGN' for AF
+
+    ShowInTXVieverDontCreate:boolean;
+
     //
     function getDescription:string;  virtual; abstract;
     function fIsKnownName:boolean; virtual; abstract; //рекурсивно вызывает всех детей, если есть. Возвращает типировано ли имя
@@ -59,10 +70,14 @@ tBaseEmerAPIServerTask=class(tObject)
 
     function getValid:tEmerAPIServerTaskValid; virtual; abstract;
 
+    function getLastError:string; virtual; abstract;
+
     //  group: ссылка на группу, при запросе можно получать поля, например id
     property Executed:boolean read getExecuted;
     property Successful:boolean read fSuccessful;
-    property LastError:string read fLastError;
+    property LastError:string read getLastError;
+
+    property validateTaskPeriod:integer read fValidateTaskPeriod write setValidateTaskPeriod; //seconds
 
     constructor create(mOwner:tEmerAPIServerTaskList);
 end;
@@ -82,6 +97,9 @@ tEmerAPIServerTask=class(tBaseEmerAPIServerTask)
    function execute(onDone:tNotifyEvent=nil):boolean; override;
    function getExecuted:boolean; override;
    function getCost:qWord; override;
+   function getLastError:string; override;
+
+   procedure setValidateTaskPeriod(value:integer); override;
 end;
 
 tEmerAPIServerTaskGroup=class(tBaseEmerAPIServerTask)
@@ -108,6 +126,9 @@ tEmerAPIServerTaskGroup=class(tBaseEmerAPIServerTask)
    function getCost:qWord; override;
    function getUniOwnerCount:integer;
    function getOwnerByCount(address:ansistring='undefined'):integer;
+   function getLastError:string; override;
+
+   procedure setValidateTaskPeriod(value:integer); override;
 end;
 
 //update
@@ -122,6 +143,7 @@ private
   fLastUpdateTime:tDatetime;
   fItems:tList;
   fValidateAfterCreate:boolean;
+  fValidateTaskPeriod:integer;
   function getItem(Index: integer):tBaseEmerAPIServerTask;
   function getCount:integer;
   procedure clearList;
@@ -131,7 +153,10 @@ private
   procedure myNewTask(sender:tObject);
   procedure myTaskRemoved(sender:tObject);
   procedure mytaskUpdated(sender:tObject);
+
+  procedure setValidateTaskPeriod(value:integer);
 public
+  property validateTaskPeriod:integer read fValidateTaskPeriod write setValidateTaskPeriod; //seconds
   property Count:integer read getCount;
   property Items[Index: integer]:tBaseEmerAPIServerTask read getItem; default;
   property ValidateAfterCreate:boolean read fValidateAfterCreate write fValidateAfterCreate;
@@ -145,7 +170,14 @@ end;
 
 implementation
 
-uses HelperUnit, EmerAPITransactionUnit, MainUnit{for getprivkey}, crypto, EmerTX, LazUTF8SysUtils;
+uses HelperUnit, EmerAPITransactionUnit, MainUnit{for getprivkey}, crypto, EmerTX, LazUTF8SysUtils
+
+  ,AntifakeHelperUnit
+  ,BaseTXUnit
+  ,EmbededSignaturesUnit
+  ,CreateRawTXunit
+  ,Localizzzeunit
+  ;
 
 {tBaseEmerAPIServerTask}
 constructor tBaseEmerAPIServerTask.create(mOwner:tEmerAPIServerTaskList);
@@ -153,6 +185,13 @@ begin
  inherited create;
  fOwner:=mOwner;
  fLastError:='';
+
+ signByAddress:=''; //don't need to sign if empty. could be overriden by signByName
+ signByName:=''; //Name's owner must sign. Overwrites signByAddress
+ signPreffix:='*'; //'*' or 'F-'
+ signParName:='SIGN'; //'Signature' or 'SIGN' for AF
+
+ fValidateTaskPeriod:=30;
 end;
 
 
@@ -170,6 +209,11 @@ begin
 
 end;
 
+function tEmerAPIServerTask.getLastError:string;
+begin
+  result:=fLastError;
+end;
+
 function tEmerAPIServerTask.getExecuted:boolean;
 begin
  result:=fExecuted;
@@ -178,12 +222,15 @@ end;
 function tEmerAPIServerTask.getValid:tEmerAPIServerTaskValid;
 begin
  //eptvUnknown,eptvValid,eptvInvalid,eptvPart
- if fTaskValidAt>0 then
+ if fTaskValidAt>0 then begin
+   if (fTaskValidAt+fValidateTaskPeriod/24/60/60)<now()
+     then validateTask;
+
    if fTaskValid then
      result:=eptvValid
    else
      result:=eptvInvalid
- else begin
+ end else begin
    result:=eptvUnknown;
  end;
 end;
@@ -213,6 +260,7 @@ begin
       end else begin
         fTaskValidAt:=now;
         fTaskValid:=false;
+        fLastError := localizzzeString('tEmerAPIServerTask.nameAlreadyExists','The name already exists: ')+NVSName;
         if assigned(fOwner) then fOwner.callNotify('taskUpdated');
       end
    else exit; //can't check //lNameExits.Caption:='Error: can''t find result in: '+result.AsJSON;
@@ -221,7 +269,8 @@ begin
 end;
 
 procedure tEmerAPIServerTask.validateTask();
-var nt:ansistring;
+var nt,s:ansistring;
+    var utxo:tbaseTXO;
 begin
  //check if the task is valid.
  //set fTaskValidAt and fTaskValid
@@ -234,15 +283,44 @@ begin
      or ((time>1000000) and ((time<()) or (time>())))
      or ((LockTime>1000000) and ((LockTime<()) or (LockTime>())))
 }
+  fLastError:='';
   if (ownerAddress='')
      or ((time>1000000) and ((time<(winTimeToUnixTime(nowUTC()))) or (time>(winTimeToUnixTime(nowUTC())+3000))))
      or ((LockTime>1000000) and ({(LockTime<(winTimeToUnixTime(nowUTC())-3000)) or} (LockTime>(winTimeToUnixTime(nowUTC())+3000*100))))
   then begin
      fTaskValidAt:=now;
      fTaskValid:=false;
+     fLastError := localizzzeString('tEmerAPIServerTask.TimeIsOver','Time is over');
      if assigned(fOwner) then fOwner.callNotify('taskUpdated');
      exit;
   end;
+
+
+ //signByAddress:=''; //don't need to sign if empty. could be overriden by signByName
+ //signByName:=''; //Name's owner must sign. Overwrites signByAddress
+ //update signByAddress and check signing possibility
+ if (signByName<>'') or (signByAddress<>'') then begin
+   //check if we control the address
+   s:='';
+   if signByName<>'' then begin
+     //is it our address?
+     utxo:=emerAPI.UTXOList.findName(signByName);
+
+     if utxo<>nil
+        then s:=utxo.getReceiver
+        else begin s:=''; fLastError := localizzzeString('tEmerAPIServerTask.YouDontOwnAsset','You dont own asset ')+signByName; end;
+   end else
+     s:=signByAddress;
+
+
+   if (s='') or (not isMyAddress(s)) then begin
+     fTaskValidAt:=now;
+     fTaskValid:=false;
+     if fLastError='' then fLastError := localizzzeString('tEmerAPIServerTask.YouDontOwnPrivateKeyForSigning','You do not own a private key to sign NVS values');
+     if assigned(fOwner) then fOwner.callNotify('taskUpdated');
+     exit;
+   end;
+ end;
 
  if TaskType='NEW_NAME' then begin
    //create name. We must check if the name is not exists
@@ -256,6 +334,18 @@ begin
    then begin
      fTaskValidAt:=now;
      fTaskValid:=false;
+
+     if NVSName='' then  fLastError := localizzzeString('tEmerAPIServerTask.TheNameIsEmpty','The Name Is Empty')
+     else
+     if NVSValue='' then  fLastError := localizzzeString('tEmerAPIServerTask.TheValueIsEmpty','The Name Is Empty')
+     else
+     if (length(NVSName)>512) then  fLastError := localizzzeString('tEmerAPIServerTask.TheNameIsTooLong','The Name Is Too Long')
+     else
+     if (length(NVSValue)>20480) then  fLastError := localizzzeString('tEmerAPIServerTask.TheValueIsTooLong','The Value Is Too Long')
+     else
+     if (NVSDays<1) then fLastError := localizzzeString('tEmerAPIServerTask.TheTimePeriodIsTooShort','The Time Period Is Too Short')
+     ;
+
      if assigned(fOwner) then fOwner.callNotify('taskUpdated');
      exit;
    end;
@@ -265,6 +355,7 @@ begin
 
 
  end else begin//unknown task
+   fLastError := localizzzeString('tEmerAPIServerTask.UnknownTask','Unknown Task');
    fTaskValidAt:=0;
    fTaskValid:=false;
  end;
@@ -312,6 +403,13 @@ begin
    if fOwner.fOwnerTask.amount>0 then amount:=fOwner.fOwnerTask.amount;
    if fOwner.fOwnerTask.time<>-1 then time:=fOwner.fOwnerTask.time;
    if fOwner.fOwnerTask.LockTime<>-1 then LockTime:=fOwner.fOwnerTask.LockTime;
+
+   if fOwner.fOwnerTask.signByAddress<>'' then signByAddress:=fOwner.fOwnerTask.signByAddress;
+   if fOwner.fOwnerTask.signByName<>'' then signByName:=fOwner.fOwnerTask.signByName;
+   if fOwner.fOwnerTask.signPreffix<>'' then signPreffix:=fOwner.fOwnerTask.signPreffix;
+   if fOwner.fOwnerTask.signParName<>'' then signParName:=fOwner.fOwnerTask.signParName;
+
+   ShowInTXVieverDontCreate:=fOwner.fOwnerTask.ShowInTXVieverDontCreate;
  end;
 
 end;
@@ -329,6 +427,11 @@ begin
   if result=nil then raise exception.Create('tEmerAPIServerTask.execute: EmerAPI is nil');
 end;
 
+procedure tEmerAPIServerTask.setValidateTaskPeriod(value:integer);
+begin
+  fValidateTaskPeriod:=value;
+end;
+
 function tEmerAPIServerTask.execute(onDone:tNotifyEvent=nil):boolean;
 var
     //nName,nValue:ansistring;
@@ -338,6 +441,9 @@ var
     //nLockTime:dWord;
     tx:tEmerTransaction;
     EmerAPI:tEmerAPI;
+    //for signing:
+    utxo:tbaseTXO; privKey,s:ansistring;
+
 begin
   inherited;//fonDone:=onDone;
   result:=false;
@@ -360,10 +466,36 @@ begin
 
   updateDataByParent;
 
+  //sign?
+  if (signByAddress<>'') or (signByName<>'') then begin
+    //signByAddress:=''; //don't need to sign if empty. could be overriden by signByName
+    //signByName:=''; //Name's owner must sign. Overwrites signByAddress
+    //signPreffix:='*'; //'*' or 'F-'
+    //signParName:='SIGN'; //'Signature' or 'SIGN' for AF
+    privKey:='';
+
+    if signByName<>'' then begin
+      utxo:=emerAPI.UTXOList.findName(signByName);
+      if utxo<>nil
+         then privKey:=MainForm.getPrivKey(utxo.getReceiver)
+         else privKey:='';
+    end else
+      privKey:=MainForm.getPrivKey(signByAddress);
+
+    if privKey<>'' then begin
+      s:=getTextToSign(NVSName,cutNVSValueParameter(NVSValue,signParName),signPreffix);
+      s:=bufToBase64(signMessage(s,privKey));
+
+      nvsValue:=addNVSValueParameter(nvsValue,signParName,s);
+    end
+    else //can't sign
+      begin fLastError:=('Can''t sign value'); exit; end;
+  end;
+
 
   if TaskType='NEW_NAME' then begin
-    if length(NVSName)>512 then exit;
-    if length(NVSValue)>20480 then exit;
+    if length(NVSName)>512 then begin fLastError:=('length(NVSName)>512');  exit; end;
+    if length(NVSValue)>20480 then begin fLastError:=('length(NVSValue)>20480');  exit; end;
 
     tx:=tEmerTransaction.create(EmerAPI,true);
 
@@ -375,8 +507,16 @@ begin
          //EmerAPI.blockChain.getNameOpFee(seDays.Value,opNum('OP_NAME_NEW'),length(nName)+length(nValue))
       if tx.makeComplete then begin
         if tx.signAllInputs(MainForm.PrivKey) then begin
-          tx.sendToBlockchain(EmerAPINotification(@Sent,'sent'));
-          tx.addNotify(EmerAPINotification(@SendingError,'error'));
+
+          if ShowInTXVieverDontCreate then begin
+            MainForm.miTXClick(nil);
+            CreateRawTXForm.LoadbinTX(packTX(tx.getTTX));
+            freeandnil(tx);
+            //Sent(nil);
+          end else begin
+            tx.sendToBlockchain(EmerAPINotification(@Sent,'sent'));
+            tx.addNotify(EmerAPINotification(@SendingError,'error'));
+          end;
         end else begin fLastError:=('Can''t sign all transaction inputs using current key: '+tx.LastError); freeandnil(tx); exit; end;//else showMessageSafe('Can''t sign all transaction inputs using current key: '+tx.LastError);
       end else begin fLastError:=('Can''t create transaction: '+tx.LastError); freeandnil(tx); exit; end; //showMessageSafe('Can''t create transaction: '+tx.LastError);
     except
@@ -421,6 +561,14 @@ begin
 
  if not assigned(fOnDone) then exit;
  fOnDone(self);
+end;
+
+procedure tEmerAPIServerTaskGroup.setValidateTaskPeriod(value:integer);
+var i:integer;
+begin
+  fValidateTaskPeriod:=value;
+  for i:=0 to Tasks.Count-1 do
+    tBaseEmerAPIServerTask(Tasks[i]).ValidateTaskPeriod:=value;
 end;
 
 function tEmerAPIServerTaskGroup.execute(onDone:tNotifyEvent=nil):boolean;
@@ -511,6 +659,15 @@ begin
        result:=result + 1;
 end;
 
+function tEmerAPIServerTaskGroup.getLastError:string;
+var i:integer;
+begin
+ result:='';
+ for i:=0 to Tasks.Count-1 do
+   if tBaseEmerAPIServerTask(Tasks[i]).lastError<>'' then
+      result:=result + tBaseEmerAPIServerTask(Tasks[i]).lastError + #10;
+
+end;
 
 constructor tEmerAPIServerTaskGroup.create(mOwner:tEmerAPIServerTaskList);
 begin
@@ -523,6 +680,7 @@ begin
 //newtask
 //taskremoved
 //taskUpdated
+
  Tasks.addNotify(EmerAPINotification(@(fOwner.myUpdate),'update',true));
  Tasks.addNotify(EmerAPINotification(@(fOwner.myError),'error',true));
  Tasks.addNotify(EmerAPINotification(@(fOwner.myNewTask),'newtask',true));
@@ -604,6 +762,44 @@ var js,e:tJsonData;
      else result:='';
     end;
 
+    procedure setSignParams(task:tBaseEmerAPIServerTask);
+    var s:ansistring;
+        n:integer;
+    begin
+     //mustBeSignedBy
+     //signByAddress:=''; //don't need to sign if empty. could be overriden by signByName
+     //signByName:=''; //Name's owner must sign. Overwrites signByAddress
+     //signPreffix:='*'; //'*' or 'F-'
+     //signParName:='SIGN'; //'Signature' or 'SIGN' for AF
+
+     //s:=safeString(ja[i].FindPath('signbyname'));
+     //if s<>'' then mustBeSignedBy:=s
+     //         else mustBeSignedBy:=''; //if (pos('af:lot:',task.NVSName)=1) or (pos('af:product:',task.NVSName)=1) then mustBeSignedBy:='PARENT';!
+      task.signByName:=safeString(ja[i].FindPath('signbyname'));
+
+      //determine mustBeSignedBy
+      if (task.signByName='') and (task.NVSName<>'') then begin
+        s:=task.NVSName;
+        if (pos('af:lot:',s)=1) then begin
+           //20190409: af:lot:<NAME>:N
+           system.delete(s,1,7);
+           task.signByName:='af:'+cutNameSuffix(s);
+        end else if (pos('af:product:',s)=1) then begin
+          //20190409: PARENT
+          task.signByName:=getNVSValueParameter(task.NVSValue,'PARENT');
+        end;
+      end;
+
+      s:=safeString(ja[i].FindPath('signpreffix'));
+      if s<>'' then task.signPreffix:=s
+               else task.signPreffix:='*'; //if (pos('af:lot:',task.NVSName)=1) or (pos('af:product:',task.NVSName)=1) then mustBeSignedBy:='PARENT';!
+
+      s:=safeString(ja[i].FindPath('signparname'));
+      if s<>'' then task.signParName:=s
+               else task.signParName:='SIGN'; //if (pos('af:lot:',task.NVSName)=1) or (pos('af:product:',task.NVSName)=1) then mustBeSignedBy:='PARENT';!
+
+
+    end;
 
 begin
   if result=nil then begin
@@ -664,6 +860,8 @@ begin
             //TaskType: String; //type
             group.TaskType:=safeString(ja[i].FindPath('type'));
             //  group: ссылка на группу, при запросе можно получать поля, например id
+
+            setSignParams(group);
 
             group.Tasks.updateFromServer(groupID);
             group.fUpdated:=false;
@@ -732,6 +930,9 @@ begin
                //  dpo: String
                //  time: Int
                //TaskType: String; //type
+
+               setSignParams(task);
+
                task.TaskType:=safeString(ja[i].FindPath('type'));
                task.fUpdated:=true;
                if fValidateAfterCreate then validateTask(taskidx);
@@ -811,6 +1012,7 @@ begin
  fEmerAPI:=mEmerAPI;
  fItems:=tList.Create;
  fvalidateAfterCreate:=setValidateAfterCreate;
+ fValidateTaskPeriod:=30;
 end;
 
 procedure tEmerAPIServerTaskList.clearList;
@@ -818,6 +1020,7 @@ var i:integer;
 begin
  for i:=0 to fItems.Count-1 do
    tBaseEmerAPIServerTask(fItems[i]).Free;
+
  fItems.Clear;
 end;
 
@@ -833,6 +1036,13 @@ begin
   clearList;
   fItems.Free;
   inherited;
+end;
+
+procedure tEmerAPIServerTaskList.setValidateTaskPeriod(value:integer);
+var i:integer;
+begin
+  fValidateTaskPeriod:=value;
+  for i:=0 to fItems.count-1 do tBaseEmerAPIServerTask(fItems[i]).ValidateTaskPeriod:=fValidateTaskPeriod;
 end;
 
 function tEmerAPIServerTaskList.getItem(Index: integer):tBaseEmerAPIServerTask;

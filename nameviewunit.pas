@@ -15,6 +15,7 @@ type
   { TNameViewForm }
 
   TNameViewForm = class(TForm)
+    bDelete: TBitBtn;
     bShowHistory: TBitBtn;
     BitBtn1: TBitBtn;
     bAtom: TBitBtn;
@@ -38,6 +39,7 @@ type
     tsRaw: TTabSheet;
     tsDecoded: TTabSheet;
     procedure bAtomClick(Sender: TObject);
+    procedure bDeleteClick(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
     procedure bShowHistoryClick(Sender: TObject);
     procedure bUpdateNameClick(Sender: TObject);
@@ -56,6 +58,7 @@ type
     SynEmerNVSSyn:tSynEmerNVSSyn;
     procedure updateView(sender:tObject);
     procedure myQueryDone(sender:TEmerAPIBlockchainThread;result:tJsonData);
+    procedure onAnswer(sender:tObject;mr:tModalResult;mtag:ansistring);
   public
     NVSRecord:tNVSRecord;
     BaseEmerAPIServerTask:tBaseEmerAPIServerTask;
@@ -263,6 +266,7 @@ begin
       then eOwner.color:=clDefault
       else eOwner.color:=clBtnFace;
     bUpdateName.Enabled:=(iAmOwner and dchanged) and (seValue.Text<>'') and (length(seValue.Text)<=20480) {and ((NVSRecord=nil) or (NVSRecord.DaysLeft>0)){}};
+    bDelete.Enabled:=iAmOwner;
     seDaysLeft.Enabled:=iAmOwner;
 
     if bUpdateName.Enabled and (c>0) then
@@ -383,6 +387,35 @@ begin
   if NVSRecord<>nil then ShowAtomForm(NVSRecord.NVSName);
 end;
 
+procedure TNameViewForm.onAnswer(sender:tObject;mr:tModalResult;mtag:ansistring);
+var ow:ansistring;
+begin
+  if (mr=mrYes) and (mtag='MessageAskNameDeleteConfirmation')
+    then begin
+      if NVSRecord<>nil then begin
+         NVSRecord.addNotify(EmerAPINotification(@nvsSent,'sent',true));
+         NVSRecord.addNotify(EmerAPINotification(@nvsError,'error',true));
+
+         NVSRecord.deleteName();
+      end else if BaseEmerAPIServerTask<>nil then begin
+         //TODO:сделать
+      end;
+
+    end;
+end;
+
+procedure TNameViewForm.bDeleteClick(Sender: TObject);
+begin
+  with AskQuestionTag(self,@onAnswer,'MessageAskNameDeleteConfirmation') do begin
+     bYes.Visible:=true;
+     bCancel.Visible:=true;
+     bHelp.Visible:=true;
+     bCancel.setFocus;
+     Update;
+   end;
+
+end;
+
 procedure TNameViewForm.nvsSent(Sender: TObject);
 begin
   seValue.MarkTextAsSaved;
@@ -454,6 +487,7 @@ procedure TNameViewForm.FormClose(Sender: TObject; var CloseAction: TCloseAction
   );
 begin
   SuicideTimer.Enabled:=true;
+  wipeAskQuestion(self);
 end;
 
 procedure TNameViewForm.FormCreate(Sender: TObject);

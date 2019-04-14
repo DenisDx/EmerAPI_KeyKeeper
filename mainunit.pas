@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, SynHighlighterAny, Forms, Controls, Graphics,
-  Dialogs, StdCtrls, Menus, ExtCtrls, Buttons, ComCtrls, // UOpenSSL, UOpenSSLdef,
+  Dialogs, StdCtrls, Menus, ExtCtrls, Buttons, ComCtrls, Spin, CheckLst, // UOpenSSL, UOpenSSLdef,
   Crypto, fpjson, jsonparser, EmerAPIBlockchainMergedUnit,
   EmerAPIBlockchainUnit, EmerAPIMain, emerapitypes,
   CryptoLib4PascalConnectorUnit, EmerAPIServerTasksUnit, FrameServerTaskUnit,
@@ -33,6 +33,7 @@ type
 
   TMainForm = class(TForm)
     bCopyAddress: TBitBtn;
+    bAssetsFilterRebuild: TBitBtn;
     bRegisterServer1: TBitBtn;
     bPay: TBitBtn;
     BitBtn1: TBitBtn;
@@ -47,6 +48,9 @@ type
     bViewTX: TBitBtn;
     bViewTasks: TBitBtn;
     bCreateAsset: TBitBtn;
+    chAssetsFilterShowExpired: TCheckBox;
+    ilAdvCon: TImageList;
+    pAssetsFilterNames: TCheckListBox;
     eAddress: TEdit;
     eBalance: TEdit;
     eNamesCount: TEdit;
@@ -58,6 +62,8 @@ type
     imLW: TImage;
     imPK: TImage;
     imServer: TImage;
+    lAssetsFilter: TLabel;
+    lAssetsFilterShowFirst: TLabel;
     lRegisterOnServer: TLabel;
     lEmerAPIServer: TLabel;
     lPrivateKey: TLabel;
@@ -117,19 +123,26 @@ type
     MenuItem8: TMenuItem;
     mLog: TMemo;
     Panel1: TPanel;
+    pAssetsFilterTop: TPanel;
+    pAssetsFilterDetails: TPanel;
+    pAssetsFilter: TPanel;
     pRegisterMasterPassword: TPanel;
     pRegisterOnServer: TPanel;
     pcMain: TPageControl;
     pMain: TPanel;
     pTop: TPanel;
     sbActions: TScrollBox;
+    sbAssetsFilterAdCon: TSpeedButton;
     sbLW: TSpeedButton;
     sbPK: TSpeedButton;
     sbAssets: TScrollBox;
     sbServer: TSpeedButton;
     ScrollBox2: TScrollBox;
+    seAssetsFilterShowFirst: TSpinEdit;
     Splitter1: TSplitter;
     realignTimer: TTimer;
+    RebuildAssetsListTimer: TTimer;
+    TimerEmerAPIServerTasksUpdated: TTimer;
     TimerStatusUpdate: TTimer;
     tsAssets: TTabSheet;
     tsActions: TTabSheet;
@@ -138,6 +151,7 @@ type
     timerAskForMP: TTimer;
     timerAskForLib: TTimer;
     updateInfoTimer: TTimer;
+    procedure bAssetsFilterRebuildClick(Sender: TObject);
     procedure bCopyAddressClick(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
     procedure bRefreshBalanceClick(Sender: TObject);
@@ -185,6 +199,8 @@ type
     procedure miSignMessageClick(Sender: TObject);
     procedure pcMainChange(Sender: TObject);
     procedure realignTimerTimer(Sender: TObject);
+    procedure RebuildAssetsListTimerTimer(Sender: TObject);
+    procedure sbAssetsFilterAdConClick(Sender: TObject);
     procedure sbLWClick(Sender: TObject);
     procedure sbPKClick(Sender: TObject);
     procedure sbServerClick(Sender: TObject);
@@ -197,6 +213,7 @@ type
     procedure onBlockchainUpdated(sender:tObject);
     procedure onServerConnected(sender:tObject);
     procedure EmerAPIServerTasksUpdated(sender:tObject);
+    procedure TimerEmerAPIServerTasksUpdatedTimer(Sender: TObject);
     procedure TimerStatusUpdateTimer(Sender: TObject);
     procedure UTXOUpdated(sender:tObject);
     procedure tLockMPTimer(Sender: TObject);
@@ -205,6 +222,7 @@ type
     procedure updatePKstate(sender:tObject);
     function getPubKey(compressed:boolean=true):ansistring;
     procedure showWalletInfo();
+    procedure RebuildAssetsList(Sender: TObject);
   private
     //fPrivKey:PEC_KEY;
     EmerAPIServerTasks:tEmerAPIServerTaskList;  //userObj1
@@ -219,6 +237,10 @@ type
 
     emerAPIisReadyWaitCounter:integer;
 
+    pAssetsFilterDetailsHeight:integer;
+
+    needShowInvalidNamesUTXOCache:tStringList; //list of the UTXOs names knows as valid
+
     //!!procedure setPrivKey(value:ansistring);
     procedure onAnswer(sender:tObject;mr:tModalResult;mtag:ansistring);
     procedure clearPrivKey;
@@ -228,7 +250,6 @@ type
     procedure BlockchainErrorHandler(sender:TEmerAPIBlockchainThread;error:string);
     procedure BlockchainBeforeSendHandler(sender:TEmerAPIBlockchainThread;data:string);
     procedure walletInformationUpdated(Sender:tObject);
-
 
   public
     debugMeasures:tStringList;
@@ -267,7 +288,7 @@ procedure showMessageSafe(msg:string);
 
 function getNameColor(op:ansistring):tColor;
 
-function isMyAddress(c58Address:ansistring):boolean;
+function isMyAddress(Address:ansistring):boolean;
 
 procedure setSynHighliterByName(SynEmerNVSSyn:TSynEmerNVSSyn;name:ansistring);
 
@@ -290,6 +311,9 @@ uses SettingsUnit,Localizzzeunit, questionUnit, MasterPasswordWizardUnit, setUPU
    ,addressQRunit
    ,AFCreateForPrintingUnit
    ,TakePossessionUnit
+   ,NVSRecordUnit,BaseTXUnit
+   ,math
+   ,AntifakeHelperUnit
    ;
 
 
@@ -336,10 +360,10 @@ begin
   result:=inttostr(taskCounterCounter); inc(taskCounterCounter);
 end;
 
-function isMyAddress(c58Address:ansistring):boolean;
+function isMyAddress(Address:ansistring):boolean;
 begin
   //check my addresses list
-  result:=c58Address=MainForm.eAddress.text;
+  result:=addressTo58(Address,globals.AddressSig)=MainForm.eAddress.text;
 end;
 
 function getNameColor(op:ansistring):tColor;
@@ -994,96 +1018,220 @@ end;
 
 
 procedure TMainForm.UTXOUpdated(sender:tObject);
- var i:integer;
-
- function findControl(nvsname:ansistring):TFrameBaseNVS;
- var i:integer;
- begin
-   result:=nil;
-   for i:=0 to sbAssets.ControlCount-1 do
-     if (sbAssets.Controls[i] is TFrameBaseNVS)
-       then if (sbAssets.Controls[i] as TFrameBaseNVS).NVSRecord.NVSName=nvsname then begin
-         result:=(sbAssets.Controls[i] as TFrameBaseNVS);
-         exit;
-       end;
-
- end;
-var
- frame:TFrameDigitalAsset;
-
-function findnamet:boolean;
 begin
-  //debugStart('UTXOList.findName');
-  result:=emerAPI.UTXOList.findName((sbAssets.Controls[i] as TFrameBaseNVS).NVSRecord.NVSName)<>nil;
-  //debugStop('UTXOList.findName');
+  RebuildAssetsListTimer.Enabled:=false;
+  RebuildAssetsListTimer.Enabled:=true;
+  //RebuildAssetsList(sender);
 end;
-
-//var hasNew:boolean;
-begin
-  //emerAPI.UTXOList
-//  hasNew:=false;
-
-  //1. Remove deleted items
-  i:=0;
-  //debugCleanMeasures;
-  //!!!
-  //debugStart('cicle1');
-  while i<sbAssets.ControlCount do
-    if sbAssets.Controls[i] is TFrameBaseNVS
-       then begin
-         application.ProcessMessages;
-         if findnamet then inc(i)
-         else begin
-           (sbAssets.Controls[i] as TFrameBaseNVS).down;
-           (sbAssets.Controls[i] as TFrameBaseNVS).Free;
-           //EmerAPIServerTasks.delete(i);
-         end;
-       end
-       else inc(i);
-  //debugStop('cicle1');
-  //2. Add
-  //debugStart('cicle2');
-  for i:=0 to emerAPI.UTXOList.Count-1 do begin
-    if emerAPI.UTXOList[i].getNVSName<>'' then
-      if findControl(emerAPI.UTXOList[i].getNVSName)=nil then
-      begin
-        frame:=TFrameDigitalAsset.Create(self);
-        frame.Name:='fr'+bufToHex(dosha256(emerAPI.UTXOList[i].getNVSName));
-        frame.Parent:=sbAssets;
-        frame.Align:=alTop;
-        frame.Height:=frame.Init(nil,emerAPI.UTXOList[i]);
-        frame.updateView(nil);
-        //hasNew:=true;
-      end;
-    application.ProcessMessages;
-  end;
-  //debugStop('cicle2');
-  //debugShowLastMeasure;
-//  if hasNew then realignTimer.Enabled:=true;
-end;
-
 
 procedure TMainForm.EmerAPIServerTasksUpdated(sender:tObject);
 var i:integer;
 begin
   //rebuild EmerAPIServerTasks?
 
-  //1. Remove excecuted items
+  //we can't delete tasks here because it can be called from the task.
+  //Use timer for schedule
+  TimerEmerAPIServerTasksUpdated.Enabled:=true;
+end;
+
+procedure TMainForm.RebuildAssetsList(Sender: TObject);
+const
+  knownPreffixesArray:array[0..12] of ansistring =
+    (''
+      ,'af:owner','af:product','af:lot'
+      ,'dpo:','dpo:::','dns:','ssh:'
+      ,'ssl:','tts:','doc','cert'
+      ,'enum'
+    );
+
+var i:integer;
+    fCounter:integer;
+    allowedPreffixes:ansistring;
+    knownPreffixes:ansistring;
+
+function findControl(nvsname:ansistring):TFrameBaseNVS;
+var i:integer;
+begin
+  result:=nil;
+  for i:=0 to sbAssets.ControlCount-1 do
+    if (sbAssets.Controls[i] is TFrameBaseNVS)
+      then if (sbAssets.Controls[i] as TFrameBaseNVS).NVSRecord.NVSName=nvsname then begin
+        result:=(sbAssets.Controls[i] as TFrameBaseNVS);
+        exit;
+      end;
+
+end;
+var
+frame:TFrameDigitalAsset;
+
+function findnamet:boolean;
+begin
+ //debugStart('UTXOList.findName');
+ result:=emerAPI.UTXOList.findName((sbAssets.Controls[i] as TFrameBaseNVS).NVSRecord.NVSName)<>nil;
+ //debugStop('UTXOList.findName');
+end;
+
+function needShow(NVSRecord:tBaseTXO {tUTXO tNVSRecord}):boolean;
+var i:integer;
+    name,preffix:ansistring;
+    found:boolean;
+begin
+ //do we need show (sbAssets.Controls[i] as TFrameBaseNVS).NVSRecord ?
+ result:=false;
+ if not chAssetsFilterShowExpired.Checked then
+   if (NVSRecord is tNVSRecord)
+      then begin
+        if (NVSRecord as tNVSRecord).DaysLeft<1 then begin
+          if needShowInvalidNamesUTXOCache.IndexOf((NVSRecord as tNVSRecord).NVSName)<0 then
+            needShowInvalidNamesUTXOCache.Append((NVSRecord as tNVSRecord).NVSName);
+          exit;
+        end;
+      end else if (NVSRecord is tUTXO) then begin
+        //max(0,trunc(Days -  (fEmerAPI.blockChain.Height-fHeight)/175 ))
+        //(NVSRecord as tUTXO).getNVSName;
+        //if (NVSRecord as tUTXO).Height;
+        //we don't know if the name is over. We will know it later.
+        //BUT maybe we KNEW it before.
+        //use needShowInvalidNamesUTXOCache
+        //validNamesUTXOCache
+        if needShowInvalidNamesUTXOCache.IndexOf((NVSRecord as tUTXO).getNVSName)>=0 then exit;
+      end;
+
+
+
+ if (fCounter>=seAssetsFilterShowFirst.Value) then exit;
+
+
+ if pAssetsFilterNames.Checked[0] or (allowedPreffixes<>' ') then begin
+   name:='';
+   if (NVSRecord is tNVSRecord) then name:=(NVSRecord as tNVSRecord).NVSName
+   else if (NVSRecord is tUTXO) then name:=(NVSRecord as tUTXO).getNVSName;
+
+   preffix:=namePreffixExtract(name);
+
+   //known preffix and not selected?
+   if (pos(' '+preffix+' ',knownPreffixes)>0) and (pos(' '+preffix+' ',allowedPreffixes)<1) then exit;
+
+   //unknow preffixes are not allowed
+   if (pos(' '+preffix+' ',knownPreffixes)<1) and (not pAssetsFilterNames.Checked[0]) then exit;
+
+   //check structure
+   if (pos(' '+preffix+' ',allowedPreffixes)>0) then begin
+     //finding real preffix
+
+     found:=false;
+
+     for i:=1 to min(length(knownPreffixesArray),pAssetsFilterNames.Count)-1 do //first is undetected
+       if pAssetsFilterNames.Checked[i] then
+         if namePreffixMatched(knownPreffixesArray[i],name) then begin
+           found:=true;
+           break;
+         end;
+     if not found then exit;
+   end;
+ end;
+
+
+ result:=true;
+end;
+
+//var hasNew:boolean;
+begin
+ //emerAPI.UTXOList
+//  hasNew:=false;
+ if emerAPI=nil then exit;
+ if emerAPI.UTXOList=nil then exit;
+
+ //build prefixes
+ allowedPreffixes:=' ';
+ knownPreffixes:=' ';
+ for i:=1 to min(length(knownPreffixesArray),pAssetsFilterNames.Count)-1 do //first is undetected
+ begin
+   if pAssetsFilterNames.Checked[i] then
+     allowedPreffixes:=allowedPreffixes+namePreffixExtract(knownPreffixesArray[i])+' ';
+   knownPreffixes:=knownPreffixes+namePreffixExtract(knownPreffixesArray[i])+' ';
+ end;
+
+
+ //1. Remove hiden items
+ fCounter:=0;
+ i:=0;
+ //debugCleanMeasures;
+ //!!!
+ //debugStart('cicle1');
+ while i<sbAssets.ControlCount do
+   if sbAssets.Controls[i] is TFrameBaseNVS
+      then begin
+        application.ProcessMessages;
+        if findnamet and needShow((sbAssets.Controls[i] as TFrameBaseNVS).NVSRecord) then begin inc(i); inc(fCounter); end
+        else begin
+          (sbAssets.Controls[i] as TFrameBaseNVS).down;
+          (sbAssets.Controls[i] as TFrameBaseNVS).Free;
+          //application.ProcessMessages;
+          //EmerAPIServerTasks.delete(i);
+        end;
+      end
+      else inc(i);
+ //debugStop('cicle1');
+ //2. Add
+ if (fCounter>=seAssetsFilterShowFirst.Value) then exit;
+
+ //debugStart('cicle2');
+ for i:=0 to emerAPI.UTXOList.Count-1 do begin
+   if emerAPI.UTXOList[i].getNVSName<>'' then
+     if (findControl(emerAPI.UTXOList[i].getNVSName)=nil) and needShow(emerAPI.UTXOList[i]) then
+     begin
+       frame:=TFrameDigitalAsset.Create(self);
+       frame.Name:='fr'+bufToHex(dosha256(emerAPI.UTXOList[i].getNVSName));
+       frame.Parent:=sbAssets;
+       frame.Top:=10+frame.Height*sbAssets.ControlCount;
+       frame.Align:=alTop;
+       frame.Height:=frame.Init(nil,emerAPI.UTXOList[i]);
+       frame.updateView(nil);
+       //hasNew:=true;
+       inc(fCounter);
+     end;
+   application.ProcessMessages;
+ end;
+ //debugStop('cicle2');
+ //debugShowLastMeasure;
+//  if hasNew then realignTimer.Enabled:=true;
+end;
+
+
+procedure TMainForm.TimerEmerAPIServerTasksUpdatedTimer(Sender: TObject);
+var i:integer;
+begin
+  //rebuild EmerAPIServerTasks?
+
+  TimerEmerAPIServerTasksUpdated.Enabled:=false;
+
+  //1. Remove excecuted items and recheck statuses
   i:=0;
   while i<EmerAPIServerTasks.Count do
     if EmerAPIServerTasks[i].Executed
        then begin
+         //DO NOT REMOVE executed tasks because they will appear again
+         //But let's hide it
          if (EmerAPIServerTasks[i].userObj1 <> nil) and (EmerAPIServerTasks[i].userObj1 is TFrameServerTask) then begin
            TFrameServerTask(EmerAPIServerTasks[i].userObj1).down;
            TFrameServerTask(EmerAPIServerTasks[i].userObj1).Free;
+           EmerAPIServerTasks[i].userObj1:=nil;
          end;
+         {//DO NOT REMOVE executed tasks because they will appear again
          EmerAPIServerTasks.delete(i);
+         } inc(i);
        end
-       else inc(i);
+       else begin
+         //recheck status
+         if (EmerAPIServerTasks[i].userObj1 <> nil) and (EmerAPIServerTasks[i].userObj1 is TFrameServerTask) then
+           (EmerAPIServerTasks[i].userObj1 as TFrameServerTask).refreshView(nil);
+         inc(i);
+       end;
 
   //2. Add
   for i:=0 to EmerAPIServerTasks.Count-1 do
-    if EmerAPIServerTasks[i].userObj1=nil then begin
+    if (not EmerAPIServerTasks[i].Executed) and (EmerAPIServerTasks[i].userObj1=nil) then begin
        EmerAPIServerTasks[i].userObj1:=TFrameServerTask.Create(self);
 
        TFrameServerTask(EmerAPIServerTasks[i].userObj1).Name:='FrameServerTask'+taskCounter;
@@ -1403,7 +1551,10 @@ begin
 
   application.AddOnKeyDownHandler(@KeyUpAppHandler);
 
+  sbAssetsFilterAdConClick(nil);
   //SynEmerNVSSyn:=tSynEmerNVSSyn.create(self);
+
+  needShowInvalidNamesUTXOCache:=tStringList.Create;
 end;
 
 procedure TMainForm.FormDestroy(Sender: TObject);
@@ -1418,6 +1569,7 @@ begin
 
   if JSONRPCServer<>nil then freeandnil(JSONRPCServer); //JSONRPCServerThread.Terminate;
   //SynEmerNVSSyn.free;
+  needShowInvalidNamesUTXOCache.free;
 end;
 
 function TMainForm.FormHelp(Command: Word; Data: PtrInt; var CallHelp: Boolean
@@ -1615,6 +1767,11 @@ begin
  Clipboard.AsText:=eAddress.Text;
 
 // eAddress.CopyToClipboard;
+end;
+
+procedure TMainForm.bAssetsFilterRebuildClick(Sender: TObject);
+begin
+  RebuildAssetsList(Sender);
 end;
 
 
@@ -1836,6 +1993,29 @@ begin
     for i:=0 to sbAssets.ControlCount-1 do
       if sbAssets.Controls[i] is TFrameBaseNVS then
         (sbAssets.Controls[i] as TFrameBaseNVS).updateView(Sender);
+end;
+
+procedure TMainForm.RebuildAssetsListTimerTimer(Sender: TObject);
+begin
+  RebuildAssetsListTimer.Enabled:=false;;
+  RebuildAssetsList(self);
+end;
+
+procedure TMainForm.sbAssetsFilterAdConClick(Sender: TObject);
+begin
+  if pAssetsFilterDetailsHeight=0 then pAssetsFilterDetailsHeight:=pAssetsFilterDetails.Height;
+
+  if pAssetsFilterDetails.Visible then begin
+    pAssetsFilter.Height:=pAssetsFilterTop.Height;
+    pAssetsFilterDetails.Visible:=false;
+    ilAdvCon.GetBitmap(0,sbAssetsFilterAdCon.Glyph);
+    RebuildAssetsList(Sender);
+  end else begin
+    pAssetsFilterDetails.Visible:=true;
+    pAssetsFilter.Height:=pAssetsFilterTop.Height+pAssetsFilterDetailsHeight;
+    ilAdvCon.GetBitmap(1,sbAssetsFilterAdCon.Glyph)
+  end;
+
 end;
 
 procedure TMainForm.sbLWClick(Sender: TObject);

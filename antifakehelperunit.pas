@@ -56,6 +56,12 @@ function getTextToSign(name:ansistring;value:string;SignFieldPreffix:string='*')
 function unscreenNVSValueParam(s:string):string;
 function screenNVSValueParam(s:string):string;
 
+function cutNameSuffix(s:string):string;
+
+function namePreffixMatched(preffix,name:ansistring):boolean;
+
+function namePreffixExtract(const name:ansistring):ansistring;
+
 implementation
 
 uses MainUnit
@@ -74,6 +80,69 @@ begin
 
 end;
 }
+
+function namePreffixExtract(const name:ansistring):ansistring;
+var n:integer;
+begin
+  //af: for 2-sectionlf
+  result:=name;
+  if pos('af:',result)=1 then
+     result:='af:'+ namePreffixExtract(copy(result,4,length(result)-3))
+  else begin
+     n:=pos(':',result);
+     if n>0 then
+        result:=copy(result,1,n-1);
+  end;
+end;
+
+function namePreffixMatched(preffix,name:ansistring):boolean;
+var
+   dc,n:integer;
+begin
+  //1. check preffix
+  //2. calculate ':' count if more than one at the end:
+  //   'xxx' -> must have xxx:
+  //   'xxx:' -> must have xxx: and no more :
+  //   'xxx:::' -> must have xxx: ??? : ??? : ???
+  result:=false;
+
+  //cut : at the end
+  dc:=length(preffix);
+  while (dc>1) and (preffix[dc]=':') do dec(dc);
+
+  dc:=length(preffix) - dc;
+
+  delete(preffix,length(preffix)-dc+1,dc);
+
+  if pos(preffix+':',name)<>1 then exit;
+
+  //calculate :
+  delete(name,1,length(preffix+':'));
+  if dc>0 then begin
+    while dc>1 do begin
+       n:=pos(':',name);
+       if n<1 then exit;
+       delete(name,1,n);
+       dec(dc);
+    end;
+    if pos(':',name)>0 then exit;
+    //if name<>'' then exit;
+  end;
+
+  result:=true;
+
+end;
+
+function cutNameSuffix(s:ansistring):ansistring;
+var n:integer;
+begin
+  //cut :NNN ... returns
+  result:='';
+  n:=length(s);
+  while (n>0) and (s[n]<>':') do dec(n);
+  if n>0 then
+    result:=copy(s,1,n-1);
+end;
 
 function unscreenNVSValueParam(s:string):string;
 var n:integer;
@@ -146,6 +215,8 @@ var s:string;
 begin
   result:=trim(name)+#10;
 
+  if (length(value)>1) and ((value[length(value)]<>#10) {or (copy(text,length(text)-1,2)<>#13)}) then begin value:=value+#10; {added10:=true;} end;
+
   n:=pos(#10,value);
   while n>0 do begin
     s:=copy(value,1,n-1);
@@ -175,9 +246,13 @@ end;
 function cutNVSValueParameter(text,name:string):string;
 var s:string;
     n:integer;
+    added10:boolean;
 begin
  //extract *XXXX= or XXX= parameter. Multiline is possible
  result:='';
+ added10:=false;
+ if (length(text)>1) and ((text[length(text)]<>#10) {or (copy(text,length(text)-1,2)<>#13)}) then begin text:=text+#10; added10:=true; end;
+
  n:=pos(#10,text);
  while n>0 do begin
    //s:=copy(text,1,n-1);
@@ -191,6 +266,10 @@ begin
    n:=pos(#10,text);
  end;
 
+ if added10 then
+   if (length(result)>0) and (result[length(result)]=#10) then
+     delete(result,length(result),1);
+
 end;
 
 function getNVSValueParameter(text,name:string; allowMultyLine:boolean=true):string;
@@ -199,6 +278,8 @@ var s:string;
 begin
  //extract *XXXX= or XXX= parameter. Multiline is possible
  result:='';
+
+ if (length(text)>1) and ((text[length(text)]<>#10) {or (copy(text,length(text)-1,2)<>#13)}) then text:=text+#10;
  n:=pos(#10,text);
  while n>0 do begin
    s:=copy(text,1,n-1);

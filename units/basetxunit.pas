@@ -67,6 +67,7 @@ tBaseTXO=class(tEmerApiNotified)
     function isValidName:boolean;
     function getNVSName:ansistring; //'' if not a name tx
     function getNVSValue:ansistring; //'' if not a name tx
+    function getDays:integer; //0 if not a name tx
     function getReceiver:ansistring; //who is receiver?
     function getType:ansichar;
     constructor create;
@@ -100,7 +101,9 @@ tbaseTX=class (tEmerApiNotified)
 
     function createSpendScript(address:ansistring):ansistring; virtual; abstract;
     function createNameScript(address:ansistring;Name,Value:ansistring;Days:dword;nameNew:boolean):ansistring;
+    function createNameDeleteScript(address:ansistring;Name:ansistring):ansistring;
     function createNameSubScript(Name,Value:ansistring;Days:dword;nameNew:boolean):ansistring;
+    function createNameDeleteSubScript(Name:ansistring):ansistring;
 
     function isValid():boolean;
     function isNameTx():boolean;
@@ -221,6 +224,17 @@ end;
 //begin
 //  result:=fOwner.fOuts.IndexOf(self);
 //end;
+function tbaseTXO.getDays:integer; //0 if not a name tx
+var NameScript:tNameScript;
+begin
+  result:=0;
+
+  if isName then begin
+    NameScript:=nameScriptDecode(fScript);
+    result:=NameScript.Days;
+  end;
+end;
+
 function tbaseTXO.getNVSValue:ansistring; //'' if not-name
 var NameScript:tNameScript;
 begin
@@ -527,6 +541,27 @@ begin
     +
     createSpendScript(address);
 end;
+
+function tbaseTX.createNameDeleteScript(address:ansistring;Name:ansistring):ansistring;
+begin
+  result:=
+    createNameDeleteSubScript(Name)
+    +
+    createSpendScript(address);
+
+end;
+
+function tbaseTX.createNameDeleteSubScript(Name:ansistring):ansistring;
+//OP_NAME_DELETE OP_DROP [747379] OP_DROP OP_DUP OP_HASH160 <muPnoaTHWbWzGGEf3qdgsPwCD7C49PXXNp> OP_EQUALVERIFY OP_CHECKSIG
+begin
+  result:='';
+  if Name='' then
+    raise exception.Create('tEmerTransaction.createNameDeleteSubScript: Empty Name ');
+
+
+  result:=opNum('OP_NAME_DELETE') + opNum('OP_DROP') + writeScriptData(Name) + opNum('OP_DROP');
+end;
+
 
 function tbaseTX.createNameSubScript(Name,Value:ansistring;Days:dword;nameNew:boolean):ansistring;
 begin

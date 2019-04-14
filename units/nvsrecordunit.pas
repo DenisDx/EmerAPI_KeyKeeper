@@ -50,6 +50,7 @@ tNVSRecord= class ({tEmerApiNotified}tBaseTXO) //tEmerApiNotified? tObject?
     function isUpdateNeeded:boolean;
     procedure readInputTxInfo(); //reads nOut, script and others
     procedure SaveToBlockchain();
+    procedure deleteName();
     procedure readFromBlockchain();
 
     procedure sendingErrorHandler(Sender: TObject);
@@ -320,6 +321,55 @@ begin
    ,@AsyncRequestDone,'loadtx:'+trim(fNVSName));
 end;
 
+procedure tNVSRecord.deleteName();
+var tx:tEmerTransaction;
+    nAddress:ansistring;
+begin
+  //if the data is not filled
+  if (nOut<0) or (fScript='') then begin
+     femerAPI.EmerAPIConnetor.sendWalletQueryAsync('getrawtransaction',
+       getJSON('{txid:"'+bufToHex(ftxid)+'"}')
+       ,@AsyncRequestDone,'loadtxanddeletename:'+trim(fNVSName));
+     exit;
+  end;
+
+
+  nAddress:=mainForm.globals.AddressSig+ownerAddress;
+  if newOwner<>'' then
+    nAddress:=mainForm.globals.AddressSig+newOwner;
+
+  //name_delete
+  tx:=tEmerTransaction.create(fEmerAPI,true);
+  try
+
+    tx.addInput(txid,nOut,value,Script);
+    tx.addOutput(tx.createNameDeleteScript(nAddress,NVSName),fEmerAPI.blockChain.MIN_TX_FEE);
+
+    if tx.makeComplete then begin
+      if tx.signAllInputs(MainForm.getPrivKey(mainForm.globals.AddressSig+ownerAddress)) then begin
+        tx.sendToBlockchain(EmerAPINotification(@SentHandler,'sent'));
+        tx.addNotify(EmerAPINotification(@SendingErrorHandler,'error'));
+      end else begin
+        LastError:='Error: Can''t sign all transaction inputs using current key: '+tx.LastError;
+        if assigned(fOnError) then fOnError(self);
+        callNotify('error');
+      end;
+    end else begin
+      LastError:='Error: Can''t create transaction: '+tx.LastError;
+      if assigned(fOnError) then fOnError(self);
+      callNotify('error');
+    end;
+
+  except
+    on e:exception do begin
+      LastError:='Error: can''t send TX: '+e.Message;
+      if assigned(fOnError) then fOnError(self);
+      callNotify('error');
+      tx.Free;
+    end;
+  end;
+end;
+
 procedure tNVSRecord.SaveToBlockchain();
 var tx:tEmerTransaction;
     nAddress,nName,nValue:ansistring;
@@ -331,7 +381,7 @@ begin
 
   if (DaysAdd=0) and ((newValue='') or (newValue=fNVSValue)) and ((newOwner='') or (newOwner=fOwnerAddress)) then exit;
 
-  //Если данные не заполнены
+  //if the data is not filled
   if (nOut<0) or (fScript='') then begin
      femerAPI.EmerAPIConnetor.sendWalletQueryAsync('getrawtransaction',
        getJSON('{txid:"'+bufToHex(ftxid)+'"}')
@@ -362,7 +412,7 @@ begin
     tx.addOutput(tx.createNameScript(nAddress,nName,nValue,nDays,false),fEmerAPI.blockChain.MIN_TX_FEE);
 
     if tx.makeComplete then begin
-      if tx.signAllInputs(MainForm.getPrivKey(nAddress)) then begin
+      if tx.signAllInputs(MainForm.getPrivKey({nAddress}mainForm.globals.AddressSig+ownerAddress)) then begin
         tx.sendToBlockchain(EmerAPINotification(@SentHandler,'sent'));
         tx.addNotify(EmerAPINotification(@SendingErrorHandler,'error'));
       end else begin
@@ -577,7 +627,7 @@ begin
   //2. write successeful
 
 
-  if (sender.id=('loadtxandsave:'+trim(fNVSName))) or (sender.id=('loadtx:'+trim(fNVSName))) then begin
+  if (sender.id=('loadtxandsave:'+trim(fNVSName))) or (sender.id=('loadtx:'+trim(fNVSName))) or (sender.id=('loadtxanddeletename:'+trim(fNVSName)))  then begin
     //fnOut , fScript
 
     if result<>nil then begin
@@ -618,6 +668,14 @@ begin
            if assigned(fOnReadFromBlockchain) then fOnReadFromBlockchain(self);
            callNotify('update');
          end;
+
+         if (sender.id=('loadtxanddeletename:'+trim(fNVSName))) then
+           deleteName()
+         else begin
+           if assigned(fOnReadFromBlockchain) then fOnReadFromBlockchain(self);
+           callNotify('update');
+         end;
+
        finally
          tx.free;
        end;

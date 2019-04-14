@@ -91,6 +91,8 @@ function AskQuestion(Message:string;helpTag:ansistring=''):tModalResult;  overlo
 procedure AskQuestionInit();
 procedure AskQuestionUpdate();
 
+procedure wipeAskQuestion(Parent:tForm);
+
 implementation
 
 uses localizzzeUnit, lclintf, settingsunit, math, HelpRedirector;
@@ -586,6 +588,18 @@ begin
     QuestionForm.mQuestion.Text:=localizzzeString(uppercase(qTag),'');
     QuestionForm.RebuildLanguageCombo();
   end;
+end;
+
+procedure wipeAskQuestion(Parent:tForm);
+var i:integer;
+begin
+  i:=0;
+  //while i<Parent.ControlCount do ;
+  while i<QuestionPanelKillList.Count do
+    if TQuestionPanel(QuestionPanelKillList[i]).Parent=Parent
+      then QuestionPanelKillList.Delete(i)
+      else inc(i);
+
 end;
 
 procedure TQuestionForm.QuestionPanelKillTimerTimer(Sender: TObject);

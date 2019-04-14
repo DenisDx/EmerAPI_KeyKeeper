@@ -133,7 +133,10 @@ implementation
 uses Crypto, {$IFDEF MSWINDOWS}
   windows,
 
-  {$ENDIF} ComCtrls, settingsunit, helperUnit;
+  {$ENDIF} ComCtrls, settingsunit, helperUnit
+
+  ,CheckLst
+  ;
 
 {  CHANGET INTO NEW WAY $R resources.rc}
 
@@ -319,6 +322,7 @@ begin
        localizzze(TMenu(obj).Items[i])
 
   else if obj is TComboBox then localizzzeStrings(sig(obj),TComboBox(obj).Items)
+  else if obj is TCheckListBox then localizzzeStrings(sig(obj),TCheckListBox(obj).Items)
   else if obj is TComboBoxEx then localizzzeComboEx(sig(obj),TComboBoxEx(obj) )
   else if obj is tLabel then (obj as tLabel).Caption:=localizzzeString(sig(obj),(obj as tLabel).Caption)
   else if obj is TTabSheet then (obj as TTabSheet).Caption:=localizzzeString(sig(obj),(obj as TTabSheet).Caption)

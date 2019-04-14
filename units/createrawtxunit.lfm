@@ -801,7 +801,7 @@ object CreateRawTXForm: TCreateRawTXForm
           Height = 19
           Top = 64
           Width = 53
-          Caption = 'asTest'
+          Caption = 'asText'
           TabOrder = 3
         end
         object Button18: TButton

@@ -16,6 +16,7 @@ type
     bDelete: TBitBtn;
     bExecute: TBitBtn;
     bDetails: TBitBtn;
+    chDebug: TCheckBox;
     Edit1: TEdit;
     Edit2: TEdit;
     eTotalNames: TEdit;
@@ -66,7 +67,7 @@ type
 
 implementation
 
-uses localizzzeunit, MainUnit, HelperUnit, Math, NameViewUnit, emerapitypes;
+uses localizzzeunit, MainUnit, HelperUnit, Math, NameViewUnit, emerapitypes, SettingsUnit;
 
 {$R *.lfm}
 
@@ -153,9 +154,8 @@ begin
     then
       if (Sender as tEmerAPIServerTaskGroup).Successful
         then visible:=false
-        else pTitle.Color:=getNameColor(ansiuppercase('executionFailed'))
-    else pTitle.Color:=getNameColor(ansiuppercase('executionFailed'));
-
+        else begin pTitle.Color:=getNameColor(ansiuppercase('executionFailed')); pTitle.Hint:= (Sender as tEmerAPIServerTaskGroup).LastError; pTitle.ShowHint:=true;  end
+    else begin pTitle.Color:=getNameColor(ansiuppercase('executionFailed')); pTitle.Hint:= (Sender as tEmerAPIServerTaskGroup).LastError; pTitle.ShowHint:=true; end;
 
 
 end;
@@ -163,6 +163,8 @@ end;
 procedure TFrameServerTask.sbExecuteClick(Sender: TObject);
 begin
   //execute
+  EmerAPIServerTaskGroup.ShowInTXVieverDontCreate:=Settings.getValue('Dev_Mode_ON') and chDebug.checked;
+
   EmerAPIServerTaskGroup.execute(@taskExecuted);
   pTitle.Color:=getNameColor(ansiuppercase('execution'));
 end;
@@ -203,6 +205,8 @@ end;
 begin
   pTitle.Caption:=adjustName(titleFullText);
 
+  chDebug.Visible:=Settings.getValue('Dev_Mode_ON');
+
   sbExecute.Enabled:=false;
   case EmerAPIServerTaskGroup.getValid of
     eptvUnknown:pTitle.Color:=getNameColor('TASK_VALID_UNKNOWN');
@@ -210,6 +214,12 @@ begin
     eptvInvalid:pTitle.Color:=getNameColor('TASK_INVALID');
     eptvPart:begin pTitle.Color:=getNameColor('TASK_PARTIAL_VALID'); sbExecute.Enabled:=true; end;
   end;
+
+  if EmerAPIServerTaskGroup.getValid<>eptvValid
+     then begin pTitle.Hint:=EmerAPIServerTaskGroup.LastError; pTitle.ShowHint:=true; end
+     else begin pTitle.Hint:=''; pTitle.ShowHint:=false; end;
+
+
 end;
 
 
@@ -271,6 +281,7 @@ begin
 //    LockTime:dword;
 
   localizzze(self);
+  chDebug.Checked:=false;
 
   addlist:=tStringList.Create;
 
@@ -340,6 +351,10 @@ begin
              break;
            end;
       end;
+
+      if (EmerAPIServerTaskGroup.Count<1) then
+          s:=localizzzeString(uppercase('TFrameServerTask.EmptyGroup'),' *ERROR: Empty task''s group* ')
+      else
       if s='' then s:=localizzzeString(uppercase('TFrameServerTask.Name_different'),' *completely different* ')
               else if (EmerAPIServerTaskGroup.Count>1) then s:=s+'...';
 
