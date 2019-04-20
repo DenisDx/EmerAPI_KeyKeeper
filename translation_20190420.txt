@@ -395,15 +395,6 @@
     "zh" : "English",
     "ua" : "English"
   },
-  "QuestionForm.cLanguage.fr" : {
-    "en" : "Français",
-    "fr" : "Français",	
-    "ru" : "Français",
-    "zh" : "Français",
-    "ua" : "Français"
-  },  
-  
-  
   "QuestionForm.cLanguage.ru" : {
     "en" : "Русский",
     "ru" : "Русский",
