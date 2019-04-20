@@ -1,720 +1,1798 @@
-{ 'help':{en:'help',ru:'помощь',zh:'支援',ua:'допомога'},
-
- 'bHelp':{en:'Help',ru:'Помощь'},
- 'bYes':{en:'Yes',ru:'Да'},
- 'bNo':{en:'No',ru:'Нет'},
- 'bCancel':{en:'Cancel',ru:'Отмена'},
- 'bOk':{en:'Ok',ru:'Ok'},
-
- 'MainForm.gbStatus':{en:'Status',ru:'Статус'},
- 'MainForm.miSettings':{en:'Settings',ru:'Настройки'},
-
- 'MainForm.miAbout':{en:'About',ru:'О программе'},
- 'MainForm.miExit':{en:'Exit',ru:'Выход'},
- 'MainForm.miSystem':{en:'System',ru:'Система',ua:'Система'},
- 'MainForm.miServer':{en:'Server',ru:'Сервер'},
- 'MainForm.miOpenWeb':{en:'Open web interface',ru:'Открыть веб-интерфейс сервера'},
-
- 'MainForm.miTools':{en:'Tools',ru:'Инструменты'},
-
- 'MainForm.miWallet':{en:'Wallet',ru:'Кошелек'},
- 'MainForm.miWalletTransfer':{en:'Coins transfer',ru:'Перевод монет'},
- 'MainForm.miWalletName':{en:'Create Digital Asset',ru:'Создать Цифровой Актив'},
- 'MainForm.miWalletMassSend':{en:'Mass coin sending',ru:'Массовая отправка монет'},
- 'MainForm.miWalletAtom':{en:'Atom contract',ru:'Атомарный контракт'},
-
- 'MainForm.miAntifake':{en:'DPO / Antifake',ru:'DPO / Antifake'},
-
- 'MainForm.miDevTools':{en:'Developer tools',ru:'Инструменты разработчика'},
- 'MainForm.miEncryption':{en:'Encryption tools',ru:'Инструменты шифрования'},
- 'MainForm.miTX':{en:'TX raw builder/decoder',ru:'Декодировщик и построитель сырых Транзакций'},
- 'MainForm.miLog':{en:'Log window',ru:'Окно журнала'},
- 'MainForm.miConsole':{en:'EmerAPI console',ru:'Консоль EmerAPI'},
- 'MainForm.miMemPool':{en:'Mempool viewer',ru:'Просмотр Mempool'},
- 'MainForm.miSimulateAction':{en:'Simulate Action',ru:'Имитировать Действие'},
-
-
- 'MainForm.lPrivateKey':{en:'Private Key',ru:'Прив. Ключ'},
- 'MainForm.lAddress':{en:'Address',ru:'Адрес'},
- 'MainForm.lBalance':{en:'Spendable balance:',ru:'Доступный баланс:'},
- 'MainForm.lEmerAPIServer':{en:'EmerAPI Server:',ru:'Сервер EmerAPI:'},
- 'MainForm.lNames':{en:'Assets:',ru:'Активов:'},
- 'MainForm.lTasks':{en:'Tasks:',ru:'Задач:'},
- 'MainForm.lLocalWallet':{en:'Emer Wallet:',ru:'Кошелек Emer:'},
-
- 'MainForm.miSignMessage':{en:'Sign a message for external verification services ...',ru:'Подписать сообщение для внешних сервисов проверки...'},
- 'MainForm.miCheckSignature':{en:'Check / sign message...',ru:'Проверить / подписать сообщение...'},
-
- 'MainForm.tsAssets':{en:'Digital assets',ru:'Цифровые активы'},
- 'MainForm.tsActions':{en:'Recommended actions',ru:'Рекомендуемые действия'},
-
- 'MainForm.DevModeOn':{
-   en:'<HTML><BODY><H2>Developer Mode ON</H2><p>Attention!</p><p>In developer mode, many security checks are disabled, for example, restrictions on the minimum length and quality of the password are removed. In addition, secret information is provided in a number of open windows.</p><p><b>DO NOT WORK WITH REAL DEVELOPER DATA</b></p></BODY></HTML>',
-   ru:'<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\" /></head><BODY><H2>Включен режим разработчика</H2><p>Внимание!</p><p>В режиме разработчика отключены многие проверки безопасности, например, сняты ограничения на минимальную длину и качество пароля. Кроме того, в ряде окон в открытом виде предоставляется секретная информация.</p><p><b>НЕ РАБОТАЙТЕ С РЕАЛЬНЫМИ ДАННЫМИ В РЕЖИМЕ РАЗРАБОТЧИКА</b></p></BODY></HTML>'},
-
- 'MainForm.DevModeOff':{
-   en:'<HTML><BODY><H2>Developer Mode OFF</H2></BODY></HTML>',
-   ru:'<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\" /></head><BODY><H2>Режим разработчика выключен</H2></BODY></HTML>'},
-
-
- 'MainForm.bCopyAddress.Hint':{en:'Copy address to buffer',ru:'Копировать адрес в буфер'},
- 'MainForm.bViewTX.Hint':{en:'View the Digital Assets list',ru:'Просмотр списка цифровых активов'},
- 'MainForm.bShowQR.Hint':{en:'Show QR code',ru:'Показать QR код'},
- 'MainForm.bRefreshBalance':{en:'Refresh balance',ru:'Обновить баланс'},
- 'MainForm.bRefreshTasks':{en:'Refresh tasks',ru:'Обновить задачи'},
-
- 'MainForm.sbPK.UNLOCKED':{en:'UNLOCKED',ru:'РАЗБЛОКИРОВАН'},
- 'MainForm.sbPK.LOCKED':{en:'LOCKED',ru:'ЗАБЛОКИРОВАН'},
- 'MainForm.sbPK.ABSENT':{en:'ABSENT',ru:'ОТСУТСТВУЕТ'},
-
- 'MainForm.sbLW.ACTIVE':{en:'ACTIVE',ru:'ПОДКЛЮЧЕН'},
- 'MainForm.sbLW.Loading':{en:'LOADING...',ru:'ЗАГРУЗКА...'},
- 'MainForm.sbServer.ACTIVE':{en:'ACTIVE',ru:'ПОДКЛЮЧЕН'},
- 'MainForm.sbServer.LOADING':{en:'LOADING...',ru:'ЗАГРУЗКА...'},
- 'MainForm.sbServer.GuestMODE':{en:'GUEST MODE',ru:'ГОСТЕВОЙ РЕЖИМ'},
-
- 'MainForm.lRegisterOnServer':{en:'Register on the server! Get tokens for transactions*!',ru:'Зарегистрируйтесь на сервере! Получите токены для совершения операций*!'},
- 'MainForm.lRegisterOnServer2':{en:'Choose one of the servers depending on your needs\nRegistration on the server is NOT REQUIRED to work with the application.',ru:'Выберите один из серверов в зависимости от потребностей\nРегистрация на сервере НЕ ЯВЛЯЕТСЯ обязательной для работы с приложением'},
- 'MainForm.lRegisterOnServerCmt':{en:'*servers do not always provide free tokens for registering digital assets',ru:'*сервера не всегда предоставляют бесплатные токены для регистрации цифровых активов'},
-
- 'MainForm.bRegisterServer1':{en:'Register on EmerAPI.info',ru:'Регистрация на EmerAPI.info'},
- 'MainForm.lRegisterServerComment1':{en:'Official server of the EmerAPI project',ru:'Официальный сервер проекта EmerAPI'},
- 'MainForm.bRegisterServer2':{en:'Register on emcdpo.info',ru:'Регистрация на emcdpo.info'},
- 'MainForm.lRegisterServerComment2':{en:'Antifake project server (forgery protection and supply chains)',ru:'Сервер проекта Antifake (защита от подделки и логистические цепочки)'},
-
- 'MainForm.lRegisterMasterPassword':{en:'Most of functions require the Master Password to be set',ru:'Для работы большинства функций программы требуется задать Мастер- Пароль'},
- 'MainForm.bRegisterMasterPassword':{en:'Create or Restore Master Password',ru:'Создать или Восстановить Мастер Пароль'},
-
-
- 'MainForm.JSONRPC_CANT_START_MESSAGE':{en:'JSON RPC Server can not be started: ',ru:'Ошибка запуска сервера JSON RPC: '},
-
- 'SignMessageForm':{en:'Sign Message',ru:'Подписать сообщение'},
- 'SignMessageForm.lDocForSign':{en:'Text for sign',ru:'Текст для подписи'},
- 'SignMessageForm.chIgnoreSigns':{en:'Ignore EMSIGN signatures',ru:'Игнорировать подписи формата EMSIGN'},
- 'SignMessageForm.chIgnoreSigns.Hint':{en:'Signatures like \"-----EMSIGN=XXXXX-----\" will be ignored.\n Use it for make multiply independed signatures',ru:'Подписи формата \"-----EMSIGN=XXXXX-----\" будут проигнорированы.\nИспользуйте это для подписания документа многими независимыми лицами'},
- 'SignMessageForm.chMakeupBeforeSign':{en:'Makeup text before sign',ru:'Очистить текст перед подписанием'},
- 'SignMessageForm.chMakeupBeforeSign.Hint':{en:'Turn it on for remove spaces at the end of lines and empty rows at the end.',ru:'Включите эту опцию для удаления пробелов в конце строк и пустых строк в конце документа'},
- 'SignMessageForm.lSignFormat':{en:'Signature format',ru:'Формат подписи'},
-
- 'SignMessageForm.rbsf_em':{en:'emsign (EmerAPI)',ru:'emsign (EmerAPI)'},
- 'SignMessageForm.rbsf_em.hint':{en:'Embedded EmerAPI format. The X.690 DER format signature with the public key, inserted at the end of the document with a new line in the form -----EMSIGN=XXX-----. \nMulti-signatures are admissible, the existing EMSIGN lines will not be signed.',ru:'Встроенный формат EmerAPI. Подпись формата X.690 DER с публичным ключом включается в конец документа новой строкой в виде -----EMSIGN=XXX-----.\nДопустима мультиподпись, существующие строки EMSIGN не подписываются'},
-
- 'SignMessageForm.rbsf_wallet':{en:'Wallet signature',ru:'Подпись кошелька'},
- 'SignMessageForm.rbsf_wallet.hint':{en:'Regular signature created by a Bitcoin or Emercoin wallet',ru:'Обычная подпись, создаваемая кошельком Bitcoin или Emercoin'},
-
- 'SignMessageForm.rbsf_em1':{en:'',ru:''},
- 'SignMessageForm.rbsf_em1.hint':{en:'',ru:''},
-
- 'CheckSignatureForm':{en:'Check Signature',ru:'Проверка и добавление электронной подписи'},
- 'CheckSignatureForm.lText':{en:'Text with the signature (if it is included)',ru:'Текст с подписью (если она включена)'},
- 'CheckSignatureForm.lSignature':{en:'Signature (if it is not included into the text)',ru:'Подпись (если она не включена в текст)'},
- 'CheckSignatureForm.lResult':{en:'Result of the signatures verification:',ru:'Результат проверки подписей:'},
- 'CheckSignatureForm.bClose':{en:'Close',ru:'Закрыть окно'},
- 'CheckSignatureForm.lbResult.passed':{en:'PASSED',ru:'ПОДПИСЬ ВЕРНА'},
- 'CheckSignatureForm.lbResult.failed':{en:'FAILED',ru:'ПОДПИСЬ ОШИБОЧНА'},
- 'CheckSignatureForm.lbResult.error':{en:'ERRONEOUS SIGNATURE TEXT',ru:'ОШИБКА В ЗАПИСИ ПОДПИСИ'},
- 'CheckSignatureForm.lbResult.noaddress':{en:'',ru:''},
- 'CheckSignatureForm.lbResult.yourAddress':{en:'(YOUR ADDRESS)',ru:'(ВАШ АДРЕС)'},
- 'CheckSignatureForm.lDoISign.NotSigned':{en:'You did not sign the message',ru:'Вы не подписывали этот текст'},
- 'CheckSignatureForm.lDoISign.Signed':{en:'You have signed the message',ru:'Этот текст подписан Вами'},
- 'CheckSignatureForm.lbResult.errorBtcAddress':{en:'Wrong or absent Bitcoin adrress',ru:'Ошибочный или отсутствующий адрес Bitcoin'},
- 'CheckSignatureForm.lDoISign.SignedIncorrect':{en:'You have signed the message, but the signature is invalid',ru:'Вы подписывали этот текст, но подпись не верна'},
-
- 'CheckSignatureForm.lDoISign':{en:'You did not sign the message',ru:'Вы не подписывали это сообщение'},
- 'CheckSignatureForm.lDoISign.Yes':{en:'You have signed the message',ru:'Это сообщение подписано Вами'},
- 'CheckSignatureForm.bRemoveSign':{en:'Remove your signature',ru:'Удалить Вашу подпись'},
- 'CheckSignatureForm.bSign':{en:'Sign the message',ru:'Подписать сообщение'},
-
- 'CheckSignatureForm.chUnixEOL':{en:'Unix EOL (\\n)',ru:'Unix концы строк (\\n)'},
-
-
- 'AskForUPForm':{en:'Enter User Password',ru:'Введите Пароль Пользователя'},
- 'AskForUPForm.pHTML':{
-   en:'<HTML><BODY><img src=\"IMG1\" align=\"right\"/><H3>Enter User Password</H3><p> To unlock your Private Key, you must enter your User Password. </p><p> <i> The Private Key is stored on your computer in encrypted form. To access it, you must enter your User Password. After that, the Private Key will be unlocked for a while (or until the program is restarted) </i> </p></BODY></HTML>',
-   ru:'<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\" /></head><BODY><img src=\"IMG1\" align=\"right\"/><H3>Введите Пароль Пользователя.</H3><p>Для разблокировки вашего Приватного Ключа требуется ввести Ваш Пароль Пользователя.</p><p><i>Приватный Ключ хранится на Вашем компьютере в зашифрованном виде. Для доступа к нему требуется ввести Пароль Пользователя. После этого Приватный Ключ будет разблокирован на некоторое время (или до перезапуска программы)</i></p></BODY></HTML>'
- },
- 'AskForUPForm.WrongPassword':{
-   en:'<HTML><BODY><img src=\"IMG2\" align=\"right\"/><H3>Enter correct User Password</H3><p> The password you entered is wrong. Please enter the correct User Password to decrypt the Private Key. </p><p> If you have forgotten your User Password, you can restore your Private Key using the previously saved Master Password. This can be done in the program settings. </p></BODY></HTML>',
-   ru:'<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\" /></head><BODY><img src=\"IMG2\" align=\"right\"/><H3>Введите верный Пароль Пользователя.</H3><p>Пароль, который Вы ввели, не подходит. Пожалуйста, введите верный Пароль Пользователя для расшифровки Приватного Ключа.</p><p>Если Вы забыли Пароль Пользователя, Вы можете восстановить Ваш Приватный Ключ, используя ранее сохраненный Мастер Пароль. Это можно сделать в настройках программы.</p></BODY></HTML>'
- },
-
- 'QuestionForm.AskForMPTitle':{en:'Do you want to set up Master Password now?',ru:'Вы хотите задать Мастер-Пароль сейчас?'},
-
- 'QuestionForm.cLanguage.en':{en:'English',ru:'English',zh:'English',ua:'English'},
- 'QuestionForm.cLanguage.ru':{en:'Русский',ru:'Русский',zh:'Русский',ua:'Русский'},
- 'QuestionForm.cLanguage.zh':{en:'中文',ru:'中文',zh:'中文',ua:'中文'},
- 'QuestionForm.cLanguage.ua':{en:'Українська',ru:'Українська',zh:'Українська',ua:'Українська'},
-
- 'QuestionForm.bHelp':{en:'Help',ru:'Справка'},
-
- 'MessageHelpTopicIsNotFound':{
-   en:'<HTML><BODY><img src=\"ICON1\" align=\"right\"/><H3>Help topic not found.</H3><p>Sorry, the requested help topic was not found. Perhaps this section has not yet been written, or an access error occurs.</p><a href=\"help://root\">More information about EmerAPI</a></BODY></HTML>',
-   ru:'<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\" /></head><BODY><H3>Раздел справки не найден.</H3><p>К сожалению, запрошенный раздел справки не найден. Возможно, этот раздел еще не написан, или возникает ошибка доступа.</p><a href=\"help://root\">Информация о проекте EmerAPI</a></BODY></HTML>'
- },
-
- 'MessageAskForCreateOrEnterMPNow':{
-   en:'<HTML><BODY><img src=\"ICON1\" align=\"right\"/><H3>Master Password is not set.</H3><br><br>To get started, you need to enter your existing Master Password or create a new Master Password.<br>Do you wish to open the Master Password creation wizard now?<br><br><a href=\"help://keeper_passwords_general\">More about EmerAPI Key Keeper passwords</a><br><a href=\"help://root\">More information about EmerAPI</a></BODY></HTML>',
-   ru:'<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\" /></head><BODY><img src=\"ICON1\" align=\"right\"/><H3>Мастер-пароль не задан.</H3><br><br>Для начала работы требуется ввести Ваш мастер-пароль или создать новый мастер-пароль.<br>Открыть мастер создания мастер-пароля?<br><br><a href=\"help://keeper_passwords_general\">Подробнее о системе паролей EmerAPI</a><br><a href=\"help://root\">Более подробная информация о системе EmerAPI</a></BODY></HTML>'
- },
-
- 'MessageAskForLoginToServer':{
-   en:'<HTML><BODY><img src=\"ICON1\" align=\"right\"/><H3>Address not recognized by server</H3><p>Your address is not recognized by the EmerAPI server. You need to register or enter an existing login and password to assign the new address to your account.</p><p>Do you want to open the login page now?</p></BODY></HTML>',
-   ru:'<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\" /></head><BODY><H3>Адрес не распознан сервером</H3><p>Ваш адрес не распознан сервером EmerAPI. Требуется зарегистрироваться или ввести существующий логин и пароль для сопоставления вашей учетной записи с новым адресом.</p><p>Вы хотите открыть страницу входа сейчас?</p></BODY></HTML>'
- },
-
-
- MessageAskForLibPath:{
-   en:'The OpenSSL library is required to run the program.\nThis library is usually located in the program folder, but now something went wrong.\nPlease specify the location of the OpenSSL library file.\n\nThe source codes and additional information you can find on https://www.openssl.org/',
-   ru:'Для работы программы требуется наличие библиотеки OpenSSL.\n Обычно эта библиотека расположена рядом с файлом запуска программы, но сейчас что-то пошло не так.\nПожалуйста, укажите расположение файла библиотеки OpenSSL.\n\nИсходные коды библиотеки и более подробную информацию Вы можете найти на стайте https://www.openssl.org/'
- },
- MessageCantOpenLib:{
-   en:'The OpenSSL library is required to run the program.\nThe file was not found, and the software cant be opened.\n\nThe source codes and additional information you can find on https://www.openssl.org/',
-   ru:'Для работы программы требуется наличие библиотеки OpenSSL.\n Без этой библиотеки работа программы невозможна. программа будет закрыта.\n\nИсходные коды библиотеки и более подробную информацию Вы можете найти на стайте https://www.openssl.org/'
- 
- },
- 
- msgMasterPasswordHasWrongPK:{
-   en:'There is no valid key for this Master Password',
-   ru:'Для введенного Мастер-Пароля не существует подходящего ключа'
- },
-  
- 
- MessageAskExample:{
- },
- 
- mTagInvalidFloat:{
-   en:'invalid float value',
-   ru:'недопустимое числовое значение'
- },
- mTagInvalidDate:{
-   en:'invalid date and time',
-   ru:'недопустимая дата и время'
- },
- 'mTagInvalidInt':{
-   en:'invalid integer value',
-   ru:'недопустимое целое число'
- },
- 'mTagInvalidValue':{
-   en:'Some fields have invalid values.\nPlease correct the values:',
-   ru:'Некоторые поля имеют недопустимые значения.\nПожалуйста, исправьте ошибочные значения:'
- },
- 
- 'newUserPass.defaultTitle':{
-   en:'Please enter a new User Password:',
-   ru:'Пожалуйста, введите новый Пароль пользователя:'
- }, 
- 'newUserPass.defaultMessage':{
-   en:'To securely store a key pair (private key), you must set a user password.\nThis password will be requested each time you connect to the server or perform payment transactions.\nYou can use the password generator to create a secure password.',
-   ru:'Для безопасного хранения Ключевой Пары требуется задать пароль пользователя.\nЭтот пароль будет запрашиваться при каждом подключении к серверу или выполнении платежных операций.\nВы можете использовать генератор паролей для создания безопасного пароля.'
- },  
- 
- 
- 'QuestionForm.bCancel':{en:'Cancel',ru:'Отмена'},	
- 'QuestionForm.bNo':{en:'No',ru:'Нет'},
- 'QuestionForm.bYes':{en:'Yes',ru:'Да'},
- 'SettingsForm':{en:'Settings',ru:'Настройки программы'},
- 
- 'SettingsForm.bCloseAndSave':{en:'Save And Close',ru:'Закрыть с сохранением'},
- 'SettingsForm.bReRead':{en:'Re-read settings',ru:'Перечитать настройки'},
- 'SettingsForm.bCloseNoSave':{en:'Close Without Saving',ru:'Закрыть без сохранения'},
-
- 'SettingsForm.gMainSettings':{en:'General settings',ru:'Основные настройки'},
- 'SettingsForm.gLocalWallet':{en:'Local wallet',ru:'Локальный кошелек'},
- 'SettingsForm.ssbUse_Local_Wallet':{en:'Use local waller',ru:'Использовать локальный кошелек'},
- 'SettingsForm.ssiLocal_Wallet_RPC_Port':{en:'RPC Port',ru:'RPC порт'},
- 'SettingsForm.sssLocal_Wallet_RPC_User_Name':{en:'RPC User Name',ru:'RPC имя пользователя'},
- 'SettingsForm.sssLocal_Wallet_RPC_Password':{en:'RPC Password',ru:' Пароль'},
- 'SettingsForm.bConfigureWallet':{en:'Configure Wallet for remore acceess (Admin)',ru:'Настроить локальный кошелек для удаленного доступа (Admin)'},
- 'SettingsForm.lWarningRPC':{en:'Opening Local Wallet RPC access could be unsafe. Please check the manual.',ru:'Предоставление доступа к локальному кошельку может быть небезопасным. См. инструкцию.'},
-
- 'SettingsForm.ssKeep_Private_Key.ru':{en:'Keep private key on this computer',ru:'Сохранять приватный ключ на этом компьютере'},
- 'SettingsForm.ssbPrefer_Using_Local_Wallet.ru':{en:'Prefer using Local Wallet if possible (Recommended)',ru:'Использовать локальный кошелек при исполнении запросов, если возможно (рекомендуется)'},
-
- 'SettingsForm.bRestoreKeypair':{en:'Restore the Key Pair using your Master Password',ru:'Восстановить Ключевую Пару по Вашему Мастер-Паролю'}, 
- 'SettingsForm.ssbKeep_Private_Key':{en:'Keep Key Pair (private key) on this computer',ru:'Сохранять Ключевую Пару (приватный ключ) на этом компьютере'},  
- 
- 
- 'SettingsForm.ssbLockKPAfter':{en:'Lock Key Pair after',ru:'Блокировать Ключевую Пару через'},  
- 'SettingsForm.lLockPKTime':{en:'minutes of non-use',ru:' минут неиспользования'},   
- 'SettingsForm.ssbConnect_To_EmerAPI_Server_After_Start':{en:'Connect to EmerAPI server after start',ru:'Подключаться к серверу EmerAPI после запуска программы'},   
- 
- 'SettingsForm.askForConfim_developing_mode':{en:'Enabling this feature allows you to perform actions the careless use of which may cause damage.\nDo not turn it on if you are not sure if it is necessary.\nTo enable developer functionality, write literally \"I UNDERSTAND THE RISK AND AGREE\" in the field below and click \"OK\"',ru:'Включение этой функции позволит Вам совершать действие, неосторожное применение которых может причинить ущерб.\nНе включайте это если точно не уверены, что это необходимо.\nДля включения функционала разработчика напишите дословно \"Я ПОНИМАЮ РИСК И СОГЛАСЕН\" в поле ниже и нажмите \"Ок\"'},
- 'SettingsForm.askForConfim_Wished_Text':{en:'I UNDERSTAND THE RISK AND AGREE',ru:'Я ПОНИМАЮ РИСК И СОГЛАСЕН'},
- 'SettingsForm.bSetEmerAPIDefault':{en:'Set default',ru:'По умолчанию'},
- 'SettingsForm.sssEmerAPI_server_address':{en:'EmerAPI server address',ru:'Адрес сервера EmerAPI'},
-
- 
- 'SettingsForm.lMaxSimConWallet':{en:'Max. simultaneous connections',ru:' Макс. число подключений'},   
- 'SettingsForm.lMaxSimConServer':{en:'Max. simultaneous connections',ru:' Макс. число подключений'},    
-  
- 'SettingsForm.sssDev_Bip32_path':{en:'HD key derive path',ru:'Путь HD ключей'},
- 'SettingsForm.sssDev_Bip32_salt':{en:'HD key salt',ru:'Соль HD ключей'},
-
- 'SettingsForm.ssbHide_To_Tray':{en:'Hide to tray',ru:'Сворачивать в трей'},
-
- 'SettingsForm.gJSONRPC':{en:'JSONRPC remote connection',ru:'JSONRPC удаленное подключение'},
- 'SettingsForm.ssbJSONPRC_allowed':{en:'Allow JSONRPC connection',ru:'Разрешить подключение по JSONRPC'},
- 'SettingsForm.lJSONPRC_port':{en:'JSONRPC port',ru:'JSONRPC порт'},
- 'SettingsForm.lJSONPRC_timeout':{en:'JSONRPC timeout',ru:'JSONRPC таймаут'},
- 'SettingsForm.ssbJSONRPC_Allow_Nonlocal':{en:'Allow non-local connections',ru:'Разрешить внешние подключения'},
- 'SettingsForm.ssbJSONRPC_filter_commands':{en:'Allow only commands:',ru:'Разрешить только команды:'},
- 'SettingsForm.ssbJSONRPC_Allow_Only':{en:'Allow only for IPs:',ru:'Разрешить только IP адреса:'},
-
- 
- 'SettingsForm.msgSetUPnow':{
-   en:'The option to save a key pair on this computer is enabled.\nTo securely store a key pair (private key), you must set a user password.\nIf the password is not set, saving will not occur.\nThis password will be requested each time you connect to the server or perform payment transactions.\nYou can use the password generator to create a secure password.',
-   ru:'Опция сохранения ключевой пары на этом компьютере включена.\nДля безопасного хранения Ключевой Пары требуется задать пароль пользователя.\nЕсли пароль не будет задан, сохранение не произойдет.\nЭтот пароль будет запрашиваться при каждом подключении к серверу или выполнении платежных операций.\nВы можете использовать генератор паролей для создания безопасного пароля.'
-   
- },
-
- 'SettingsForm.MsgUPChanged':{
-   en:'<H3>New user password is set, but not saved.</H3>Save the settings for the new password to take effect.',
-   ru:'<H3>Новый пароль пользователя задан, но не сохранен.</H3>Сохраните настройки для вступления нового пароля в силу.'
- },
-
-  'MessageInfoWeakMasterPassword':{
-   en:'The Master Password you entered is not secure enough. We recommend creating a new Master Password and transferring all digital assets to the new address. Using low-security passwords compromises the security of your data. See the details in the help system.',
-   ru:'Использованный мастер- пароль недостаточно надежен.\nМы рекомендуем создать новый мастер- пароль и перенести все цифровые активы на новый адрес. Использование низконадежных паролей ставит под угрозу безопасность Ваших данных. Смотрите подробности в справочной системе.'
-    
+{
+  "help" : {
+    "en" : "help",
+    "ru" : "помощь",
+    "zh" : "支援",
+    "ua" : "допомога"
   },
-
-
-  'MessageInfoWeakUserPassword':{
-   en:'<HTML><BODY><H2> User Password is not strong enough </H2> The User Password is not strong enough. <BR> You must set a User Password with a rating of at least 20 points (recommended more than 25 points).</BODY></HTML>',
-   ru:'<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\" /></head> <BODY><H2>Пароль Пользователя недостаточно надежен</H2>Пароль пользователя, выбранный Вами, недостаточно надежен.<BR>Необходимо задать пароль пользователя с оценкой не менее 20 баллов, рекомендовано - не менее 25 баллов.</BODY></HTML>'
+  "bHelp" : {
+    "en" : "Help",
+    "ru" : "Помощь"
   },
-
- 'SettingsForm.sssLanguage.en':{en:'English',ru:'English',zh:'English',ua:'English'},
- 'SettingsForm.sssLanguage.ru':{en:'Русский',ru:'Русский',zh:'Русский',ua:'Русский'},
- 'SettingsForm.sssLanguage.zh':{en:'中文',ru:'中文',zh:'中文',ua:'中文'},
- 'SettingsForm.sssLanguage.ua':{en:'Українська',ru:'Українська',zh:'Українська',ua:'Українська'}
- 
- ,'setUPForm.lExplain':{
-   en:'Some fields have invalid values.\nPlease correct the values:',
-   ru:'Вы создаете новый пароль пользователя.'
- }
- 
- ,'PasswordHelper.KillListWord':{
-   en:'Killlist word found:',
-   ru:'Найдено слово из расстрельного списка:'
- } 
- 
- ,'PasswordHelper.KillListWordHidden':{
-   en:'Hidden killlist word found:',
-   ru:'Найдено скрытое слово из расстрельного списка:'
- } 
- ,'PasswordHelper.DigitsEnd':{
-   en:'Your password ends in numbers, but does not contain numbers inside:',
-   ru:'Ваш пароль заканчивается на цифры, но не содержит цифр внутри:'
- }  
-,'PasswordHelper.End1':{
-   en:'Your password ends in `1`:',
-   ru:'Ваш пароль заканчивается на единицу:'
- }   
- 
-,'PasswordHelper.BigUnicodeBonus':{
-   en:'Used international characters with a large set (Chinese characters, etc.):',
-   ru:'Использованы международные символы с большим набором (китайские иероглифы и т.д.):'
- }    
- 
-
- ,'MainForm.cTest.One':{en:'One',ru:'Один',zh:'Yi'}
- ,'MainForm.cTest.Two':{en:'Two',ru:'Два',zh:'Er'}
- ,'MainForm.cTest.Three':{en:'Three',ru:'Три',zh:'San'}
-
-
-
- ,'MasterPasswordWizardForm.tsAskForMasterPassRB1':{en:'I have my Master Password created before',ru:'У меня уже есть Мастер Пароль, созданный ранее'}
- ,'MasterPasswordWizardForm.tsAskForMasterPassRB2':{en:'I want to create a new Master Password',ru:'Создать новый Мастер Пароль сейчас'}
- ,'MasterPasswordWizardForm.tsRestoreMasterPassCSetupServer':{en:'Setup EmerAPI Server now',ru:'Настроить подключение к серверу EmerAPI сейчас'}
-
- ,'MasterPasswordWizardForm.tsCreateNewMasterPass1RB1':{en:'Standart 12-words \"BIP32\" master password (recommended)',ru:'Стандатный Мастер-Пароль из 12 слов (рекомендуется)'}
- ,'MasterPasswordWizardForm.tsCreateNewMasterPass1RB2':{en:'I want to use my own \"brain\" password (could be not safe!)',ru:'Ваш собственный \"Брейн- пароль\" (не рекомендуется, может быть небезопасно)'}
-
- ,'MasterPasswordWizardForm.PasswordIsEmpty':{
-     en:'<HTML><BODY><H3>Password can not be empty</H3>Please enter your previously created Master Password in the input field at the bottom of the page.</BODY></HTML>'
-     ,ru:'<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\" /></head> <BODY><H3>Пароль не может быть пустым</H3>Введите ранее созданный Мастер-Пароль в поле ввода внизу страницы</BODY></HTML>'
-   }
-
- ,'MasterPasswordWizardForm.bFinish':{en:'Finish',ru:'Закончить'}
- ,'MasterPasswordWizardForm.bPrev':{en:'Back',ru:'Назад'}
- ,'MasterPasswordWizardForm.bNext':{en:'Next',ru:'Далее'}
- ,'MasterPasswordWizardForm.bClose':{en:'Close',ru:'Закрыть'}
- ,'MasterPasswordWizardForm.bHelp':{en:'Help',ru:'Справка'}
-
-  ,'MasterPasswordWizardForm.tsCreateMasterPass12wlW1':{en:'Word 1',ru:'Слово 1'}
-  ,'MasterPasswordWizardForm.tsCreateMasterPass12wlW2':{en:'Word 2',ru:'Слово 2'}
-  ,'MasterPasswordWizardForm.tsCreateMasterPass12wlW3':{en:'Word 3',ru:'Слово 3'}
-  ,'MasterPasswordWizardForm.tsCreateMasterPass12wlW4':{en:'Word 4',ru:'Слово 4'}
-  ,'MasterPasswordWizardForm.tsCreateMasterPass12wlW5':{en:'Word 5',ru:'Слово 5'}
-  ,'MasterPasswordWizardForm.tsCreateMasterPass12wlW6':{en:'Word 6',ru:'Слово 6'}
-  ,'MasterPasswordWizardForm.tsCreateMasterPass12wlW7':{en:'Word 7',ru:'Слово 7'}
-  ,'MasterPasswordWizardForm.tsCreateMasterPass12wlW8':{en:'Word 8',ru:'Слово 8'}
-  ,'MasterPasswordWizardForm.tsCreateMasterPass12wlW9':{en:'Word 9',ru:'Слово 9'}
-  ,'MasterPasswordWizardForm.tsCreateMasterPass12wlW10':{en:'Word 10',ru:'Слово 10'}
-  ,'MasterPasswordWizardForm.tsCreateMasterPass12wlW11':{en:'Word 11',ru:'Слово 11'}
-  ,'MasterPasswordWizardForm.tsCreateMasterPass12wlW12':{en:'Word 12',ru:'Слово 12'}
-
-  ,'MasterPasswordWizardForm.tsSetUserPassPanelCDoNotSave':{en:'I don`t want to save my Master Password on this computer',ru:'Я не хочу сохранять Мастер-Пароль на этом компьютере'}
-
-  ,'MasterPasswordWizardForm.tsCreateMasterPassFreeFormchShowPassword':{en:'Show password',ru:'Показать пароль'}
-  ,'MasterPasswordWizardForm.tsSetUserPasschShowPassword':{en:'Show password',ru:'Показать пароль'}
-
-  ,'MasterPasswordWizardForm.PasswordsNotTheSame':{en:'The passwords you entered are not the same',ru:'Копии паролей не совпадают'}
-
-  ,'MasterPasswordWizardForm.bShowUserPasswordGenerator':{en:'Show generator',ru:'Генератор...'}
-  ,'MasterPasswordWizardForm.bGenerateUserPass':{en:'Generate',ru:'Сгенерировать'}
-
- ,'GuidePages.tsCheckMasterPassPanel':{
-   en:'<HTML><BODY><H2>Master Password Verification</H2>Please enter the newly created Master Password in the field below.<br>This is necessary to verify the correctness of your records.<br>Make sure that all the password entries are correct and various readings of them are not possible.<br><B> In the future, there will be no way to see the Master Password in the program again. </ B><br>After successfully entering the Master Password, we will create a User Password.</BODY></HTML>',
-   ru:'<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\" /></head> <BODY><H2>Проверка Мастер-Пароля</H2>Пожалуйста введите только что созданный Мастер-Пароль в поле ниже.Это необходимо для проверки правильности Ваших записей.<br>Убедитесь, что записи пароля сделаны верно и не допускают различных прочтений.<br><B>В будущем не будет никакого способа снова увидеть Мастер-Пароль в программе.</B><br>После успешного ввода Мастер-Пароля мы перейдем к заданию Пароля Пользователя.<br></BODY></HTML>'
- }
-
- ,'MessageInfoMasterPasswordIsNotABIP39Password':{
-   en:'<HTML><BODY><H3>Password is not BIP32 password</H3><P>We recommend using randomly generated BIP32 passwords, as they provide the most security.</P><P>The password you entered is not a standard BIP32 password (12 words from the dictionary). Are you sure this is correct?</P></BODY></HTML>',
-   ru:'<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\" /></head> <BODY><H3>Пароль не являeтся BIP32 паролем</H3><P>Мы рекомендуем использовать случайно сгенерированные BIP32 пароли, так как они обеспечивают наибольшую безопасность.</P><P>Введенный вами пароль не является стандартным паролем BIP32 (12 слов из словаря). Вы уверены, что это правильно?</P></BODY></HTML>'
- }
-
- ,'msgServerNetworkSettingsDifferent':{
-   en:'<HTML><BODY><H2>The server has requested network settings changing.</H2><p>If you do not understand the meaning of this message or did not change the network settings on your own and do not develop software, <b>answer \"NO\" to this request.</b> After that, make sure you are using the latest version of the software and are using the correct network settings. Turn off the developer mode in the settings, if it is enabled.</p><p>The server reports that it is working with the settings for connecting to the blockchain network other than the current ones. The server may be running on a test network or not on an Emer network.<br>When accepting the settings reported by the server, the developer mode will automatically turn on.<br>Attention! Careless actions in developer mode can lead to data loss.</p><P><B>DO NOT WORK WITH REAL DATA IN DEVELOPER MODE!</B></P><p>Change the settings to the proposed by the server?</p></BODY></HTML>',
-   ru:'<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\" /></head> <BODY><H2>Сервер запросил подключение к другой сети</H2><p>Если Вы не понимаете смысл этого сообщения либо не изменяли настройки сети самостоятельно и не занимаетесь разработкой программного обеспечения - <b>ответьте \"НЕТ\" на этот запрос</b>. После этого убедитесь, что используете последнюю версию программного обеспечения и используются верные настройки сети. Отключите режим разработчика в настройках, если он включен.</p><p>Сервер сообщает, что работает с настройками подключения к блокчейн- сети, отличными от текущих. Возможно, сервер работает в тестовой сети или не в сети Эмер. </p><p>При принятии настроек, сообщенных сервером, произойдет автоматическое включение режима разработчика.<br>Внимание! Неосторожные действия в режиме разработчика могут привести к потерям данных.</p><P><B>НЕ РАБОТАЙТЕ С РЕАЛЬНЫМИ ДАННЫМИ В РЕЖИМЕ РАЗРАБОТЧИКА!</B></P><p>Изменить настройки на предлагаемые сервером?</p></BODY></HTML>'
- }
-
-
- ,'GuidePages.tsSetUserPassPanel':{
-   en:'<HTML><BODY><H2>Set a desired User Password</H2>The Private Key created on the basis of your Master Password will be saved on this computer. Thus, you do not have to enter the Master Password every time you need access to your secret data.To protect them, the User Password will be used. <BR> <BR><B> The User Password will be required each time </B> when you use the program to perform operations on your digital assets. Thus, it should be convenient for memorizing and frequent input. <BR>You can avoid the need to constantly enter the User Password using hardware wallets compatible with EmerAPI. <BR> <BR><B> Enter your User Password in the \"password\" field </B> (if you use asterisks to hide the password, you will need to enter it twice).The system will automatically evaluate the quality of the password. It is unacceptable to use a User Password with a rating below 20, a rating of at least 25 points is strongly recommended (rating is the decimal logarithm of the password entropy)<BR>You can use the built-in password generator to facilitate the creation of a new password. It is recommended because it significantly increases the strength of the password while maintaining its length.</BODY></HTML>',
-   ru:'<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\" /></head> <BODY><H2>Задайте желаемый Пароль Пользователя</H2>Приватный Ключ, созданный на основе Мастер- Пароля, будет сохранен на этом компьютере. Таким образом, Вам не придется вводить Мастер-Пароль каждый раз, когда требуется доступ к секретным данным.Для его защиты будет использован Пароль Пользователя.<BR><BR><B>Пароль Пользователя потребуется вводить каждый раз</B>, когда Вы используете программу для выполнения операций над Вашими цифровыми активами. Таким образом, он должен быть удобен для запоминания и частого ввода. <BR>Избежать необходимости постоянного ввода Пароля Пользователя можно используя аппаратные кошельки, совместимые с EmerAPI.<BR><BR><B>Введите желаемый Пароль Пользователя в поле \"пароль\" </B> (если Вы используете скрытие пароля звездочками, то потребуется ввести его два раза).Система автоматически оценит качество пароля. Недопустимо использование Пароля Пользователя с оценкой ниже 20, настоятельно рекомендуется оценка не ниже 25 баллов (оценка является десятичным логарифмом энтропии пароля)<br>Вы можете использовать встроенные генератор паролей для облегчения создания нового пароля. Мы рекомендуем поступить именно так, так как это существенно повышает надежность пароля при сохранении его длины.</BODY></HTML>'
- }
- ,'GuidePages.tsSetPassDoneFinishPanel':{
-   en:'<HTML><BODY><H2> Private Key has been created and saved on this computer. </H2>On the basis of the Master Password, the Private Key was successfully created. The Private Key is stored on this computer in encrypted form, and the User Password must be entered to decrypt it.<br>Keep the Master Password safe, data recovery is possible only with it`s using.<br>If you forget the User Password, it will be possible to recover all information using the Master Password.</BODY></HTML>',
-   ru:'<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\" /></head> <BODY><H2>Приватный ключ создан и сохранён на этом компьютере. </H2>На базе Мастер- Пароля был успешно создан Приватный Ключ. Этот Приватный Ключ сохранен на этом компьютере в зашифрованном виде, для его расшифровки используется Пароль Пользователя.<br>Бережно храните Мастер- Пароль, восстановление информации возможно только с его использованием. <br>Если Вы забудете Пароль Пользователя, можно будет восстановить всю информацию, использовав Мастер- Пароль.</BODY></HTML>'
- }
- ,'GuidePages.tsSetPassDoneContinuePanel':{
-   en:'<HTML><BODY><H2> Private Key has been created and saved on this computer. </H2>On the basis of the Master Password, the Private Key was successfully created. The Private Key is stored on this computer in encrypted form, and the User Password must be entered to decrypt it.<br>Keep the Master Password safe, data recovery is possible only with it`s using.<br>If you forget the User Password, it will be possible to recover all information using the Master Password.<H3> To access all system features, you need to set up a user connection to the EmerAPI server </H3>To do this, you will need to enter your username and password, if any, or register a new user.Do you want to do it right now?</BODY></HTML>',
-   ru:'<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\" /></head> <BODY><H2>Приватный ключ создан и сохранён на этом компьютере. </H2>На базе Мастер- Пароля был успешно создан Приватный Ключ. Этот Приватный Ключ сохранен на этом компьютере в зашифрованном виде, для его расшифровки используется Пароль Пользователя.<br>Бережно храните Мастер- Пароль, восстановление информации возможно только с его использованием. <br>Если Вы забудете Пароль Пользователя, можно будет восстановить всю информацию, использовав Мастер- Пароль.<H3>Для доступа ко всем возможностям системы необходимо настроить пользовательское подключение к серверу EmerAPI</H3>Для этого Вам потребуется ввести Ваши имя пользователя и пароль, если они имеются, или зарегистрировать нового пользователя.Хотите ли Вы сделать это прямо сейчас?</BODY></HTML>'
- }
- ,'GuidePages.tsCreateMasterPassFreeFormPanel':{
-   en:'<HTML><BODY><H2>Free-form Master Password creation</H2>Attention! Brain passwords may not be secure. Their usage is not recommended. Go back and choose a standard password if you are not sure that you want to create a \"brain password\". <br> <br>On this step you can create a \"brain-password\" (free-form password) to recover your Private Key. <br>Safety requirements do not allow using of sequences with a score below 30 points as a Master Password. We recommend creating sequences of at least 40-point complexity (which roughly corresponds to the complexity of the standard BIP39 password) or higher. <BR><B> If the system highly evaluate your password, it does not mean that it is secure </B> <BR>For example, if you use the address of your company as a password, it will be rated as reliable, because the system does not know all the addresses of the planet and cannot track them. However, the attacker will easily crack such a password. <BR><i> <h5> Technical Information: </h5>The system automatically evaluates password strength as the decimal logarithm of entropy. For example, a password with an entropy of 10 bits will have 1024 possible combinations, which is approximately equal to 10 ** 3, so such a password will be rated at 3 points.It is easy to assume that one point is equal to one digit when using a password consisting of one digit only.<br>Based on the entered password, the standard 128-bit entropy BIP32 will be created. <br>For this, the entered password will be hashed using the SHA256 algorithm, and the first 16 bytes of the received hash will be used as the entropy bits.If in the future you need compatibility with other products, for example, with an Emercoin Secure wallet, you can create a BIP39 phrase based on this entropy that can be loaded into this wallet. <br>The hierarchical derivative m/0/0 is used as the main private key.<br>This uses the word BIP32 encryption \"witnesskey\" to ensure compatibility with other Emercoin wallets (Electrum uses the word \"mnemonic”) <br>These and other settings can be changed by switching the program to the developer mode. <br>The system also maintains a simplified private key generation system, in which SHA256 password hashes are used as the private keys. Switch this application into the developer mode to enable this feature.</i></BODY></HTML>',
-   ru:'<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\" /></head> <BODY><H2>Создание Мастер - Пароля в свободной форме</H2>Внимание! Брейн- пароли могут быть небезопасны. Их использование не рекомендуется. Вернитесь на шаг назад и выберите стандартный пароль если Вы не уверены, что хотите создать именно брейн-пароль.<br><br>В этом окне Вы можете создать \"брейн-пароль\" (пароль в свободной форме) для восстановления Вашего Приватного Ключа.<br>Требования надежности не позволяют использовать в качестве Мастер- Пароля последовательности с оценкой ниже 30 баллов. Мы рекомендуем создавать последовательности как минимум 40-балльной сложности (что примерно соответствует сложности стандартного пароля BIP39) или выше.<BR><B>Если система высоко оценила Ваш пароль, это не значит, что он надежен</B><BR>Например, если Вы используете в качестве пароля адрес вашей компании, он будет оценен как надежный, т.к. система не знает все адреса планеты и не может их отследить. Тем не менее, злоумышленник легко подберет такой пароль.<BR><i><h5>Техническая информация:</h5>Система автоматически оценивает надежность пароля как десятичный логарифм энтропии. Например, пароль с неопределенностью 10 бит будет иметь 1024 возможных комбинации, что примерно равно 10**3, т.к. такой пароль будет оценен на 3 балла.Упрощенно можно считать что один балл равен одной цифре при использовании пароля, состоящего из одних цифр. На основании введенного пароля будет создан стандартная 128-битная энтропия BIP32. Для этого введенный пароль будет прохеширован по алгоритму SHA256, и первые 16 байт полученного хеша будут использованы в качестве битов энтропии.Если в будущем Вам потребуется совместимость с другими продуктами, например, с кошельком Emercoin Secure, можно будет на основании этой энтропии создать BIP39 фразу, которая может быть загружена в этот кошелек.<br>В качестве основного приватного ключа используется иерархический дериватив m/0/0<br>При этом используется слово шифрования BIP32 \"witnesskey\" для обеспечения совместимости с другими кошельками Эмеркоин (Электрум использует слово \"mnemonic\")<br>Эти и другие настройки могут быть изменены при переводе программы в режим разработчика.<br>Системой также поддерживается упрощенная система генерации приватных ключей, при которой в качестве приватного ключа используется просто SHA256 хеш пароля. Включение данного режима возможно при переводе этого приложения в режим разработчика.</i></BODY></HTML>'
- }
-
-
-
- ,'GuidePages.tsAskForMasterPassPanel':{
-   en:'<HTML><BODY><H2>Welcome to the Master Password Configuration Wizard.</H2><BR>Data that will be created in the future during the operation of this program must be reliably protected. For this purpose, a number of reliable cryptographic algorithms are used. The program itself will create all the necessary keys, and all of them will be created on the basis of one main secret, called the Master Password. The Master Password itself will not be stored in the program. Keys created on its basis can be stored on this computer. All stored keys will be encrypted with another password, called the Account Password. <BR>We must create or restore your Private Key, which provides access to all functions of the system.<BR>Master Password is used to restore the Private Key. If you have already created the Private Key and you have the Master Password, you can restore access to all resources by entering it. Otherwise, to get started, you must create a new Private Key and Master Password.<BR>After that, you will be asked to save the Private Key, created by the system based on your Master Password, on this computer.<BR>The private key is stored in encrypted form, and the User Password is used to decrypt it.You will need to enter a User Password every time you need to complete a payment or digital property management operation.<BR><H3>Important notes about complexity and storing the passwords</H3>If nothing unexpected happens and you do not need to install the program on another device, you will never have to enter the Master Password ever. But, if the computer is damaged or the User Password is lost, entering the Master Password will be the only way to restore access to your assets. No other recovery methods will be possible. Thus, it is VERY IMPORTANT to SAFELY KEEP the Master Password, but you do not need to store it in a place with easy access. You can, for example, store it in a bank safe deposit box.<BR>After creating (or entering) the Master Password, you will be prompted to create a User Password. This password will be used to access your secret data every time you needed it. You will need to enter this password often, but it may be less complicated because with its access to data can be obtained only with the presence of this computer.<BR><BR>The system allows using any reliable phrase (“brain-password”) as a Master Password.<BR>However, we strongly recommend NOT TO USE “Brain Passwords”), but use the standard 12-word password offered by the program.More details about working with passwords can be found in the help.<BR><BR><H3>Important notes about the safe environment </H3>Before creating a password, make sure the environment is safe. There are no other people in the room, your monitor or keyboard cannot be seen through the window and you are not in the field of view of surveillance cameras. After that, specify the desired type of password and click “next”.</BODY></HTML>',
-   ru:'<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\" /></head> <BODY><H2>Добро пожаловать в мастер конфигурации Мастер -Пароля.</H2><BR>Данные, которые будут созданы в будущем в процессе работы этой программы, должны быть надежно защищены. Для этого используется ряд надежных криптографических алгоритмов. Программа сама создаст все необходимые ключи,и все они будут созданы на базе одного главного секрета, называемого Мастер- Пароль. Сам Мастер-Пароль не будет храниться в программе. Ключи, созданные на его основе, могут храниться на этом компьютере. Все хранимые ключи будут зашифрованы с помощью еще одного пароля, называемого Паролем Пользователя.<BR><BR>Мастер Пароль используется только для восстановления Приватного Ключа. Если Вы уже создавали Приватный Ключ и у Вас есть Мастер Пароль, вы можете восстановить доступ ко всем ресурсам, введя его. В противном случае, для начала работы необходимо создать новый Приватный Ключ и Мастер Пароль для его восстановления.<BR>После этого Вам будет предложено сохранить Приватный Ключ, который система создаст на основании Вашего Мастер- Пароля, на этом компьютере. <BR>Приватный ключ сохраняется в зашифрованном виде, и для его расшифровки используется Пароль Пользователя. <BR>Вам потребуется вводить Пароль Пользователя каждый раз, когда будет нужно совершить платежную операцию или операцию управления цифровой собственностью.<BR><H3>Важные замечания о сложности и хранении паролей:</H3>Если не случится ничего непредвиденного и не потребуется установка программы на другое устройство, Вам не придётся вводить Мастер Пароль никогда. Но, если компьютер будет поврежден или Пароль Пользователя будет утрачен, ввод Мастер Пароля будет единственным способов восстановить доступ к Вашим активам. Никакие другие способы восстановления будут невозможны. Таким образом, ОЧЕНЬ ВАЖНО НАДЕЖНО СОХРАНИТЬ Мастер- Пароль, но не требуется хранить его в месте с легким доступом. Вы можете, например, хранить его в банковской сейфовой ячейке.<BR>После создания Мастер - Пароля (или его ввода) Вам будет предложено создать Пароль Пользователя. Этот пароль будет использован для доступа к вашим секретным данным каждый раз, когда это будет необходимо. Этот пароль потребуется вводить часто, но он может быть менее сложен, т.к. с его помощью доступ к данным можно получить только при наличии этого компьютера.<BR><BR>Система позволяет использовать в качестве Мастер- Пароля любую надежную фразу (“брейн- пароль”).<BR>Тем не менее, мы настоятельно рекомендуем НЕ ИСПОЛЬЗОВАТЬ “брейн-пароли”), а воспользоваться стандартным паролем из 12 слов, предлагаемым программой. Более подробно про работу с паролями можно прочитать в справке<BR><BR><H3>Важные замечания о безопасности среды</H3>Перед созданием пароля убедитесь, что окружающая среда безопасна. В помещении отсутствуют другие люди, Ваш монитор или клавиатуру нельзя увидеть через окно и Вы не находитесь в поле зрения камер видеонаблюдения. После этого укажите желаемый тип пароля и нажмите кнопку “далее”.<BR><BR></BODY></HTML>'
- }
- ,'GuidePages.tsRestoreMasterPassPanel':{
-   en:'<HTML><BODY><H2>Private Key recovering</H2>Enter the previously saved Master Password in the field below.<BR>Make sure you are alone in the room and no one can see the keyboard or monitor.<BR>Remove the monitor from the window.<BR>Make sure that the monitor and keyboard are outside surveillance camera areas.</BODY></HTML>',
-   ru:'<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\" /></head> <BODY><H2>Восстановление Приватного Ключа</H2>Введите ранее сохраненный Мастер Пароль в поле внизу.<BR><BR>Убедитесь, что Вы одни в комнате, и никто не может видеть клавиатуру или монитор.<BR>Отверните монитор от окна.<BR>Убедитесь, что монитор и клавиатура находятся вне зоны камер наблюдения<BR></BODY></HTML>'
- }
- ,'GuidePages.tsCreateNewMasterPass1Panel':{
-   en:'<HTML><BODY><H2>Welcome to the Master Password Creation Wizard.</H2>This wizard lets you create a new Master Password and securely save it. After that you will be asked to create a user password which provides access to the Private Key generated using Master Password.<BR>The system allows using any reliable phrase (“brain-password”) as a Master Password.However, we strongly recommend NOT TO USE “Brain Passwords”), but <B> use the standard 12-word password </B> offered by the program.<BR>More details about working with passwords can be found in the help.<BR><BR>Before creating a password, make sure the environment is safe. There are no other people in the room, your monitor or keyboard cannot be seen through the window and you are not in the field of view of surveillance cameras. After that, specify the desired type of password and click “next”.<BR><BR><h4>During the wizard, we will create two passwords:</h4><ol><li>Master Password. It is used only for recovery and should be kept in a safe place. Commonly used Master Passwords consisting of 12 random English words (recommended). <B>Master Password cannot be changed in the future.</B></li><li>User password. It will be entered into the program to perform payment functions or transfer digital assets every time you need it. It could be convenient for typing and remembering. User password can be changed in the future.</li></ol></BODY></HTML>',
-   ru:'<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\" /></head> <BODY><H2>Добро пожаловать в мастер создания Мастер Пароля.</H2>С помощью данного мастера Вы сможете создать новый Мастер- Пароль, надежно сохранить его и обеспечить доступ к Приватному Ключу, полученному на его основе, с помощью еще одного пароля - Пароля Пользователя.<BR><BR>Система позволяет использовать в качестве Мастер- Пароля любую надежную фразу (“брейн- пароль”).<BR>Тем не менее, мы настоятельно рекомендуем НЕ ИСПОЛЬЗОВАТЬ “брейн-пароли”, а <B>воспользоваться стандартным паролем из 12 слов</B>, предлагаемым программой.<BR>Более подробно про работу с паролями можно прочитать в справке<BR><BR>Перед созданием пароля убедитесь, что окружающая среда безопасна. В помещении отсутствуют другие люди, Ваш монитор или клавиатуру нельзя увидеть через окно и Вы не находитесь в поле зрения камер видеонаблюдения. После этого укажите желаемый тип пароля и нажмите кнопку “далее”.<BR><BR><h4>В процессе работы мастера мы создадим два пароля:</h4><ol><li>Мастер-Пароль. Он используется только для восстановления доступа и должен храниться в надежном месте. Обычно используются Мастер-Пароли, состоящие из 12 случайных английских слов (рекомендуется). <B>Мастер-Пароль нельзя поменять в будущем</B></li><li>Пароль пользователя. Он будет вводиться в программе для выполнения платежных функций или передачи цифровых активов. Обычно используется удобный для набора и запоминания пароль. Пароль пользователя можно будет поменять в будущем.</li></ol></BODY></HTML>'
- }
- ,'GuidePages.tsCreateMasterPass12wPanel':{
-   en:'<HTML><BODY><H2> New Master Password has been created. </H2>Record the Master Password created by the system. In the future, it will be required if you want to use the program on another device.Write down the 12 words below (order is important) in more than one place and click \"Next\".You will be prompted to enter the Master Password for verification on the next screen.After verification, save copies of the Master-Password records in accordance with the recommendations below.<H3> Recommendations for reliable storage of the Master Password: </H3><ul><li> Create multiple copies of the Master Password. In this case, if one record is lost, your Master Password will not be lost. All copies must be kept in safe locations. </li><li> It is not necessary to store the Master Password in places that can be quickly accessed. You can store a copy of the Master Password, for example, in a safe deposit box </li><li> Do not store the Master Password on this computer! </li><li> You can split the Master Password into parts to ask your confidants to save these parts for you. Use the utility to safely save Master Passwords for this. </li></ul></BODY></HTML>',
-   ru:'<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\" /></head> <BODY><H2>Создан новый Мастер- Пароль.</H2>Сохраните Мастер- Пароль, созданный системой. В дальнейшем он потребуется в случае, если Вы захотите использовать программу на другом устройстве.Запишите 12 слов, приведенных ниже (порядок следования важен) более чем в одном месте и нажмите \"Далее\".Вам будет предложено ввести Мастер- Пароль для проверки.После проверки сохраните копии записей Мастер- Пароля в соответствии с приведенными ниже рекомендациями.<H3>Рекомендации по надежному хранению Мастер-Пароля:</H3><ul><li>Создайте несколько копий Мастер-Пароля. В этом случае при потере одной копии записи Мастер-Пароль не будет потерян. Все копии должны храниться в безопасных местах</li><li>Мастер-Пароль не обязательно хранить в местах, к которым возможен быстрый доступ. Вы можете хранить копию Мастер-Пароля, например, в депозитной банковской ячейке</li><li>Не храните Мастер- Пароль на этом компьютере!</li><li>Вы можете разделить Мастер- Пароль на части попросить доверенных лиц сохранить эти части для Вас. Используйте утилиту для безопасного сохранения Мастер-Паролей для этого.</li></ul></BODY></HTML>'
- }
-
- ,'GuidePages.tsConnectServerPanel':{
-   en:'<HTML><BODY><H2> Connecting to the EmerAPI / Antifake Server </H2><p> With this wizard you can configure a user (non-guest) connection to the EmerAPI / Antifake server <br>If you are already registered on the server, and your Public Key is linked with your user, connection and configuration will occur automatically. <br>Otherwise, you will need to go through the sign in / login procedure on the server. To do this, a browser window will be opened. </p><p> The EmerAPI / Antifake server can be used by the application to perform requests to the blockchain, as well as for specific functions. <br>Some servers may have special features. </p><p> You can choose your own EmerAPI server or use the default one. If you want to set up your server, check the box at the bottom of the page. </p><p> EmerAPI servers <b>cannot take possession of your secret keys or steal your funds </b> directly. However, attackers may provide incorrect information about the blockchain. For this reason, connect unknown servers with caution. </p></BODY></HTML>',
-   ru:'<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\" /></head> <BODY><H2>Подключение к серверу EmerAPI / Antifake </H2><p>С помощью этого мастера Вы сможете настроить пользовательское (не гостевое) подключение к серверу EmerAPI / Antifake<br>Если Вы уже зарегистрированы на сервере, и Ваш Публичный Ключ связан с Вашим пользователем, подключение и настройка произойдут автоматически.<br>В противном случае Вам потребуется пройти процедуру регистрации, если у Вас нет учетной записи на сервере, или идентификации, если такая запись уже есть.<br>Для этого используется окно браузера, которое будет открыто в процессе работы мастера.</p><p>Сервер EmerAPI / Antifake может использоваться приложением для выполнения запросов к блокчейн, а также для специфических функций.<br>Некоторые сервера могут иметь особые функции.</p><p>Вы можете выбрать свой собственный сервер EmerAPI или воспользоваться заданным по умолчанию. Если Вы хотите задать свой сервер, установите галочку внизу страницы.</p><p>Сервера, работающие по протоколу EmerAPI, <b>не могут завладеть Вашими секретными ключами или похитить Ваши средства</b> напрямую. Тем не менее, злоумышленники могут предоставлять неправильную информацию о блокчейне. По этой причине подключать неизвестные сервера следует с осторожностью.</p></BODY></HTML>'
- }
- ,'MasterPasswordWizardForm.tsConnectServerPanelChSelectServer':{en:'I want choose my own server',ru:'Я хочу подключиться к своему собственному серверу'}
-
- ,'MasterPasswordWizardForm.tsServerLoginPanelLabel.Connect':{en:'Trying to connect to the server ...',ru:'Пытаемся установить соединение с сервером ...'}
- ,'MasterPasswordWizardForm.tsServerLoginPanelLabel.ConnError':{en:'Error connecting to server',ru:'Ошибка при соединении с сервером'}
- ,'MasterPasswordWizardForm.tsServerLoginBRecheck':{en:'Test connection',ru:'Проверить подключение'}
- ,'MasterPasswordWizardForm.tsServerLoginBOpen':{en:'Open signin/login page',ru:'Открыть страницу входа'}
- ,'MasterPasswordWizardForm.tsServerLoginBLinkToBuffer':{en:'Copy link to buffer',ru:'Скопировать ссылку в буфер'}
-
- ,'MasterPasswordWizardForm.tsServerConnectedPanel':{en:'Do not save session key on this computer (it is not my computer)',ru:'Не сохранять ключи доступа к серверу на этом компьютере (это чужой компьютер)'}
-
- ,'MasterPasswordWizardForm.tsServerLoginPanelLabel.UnknownResponse':{en:'Error: unknown server response',ru:'Ошибка: Неизвестный/ошибочный ответ от сервера'}
- ,'MasterPasswordWizardForm.tsServerLoginPanelLabel.WrongPrivKey':{en:'Error: wrong private key. Cannot decode server response',ru:'Ошибочный приватный ключ. Невозможно расшифровать ответ сервера'}
- ,'MasterPasswordWizardForm.tsServerLoginPanelLabel.WrongAESKey':{en:'Error: wrong AES key. Cannot decode server response',ru:'Ошибочный ключ AES. Невозможно расшифровать ответ сервера.'}
- ,'MasterPasswordWizardForm.tsServerLoginPanelLabel.NotRegistered':{en:'Server has not recognized your address. You must login/sign in',ru:'Сервер не распознал Ваш адрес. Авторизируйтесь или зарегистрируйтесь.'}
-
- ,'GuidePages.tsServerLoginPanel':{
-   en:'<HTML><BODY><H2> Setting up a connection to the server </H2><p>After this window opens Key Keeper will attempt to connect to the EmerAPI server.<br>If your private key is locked, you will be asked to unlock it entering your User Password. </p><p> If the public key is recognized by the server, you will immediately go to next page. </p><p> If the public key is not registered on the server, you will be asked to login to the server first. If you do not have an account, you can register a new one. </p><p> To open the registration link or login, click the \"Open signin/login page\" button </p><p> After registering with the server (or logging into your account) click on the button \"Test connection\". If the key assigning is successful, you will proceed to complete the wizard. </p></BODY></HTML>',
-   ru:'<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\" /></head> <BODY><H2>Настройка подключения к серверу</H2><p>При открытии этого окна будет предпринята попытка подключения к серверу EmerAPI.<br>Вы можете повторить попытку, нажимая кнопку \"Проверить подключение\". Если Ваш Приватный Ключ заблокирован, Вам потребуется ввести пароль пользователя для его разблокировки, когда будет получен ответ от сервера.</p><p>Если публичный ключ будет распознан сервером, Вы сразу перейдете к завершению мастера.</p><p>Если публичный ключ неизвестен серверу, Вам потребуется пройти процедуру логина на сервере. В случае, если у Вас нет учетной записи, Вы сможете зарегистрировать новую.</p><p>Для открытия ссылки на регистрацию или логин нажмите кнопку \"Открыть страницу входа\"</p><p>После регистрации на сервере (или входа в Вашу учетную запись) нажмите на кнопку \"Проверить подключение\". Если сопоставление ключа прошло успешно, Вы перейдете к завершению мастера. </p></BODY></HTML>'
- }
-
- ,'GuidePages.tsServerConnectedPanel':{
-   en:'<HTML><BODY><H2>Everything went great!</H2><p>Communication with the EmerAPI / Antifake server has been successfully configured.</p><p>The wizard set up a connection to the server:</p><ul><li>The data encryption key for accessing the server is stored on this computer. You do not need to enter a user password after each time you start the application.</li><li>The application is configured to connect to the server after starting.</li><li>Connecting to the server will occur using the public key.</li></ul><p>You can cancel saving session keys on this computer by checking the box at the bottom of the page. In this case, after each launch of the program you will have to enter your User Password to connect to the server.</p></BODY></HTML>',
-   ru:'<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=windows-1251\" /></head> <BODY><H2>Всё прошло прекрасно! </H2><p>Связь с сервером EmerAPI / Antifake успешно сконфигурирована.</p><p>Мастер настроил соединение с сервером таким образом:</p><ul><li>Ключ шифрования данных для доступа к серверу сохранен на этом компьютере. Вам не потребуется вводить пароль пользователя после каждой загрузки программы.</li><li>Программа сконфигурирована для подключения к серверу после запуска</li><li>Подключение к серверу будет происходить с использованием публичного ключа.</li></ul><p>Вы можете отменить сохранение сессионного ключа на этом компьютере, установив галочку внизу страницы. В этом случае после каждого запуска программы для подключения к серверу придется вводить Пароль Пользователя.</p></BODY></HTML>'
- }
-
- ,'TEnterMasterPasswordFrame.lComment':{en:'Enter the words of the Master Password separated by a space. Enter selects the first suggested word.',ru:'Введите слова Mастер- Пароля через пробел. Ввод выбирает первое предложенное слово.'}
- ,'TEnterMasterPasswordFrame.lMasterPassword':{en:'Master Password',ru:'Мастер- Пароль'}
- ,'TEnterMasterPasswordFrame.chShowMasterPassword':{en:'Show',ru:'Показывать'}
- ,'TEnterMasterPasswordFrame.lAssignedAddress':{en:'Assigned address',ru:'Связанный адрес'}
-
-
- ,'TFrameSelectAddress.chRefresh':{en:'Refresh information',ru:'Обновлять информацию'}
- ,'TFrameSelectAddress.chDecodeAddress':{en:'Pay to alias',ru:'Платить по псевдонимам'}
- ,'TFrameSelectAddress.lAddressInfo':{en:'*Unknown address*',ru:'*Неизвестный адрес*'}
- ,'TFrameSelectAddress.lAddressInfo.Found':{en:'Address: ',ru:'Адрес: '}
- ,'TFrameSelectAddress.lAddressInfo.Empty':{en:'Enter address or alias',ru:'Введите адрес или псевдноним'}
- ,'TFrameSelectAddress.lPayments':{en:'',ru:''}
- ,'TFrameSelectAddress.lCert':{en:'',ru:''}
- ,'TFrameSelectAddress.lCert.wait':{en:'Please wait...',ru:'Пожалуйста, подождите...'}
- ,'TFrameSelectAddress.lPayments.wait':{en:'Please wait...',ru:'Пожалуйста, подождите...'}
- ,'TFrameSelectAddress.lCert.NoUpdate':{en:'*Online update turned off*',ru:'*Обновление отключено*'}
- ,'TFrameSelectAddress.lPayments.InvalidAddress':{en:'*Address you entered is not valid*',ru:'*Введенный адрес ошибочен*'}
-
-
- ,'TFramePayToAddress.lPayee':{en:'Payee: ',ru:'Получатель перевода: '}
- ,'TFramePayToAddress.lAmount':{en:'Amount to transfer: ',ru:'Сумма перевода: '}
- ,'TFramePayToAddress.bSend':{en:'Send',ru:'Отправить'}
- ,'TFramePayToAddress.lBalance.startIfBalance':{en:'Your balance: ',ru:'Ваш текущий баланс: '}
-
- ,'FrameDigitalAsset.Title.dns':{en:'DNS: ',ru:'DNS: '}
- ,'FrameDigitalAsset.Title.ssl':{en:'SSL: ',ru:'SSL: '}
- ,'FrameDigitalAsset.Title.ssh':{en:'SSH: ',ru:'SSH: '}
- ,'FrameDigitalAsset.Title.enum':{en:'ENUMER: ',ru:'ENUMER: '}
- ,'FrameDigitalAsset.Title.blog':{en:'Blog: ',ru:'Блог: '}
- ,'FrameDigitalAsset.Title.cert':{en:'CERTIFICATE: ',ru:'СЕРТИФИКАТ: '}
- ,'FrameDigitalAsset.Title.doc':{en:'DOCUMENT: ',ru:'ДОКУМЕНТ: '}
- ,'FrameDigitalAsset.Title.Empty':{en:'ALIAS OR UNKNOWN: ',ru:'ПСЕВДОНИМ ИЛИ НЕИЗВ: '}
- ,'FrameDigitalAsset.Title.Expired':{en:'EXPIRED: ',ru:'ИСТЕКЛО: '}
- ,'FrameDigitalAsset.Title.SoonExpiration':{en:'EXPIRES SOON: ',ru:'СКОРО ИСТЕЧЕТ: '}
-
- ,'FrameDigitalAsset.Title.dpoBrand':{en:'DPO Brand: ',ru:'DPO Бренд: '}
- ,'FrameDigitalAsset.Title.dpo':{en:'DPO item: ',ru:'DPO item: '}
- ,'FrameDigitalAsset.Title.afOwner':{en:'Antifake owner: ',ru:'Antifake владелец: '}
- ,'FrameDigitalAsset.Title.afProduct':{en:'Antifake product: ',ru:'Antifake продукт: '}
- ,'FrameDigitalAsset.Title.afLot':{en:'Antifake lot: ',ru:'Antifake партия:'}
- ,'FrameDigitalAsset.Title.afUnknown':{en:'Antifake UNKNOWN:',ru:'Antifake НЕИЗВЕСТНЫЙ ТИП: '}
-
- ,'FrameDigitalAsset.Title.Undetected':{en:'UNKNOWN: ',ru:'НЕИЗВЕСТНО: '}
- ,'FrameDigitalAsset.Title.Erroneous':{en:'[ERRONEOUS]: ',ru:'[ОШИБОЧНЫЙ]: '}
- ,'FrameDigitalAsset.Title.Invalid':{en:'[INVALID]: ',ru:'[НЕДЕЙСТВИТЕЛЬНЫЙ]: '}
- ,'FrameDigitalAsset.Title.Expired':{en:'[EXPIRED]: ',ru:'[ИСТЕКШИЙ]: '}
-
-
- ,'TFrameServerTask.OP_NAMENEW_ONE':{en:'Create: ',ru:'Создать: '}
- ,'TFrameServerTask.Create_Unknown_Name':{en:'Name: ',ru:'Имя: '}
- ,'TFrameServerTask.Create_DPO_record':{en:'DPO record: ',ru:'DPO запись: '}
- ,'TFrameServerTask.bDetails':{en:'Details',ru:'Подробнее'}
- ,'TFrameServerTask.bDelete':{en:'Delete',ru:'Удалить'}
- ,'TFrameServerTask.bDelete.Hint':{en:'Permanently delete the tasks from the server queue',ru:'Удалить записи из очереди задач сервера навсегда'}
- ,'TFrameServerTask.bExecute':{en:'Execute',ru:'Выполнить'}
- ,'TFrameServerTask.bExecute.Hint':{en:'Perform operations in blockchain',ru:'Выполнить операции в блокчейне'}
- ,'TFrameServerTask.lTotalNames':{en:'Records count:',ru:'Количество записей:'}
- ,'TFrameServerTask.lTotalOwners':{en:'Owners count:',ru:'Количество владельцев:'}
- ,'TFrameServerTask.lTotalCost':{en:'Total cost (EMC):',ru:'Стоимость (EMC):'}
- ,'TFrameServerTask.lOwnedCount':{en:'Belong to your:',ru:'Принадлежит Вам:'}
-
-
- ,'tFrameCreateName.NameIsFree':{en:'Name is not registered yet',ru:'Имя свободно для регистрации'}
- ,'tFrameCreateName.NameIsDelegated':{en:' has registered the name till ',ru:' зарегистрировал имя до '}
- ,'tFrameCreateName.lLoadTemplate':{en:'Load template:',ru:'Загрузить шаблон:'}
- ,'tFrameCreateName.cLoadTemplate':{en:'Select template...',ru:'Выберите шаблон...'}
- ,'tFrameCreateName.Templates.YourName':{en:'YourName',ru:'ВашеИмя'}
-
- ,'tFrameCreateName.lDays':{en:'Validity (days)',ru:'Период регистрации (дней)'}
- ,'tFrameCreateName.lName':{en:'Name of the digital asset',ru:'Имя цифрового актива'}
- ,'tFrameCreateName.lValue':{en:'Value (text)',ru:'Текст актива'}
- ,'tFrameCreateName.bSend':{en:'Create the asset',ru:'Создать цифровой актив'}
-
- ,'tFrameCreateName.Templates.dnsName':{en:'dns:insertyourdomain.here',ru:'dns:вставьтевашдомен.сюда'}
- ,'tFrameCreateName.Templates.dnsValue':{en:'A=127.0.0.1|TTL=6000',ru:'A=127.0.0.1|TTL=6000'}
- ,'tFrameCreateName.Templates.sshName':{en:'ssh:YourName',ru:'ssh:ВашеИмя'}
- ,'tFrameCreateName.Templates.sshValue':{en:'*Insert your ssh certificate here (a string like \"ssh-rsa AAA........\") or a link to another name with an @ symbol (for example, \"@AnotherName\"). You can insert multiple records, separating them with | (for example, \"user1|user2|user3\") to creating a group*',ru:'*вставьте сюда Ваш ssh сертификат (строка вида \"ssh-rsa AAA........\") или ссылку на другое имя с символа @ (например, \"@AnotherName\"). Можно вставлять несколько записей, разделяя их знаком | (например, \"user1|user2|user3\")*'}
- ,'tFrameCreateName.Templates.sslName':{en:'ssl:YourCertificateSerialInhex',ru:'ssl:СерийныйНомерВашегоСертификатаВhex'}
- ,'tFrameCreateName.Templates.sslValue':{en:'sha256=*insert sha256 hash of your SSL certificate here in hex (low case)*',ru:'sha256=*вставьте сюда sha256 хеш Вашего SSL сертификата (hex, маленькие буквы)*'}
- ,'tFrameCreateName.Templates.enumName':{en:'enum:YourPhoneNumberInternational:0',ru:'enum:ВашТелефонВМеждународномФормате:0'}
- ,'tFrameCreateName.Templates.enumValue':{en:'SIG=*fill the fields separated by | :verifier|signature E2U+sip=PRI1|PRI2|RegExp*',ru:'SIG=*Заполните поля, разделенные знаком | : verifier|signature E2U+sip=PRI1|PRI2|RegExp*'}
-
- ,'tFrameCreateName.Templates.dpoBrandName':{en:'dpo:BrandName',ru:'dpo:НаименованиеБренда'}
- ,'tFrameCreateName.Templates.dpoBrandValue':{en:'URL=',ru:'URL='}
- ,'tFrameCreateName.Templates.dpoName':{en:'dpo:BrandName:SerialNumber:0',ru:'dpo:НаименованиеБренда:СерийныйНомер:0'}
- ,'tFrameCreateName.Templates.dpoValue':{en:'Signature=*InsertBrandSignatureHere*',ru:'Signature=*ВставьтеПодписьБрендаСюда*'}
- ,'tFrameCreateName.Templates.docName':{en:'doc:YourDocumentIDorSha256Hash',ru:'doc:ИдентификаторВашегоДокументаИлиSha256Хеш'}
- ,'tFrameCreateName.Templates.docValue':{en:'TITLE=*Put document title here. This is not a required field.*',ru:'TITLE=*Втавьте сюда заголовок документа. Это не обязательное поле.*'}
- ,'tFrameCreateName.Templates.certName':{en:'cert:AddressOr&NameOr@Hash:type:0',ru:'cert:АдресИли&ИмяИли@Хеш:Тип:0'}
- ,'tFrameCreateName.Templates.certValue':{en:'*ISSUER=*UssuerName*\n*EXDATE=*ExpirationDate YYYYMMDD*\nSIGN=*IssuersSignature*',ru:'*ISSUER=*ВставьтеИмяИздателя*\n*EXDATE=*ВставьтеДатуИстечения ГГГГММДД*\nSIGN=*ВставьтеПодписьИздателя*'}
-
- ,'NameViewForm.lInfo.myTask':{en:'Task for create an asset (owned by you): ',ru:'Задача создание записи (Вашей): '}
- ,'NameViewForm.lInfo.myNVS':{en:'NVS asset (owned by you): ',ru:'NVS запись (Ваша): '}
- ,'NameViewForm.lInfo.Task':{en:'Task for create an asset (owned by other(s)): ',ru:'Задача создание записи (чужой/чужих): '}
- ,'NameViewForm.lInfo.NVS':{en:'NVS asset (owned by other): ',ru:'NVS запись (чужая): '}
- ,'NameViewForm.lInfo.Expired':{en:'NAME EXPIRED: ',ru:'ИМЯ ИСТЕКЛО: '}
- ,'NameViewForm.lOwnerWarning':{en:'WARNING! Changing the owner you lose control of this asset!',ru:'ВНИМАНИЕ! Изменив владельца, Вы потеряете контроль над этим активом!'}
- ,'NameViewForm.eOwner':{en:'Owner',ru:'Владелец'}
- ,'NameViewForm.lDaysLeft':{en:'Days left (approximately)',ru:'Дней осталось (примерно)'}
- ,'NameViewForm.lDaysAdded':{en:'Days add: ',ru:'Добавлено дней: '}
- ,'NameViewForm.msgNVSUpdateError':{en:'NVS record update error: ',ru:'Ошибка обновления NVS записи: '}
- ,'NameViewForm.msgWrongAddress':{en:'Wrong new owner address',ru:'Новый адрес пользователя неверен'}
- ,'NameViewForm.msgWrongAddressSig':{en:'New owner address is belong to another network',ru:'Введенный новый адрес владельца имени принадлежит другой сети'}
- ,'NameViewForm.msgSendToBC':{en:'The changes are sent to blockchain. It will take some time (up to 20 minutes) to update.',ru:'Сделанные изменения отправлены в блокчейн. Потребуется некоторое время (до 20 минут) для обновления.'}
- ,'NameViewForm.Caption.TaskNewName':{en:'Create asset: ',ru:'Создать актив: '}
- ,'NameViewForm.eOwner.myTask':{en:' (your address)',ru:' (Ваш адрес)'}
-
- ,'AtomForm':{en:'Atom Contract',ru:'Атомарный Контракт'}
- ,'AtomForm.NameNotLoaded':{en:'Please paste contract from buffer',ru:'Вставьте контракт из буфера'}
- ,'AtomForm.PleaseWait':{en:'Please wait',ru:'Пожалуйста подождите'}
- ,'AtomForm.WrongContract':{en:'Invalid contract data. The contract cannot be loaded',ru:'Ошибочный контракт. Контракт не может быть загружен.'}
- ,'AtomForm.WrongTime':{en:'The contract time does not correspond to the current one.\nThe contract may be outdated. In this case, you need to create a new contract.\nCheck the time set on your computer.',ru:'Время контракта не соответствует текущему.\nКонтракт может быть устаревшим. В этом случае вам необходимо создать новый контракт.\nПроверьте время, установленное на вашем компьютере.'}
- ,'AtomForm.BuyerBalance':{en:'Available funds in the buyer wallet: ',ru:'Доступно средств у покупателя: '}
-
- ,'AtomForm.YouBuyTheName':{en:'You are buying a digital asset',ru:'Вы покупаете цифровой актив'}
- ,'AtomForm.YouSellTheName':{en:'You are selling a digital asset',ru:'Вы продаете цифровой актив'}
-
- ,'AtomForm.askForChangeConfirmation.Message':{en:'You are trying to change the data of the contract that has already been signed. Modifying this contract will invalidate the signature. Are you sure you want to make the change?',ru:'Вы пытаетесь изменить данные контракта, который уже подписан. Изменение этого контракта сделает подписи недействительными. Вы уверены,  что хотите внести изменения?'}
-
- ,'AtomForm.lYouAreBuyer':{en:'You are the buyer',ru:'Покупатель- это Вы'}
- ,'AtomForm.lPrice':{en:'Price (EMC)',ru:'Цена (EMC)'}
- ,'AtomForm.lName':{en:'Asset name',ru:'Наименование актива'}
- ,'AtomForm.lContractText':{en:'Contract code',ru:'Код контракта'}
- ,'AtomForm.chAddScript':{en:'Script v2',ru:'Скрипт версии 2'}
- ,'AtomForm.bSignSend':{en:'Sign the contract',ru:'Подписать контракт'}
- ,'AtomForm.bClose':{en:'Close',ru:'Выйти'}
- ,'AtomForm.bPasteFromBuffer':{en:'Paste from buffer',ru:'Вставить из буффера'}
- ,'AtomForm.bCopyToBuffer':{en:'Copy to clipboard',ru:'Скопировать в буффер'}
- ,'AtomForm.lState':{en:'State',ru:'Состояние'}
- ,'AtomForm.lContractResume':{en:'Resume',ru:'Краткая информация'}
-
- ,'WalletBasicsForm':{en:'Wallet basics',ru:'Базовые операции кошелька'}
- ,'WalletBasicsForm.tsCreateName':{en:'Create digital asset',ru:'Создать цифровой актив'}
- ,'WalletBasicsForm.tsPay':{en:'Transfer coins (pay)',ru:'Перевод монет (платеж)'}
-
- ,'PleaseWait':{en:'Please wait',ru:'Пожалуйста, подождите'}
-
- ,'MainForm.imAFCreateForPrinting':{en:'Create data package / NVS records',ru:'Создание пакета документов / записей NVS'}
- ,'MainForm.miBecomeOwner':{en:'Become the owner of a digital asset',ru:'Овладеть цифровым активом'}
-
- ,'AFCreateForPrintingForm':{en:'Create data package for label printing',ru:'Создание пакета документов для типографии'}
- ,'AFCreateForPrintingForm.lStep1':{en:'Step 1: Choose the data source',ru:'Шаг 1: укажите, откуда получить данные'}
- ,'AFCreateForPrintingForm.lStep2':{en:'Step 2: Choose general data and the data required for creation',ru:'Шаг 2: Определите общие данные и данные для генерации'}
- ,'AFCreateForPrintingForm.lStep3':{en:'Step 3: Choose what is needed to be created',ru:'Шаг 3: укажите, что требуется создать'}
-
- ,'AFCreateForPrintingForm.Messages.FileNotExist':{en:'Source file does not exist',ru:'Исходный файл не существует'}
- ,'AFCreateForPrintingForm.Messages.LotNotSelected':{en:'Please select lot',ru:'Пожалуйста выберите лот'}
- ,'AFCreateForPrintingForm.lInformation1.SerialVolume':{en:'Capacity: ',ru:'Емкость: '}
- ,'AFCreateForPrintingForm.lInformation1.LotNotSelected':{en:'Lot not selected',ru:'Партия товара не выбрана'}
- ,'AFCreateForPrintingForm.lInformation1.WrongLot':{en:'Incorrect value in Lot asset',ru:'Ошибочная запись партии товара'}
- ,'AFCreateForPrintingForm.lInformation1.PleaseWait':{en:'Please wait for data to load',ru:'Пожалуйста, подождите окончания загрузки данных'}
-
- ,'AFCreateForPrintingForm.rbIterRange':{en:'Create by range: ',ru:'Создать по диапазону: '}
- ,'AFCreateForPrintingForm.rbIterFile':{en:'Create by file: ',ru:'Создать по файлу: '}
- ,'AFCreateForPrintingForm.rbIterLot':{en:'Create by lot: ',ru:'Создать по партии: '}
- ,'AFCreateForPrintingForm.lInformation':{en:'Information: ',ru:'Информация: '}
- ,'AFCreateForPrintingForm.lBrand':{en:'Brand: ',ru:'Бренд: '}
- ,'AFCreateForPrintingForm.lInformation1.BrandError':{en:'Brand finding error: ',ru:'Ошибка нахождения бренда: '}
-
- ,'AFCreateForPrintingForm.chCreatePrivateCSV':{en:'Create CSV file with secret codes: ',ru:'Создать CSV файл с секретными кодами: '}
- ,'AFCreateForPrintingForm.chCreatePublicCSV':{en:'Create public CSV file: ',ru:'Создать публичный CSV файл: '}
- ,'AFCreateForPrintingForm.chCreatePrintCSV':{en:'Create CSV file for printing factory',ru:'Создать CSV файл для типографии'}
- ,'AFCreateForPrintingForm.chCreateQR1':{en:'Save public QR code to folder: ',ru:'Сохранить открытый QR код в каталог: '}
- ,'AFCreateForPrintingForm.chCreateQR2':{en:'Save secret QR code to folder: ',ru:'Сохранить секретный QR код в каталог: '}
-
- ,'AFCreateForPrintingForm.chCreateNVSrecords':{en:'Create blockchain record (needs time!)',ru:'Создать записи в блокчейн (потребует времени!)'}
- ,'AFCreateForPrintingForm.chCreateNVSrecordsOwnedByMe':{en:'Create blockchain records owned by me (NOT RECOMMENDED)',ru:'Овладеть создаваемыми записями (НЕ РЕКОМЕНДУЕТСЯ)'}
- ,'AFCreateForPrintingForm.chLogErrorSerialsToFile':{en:'Save erroneous serials to file (RECOMMENDED): ',ru:'Сохранить ошибочные номера в файл (РЕКОМЕНДУЕТСЯ) '}
- ,'AFCreateForPrintingForm.chCreateNVSrecordsAddCoins':{en:'Add coins to the asset:',ru:'Добавить монет к активу:'}
- ,'AFCreateForPrintingForm.chCreateNVSrecordsAddCoins.Hint':{en:'Specify how many EMC coins should be added to the EmerDPO object you are creating.\nThe added coins will be passed on to the person who owns the NVS record (e.g. the buyer of the product)\nIn addition, if at least 0.0001 EMC is added, the buyer will not need to receive coins to become the owner of the Digital Asset',ru:'Укажите, какое количество монет EMC следует добавить к создаваемому объекту EmerDPO.\nДобавленные монеты будут переданы тому, кто завладеет NVS записью (например, покупателю продукции)\nКроме того, если добавлено хотя бы 0.0001 EMC, покупателю не потребуется получать монет для того, чтобы стать владельцем Цифрового Актива'}
- ,'AFCreateForPrintingForm.bEditCustomFields':{en:'Edit custom fields',ru:'Редактировать пользовательские поля'}
- ,'AFCreateForPrintingForm.chAddCustomFields':{en:'Add custom fields',ru:'Добавить пользовательские поля'}
- ,'AFCreateForPrintingForm.chCreateBrandField':{en:'Link brand',ru:'Добавить поле бренда'}
- ,'AFCreateForPrintingForm.chCreateParentField':{en:'Add parent link',ru:'Добавить ссылку на родителя'}
- ,'AFCreateForPrintingForm.chCreateParentLotField':{en:'Ling lot',ru:'Добавить ссылку на партию'}
- ,'AFCreateForPrintingForm.chCreateProductField':{en:'Link product',ru:'Добавить ссылку на продукт'}
-
- ,'AFCreateForPrintingForm.lLeaseTime':{en:'The duration of the name lease (days)',ru:'Длительность аренды имени, дней'}
-
- ,'AFCreateForPrintingForm.chCheckNamesIfFree':{en:'Check if the name is free and increment the suffix if it is necessary (requires time)',ru:'Проверять, свободно ли имя, и увеличивать суффик имени если необходимо (требует времени)'}
- ,'AFCreateForPrintingForm.chAddRandomSuffix':{en:'Add random name suffix',ru:'Добавлять случайный суффикс к имени'}
-
- ,'AFCreateForPrintingForm.cBrand.Manual':{en:'Manual add brand name',ru:'Указать имя бренда вручную'}
- ,'AFCreateForPrintingForm.lBrandManual':{en:'Brand NVS name:',ru:'NVS имя бренда: '}
- ,'AFCreateForPrintingForm.lBrandManualComment':{en:'Attention! Be very careful when manually entering the brand name.\nThe dpo prefix is not necessary.',ru:'Внимание! Будьте очень внимательны при ручном вводе имени бренда.\nПрефикс dpo вводить не нужно.'}
-
- ,'AFCreateForPrintingForm.chPubAddName':{en:'Add NVS name',ru:'Добавить NVS имя'}
- ,'AFCreateForPrintingForm.chPubAddValue':{en:'Add NVS Value',ru:'Добавить NVS Value'}
- ,'AFCreateForPrintingForm.chPubAddBrand':{en:'Add Brand',ru:'Добавить Бренд'}
- ,'AFCreateForPrintingForm.chPubAddAddress':{en:'Add Blockchain Address',ru:'Добавить адрес в блокчейне'}
-
- ,'AFCreateForPrintingForm.chPrivAddName':{en:'Add NVS name',ru:'Добавить NVS имя'}
- ,'AFCreateForPrintingForm.chPrivAddValue':{en:'Add NVS Value',ru:'Добавить NVS Value'}
- ,'AFCreateForPrintingForm.chPrivAddBrand':{en:'Add Brand',ru:'Добавить бренд'}
- ,'AFCreateForPrintingForm.chPrivAddAddress':{en:'Add Blockchain Address',ru:'Добавить адрес в блокчейне'}
-
- ,'AFCreateForPrintingForm.chFolderPackage':{en:'Use one folder for all files: ',ru:'Один каталог для всех файлов: '}
-
- ,'AFCreateForPrintingForm.chSignValue':{en:'(Re)sign value',ru:'(Пере)подписывать value'}
-
- ,'AFCreateForPrintingForm.msg.PleaseSetFileName':{en:'Please select the filename',ru:'Пожалуйста, укажите имя файла'}
- ,'AFCreateForPrintingForm.msg.PleaseSetFolder':{en:'Please select the folder for save the data',ru:'Пожалуйста, укажите имя каталога для сохранения данных'}
-
- ,'AFCreateForPrintingForm.msg.BrandMustBeSet':{en:'You must define brand',ru:'Вы должны определить бренд'}
- ,'AFCreateForPrintingForm.msg.BrandMustBeYour':{en:'To create entries in the blockchain, the brand must belong to you or the private key of the owner`s address must be specified.',ru:'Для создания записей в блокчейне бренд должен принадлежать Вам или должен быть задан приватный ключ адреса- владельца'}
-
- ,'AFCreateForPrintingForm.lTextQR1':{en:'public QR code text template:',ru:'Шаблон текста открытого QR кода:'}
- ,'AFCreateForPrintingForm.lTextQR2':{en:'private QR code text template:',ru:'Шаблон текста закрытого QR кода:'}
-
- ,'AFCreateForPrintingForm.lSecretLength':{en:'Secret code length ',ru:'Длина секретного слова '}
-
- ,'AFCreateForPrintingForm.bDemo1':{en:'Demo1: 10 records in blockchain',ru:'Демо 1: Десять записей в блокчейн'}
- ,'AFCreateForPrintingForm.bDemo2':{en:'Demo2: based on a lot',ru:'Демо 2: На основе партии'}
- ,'AFCreateForPrintingForm.bDemo3':{en:'Demo3: 1000 serials set',ru:'Демо 3: 1000 серийных номеров'}
- ,'AFCreateForPrintingForm.bDemo1.Desc':{en:'Demo1: 10 records in blockchain',ru:'<H3>Пример 1</H3><font color=red>Внимание! Данный пример при запуске создаст реальные записи в блокчейн. Не запускайте его на исполнение!</font><H4>Решаемая задача</H4>Создание в блокчейн серии DPO записей<H4>Описание</H4>Данный пример создает в блокчейне 10 записей в формате DPO для бренда, имеющегося в системе<br>Если бренд в системе отсутствует, он не будет выбран.<br>Никакие файлы не будут созданы<br><H4>Что следует задать</H4><li><ul>Диапазон серийных номеров</ul><ul>Бренд-  владелец товара.</ul></li>'}
- ,'AFCreateForPrintingForm.bDemo2.Desc':{en:'Demo2',ru:'<H3>Пример 2</H3><H4>Решаемая задача</H4>Antifake: Создание полного набора документов в папку, без генерации в блокчейне<H4>Описание</H4>Предполагается, что Вы - владелец объекта \"бренд\", и этот бренд принадлежит Вашему адресу.<br>Кроме этого, существует объект Antifake \"лот\", который также принадлежит Вашему адресу.<br><br>Будут выбраны первый объекты из списка в качестве примера.<br>Если у Вас нет ни одного лота или ни одного бренда, пример не сможет быть запущен.<br><br>Все документы будут загружены в папку с именем \"demo2\", которая будет создана в папке с приложением.<br>Вы можете изменить это, указав желаемую папку.<br><br>Будут созданы:<ul><li><b>private.csv</b> со всей информацией, необходимой для генерации. Далее записи в блокчейне смогут быть созданы на базе этого файла.</li><li><b>public.csv</b> - файл для загрузки на сервер antifake. В нем не содержится секретной информации</li><li><b>print.csv</b> - файл для отправки в типографию. В нем содержится вся секретная информация, необходимая для создания этикеток</li><li>Папка <b>QR1</b> будет содержать QR-коды, предназначенные для открытой части этикетки товара. Все данные для генерации кода также содержатся в файле print.csv, файлы могут быть предоставлены для удобства типографии</li><li>Папка <b>QR2</b> будет содержать QR-коды, предназначенные для скрытой части этикетки товара. Все данные для генерации кода также содержатся в файле print.csv, файлы могут быть предоставлены для удобства типографии</li><li>если в процессе создания возникнут ошибки, они будут сохранены в файле <b>errors.csv</b> - файл для отправки в типографию. </li></ul><H4>Дополнительная информация</H4>Данный файл рассчитан на двухступенчатую генерацию (записи  не создаются в блокчейн сразу, а могут быть быть созданы позднее на основе файла private.csv<br>Для защиты от возможных сквотеров имена будут иметь случайный суффикс (включена опция <font color=green>\"Добавлять случайны суффикс к имени\"</font>).<br>Тем не менее, будет проводится проверка существования каждой записи в блокчейне и изменение суффикса в случае, если такое имя уже есть. Эта проверка требует времени, Вы можете отключить ее для ускорения процесса (отключив функцию <font color=green>\"проверять, свободно ли имя\"</font>)<br>Если будет принято решение создавать записи в блокчейне сразу (будет включена опция <font color=green>\"Создавать записи в блокчейн\"</font> - генерацию случайного суффикса можно отключить.<br>'}
- ,'AFCreateForPrintingForm.bDemo3.Desc':{en:'Demo3',ru:'<H3>Пример 3</H3>'}
- ,'AFCreateForPrintingForm.bCreate':{en:'Create',ru:'Создать'}
- ,'AFCreateForPrintingForm.bCreate.Start':{en:'Create',ru:'Создать'}
- ,'AFCreateForPrintingForm.bCreate.Stop':{en:'Stop',ru:'Остановить'}
- ,'AFCreateForPrintingForm.bCreate.Stopping':{en:'Stopping...',ru:'Остановка...'}
- ,'AFCreateForPrintingForm.bClose':{en:'Close',ru:'Закрыть'}
-
- ,'AFCreateForPrintingForm.msg.LotNotSelected':{en:'<H3>Lot not selected</H3>You must choose a lot to continue',ru:'<H3>Лот не выбран</H3> Для продолжения работы Вы должны выбрать существующую партию товара.'}
-
- ,'NVSValueEditForm':{en:'NVS value editor',ru:'Редактор NVS Value'}
- ,'NVSValueEditForm.bClose':{en:'Cancel and close',ru:'Отменить и закрыть'}
- ,'NVSValueEditForm.bSave':{en:'Save and close',ru:'Сохранить и закрыть'}
-
- ,'AFCreateForPrintingForm.tAFRequest.CantResolve':{en:'Can not resolve name path: ',ru:'Невозможно разрешить наследование имени: '}
-
- ,'TakePossessionForm':{en:'Take possession of assets',ru:'Завладеть цифровыми активами'}
- ,'TakePossessionForm.lTakePossession':{en:'Select the data to restore Private Key',ru:'Выберите, по каким данным следует восстановить Приватный Ключ'}
- ,'TakePossessionForm.lTakePossession1':{en:'Associated address:',ru:'Связанный с указанными данными адрес: '}
- ,'TakePossessionForm.lTakePossession2':{en:'Address balance:',ru:'Баланс на адресе: '}
- ,'TakePossessionForm.lTakePossession3':{en:'Digital assets on the address:',ru:'Цифровых активов на адресе: '}
- ,'TakePossessionForm.lTakePossession1.InvalidPrivateKey':{en:'Invalid private key.',ru:'Ошибочный приватный ключ.'}
- ,'TakePossessionForm.lTakePossession1.InvalidCred':{en:'Invalid key data',ru:'Ошибочные данные приватного ключа'}
- ,'TakePossessionForm.lTakePossession2.PressButton':{en:'Press the button to request a list of assets.',ru:'Нажмите кнопку для запроса списка активов'}
-
-
- ,'TakePossessionForm.rbTakeSerialPassword':{en:'Use Serial Number + Password (DPO / Antifake)',ru:'Использовать серийный номер + пароль (DPO / Antifake)'}
- ,'TakePossessionForm.lSerial':{en:'Serial Number',ru:'Серийный номер'}
- ,'TakePossessionForm.lPassword':{en:'Password',ru:'Пароль'}
- ,'TakePossessionForm.rbTakePrivateKey':{en:'Use Private Key',ru:'Использовать Приватный Ключ'}
- ,'TakePossessionForm.lPrivateKey':{en:'Private key',ru:'Приватный ключ'}
- ,'TakePossessionForm.rbTakeMasterPassword':{en:'Use Master Password',ru:'Использовать Мастер Пароль'}
- ,'TakePossessionForm.bTakePossession':{en:'Take Possession of ALL assets',ru:'Завладеть всеми активами'}
- ,'TakePossessionForm.bClose':{en:'Close',ru:'Закрыть'}
-
- ,'TakePossessionForm.messageTransferError':{en:'Asset transfer error: ',ru:'Ошибка смены собственника цифрового актива: '}
- ,'TakePossessionForm.messageTransferDone':{en:'The change in ownership of digital assets is complete. It is required to wait for the completion of entering data into the blockchain.',ru:'Изменение собственника цифровых активов завершено. Требуется подожать для окончания внесения данных в блокчейн.'}
- ,'TakePossessionForm.bRequestAssets':{en:'Request digital assets list',ru:'Запросить список цифровых активов'}
-
- ,'tEmerAPIServerTask.YouDontOwnPrivateKeyForSigning':{en:'You do not own a private key to sign NVS value',ru:'Вы не владеете приватным ключем для подписи NVS значения'}
- ,'tEmerAPIServerTask.TimeIsOver':{en:'The time to complete this task has expired',ru:'Время, в течении которого можно было исполнить эту задачу, истекло'}
- ,'tEmerAPIServerTask.YouDontOwnAsset':{en:'You do not own the Digital Asset required to sign the record being created. The name of the asset: ',ru:'Вы не владеете Цифровым Активом, необходимым для подписи создаваемой записи. Имя актива: '}
-
- ,'tEmerAPIServerTask.UnknownTask':{en:'Unknown task type',ru:'Неизвестный тип задачи'}
- ,'tEmerAPIServerTask.TheNameIsEmpty':{en:'The name of the Digital Asset is blank',ru:'Имя Цифрового Актива пустое'}
- ,'tEmerAPIServerTask.TheValueIsEmpty':{en:'Value of the Digital Asset is empty',ru:'Значение (Value) Цифрового Актива пустое'}
- ,'tEmerAPIServerTask.TheNameIsTooLong':{en:'Digital Asset name too long (max. length 512 bytes)',ru:'Имя цифрового актива слишком длинное (макс длина 512 байт)'}
- ,'tEmerAPIServerTask.TheValueIsTooLong':{en:'Digital Asset value too long (max length 20480 bytes)',ru:'Значение цифрового актива слишком длинное (макс длина 20480 байт)'}
- ,'tEmerAPIServerTask.TheTimePeriodIsTooShort':{en:'The duration of the Digital Asset`s Name lease is too short',ru:'Длительность аренды имени Цифрового Актива слишком короткое'}
- ,'tEmerAPIServerTask.nameAlreadyExists':{en:'The name of the Digital Asset is already reserved: ',ru:'Имя Цифрового Актива уже зарезервировано: '}
-
- ,'MessageAskNameDeleteConfirmation':{en:'<H3>Deletion: Are you sure?</H3><br>The Digital Asset will be deleted.<br>You will lose control of this asset.<br>Another user will be able to register this asset after that.',ru:'<H3>Удаление: Вы уверены?</H3><br>Выбранный Цифровой Актив будет удален.<br>Вы потеряете контроль над этим активом.<br>Другой пользователь сможет зарегистрировать этот актив после этого.'}
- ,'MainForm.lAssetsFilter':{en:'Digital Assets Filter',ru:'Фильтр Цифровых Aктивов'}
- ,'MainForm.lAssetsFilterShowFirst':{en:'Show first',ru:'Показывать первые'}
- ,'MainForm.chAssetsFilterShowExpired':{en:'Show expired',ru:'Показывать истекшие'}
- ,'MainForm.bAssetsFilterRebuild':{en:'Rebuild',ru:'Перестроить'}
+  "bYes" : {
+    "en" : "Yes",
+    "ru" : "Да"
+  },
+  "bNo" : {
+    "en" : "No",
+    "ru" : "Нет"
+  },
+  "bCancel" : {
+    "en" : "Cancel",
+    "ru" : "Отмена"
+  },
+  "bOk" : {
+    "en" : "Ok",
+    "ru" : "Ok"
+  },
+  "MainForm.gbStatus" : {
+    "en" : "Status",
+    "ru" : "Статус"
+  },
+  "MainForm.miSettings" : {
+    "en" : "Settings",
+    "ru" : "Настройки"
+  },
+  "MainForm.miAbout" : {
+    "en" : "About",
+    "ru" : "О программе"
+  },
+  "MainForm.miExit" : {
+    "en" : "Exit",
+    "ru" : "Выход"
+  },
+  "MainForm.miSystem" : {
+    "en" : "System",
+    "ru" : "Система",
+    "ua" : "Система"
+  },
+  "MainForm.miServer" : {
+    "en" : "Server",
+    "ru" : "Сервер"
+  },
+  "MainForm.miOpenWeb" : {
+    "en" : "Open web interface",
+    "ru" : "Открыть веб-интерфейс сервера"
+  },
+  "MainForm.miTools" : {
+    "en" : "Tools",
+    "ru" : "Инструменты"
+  },
+  "MainForm.miWallet" : {
+    "en" : "Wallet",
+    "ru" : "Кошелек"
+  },
+  "MainForm.miWalletTransfer" : {
+    "en" : "Coins transfer",
+    "ru" : "Перевод монет"
+  },
+  "MainForm.miWalletName" : {
+    "en" : "Create Digital Asset",
+    "ru" : "Создать Цифровой Актив"
+  },
+  "MainForm.miWalletMassSend" : {
+    "en" : "Mass coin sending",
+    "ru" : "Массовая отправка монет"
+  },
+  "MainForm.miWalletAtom" : {
+    "en" : "Atom contract",
+    "ru" : "Атомарный контракт"
+  },
+  "MainForm.miAntifake" : {
+    "en" : "DPO / Antifake",
+    "ru" : "DPO / Antifake"
+  },
+  "MainForm.miDevTools" : {
+    "en" : "Developer tools",
+    "ru" : "Инструменты разработчика"
+  },
+  "MainForm.miEncryption" : {
+    "en" : "Encryption tools",
+    "ru" : "Инструменты шифрования"
+  },
+  "MainForm.miTX" : {
+    "en" : "TX raw builder/decoder",
+    "ru" : "Декодировщик и построитель сырых Транзакций"
+  },
+  "MainForm.miLog" : {
+    "en" : "Log window",
+    "ru" : "Окно журнала"
+  },
+  "MainForm.miConsole" : {
+    "en" : "EmerAPI console",
+    "ru" : "Консоль EmerAPI"
+  },
+  "MainForm.miMemPool" : {
+    "en" : "Mempool viewer",
+    "ru" : "Просмотр Mempool"
+  },
+  "MainForm.miSimulateAction" : {
+    "en" : "Simulate Action",
+    "ru" : "Имитировать Действие"
+  },
+  "MainForm.lPrivateKey" : {
+    "en" : "Private Key",
+    "ru" : "Прив. Ключ"
+  },
+  "MainForm.lAddress" : {
+    "en" : "Address",
+    "ru" : "Адрес"
+  },
+  "MainForm.lBalance" : {
+    "en" : "Spendable balance:",
+    "ru" : "Доступный баланс:"
+  },
+  "MainForm.lEmerAPIServer" : {
+    "en" : "EmerAPI Server:",
+    "ru" : "Сервер EmerAPI:"
+  },
+  "MainForm.lNames" : {
+    "en" : "Assets:",
+    "ru" : "Активов:"
+  },
+  "MainForm.lTasks" : {
+    "en" : "Tasks:",
+    "ru" : "Задач:"
+  },
+  "MainForm.lLocalWallet" : {
+    "en" : "Emer Wallet:",
+    "ru" : "Кошелек Emer:"
+  },
+  "MainForm.miSignMessage" : {
+    "en" : "Sign a message for external verification services ...",
+    "ru" : "Подписать сообщение для внешних сервисов проверки..."
+  },
+  "MainForm.miCheckSignature" : {
+    "en" : "Check / sign message...",
+    "ru" : "Проверить / подписать сообщение..."
+  },
+  "MainForm.tsAssets" : {
+    "en" : "Digital assets",
+    "ru" : "Цифровые активы"
+  },
+  "MainForm.tsActions" : {
+    "en" : "Recommended actions",
+    "ru" : "Рекомендуемые действия"
+  },
+  "MainForm.DevModeOn" : {
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Developer Mode ON</H2><p>Attention!</p><p>In developer mode, many security checks are disabled, for example, restrictions on the minimum length and quality of the password are removed. In addition, secret information is provided in a number of open windows.</p><p><b>DO NOT WORK WITH REAL DEVELOPER DATA</b></p></BODY></HTML>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Включен режим разработчика</H2><p>Внимание!</p><p>В режиме разработчика отключены многие проверки безопасности, например, сняты ограничения на минимальную длину и качество пароля. Кроме того, в ряде окон в открытом виде предоставляется секретная информация.</p><p><b>НЕ РАБОТАЙТЕ С РЕАЛЬНЫМИ ДАННЫМИ В РЕЖИМЕ РАЗРАБОТЧИКА</b></p></BODY></HTML>"
+  },
+  "MainForm.DevModeOff" : {
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Developer Mode OFF</H2></BODY></HTML>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Режим разработчика выключен</H2></BODY></HTML>"
+  },
+  "MainForm.bCopyAddress.Hint" : {
+    "en" : "Copy address to buffer",
+    "ru" : "Копировать адрес в буфер"
+  },
+  "MainForm.bViewTX.Hint" : {
+    "en" : "View the Digital Assets list",
+    "ru" : "Просмотр списка цифровых активов"
+  },
+  "MainForm.bShowQR.Hint" : {
+    "en" : "Show QR code",
+    "ru" : "Показать QR код"
+  },
+  "MainForm.bRefreshBalance" : {
+    "en" : "Refresh balance",
+    "ru" : "Обновить баланс"
+  },
+  "MainForm.bRefreshTasks" : {
+    "en" : "Refresh tasks",
+    "ru" : "Обновить задачи"
+  },
+  "MainForm.sbPK.UNLOCKED" : {
+    "en" : "UNLOCKED",
+    "ru" : "РАЗБЛОКИРОВАН"
+  },
+  "MainForm.sbPK.LOCKED" : {
+    "en" : "LOCKED",
+    "ru" : "ЗАБЛОКИРОВАН"
+  },
+  "MainForm.sbPK.ABSENT" : {
+    "en" : "ABSENT",
+    "ru" : "ОТСУТСТВУЕТ"
+  },
+  "MainForm.sbLW.ACTIVE" : {
+    "en" : "ACTIVE",
+    "ru" : "ПОДКЛЮЧЕН"
+  },
+  "MainForm.sbLW.Loading" : {
+    "en" : "LOADING...",
+    "ru" : "ЗАГРУЗКА..."
+  },
+  "MainForm.sbServer.ACTIVE" : {
+    "en" : "ACTIVE",
+    "ru" : "ПОДКЛЮЧЕН"
+  },
+  "MainForm.sbServer.LOADING" : {
+    "en" : "LOADING...",
+    "ru" : "ЗАГРУЗКА..."
+  },
+  "MainForm.sbServer.GuestMODE" : {
+    "en" : "GUEST MODE",
+    "ru" : "ГОСТЕВОЙ РЕЖИМ"
+  },
+  "MainForm.lRegisterOnServer" : {
+    "en" : "Register on the server! Get tokens for transactions*!",
+    "ru" : "Зарегистрируйтесь на сервере! Получите токены для совершения операций*!"
+  },
+  "MainForm.lRegisterOnServer2" : {
+    "en" : "Choose one of the servers depending on your needs\nRegistration on the server is NOT REQUIRED to work with the application.",
+    "ru" : "Выберите один из серверов в зависимости от потребностей\nРегистрация на сервере НЕ ЯВЛЯЕТСЯ обязательной для работы с приложением"
+  },
+  "MainForm.lRegisterOnServerCmt" : {
+    "en" : "*servers do not always provide free tokens for registering digital assets",
+    "ru" : "*сервера не всегда предоставляют бесплатные токены для регистрации цифровых активов"
+  },
+  "MainForm.bRegisterServer1" : {
+    "en" : "Register on EmerAPI.info",
+    "ru" : "Регистрация на EmerAPI.info"
+  },
+  "MainForm.lRegisterServerComment1" : {
+    "en" : "Official server of the EmerAPI project",
+    "ru" : "Официальный сервер проекта EmerAPI"
+  },
+  "MainForm.bRegisterServer2" : {
+    "en" : "Register on emcdpo.info",
+    "ru" : "Регистрация на emcdpo.info"
+  },
+  "MainForm.lRegisterServerComment2" : {
+    "en" : "Antifake project server (forgery protection and supply chains)",
+    "ru" : "Сервер проекта Antifake (защита от подделки и логистические цепочки)"
+  },
+  "MainForm.lRegisterMasterPassword" : {
+    "en" : "Most of functions require the Master Password to be set",
+    "ru" : "Для работы большинства функций программы требуется задать Мастер- Пароль"
+  },
+  "MainForm.bRegisterMasterPassword" : {
+    "en" : "Create or Restore Master Password",
+    "ru" : "Создать или Восстановить Мастер Пароль"
+  },
+  "MainForm.JSONRPC_CANT_START_MESSAGE" : {
+    "en" : "JSON RPC Server can not be started: ",
+    "ru" : "Ошибка запуска сервера JSON RPC: "
+  },
+  "SignMessageForm" : {
+    "en" : "Sign Message",
+    "ru" : "Подписать сообщение"
+  },
+  "SignMessageForm.lDocForSign" : {
+    "en" : "Text for sign",
+    "ru" : "Текст для подписи"
+  },
+  "SignMessageForm.chIgnoreSigns" : {
+    "en" : "Ignore EMSIGN signatures",
+    "ru" : "Игнорировать подписи формата EMSIGN"
+  },
+  "SignMessageForm.chIgnoreSigns.Hint" : {
+    "en" : "Signatures like \"-----EMSIGN=XXXXX-----\" will be ignored.\n Use it for make multiply independed signatures",
+    "ru" : "Подписи формата \"-----EMSIGN=XXXXX-----\" будут проигнорированы.\nИспользуйте это для подписания документа многими независимыми лицами"
+  },
+  "SignMessageForm.chMakeupBeforeSign" : {
+    "en" : "Makeup text before sign",
+    "ru" : "Очистить текст перед подписанием"
+  },
+  "SignMessageForm.chMakeupBeforeSign.Hint" : {
+    "en" : "Turn it on for remove spaces at the end of lines and empty rows at the end.",
+    "ru" : "Включите эту опцию для удаления пробелов в конце строк и пустых строк в конце документа"
+  },
+  "SignMessageForm.lSignFormat" : {
+    "en" : "Signature format",
+    "ru" : "Формат подписи"
+  },
+  "SignMessageForm.rbsf_em" : {
+    "en" : "emsign (EmerAPI)",
+    "ru" : "emsign (EmerAPI)"
+  },
+  "SignMessageForm.rbsf_em.hint" : {
+    "en" : "Embedded EmerAPI format. The X.690 DER format signature with the public key, inserted at the end of the document with a new line in the form -----EMSIGN=XXX-----. \nMulti-signatures are admissible, the existing EMSIGN lines will not be signed.",
+    "ru" : "Встроенный формат EmerAPI. Подпись формата X.690 DER с публичным ключом включается в конец документа новой строкой в виде -----EMSIGN=XXX-----.\nДопустима мультиподпись, существующие строки EMSIGN не подписываются"
+  },
+  "SignMessageForm.rbsf_wallet" : {
+    "en" : "Wallet signature",
+    "ru" : "Подпись кошелька"
+  },
+  "SignMessageForm.rbsf_wallet.hint" : {
+    "en" : "Regular signature created by a Bitcoin or Emercoin wallet",
+    "ru" : "Обычная подпись, создаваемая кошельком Bitcoin или Emercoin"
+  },
+  "SignMessageForm.rbsf_em1" : {},
+  "SignMessageForm.rbsf_em1.hint" : {},
+  "CheckSignatureForm" : {
+    "en" : "Check Signature",
+    "ru" : "Проверка и добавление электронной подписи"
+  },
+  "CheckSignatureForm.lText" : {
+    "en" : "Text with the signature (if it is included)",
+    "ru" : "Текст с подписью (если она включена)"
+  },
+  "CheckSignatureForm.lSignature" : {
+    "en" : "Signature (if it is not included into the text)",
+    "ru" : "Подпись (если она не включена в текст)"
+  },
+  "CheckSignatureForm.lResult" : {
+    "en" : "Result of the signatures verification:",
+    "ru" : "Результат проверки подписей:"
+  },
+  "CheckSignatureForm.bClose" : {
+    "en" : "Close",
+    "ru" : "Закрыть окно"
+  },
+  "CheckSignatureForm.lbResult.passed" : {
+    "en" : "PASSED",
+    "ru" : "ПОДПИСЬ ВЕРНА"
+  },
+  "CheckSignatureForm.lbResult.failed" : {
+    "en" : "FAILED",
+    "ru" : "ПОДПИСЬ ОШИБОЧНА"
+  },
+  "CheckSignatureForm.lbResult.error" : {
+    "en" : "ERRONEOUS SIGNATURE TEXT",
+    "ru" : "ОШИБКА В ЗАПИСИ ПОДПИСИ"
+  },
+  "CheckSignatureForm.lbResult.noaddress" : {},
+  "CheckSignatureForm.lbResult.yourAddress" : {
+    "en" : "(YOUR ADDRESS)",
+    "ru" : "(ВАШ АДРЕС)"
+  },
+  "CheckSignatureForm.lDoISign.NotSigned" : {
+    "en" : "You did not sign the message",
+    "ru" : "Вы не подписывали этот текст"
+  },
+  "CheckSignatureForm.lDoISign.Signed" : {
+    "en" : "You have signed the message",
+    "ru" : "Этот текст подписан Вами"
+  },
+  "CheckSignatureForm.lbResult.errorBtcAddress" : {
+    "en" : "Wrong or absent Bitcoin adrress",
+    "ru" : "Ошибочный или отсутствующий адрес Bitcoin"
+  },
+  "CheckSignatureForm.lDoISign.SignedIncorrect" : {
+    "en" : "You have signed the message, but the signature is invalid",
+    "ru" : "Вы подписывали этот текст, но подпись не верна"
+  },
+  "CheckSignatureForm.lDoISign" : {
+    "en" : "You did not sign the message",
+    "ru" : "Вы не подписывали это сообщение"
+  },
+  "CheckSignatureForm.lDoISign.Yes" : {
+    "en" : "You have signed the message",
+    "ru" : "Это сообщение подписано Вами"
+  },
+  "CheckSignatureForm.bRemoveSign" : {
+    "en" : "Remove your signature",
+    "ru" : "Удалить Вашу подпись"
+  },
+  "CheckSignatureForm.bSign" : {
+    "en" : "Sign the message",
+    "ru" : "Подписать сообщение"
+  },
+  "CheckSignatureForm.chUnixEOL" : {
+    "en" : "Unix EOL (\\n)",
+    "ru" : "Unix концы строк (\\n)"
+  },
+  "AskForUPForm" : {
+    "en" : "Enter User Password",
+    "ru" : "Введите Пароль Пользователя"
+  },
+  "AskForUPForm.pHTML" : {
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><img src=\"IMG1\" align=\"right\"/><H3>Enter User Password</H3><p>To unlock your Private Key, you must enter your User Password.</p><p><i>The Private Key is stored on your computer in encrypted form. To access it, you must enter your User Password. After that, the Private Key will be unlocked for a while (or until the program is restarted)</i></p></BODY></HTML>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><img src=\"IMG1\" align=\"right\"/><H3>Введите Пароль Пользователя.</H3><p>Для разблокировки вашего Приватного Ключа требуется ввести Ваш Пароль Пользователя.</p><p><i>Приватный Ключ хранится на Вашем компьютере в зашифрованном виде. Для доступа к нему требуется ввести Пароль Пользователя. После этого Приватный Ключ будет разблокирован на некоторое время (или до перезапуска программы)</i></p></BODY></HTML>"
+  },
+  "AskForUPForm.WrongPassword" : {
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><img src=\"IMG2\" align=\"right\"/><H3>Enter correct User Password</H3><p>The password you entered is wrong. Please enter the correct User Password to decrypt the Private Key.</p><p>If you have forgotten your User Password, you can restore your Private Key using the previously saved Master Password. This can be done in the program settings.</p></BODY></HTML>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><img src=\"IMG2\" align=\"right\"/><H3>Введите верный Пароль Пользователя.</H3><p>Пароль, который Вы ввели, не подходит. Пожалуйста, введите верный Пароль Пользователя для расшифровки Приватного Ключа.</p><p>Если Вы забыли Пароль Пользователя, Вы можете восстановить Ваш Приватный Ключ, используя ранее сохраненный Мастер Пароль. Это можно сделать в настройках программы.</p></BODY></HTML>"
+  },
+  "QuestionForm.AskForMPTitle" : {
+    "en" : "Do you want to set up Master Password now?",
+    "ru" : "Вы хотите задать Мастер-Пароль сейчас?"
+  },
+  "QuestionForm.cLanguage.en" : {
+    "en" : "English",
+    "ru" : "English",
+    "zh" : "English",
+    "ua" : "English"
+  },
+  "QuestionForm.cLanguage.ru" : {
+    "en" : "Русский",
+    "ru" : "Русский",
+    "zh" : "Русский",
+    "ua" : "Русский"
+  },
+  "QuestionForm.cLanguage.zh" : {
+    "en" : "中文",
+    "ru" : "中文",
+    "zh" : "中文",
+    "ua" : "中文"
+  },
+  "QuestionForm.cLanguage.ua" : {
+    "en" : "Українська",
+    "ru" : "Українська",
+    "zh" : "Українська",
+    "ua" : "Українська"
+  },
+  "QuestionForm.bHelp" : {
+    "en" : "Help",
+    "ru" : "Справка"
+  },
+  "MessageHelpTopicIsNotFound" : {
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><img src=\"ICON1\" align=\"right\"/><H3>Help topic not found.</H3><p>Sorry, the requested help topic was not found. Perhaps this section has not yet been written, or an access error occurs.</p><a href=\"help://root\">More information about EmerAPI</a></BODY></HTML>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Раздел справки не найден.</H3><p>К сожалению, запрошенный раздел справки не найден. Возможно, этот раздел еще не написан, или возникает ошибка доступа.</p><a href=\"help://root\">Информация о проекте EmerAPI</a></BODY></HTML>"
+  },
+  "MessageAskForCreateOrEnterMPNow" : {
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><img src=\"ICON1\" align=\"right\"/><H3>Master Password is not set.</H3><br><br>To get started, you need to enter your existing Master Password or create a new Master Password.<br>Do you wish to open the Master Password creation wizard now?<br><br><a href=\"help://keeper_passwords_general\">More about EmerAPI Key Keeper passwords</a><br><a href=\"help://root\">More information about EmerAPI</a></BODY></HTML>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><img src=\"ICON1\" align=\"right\"/><H3>Мастер-пароль не задан.</H3><br><br>Для начала работы требуется ввести Ваш мастер-пароль или создать новый мастер-пароль.<br>Открыть мастер создания мастер-пароля?<br><br><a href=\"help://keeper_passwords_general\">Подробнее о системе паролей EmerAPI</a><br><a href=\"help://root\">Более подробная информация о системе EmerAPI</a></BODY></HTML>"
+  },
+  "MessageAskForLoginToServer" : {
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><img src=\"ICON1\" align=\"right\"/><H3>Address not recognized by server</H3><p>Your address is not recognized by the EmerAPI server. You need to register or enter an existing login and password to assign the new address to your account.</p><p>Do you want to open the login page now?</p></BODY></HTML>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Адрес не распознан сервером</H3><p>Ваш адрес не распознан сервером EmerAPI. Требуется зарегистрироваться или ввести существующий логин и пароль для сопоставления вашей учетной записи с новым адресом.</p><p>Вы хотите открыть страницу входа сейчас?</p></BODY></HTML>"
+  },
+  "MessageAskForLibPath" : {
+    "en" : "The OpenSSL library is required to run the program.\nThis library is usually located in the program folder, but now something went wrong.\nPlease specify the location of the OpenSSL library file.\n\nThe source codes and additional information you can find on https://www.openssl.org/",
+    "ru" : "Для работы программы требуется наличие библиотеки OpenSSL.\n Обычно эта библиотека расположена рядом с файлом запуска программы, но сейчас что-то пошло не так.\nПожалуйста, укажите расположение файла библиотеки OpenSSL.\n\nИсходные коды библиотеки и более подробную информацию Вы можете найти на стайте https://www.openssl.org/"
+  },
+  "MessageCantOpenLib" : {
+    "en" : "The OpenSSL library is required to run the program.\nThe file was not found, and the software cant be opened.\n\nThe source codes and additional information you can find on https://www.openssl.org/",
+    "ru" : "Для работы программы требуется наличие библиотеки OpenSSL.\n Без этой библиотеки работа программы невозможна. программа будет закрыта.\n\nИсходные коды библиотеки и более подробную информацию Вы можете найти на стайте https://www.openssl.org/"
+  },
+  "msgMasterPasswordHasWrongPK" : {
+    "en" : "There is no valid key for this Master Password",
+    "ru" : "Для введенного Мастер-Пароля не существует подходящего ключа"
+  },
+  "MessageAskExample" : {},
+  "mTagInvalidFloat" : {
+    "en" : "invalid float value",
+    "ru" : "недопустимое числовое значение"
+  },
+  "mTagInvalidDate" : {
+    "en" : "invalid date and time",
+    "ru" : "недопустимая дата и время"
+  },
+  "mTagInvalidInt" : {
+    "en" : "invalid integer value",
+    "ru" : "недопустимое целое число"
+  },
+  "mTagInvalidValue" : {
+    "en" : "Some fields have invalid values.\nPlease correct the values:",
+    "ru" : "Некоторые поля имеют недопустимые значения.\nПожалуйста, исправьте ошибочные значения:"
+  },
+  "newUserPass.defaultTitle" : {
+    "en" : "Please enter a new User Password:",
+    "ru" : "Пожалуйста, введите новый Пароль пользователя:"
+  },
+  "newUserPass.defaultMessage" : {
+    "en" : "To securely store a key pair (private key), you must set a user password.\nThis password will be requested each time you connect to the server or perform payment transactions.\nYou can use the password generator to create a secure password.",
+    "ru" : "Для безопасного хранения Ключевой Пары требуется задать пароль пользователя.\nЭтот пароль будет запрашиваться при каждом подключении к серверу или выполнении платежных операций.\nВы можете использовать генератор паролей для создания безопасного пароля."
+  },
+  "QuestionForm.bCancel" : {
+    "en" : "Cancel",
+    "ru" : "Отмена"
+  },
+  "QuestionForm.bNo" : {
+    "en" : "No",
+    "ru" : "Нет"
+  },
+  "QuestionForm.bYes" : {
+    "en" : "Yes",
+    "ru" : "Да"
+  },
+  "SettingsForm" : {
+    "en" : "Settings",
+    "ru" : "Настройки программы"
+  },
+  "SettingsForm.bCloseAndSave" : {
+    "en" : "Save And Close",
+    "ru" : "Закрыть с сохранением"
+  },
+  "SettingsForm.bReRead" : {
+    "en" : "Re-read settings",
+    "ru" : "Перечитать настройки"
+  },
+  "SettingsForm.bCloseNoSave" : {
+    "en" : "Close Without Saving",
+    "ru" : "Закрыть без сохранения"
+  },
+  "SettingsForm.gMainSettings" : {
+    "en" : "General settings",
+    "ru" : "Основные настройки"
+  },
+  "SettingsForm.gLocalWallet" : {
+    "en" : "Local wallet",
+    "ru" : "Локальный кошелек"
+  },
+  "SettingsForm.ssbUse_Local_Wallet" : {
+    "en" : "Use local waller",
+    "ru" : "Использовать локальный кошелек"
+  },
+  "SettingsForm.ssiLocal_Wallet_RPC_Port" : {
+    "en" : "RPC Port",
+    "ru" : "RPC порт"
+  },
+  "SettingsForm.sssLocal_Wallet_RPC_User_Name" : {
+    "en" : "RPC User Name",
+    "ru" : "RPC имя пользователя"
+  },
+  "SettingsForm.sssLocal_Wallet_RPC_Password" : {
+    "en" : "RPC Password",
+    "ru" : " Пароль"
+  },
+  "SettingsForm.bConfigureWallet" : {
+    "en" : "Configure Wallet for remore acceess (Admin)",
+    "ru" : "Настроить локальный кошелек для удаленного доступа (Admin)"
+  },
+  "SettingsForm.lWarningRPC" : {
+    "en" : "Opening Local Wallet RPC access could be unsafe. Please check the manual.",
+    "ru" : "Предоставление доступа к локальному кошельку может быть небезопасным. См. инструкцию."
+  },
+  "SettingsForm.ssKeep_Private_Key.ru" : {
+    "en" : "Keep private key on this computer",
+    "ru" : "Сохранять приватный ключ на этом компьютере"
+  },
+  "SettingsForm.ssbPrefer_Using_Local_Wallet.ru" : {
+    "en" : "Prefer using Local Wallet if possible (Recommended)",
+    "ru" : "Использовать локальный кошелек при исполнении запросов, если возможно (рекомендуется)"
+  },
+  "SettingsForm.bRestoreKeypair" : {
+    "en" : "Restore the Key Pair using your Master Password",
+    "ru" : "Восстановить Ключевую Пару по Вашему Мастер-Паролю"
+  },
+  "SettingsForm.ssbKeep_Private_Key" : {
+    "en" : "Keep Key Pair (private key) on this computer",
+    "ru" : "Сохранять Ключевую Пару (приватный ключ) на этом компьютере"
+  },
+  "SettingsForm.ssbLockKPAfter" : {
+    "en" : "Lock Key Pair after",
+    "ru" : "Блокировать Ключевую Пару через"
+  },
+  "SettingsForm.lLockPKTime" : {
+    "en" : "minutes of non-use",
+    "ru" : " минут неиспользования"
+  },
+  "SettingsForm.ssbConnect_To_EmerAPI_Server_After_Start" : {
+    "en" : "Connect to EmerAPI server after start",
+    "ru" : "Подключаться к серверу EmerAPI после запуска программы"
+  },
+  "SettingsForm.askForConfim_developing_mode" : {
+    "en" : "Enabling this feature allows you to perform actions the careless use of which may cause damage.\nDo not turn it on if you are not sure if it is necessary.\nTo enable developer functionality, write literally \"I UNDERSTAND THE RISK AND AGREE\" in the field below and click \"OK\"",
+    "ru" : "Включение этой функции позволит Вам совершать действие, неосторожное применение которых может причинить ущерб.\nНе включайте это если точно не уверены, что это необходимо.\nДля включения функционала разработчика напишите дословно \"Я ПОНИМАЮ РИСК И СОГЛАСЕН\" в поле ниже и нажмите \"Ок\""
+  },
+  "SettingsForm.askForConfim_Wished_Text" : {
+    "en" : "I UNDERSTAND THE RISK AND AGREE",
+    "ru" : "Я ПОНИМАЮ РИСК И СОГЛАСЕН"
+  },
+  "SettingsForm.bSetEmerAPIDefault" : {
+    "en" : "Set default",
+    "ru" : "По умолчанию"
+  },
+  "SettingsForm.sssEmerAPI_server_address" : {
+    "en" : "EmerAPI server address",
+    "ru" : "Адрес сервера EmerAPI"
+  },
+  "SettingsForm.lMaxSimConWallet" : {
+    "en" : "Max. simultaneous connections",
+    "ru" : " Макс. число подключений"
+  },
+  "SettingsForm.lMaxSimConServer" : {
+    "en" : "Max. simultaneous connections",
+    "ru" : " Макс. число подключений"
+  },
+  "SettingsForm.sssDev_Bip32_path" : {
+    "en" : "HD key derive path",
+    "ru" : "Путь HD ключей"
+  },
+  "SettingsForm.sssDev_Bip32_salt" : {
+    "en" : "HD key salt",
+    "ru" : "Соль HD ключей"
+  },
+  "SettingsForm.ssbHide_To_Tray" : {
+    "en" : "Hide to tray",
+    "ru" : "Сворачивать в трей"
+  },
+  "SettingsForm.gJSONRPC" : {
+    "en" : "JSONRPC remote connection",
+    "ru" : "JSONRPC удаленное подключение"
+  },
+  "SettingsForm.ssbJSONPRC_allowed" : {
+    "en" : "Allow JSONRPC connection",
+    "ru" : "Разрешить подключение по JSONRPC"
+  },
+  "SettingsForm.lJSONPRC_port" : {
+    "en" : "JSONRPC port",
+    "ru" : "JSONRPC порт"
+  },
+  "SettingsForm.lJSONPRC_timeout" : {
+    "en" : "JSONRPC timeout",
+    "ru" : "JSONRPC таймаут"
+  },
+  "SettingsForm.ssbJSONRPC_Allow_Nonlocal" : {
+    "en" : "Allow non-local connections",
+    "ru" : "Разрешить внешние подключения"
+  },
+  "SettingsForm.ssbJSONRPC_filter_commands" : {
+    "en" : "Allow only commands:",
+    "ru" : "Разрешить только команды:"
+  },
+  "SettingsForm.ssbJSONRPC_Allow_Only" : {
+    "en" : "Allow only for IPs:",
+    "ru" : "Разрешить только IP адреса:"
+  },
+  "SettingsForm.msgSetUPnow" : {
+    "en" : "The option to save a key pair on this computer is enabled.\nTo securely store a key pair (private key), you must set a user password.\nIf the password is not set, saving will not occur.\nThis password will be requested each time you connect to the server or perform payment transactions.\nYou can use the password generator to create a secure password.",
+    "ru" : "Опция сохранения ключевой пары на этом компьютере включена.\nДля безопасного хранения Ключевой Пары требуется задать пароль пользователя.\nЕсли пароль не будет задан, сохранение не произойдет.\nЭтот пароль будет запрашиваться при каждом подключении к серверу или выполнении платежных операций.\nВы можете использовать генератор паролей для создания безопасного пароля."
+  },
+  "SettingsForm.MsgUPChanged" : {
+    "en" : "<H3>New user password is set, but not saved.</H3>Save the settings for the new password to take effect.",
+    "ru" : "<H3>Новый пароль пользователя задан, но не сохранен.</H3>Сохраните настройки для вступления нового пароля в силу."
+  },
+  "MessageInfoWeakMasterPassword" : {
+    "en" : "The Master Password you entered is not secure enough. We recommend creating a new Master Password and transferring all digital assets to the new address. Using low-security passwords compromises the security of your data. See the details in the help system.",
+    "ru" : "Использованный мастер- пароль недостаточно надежен.\nМы рекомендуем создать новый мастер- пароль и перенести все цифровые активы на новый адрес. Использование низконадежных паролей ставит под угрозу безопасность Ваших данных. Смотрите подробности в справочной системе."
+  },
+  "MessageInfoWeakUserPassword" : {
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>User Password is not strong enough</H2>The User Password is not strong enough.<BR>You must set a User Password with a rating of at least 20 points (recommended more than 25 points).</BODY></HTML>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Пароль Пользователя недостаточно надежен</H2>Пароль пользователя, выбранный Вами, недостаточно надежен.<BR>Необходимо задать пароль пользователя с оценкой не менее 20 баллов, рекомендовано - не менее 25 баллов.</BODY></HTML>"
+  },
+  "SettingsForm.sssLanguage.en" : {
+    "en" : "English",
+    "ru" : "English",
+    "zh" : "English",
+    "ua" : "English"
+  },
+  "SettingsForm.sssLanguage.ru" : {
+    "en" : "Русский",
+    "ru" : "Русский",
+    "zh" : "Русский",
+    "ua" : "Русский"
+  },
+  "SettingsForm.sssLanguage.zh" : {
+    "en" : "中文",
+    "ru" : "中文",
+    "zh" : "中文",
+    "ua" : "中文"
+  },
+  "SettingsForm.sssLanguage.ua" : {
+    "en" : "Українська",
+    "ru" : "Українська",
+    "zh" : "Українська",
+    "ua" : "Українська"
+  },
+  "setUPForm.lExplain" : {
+    "en" : "Some fields have invalid values.\nPlease correct the values:",
+    "ru" : "Вы создаете новый пароль пользователя."
+  },
+  "PasswordHelper.KillListWord" : {
+    "en" : "Killlist word found:",
+    "ru" : "Найдено слово из расстрельного списка:"
+  },
+  "PasswordHelper.KillListWordHidden" : {
+    "en" : "Hidden killlist word found:",
+    "ru" : "Найдено скрытое слово из расстрельного списка:"
+  },
+  "PasswordHelper.DigitsEnd" : {
+    "en" : "Your password ends in numbers, but does not contain numbers inside:",
+    "ru" : "Ваш пароль заканчивается на цифры, но не содержит цифр внутри:"
+  },
+  "PasswordHelper.End1" : {
+    "en" : "Your password ends in `1`:",
+    "ru" : "Ваш пароль заканчивается на единицу:"
+  },
+  "PasswordHelper.BigUnicodeBonus" : {
+    "en" : "Used international characters with a large set (Chinese characters, etc.):",
+    "ru" : "Использованы международные символы с большим набором (китайские иероглифы и т.д.):"
+  },
+  "MainForm.cTest.One" : {
+    "en" : "One",
+    "ru" : "Один",
+    "zh" : "Yi"
+  },
+  "MainForm.cTest.Two" : {
+    "en" : "Two",
+    "ru" : "Два",
+    "zh" : "Er"
+  },
+  "MainForm.cTest.Three" : {
+    "en" : "Three",
+    "ru" : "Три",
+    "zh" : "San"
+  },
+  "MasterPasswordWizardForm.tsAskForMasterPassRB1" : {
+    "en" : "I have my Master Password created before",
+    "ru" : "У меня уже есть Мастер Пароль, созданный ранее"
+  },
+  "MasterPasswordWizardForm.tsAskForMasterPassRB2" : {
+    "en" : "I want to create a new Master Password",
+    "ru" : "Создать новый Мастер Пароль сейчас"
+  },
+  "MasterPasswordWizardForm.tsRestoreMasterPassCSetupServer" : {
+    "en" : "Setup EmerAPI Server now",
+    "ru" : "Настроить подключение к серверу EmerAPI сейчас"
+  },
+  "MasterPasswordWizardForm.tsCreateNewMasterPass1RB1" : {
+    "en" : "Standart 12-words \"BIP32\" master password (recommended)",
+    "ru" : "Стандатный Мастер-Пароль из 12 слов (рекомендуется)"
+  },
+  "MasterPasswordWizardForm.tsCreateNewMasterPass1RB2" : {
+    "en" : "I want to use my own \"brain\" password (could be not safe!)",
+    "ru" : "Ваш собственный \"Брейн- пароль\" (не рекомендуется, может быть небезопасно)"
+  },
+  "MasterPasswordWizardForm.PasswordIsEmpty" : {
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Password can not be empty</H3>Please enter your previously created Master Password in the input field at the bottom of the page.</BODY></HTML>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Пароль не может быть пустым</H3>Введите ранее созданный Мастер-Пароль в поле ввода внизу страницы</BODY></HTML>"
+  },
+  "MasterPasswordWizardForm.bFinish" : {
+    "en" : "Finish",
+    "ru" : "Закончить"
+  },
+  "MasterPasswordWizardForm.bPrev" : {
+    "en" : "Back",
+    "ru" : "Назад"
+  },
+  "MasterPasswordWizardForm.bNext" : {
+    "en" : "Next",
+    "ru" : "Далее"
+  },
+  "MasterPasswordWizardForm.bClose" : {
+    "en" : "Close",
+    "ru" : "Закрыть"
+  },
+  "MasterPasswordWizardForm.bHelp" : {
+    "en" : "Help",
+    "ru" : "Справка"
+  },
+  "MasterPasswordWizardForm.tsCreateMasterPass12wlW1" : {
+    "en" : "Word 1",
+    "ru" : "Слово 1"
+  },
+  "MasterPasswordWizardForm.tsCreateMasterPass12wlW2" : {
+    "en" : "Word 2",
+    "ru" : "Слово 2"
+  },
+  "MasterPasswordWizardForm.tsCreateMasterPass12wlW3" : {
+    "en" : "Word 3",
+    "ru" : "Слово 3"
+  },
+  "MasterPasswordWizardForm.tsCreateMasterPass12wlW4" : {
+    "en" : "Word 4",
+    "ru" : "Слово 4"
+  },
+  "MasterPasswordWizardForm.tsCreateMasterPass12wlW5" : {
+    "en" : "Word 5",
+    "ru" : "Слово 5"
+  },
+  "MasterPasswordWizardForm.tsCreateMasterPass12wlW6" : {
+    "en" : "Word 6",
+    "ru" : "Слово 6"
+  },
+  "MasterPasswordWizardForm.tsCreateMasterPass12wlW7" : {
+    "en" : "Word 7",
+    "ru" : "Слово 7"
+  },
+  "MasterPasswordWizardForm.tsCreateMasterPass12wlW8" : {
+    "en" : "Word 8",
+    "ru" : "Слово 8"
+  },
+  "MasterPasswordWizardForm.tsCreateMasterPass12wlW9" : {
+    "en" : "Word 9",
+    "ru" : "Слово 9"
+  },
+  "MasterPasswordWizardForm.tsCreateMasterPass12wlW10" : {
+    "en" : "Word 10",
+    "ru" : "Слово 10"
+  },
+  "MasterPasswordWizardForm.tsCreateMasterPass12wlW11" : {
+    "en" : "Word 11",
+    "ru" : "Слово 11"
+  },
+  "MasterPasswordWizardForm.tsCreateMasterPass12wlW12" : {
+    "en" : "Word 12",
+    "ru" : "Слово 12"
+  },
+  "MasterPasswordWizardForm.tsSetUserPassPanelCDoNotSave" : {
+    "en" : "I don`t want to save my Master Password on this computer",
+    "ru" : "Я не хочу сохранять Мастер-Пароль на этом компьютере"
+  },
+  "MasterPasswordWizardForm.tsCreateMasterPassFreeFormchShowPassword" : {
+    "en" : "Show password",
+    "ru" : "Показать пароль"
+  },
+  "MasterPasswordWizardForm.tsSetUserPasschShowPassword" : {
+    "en" : "Show password",
+    "ru" : "Показать пароль"
+  },
+  "MasterPasswordWizardForm.PasswordsNotTheSame" : {
+    "en" : "The passwords you entered are not the same",
+    "ru" : "Копии паролей не совпадают"
+  },
+  "MasterPasswordWizardForm.bShowUserPasswordGenerator" : {
+    "en" : "Show generator",
+    "ru" : "Генератор..."
+  },
+  "MasterPasswordWizardForm.bGenerateUserPass" : {
+    "en" : "Generate",
+    "ru" : "Сгенерировать"
+  },
+  "GuidePages.tsCheckMasterPassPanel" : {
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Master Password Verification</H2>Please enter the newly created Master Password in the field below.<br>This is necessary to verify the correctness of your records.<br>Make sure that all the password entries are correct and various readings of them are not possible.<br><B>In the future, there will be no way to see the Master Password in the program again.</ B><br>After successfully entering the Master Password, we will create a User Password.</BODY></HTML>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Проверка Мастер-Пароля</H2>Пожалуйста введите только что созданный Мастер-Пароль в поле ниже.Это необходимо для проверки правильности Ваших записей.<br>Убедитесь, что записи пароля сделаны верно и не допускают различных прочтений.<br><B>В будущем не будет никакого способа снова увидеть Мастер-Пароль в программе.</B><br>После успешного ввода Мастер-Пароля мы перейдем к заданию Пароля Пользователя.<br></BODY></HTML>"
+  },
+  "MessageInfoMasterPasswordIsNotABIP39Password" : {
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Password is not BIP32 password</H3><P>We recommend using randomly generated BIP32 passwords, as they provide the most security.</P><P>The password you entered is not a standard BIP32 password (12 words from the dictionary). Are you sure this is correct?</P></BODY></HTML>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Пароль не являeтся BIP32 паролем</H3><P>Мы рекомендуем использовать случайно сгенерированные BIP32 пароли, так как они обеспечивают наибольшую безопасность.</P><P>Введенный вами пароль не является стандартным паролем BIP32 (12 слов из словаря). Вы уверены, что это правильно?</P></BODY></HTML>"
+  },
+  "msgServerNetworkSettingsDifferent" : {
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>The server has requested network settings changing.</H2><p>If you do not understand the meaning of this message or did not change the network settings on your own and do not develop software,<b>answer \"NO\" to this request.</b>After that, make sure you are using the latest version of the software and are using the correct network settings. Turn off the developer mode in the settings, if it is enabled.</p><p>The server reports that it is working with the settings for connecting to the blockchain network other than the current ones. The server may be running on a test network or not on an Emer network.<br>When accepting the settings reported by the server, the developer mode will automatically turn on.<br>Attention! Careless actions in developer mode can lead to data loss.</p><P><B>DO NOT WORK WITH REAL DATA IN DEVELOPER MODE!</B></P><p>Change the settings to the proposed by the server?</p></BODY></HTML>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Сервер запросил подключение к другой сети</H2><p>Если Вы не понимаете смысл этого сообщения либо не изменяли настройки сети самостоятельно и не занимаетесь разработкой программного обеспечения -<b>ответьте \"НЕТ\" на этот запрос</b>. После этого убедитесь, что используете последнюю версию программного обеспечения и используются верные настройки сети. Отключите режим разработчика в настройках, если он включен.</p><p>Сервер сообщает, что работает с настройками подключения к блокчейн- сети, отличными от текущих. Возможно, сервер работает в тестовой сети или не в сети Эмер.</p><p>При принятии настроек, сообщенных сервером, произойдет автоматическое включение режима разработчика.<br>Внимание! Неосторожные действия в режиме разработчика могут привести к потерям данных.</p><P><B>НЕ РАБОТАЙТЕ С РЕАЛЬНЫМИ ДАННЫМИ В РЕЖИМЕ РАЗРАБОТЧИКА!</B></P><p>Изменить настройки на предлагаемые сервером?</p></BODY></HTML>"
+  },
+  "GuidePages.tsSetUserPassPanel" : {
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Set a desired User Password</H2>The Private Key created on the basis of your Master Password will be saved on this computer. Thus, you do not have to enter the Master Password every time you need access to your secret data.To protect them, the User Password will be used.<BR><BR><B>The User Password will be required each time</B>when you use the program to perform operations on your digital assets. Thus, it should be convenient for memorizing and frequent input.<BR>You can avoid the need to constantly enter the User Password using hardware wallets compatible with EmerAPI.<BR><BR><B>Enter your User Password in the \"password\" field</B>(if you use asterisks to hide the password, you will need to enter it twice).The system will automatically evaluate the quality of the password. It is unacceptable to use a User Password with a rating below 20, a rating of at least 25 points is strongly recommended (rating is the decimal logarithm of the password entropy)<BR>You can use the built-in password generator to facilitate the creation of a new password. It is recommended because it significantly increases the strength of the password while maintaining its length.</BODY></HTML>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Задайте желаемый Пароль Пользователя</H2>Приватный Ключ, созданный на основе Мастер- Пароля, будет сохранен на этом компьютере. Таким образом, Вам не придется вводить Мастер-Пароль каждый раз, когда требуется доступ к секретным данным.Для его защиты будет использован Пароль Пользователя.<BR><BR><B>Пароль Пользователя потребуется вводить каждый раз</B>, когда Вы используете программу для выполнения операций над Вашими цифровыми активами. Таким образом, он должен быть удобен для запоминания и частого ввода.<BR>Избежать необходимости постоянного ввода Пароля Пользователя можно используя аппаратные кошельки, совместимые с EmerAPI.<BR><BR><B>Введите желаемый Пароль Пользователя в поле \"пароль\"</B>(если Вы используете скрытие пароля звездочками, то потребуется ввести его два раза).Система автоматически оценит качество пароля. Недопустимо использование Пароля Пользователя с оценкой ниже 20, настоятельно рекомендуется оценка не ниже 25 баллов (оценка является десятичным логарифмом энтропии пароля)<br>Вы можете использовать встроенные генератор паролей для облегчения создания нового пароля. Мы рекомендуем поступить именно так, так как это существенно повышает надежность пароля при сохранении его длины.</BODY></HTML>"
+  },
+  "GuidePages.tsSetPassDoneFinishPanel" : {
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Private Key has been created and saved on this computer.</H2>On the basis of the Master Password, the Private Key was successfully created. The Private Key is stored on this computer in encrypted form, and the User Password must be entered to decrypt it.<br>Keep the Master Password safe, data recovery is possible only with it`s using.<br>If you forget the User Password, it will be possible to recover all information using the Master Password.</BODY></HTML>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Приватный ключ создан и сохранён на этом компьютере.</H2>На базе Мастер- Пароля был успешно создан Приватный Ключ. Этот Приватный Ключ сохранен на этом компьютере в зашифрованном виде, для его расшифровки используется Пароль Пользователя.<br>Бережно храните Мастер- Пароль, восстановление информации возможно только с его использованием.<br>Если Вы забудете Пароль Пользователя, можно будет восстановить всю информацию, использовав Мастер- Пароль.</BODY></HTML>"
+  },
+  "GuidePages.tsSetPassDoneContinuePanel" : {
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Private Key has been created and saved on this computer.</H2>On the basis of the Master Password, the Private Key was successfully created. The Private Key is stored on this computer in encrypted form, and the User Password must be entered to decrypt it.<br>Keep the Master Password safe, data recovery is possible only with it`s using.<br>If you forget the User Password, it will be possible to recover all information using the Master Password.<H3>To access all system features, you need to set up a user connection to the EmerAPI server</H3>To do this, you will need to enter your username and password, if any, or register a new user.Do you want to do it right now?</BODY></HTML>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Приватный ключ создан и сохранён на этом компьютере.</H2>На базе Мастер- Пароля был успешно создан Приватный Ключ. Этот Приватный Ключ сохранен на этом компьютере в зашифрованном виде, для его расшифровки используется Пароль Пользователя.<br>Бережно храните Мастер- Пароль, восстановление информации возможно только с его использованием.<br>Если Вы забудете Пароль Пользователя, можно будет восстановить всю информацию, использовав Мастер- Пароль.<H3>Для доступа ко всем возможностям системы необходимо настроить пользовательское подключение к серверу EmerAPI</H3>Для этого Вам потребуется ввести Ваши имя пользователя и пароль, если они имеются, или зарегистрировать нового пользователя.Хотите ли Вы сделать это прямо сейчас?</BODY></HTML>"
+  },
+  "GuidePages.tsCreateMasterPassFreeFormPanel" : {
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Free-form Master Password creation</H2>Attention! Brain passwords may not be secure. Their usage is not recommended. Go back and choose a standard password if you are not sure that you want to create a \"brain password\".<br><br>On this step you can create a \"brain-password\" (free-form password) to recover your Private Key.<br>Safety requirements do not allow using of sequences with a score below 30 points as a Master Password. We recommend creating sequences of at least 40-point complexity (which roughly corresponds to the complexity of the standard BIP39 password) or higher.<BR><B>If the system highly evaluate your password, it does not mean that it is secure</B><BR>For example, if you use the address of your company as a password, it will be rated as reliable, because the system does not know all the addresses of the planet and cannot track them. However, the attacker will easily crack such a password.<BR><i><h5>Technical Information:</h5>The system automatically evaluates password strength as the decimal logarithm of entropy. For example, a password with an entropy of 10 bits will have 1024 possible combinations, which is approximately equal to 10 ** 3, so such a password will be rated at 3 points.It is easy to assume that one point is equal to one digit when using a password consisting of one digit only.<br>Based on the entered password, the standard 128-bit entropy BIP32 will be created.<br>For this, the entered password will be hashed using the SHA256 algorithm, and the first 16 bytes of the received hash will be used as the entropy bits.If in the future you need compatibility with other products, for example, with an Emercoin Secure wallet, you can create a BIP39 phrase based on this entropy that can be loaded into this wallet.<br>The hierarchical derivative m/0/0 is used as the main private key.<br>This uses the word BIP32 encryption \"witnesskey\" to ensure compatibility with other Emercoin wallets (Electrum uses the word \"mnemonic”)<br>These and other settings can be changed by switching the program to the developer mode.<br>The system also maintains a simplified private key generation system, in which SHA256 password hashes are used as the private keys. Switch this application into the developer mode to enable this feature.</i></BODY></HTML>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Создание Мастер - Пароля в свободной форме</H2>Внимание! Брейн- пароли могут быть небезопасны. Их использование не рекомендуется. Вернитесь на шаг назад и выберите стандартный пароль если Вы не уверены, что хотите создать именно брейн-пароль.<br><br>В этом окне Вы можете создать \"брейн-пароль\" (пароль в свободной форме) для восстановления Вашего Приватного Ключа.<br>Требования надежности не позволяют использовать в качестве Мастер- Пароля последовательности с оценкой ниже 30 баллов. Мы рекомендуем создавать последовательности как минимум 40-балльной сложности (что примерно соответствует сложности стандартного пароля BIP39) или выше.<BR><B>Если система высоко оценила Ваш пароль, это не значит, что он надежен</B><BR>Например, если Вы используете в качестве пароля адрес вашей компании, он будет оценен как надежный, т.к. система не знает все адреса планеты и не может их отследить. Тем не менее, злоумышленник легко подберет такой пароль.<BR><i><h5>Техническая информация:</h5>Система автоматически оценивает надежность пароля как десятичный логарифм энтропии. Например, пароль с неопределенностью 10 бит будет иметь 1024 возможных комбинации, что примерно равно 10**3, т.к. такой пароль будет оценен на 3 балла.Упрощенно можно считать что один балл равен одной цифре при использовании пароля, состоящего из одних цифр. На основании введенного пароля будет создан стандартная 128-битная энтропия BIP32. Для этого введенный пароль будет прохеширован по алгоритму SHA256, и первые 16 байт полученного хеша будут использованы в качестве битов энтропии.Если в будущем Вам потребуется совместимость с другими продуктами, например, с кошельком Emercoin Secure, можно будет на основании этой энтропии создать BIP39 фразу, которая может быть загружена в этот кошелек.<br>В качестве основного приватного ключа используется иерархический дериватив m/0/0<br>При этом используется слово шифрования BIP32 \"witnesskey\" для обеспечения совместимости с другими кошельками Эмеркоин (Электрум использует слово \"mnemonic\")<br>Эти и другие настройки могут быть изменены при переводе программы в режим разработчика.<br>Системой также поддерживается упрощенная система генерации приватных ключей, при которой в качестве приватного ключа используется просто SHA256 хеш пароля. Включение данного режима возможно при переводе этого приложения в режим разработчика.</i></BODY></HTML>"
+  },
+  "GuidePages.tsAskForMasterPassPanel" : {
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Welcome to the Master Password Configuration Wizard.</H2><BR>Data that will be created in the future during the operation of this program must be reliably protected. For this purpose, a number of reliable cryptographic algorithms are used. The program itself will create all the necessary keys, and all of them will be created on the basis of one main secret, called the Master Password. The Master Password itself will not be stored in the program. Keys created on its basis can be stored on this computer. All stored keys will be encrypted with another password, called the Account Password.<BR>We must create or restore your Private Key, which provides access to all functions of the system.<BR>Master Password is used to restore the Private Key. If you have already created the Private Key and you have the Master Password, you can restore access to all resources by entering it. Otherwise, to get started, you must create a new Private Key and Master Password.<BR>After that, you will be asked to save the Private Key, created by the system based on your Master Password, on this computer.<BR>The private key is stored in encrypted form, and the User Password is used to decrypt it.You will need to enter a User Password every time you need to complete a payment or digital property management operation.<BR><H3>Important notes about complexity and storing the passwords</H3>If nothing unexpected happens and you do not need to install the program on another device, you will never have to enter the Master Password ever. But, if the computer is damaged or the User Password is lost, entering the Master Password will be the only way to restore access to your assets. No other recovery methods will be possible. Thus, it is VERY IMPORTANT to SAFELY KEEP the Master Password, but you do not need to store it in a place with easy access. You can, for example, store it in a bank safe deposit box.<BR>After creating (or entering) the Master Password, you will be prompted to create a User Password. This password will be used to access your secret data every time you needed it. You will need to enter this password often, but it may be less complicated because with its access to data can be obtained only with the presence of this computer.<BR><BR>The system allows using any reliable phrase (“brain-password”) as a Master Password.<BR>However, we strongly recommend NOT TO USE “Brain Passwords”), but use the standard 12-word password offered by the program.More details about working with passwords can be found in the help.<BR><BR><H3>Important notes about the safe environment</H3>Before creating a password, make sure the environment is safe. There are no other people in the room, your monitor or keyboard cannot be seen through the window and you are not in the field of view of surveillance cameras. After that, specify the desired type of password and click “next”.</BODY></HTML>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Добро пожаловать в мастер конфигурации Мастер -Пароля.</H2><BR>Данные, которые будут созданы в будущем в процессе работы этой программы, должны быть надежно защищены. Для этого используется ряд надежных криптографических алгоритмов. Программа сама создаст все необходимые ключи,и все они будут созданы на базе одного главного секрета, называемого Мастер- Пароль. Сам Мастер-Пароль не будет храниться в программе. Ключи, созданные на его основе, могут храниться на этом компьютере. Все хранимые ключи будут зашифрованы с помощью еще одного пароля, называемого Паролем Пользователя.<BR><BR>Мастер Пароль используется только для восстановления Приватного Ключа. Если Вы уже создавали Приватный Ключ и у Вас есть Мастер Пароль, вы можете восстановить доступ ко всем ресурсам, введя его. В противном случае, для начала работы необходимо создать новый Приватный Ключ и Мастер Пароль для его восстановления.<BR>После этого Вам будет предложено сохранить Приватный Ключ, который система создаст на основании Вашего Мастер- Пароля, на этом компьютере.<BR>Приватный ключ сохраняется в зашифрованном виде, и для его расшифровки используется Пароль Пользователя.<BR>Вам потребуется вводить Пароль Пользователя каждый раз, когда будет нужно совершить платежную операцию или операцию управления цифровой собственностью.<BR><H3>Важные замечания о сложности и хранении паролей:</H3>Если не случится ничего непредвиденного и не потребуется установка программы на другое устройство, Вам не придётся вводить Мастер Пароль никогда. Но, если компьютер будет поврежден или Пароль Пользователя будет утрачен, ввод Мастер Пароля будет единственным способов восстановить доступ к Вашим активам. Никакие другие способы восстановления будут невозможны. Таким образом, ОЧЕНЬ ВАЖНО НАДЕЖНО СОХРАНИТЬ Мастер- Пароль, но не требуется хранить его в месте с легким доступом. Вы можете, например, хранить его в банковской сейфовой ячейке.<BR>После создания Мастер - Пароля (или его ввода) Вам будет предложено создать Пароль Пользователя. Этот пароль будет использован для доступа к вашим секретным данным каждый раз, когда это будет необходимо. Этот пароль потребуется вводить часто, но он может быть менее сложен, т.к. с его помощью доступ к данным можно получить только при наличии этого компьютера.<BR><BR>Система позволяет использовать в качестве Мастер- Пароля любую надежную фразу (“брейн- пароль”).<BR>Тем не менее, мы настоятельно рекомендуем НЕ ИСПОЛЬЗОВАТЬ “брейн-пароли”), а воспользоваться стандартным паролем из 12 слов, предлагаемым программой. Более подробно про работу с паролями можно прочитать в справке<BR><BR><H3>Важные замечания о безопасности среды</H3>Перед созданием пароля убедитесь, что окружающая среда безопасна. В помещении отсутствуют другие люди, Ваш монитор или клавиатуру нельзя увидеть через окно и Вы не находитесь в поле зрения камер видеонаблюдения. После этого укажите желаемый тип пароля и нажмите кнопку “далее”.<BR><BR></BODY></HTML>"
+  },
+  "GuidePages.tsRestoreMasterPassPanel" : {
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Private Key recovering</H2>Enter the previously saved Master Password in the field below.<BR>Make sure you are alone in the room and no one can see the keyboard or monitor.<BR>Remove the monitor from the window.<BR>Make sure that the monitor and keyboard are outside surveillance camera areas.</BODY></HTML>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Восстановление Приватного Ключа</H2>Введите ранее сохраненный Мастер Пароль в поле внизу.<BR><BR>Убедитесь, что Вы одни в комнате, и никто не может видеть клавиатуру или монитор.<BR>Отверните монитор от окна.<BR>Убедитесь, что монитор и клавиатура находятся вне зоны камер наблюдения<BR></BODY></HTML>"
+  },
+  "GuidePages.tsCreateNewMasterPass1Panel" : {
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Welcome to the Master Password Creation Wizard.</H2>This wizard lets you create a new Master Password and securely save it. After that you will be asked to create a user password which provides access to the Private Key generated using Master Password.<BR>The system allows using any reliable phrase (“brain-password”) as a Master Password.However, we strongly recommend NOT TO USE “Brain Passwords”), but<B>use the standard 12-word password</B>offered by the program.<BR>More details about working with passwords can be found in the help.<BR><BR>Before creating a password, make sure the environment is safe. There are no other people in the room, your monitor or keyboard cannot be seen through the window and you are not in the field of view of surveillance cameras. After that, specify the desired type of password and click “next”.<BR><BR><h4>During the wizard, we will create two passwords:</h4><ol><li>Master Password. It is used only for recovery and should be kept in a safe place. Commonly used Master Passwords consisting of 12 random English words (recommended).<B>Master Password cannot be changed in the future.</B></li><li>User password. It will be entered into the program to perform payment functions or transfer digital assets every time you need it. It could be convenient for typing and remembering. User password can be changed in the future.</li></ol></BODY></HTML>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Добро пожаловать в мастер создания Мастер Пароля.</H2>С помощью данного мастера Вы сможете создать новый Мастер- Пароль, надежно сохранить его и обеспечить доступ к Приватному Ключу, полученному на его основе, с помощью еще одного пароля - Пароля Пользователя.<BR><BR>Система позволяет использовать в качестве Мастер- Пароля любую надежную фразу (“брейн- пароль”).<BR>Тем не менее, мы настоятельно рекомендуем НЕ ИСПОЛЬЗОВАТЬ “брейн-пароли”, а<B>воспользоваться стандартным паролем из 12 слов</B>, предлагаемым программой.<BR>Более подробно про работу с паролями можно прочитать в справке<BR><BR>Перед созданием пароля убедитесь, что окружающая среда безопасна. В помещении отсутствуют другие люди, Ваш монитор или клавиатуру нельзя увидеть через окно и Вы не находитесь в поле зрения камер видеонаблюдения. После этого укажите желаемый тип пароля и нажмите кнопку “далее”.<BR><BR><h4>В процессе работы мастера мы создадим два пароля:</h4><ol><li>Мастер-Пароль. Он используется только для восстановления доступа и должен храниться в надежном месте. Обычно используются Мастер-Пароли, состоящие из 12 случайных английских слов (рекомендуется).<B>Мастер-Пароль нельзя поменять в будущем</B></li><li>Пароль пользователя. Он будет вводиться в программе для выполнения платежных функций или передачи цифровых активов. Обычно используется удобный для набора и запоминания пароль. Пароль пользователя можно будет поменять в будущем.</li></ol></BODY></HTML>"
+  },
+  "GuidePages.tsCreateMasterPass12wPanel" : {
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>New Master Password has been created.</H2>Record the Master Password created by the system. In the future, it will be required if you want to use the program on another device.Write down the 12 words below (order is important) in more than one place and click \"Next\".You will be prompted to enter the Master Password for verification on the next screen.After verification, save copies of the Master-Password records in accordance with the recommendations below.<H3>Recommendations for reliable storage of the Master Password:</H3><ul><li>Create multiple copies of the Master Password. In this case, if one record is lost, your Master Password will not be lost. All copies must be kept in safe locations.</li><li>It is not necessary to store the Master Password in places that can be quickly accessed. You can store a copy of the Master Password, for example, in a safe deposit box</li><li>Do not store the Master Password on this computer!</li><li>You can split the Master Password into parts to ask your confidants to save these parts for you. Use the utility to safely save Master Passwords for this.</li></ul></BODY></HTML>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Создан новый Мастер- Пароль.</H2>Сохраните Мастер- Пароль, созданный системой. В дальнейшем он потребуется в случае, если Вы захотите использовать программу на другом устройстве.Запишите 12 слов, приведенных ниже (порядок следования важен) более чем в одном месте и нажмите \"Далее\".Вам будет предложено ввести Мастер- Пароль для проверки.После проверки сохраните копии записей Мастер- Пароля в соответствии с приведенными ниже рекомендациями.<H3>Рекомендации по надежному хранению Мастер-Пароля:</H3><ul><li>Создайте несколько копий Мастер-Пароля. В этом случае при потере одной копии записи Мастер-Пароль не будет потерян. Все копии должны храниться в безопасных местах</li><li>Мастер-Пароль не обязательно хранить в местах, к которым возможен быстрый доступ. Вы можете хранить копию Мастер-Пароля, например, в депозитной банковской ячейке</li><li>Не храните Мастер- Пароль на этом компьютере!</li><li>Вы можете разделить Мастер- Пароль на части попросить доверенных лиц сохранить эти части для Вас. Используйте утилиту для безопасного сохранения Мастер-Паролей для этого.</li></ul></BODY></HTML>"
+  },
+  "GuidePages.tsConnectServerPanel" : {
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Connecting to the EmerAPI / Antifake Server</H2><p>With this wizard you can configure a user (non-guest) connection to the EmerAPI / Antifake server<br>If you are already registered on the server, and your Public Key is linked with your user, connection and configuration will occur automatically.<br>Otherwise, you will need to go through the sign in / login procedure on the server. To do this, a browser window will be opened.</p><p>The EmerAPI / Antifake server can be used by the application to perform requests to the blockchain, as well as for specific functions.<br>Some servers may have special features.</p><p>You can choose your own EmerAPI server or use the default one. If you want to set up your server, check the box at the bottom of the page.</p><p>EmerAPI servers<b>cannot take possession of your secret keys or steal your funds</b>directly. However, attackers may provide incorrect information about the blockchain. For this reason, connect unknown servers with caution.</p></BODY></HTML>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Подключение к серверу EmerAPI / Antifake</H2><p>С помощью этого мастера Вы сможете настроить пользовательское (не гостевое) подключение к серверу EmerAPI / Antifake<br>Если Вы уже зарегистрированы на сервере, и Ваш Публичный Ключ связан с Вашим пользователем, подключение и настройка произойдут автоматически.<br>В противном случае Вам потребуется пройти процедуру регистрации, если у Вас нет учетной записи на сервере, или идентификации, если такая запись уже есть.<br>Для этого используется окно браузера, которое будет открыто в процессе работы мастера.</p><p>Сервер EmerAPI / Antifake может использоваться приложением для выполнения запросов к блокчейн, а также для специфических функций.<br>Некоторые сервера могут иметь особые функции.</p><p>Вы можете выбрать свой собственный сервер EmerAPI или воспользоваться заданным по умолчанию. Если Вы хотите задать свой сервер, установите галочку внизу страницы.</p><p>Сервера, работающие по протоколу EmerAPI,<b>не могут завладеть Вашими секретными ключами или похитить Ваши средства</b>напрямую. Тем не менее, злоумышленники могут предоставлять неправильную информацию о блокчейне. По этой причине подключать неизвестные сервера следует с осторожностью.</p></BODY></HTML>"
+  },
+  "MasterPasswordWizardForm.tsConnectServerPanelChSelectServer" : {
+    "en" : "I want choose my own server",
+    "ru" : "Я хочу подключиться к своему собственному серверу"
+  },
+  "MasterPasswordWizardForm.tsServerLoginPanelLabel.Connect" : {
+    "en" : "Trying to connect to the server ...",
+    "ru" : "Пытаемся установить соединение с сервером ..."
+  },
+  "MasterPasswordWizardForm.tsServerLoginPanelLabel.ConnError" : {
+    "en" : "Error connecting to server",
+    "ru" : "Ошибка при соединении с сервером"
+  },
+  "MasterPasswordWizardForm.tsServerLoginBRecheck" : {
+    "en" : "Test connection",
+    "ru" : "Проверить подключение"
+  },
+  "MasterPasswordWizardForm.tsServerLoginBOpen" : {
+    "en" : "Open signin/login page",
+    "ru" : "Открыть страницу входа"
+  },
+  "MasterPasswordWizardForm.tsServerLoginBLinkToBuffer" : {
+    "en" : "Copy link to buffer",
+    "ru" : "Скопировать ссылку в буфер"
+  },
+  "MasterPasswordWizardForm.tsServerConnectedPanel" : {
+    "en" : "Do not save session key on this computer (it is not my computer)",
+    "ru" : "Не сохранять ключи доступа к серверу на этом компьютере (это чужой компьютер)"
+  },
+  "MasterPasswordWizardForm.tsServerLoginPanelLabel.UnknownResponse" : {
+    "en" : "Error: unknown server response",
+    "ru" : "Ошибка: Неизвестный/ошибочный ответ от сервера"
+  },
+  "MasterPasswordWizardForm.tsServerLoginPanelLabel.WrongPrivKey" : {
+    "en" : "Error: wrong private key. Cannot decode server response",
+    "ru" : "Ошибочный приватный ключ. Невозможно расшифровать ответ сервера"
+  },
+  "MasterPasswordWizardForm.tsServerLoginPanelLabel.WrongAESKey" : {
+    "en" : "Error: wrong AES key. Cannot decode server response",
+    "ru" : "Ошибочный ключ AES. Невозможно расшифровать ответ сервера."
+  },
+  "MasterPasswordWizardForm.tsServerLoginPanelLabel.NotRegistered" : {
+    "en" : "Server has not recognized your address. You must login/sign in",
+    "ru" : "Сервер не распознал Ваш адрес. Авторизируйтесь или зарегистрируйтесь."
+  },
+  "GuidePages.tsServerLoginPanel" : {
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Setting up a connection to the server</H2><p>After this window opens Key Keeper will attempt to connect to the EmerAPI server.<br>If your private key is locked, you will be asked to unlock it entering your User Password.</p><p>If the public key is recognized by the server, you will immediately go to next page.</p><p>If the public key is not registered on the server, you will be asked to login to the server first. If you do not have an account, you can register a new one.</p><p>To open the registration link or login, click the \"Open signin/login page\" button</p><p>After registering with the server (or logging into your account) click on the button \"Test connection\". If the key assigning is successful, you will proceed to complete the wizard.</p></BODY></HTML>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Настройка подключения к серверу</H2><p>При открытии этого окна будет предпринята попытка подключения к серверу EmerAPI.<br>Вы можете повторить попытку, нажимая кнопку \"Проверить подключение\". Если Ваш Приватный Ключ заблокирован, Вам потребуется ввести пароль пользователя для его разблокировки, когда будет получен ответ от сервера.</p><p>Если публичный ключ будет распознан сервером, Вы сразу перейдете к завершению мастера.</p><p>Если публичный ключ неизвестен серверу, Вам потребуется пройти процедуру логина на сервере. В случае, если у Вас нет учетной записи, Вы сможете зарегистрировать новую.</p><p>Для открытия ссылки на регистрацию или логин нажмите кнопку \"Открыть страницу входа\"</p><p>После регистрации на сервере (или входа в Вашу учетную запись) нажмите на кнопку \"Проверить подключение\". Если сопоставление ключа прошло успешно, Вы перейдете к завершению мастера.</p></BODY></HTML>"
+  },
+  "GuidePages.tsServerConnectedPanel" : {
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Everything went great!</H2><p>Communication with the EmerAPI / Antifake server has been successfully configured.</p><p>The wizard set up a connection to the server:</p><ul><li>The data encryption key for accessing the server is stored on this computer. You do not need to enter a user password after each time you start the application.</li><li>The application is configured to connect to the server after starting.</li><li>Connecting to the server will occur using the public key.</li></ul><p>You can cancel saving session keys on this computer by checking the box at the bottom of the page. In this case, after each launch of the program you will have to enter your User Password to connect to the server.</p></BODY></HTML>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H2>Всё прошло прекрасно!</H2><p>Связь с сервером EmerAPI / Antifake успешно сконфигурирована.</p><p>Мастер настроил соединение с сервером таким образом:</p><ul><li>Ключ шифрования данных для доступа к серверу сохранен на этом компьютере. Вам не потребуется вводить пароль пользователя после каждой загрузки программы.</li><li>Программа сконфигурирована для подключения к серверу после запуска</li><li>Подключение к серверу будет происходить с использованием публичного ключа.</li></ul><p>Вы можете отменить сохранение сессионного ключа на этом компьютере, установив галочку внизу страницы. В этом случае после каждого запуска программы для подключения к серверу придется вводить Пароль Пользователя.</p></BODY></HTML>"
+  },
+  "TEnterMasterPasswordFrame.lComment" : {
+    "en" : "Enter the words of the Master Password separated by a space. Enter selects the first suggested word.",
+    "ru" : "Введите слова Mастер- Пароля через пробел. Ввод выбирает первое предложенное слово."
+  },
+  "TEnterMasterPasswordFrame.lMasterPassword" : {
+    "en" : "Master Password",
+    "ru" : "Мастер- Пароль"
+  },
+  "TEnterMasterPasswordFrame.chShowMasterPassword" : {
+    "en" : "Show",
+    "ru" : "Показывать"
+  },
+  "TEnterMasterPasswordFrame.lAssignedAddress" : {
+    "en" : "Assigned address",
+    "ru" : "Связанный адрес"
+  },
+  "TFrameSelectAddress.chRefresh" : {
+    "en" : "Refresh information",
+    "ru" : "Обновлять информацию"
+  },
+  "TFrameSelectAddress.chDecodeAddress" : {
+    "en" : "Pay to alias",
+    "ru" : "Платить по псевдонимам"
+  },
+  "TFrameSelectAddress.lAddressInfo" : {
+    "en" : "*Unknown address*",
+    "ru" : "*Неизвестный адрес*"
+  },
+  "TFrameSelectAddress.lAddressInfo.Found" : {
+    "en" : "Address: ",
+    "ru" : "Адрес: "
+  },
+  "TFrameSelectAddress.lAddressInfo.Empty" : {
+    "en" : "Enter address or alias",
+    "ru" : "Введите адрес или псевдноним"
+  },
+  "TFrameSelectAddress.lPayments" : {},
+  "TFrameSelectAddress.lCert" : {},
+  "TFrameSelectAddress.lCert.wait" : {
+    "en" : "Please wait...",
+    "ru" : "Пожалуйста, подождите..."
+  },
+  "TFrameSelectAddress.lPayments.wait" : {
+    "en" : "Please wait...",
+    "ru" : "Пожалуйста, подождите..."
+  },
+  "TFrameSelectAddress.lCert.NoUpdate" : {
+    "en" : "*Online update turned off*",
+    "ru" : "*Обновление отключено*"
+  },
+  "TFrameSelectAddress.lPayments.InvalidAddress" : {
+    "en" : "*Address you entered is not valid*",
+    "ru" : "*Введенный адрес ошибочен*"
+  },
+  "TFramePayToAddress.lPayee" : {
+    "en" : "Payee: ",
+    "ru" : "Получатель перевода: "
+  },
+  "TFramePayToAddress.lAmount" : {
+    "en" : "Amount to transfer: ",
+    "ru" : "Сумма перевода: "
+  },
+  "TFramePayToAddress.bSend" : {
+    "en" : "Send",
+    "ru" : "Отправить"
+  },
+  "TFramePayToAddress.lBalance.startIfBalance" : {
+    "en" : "Your balance: ",
+    "ru" : "Ваш текущий баланс: "
+  },
+  "FrameDigitalAsset.Title.dns" : {
+    "en" : "DNS: ",
+    "ru" : "DNS: "
+  },
+  "FrameDigitalAsset.Title.ssl" : {
+    "en" : "SSL: ",
+    "ru" : "SSL: "
+  },
+  "FrameDigitalAsset.Title.ssh" : {
+    "en" : "SSH: ",
+    "ru" : "SSH: "
+  },
+  "FrameDigitalAsset.Title.enum" : {
+    "en" : "ENUMER: ",
+    "ru" : "ENUMER: "
+  },
+  "FrameDigitalAsset.Title.blog" : {
+    "en" : "Blog: ",
+    "ru" : "Блог: "
+  },
+  "FrameDigitalAsset.Title.cert" : {
+    "en" : "CERTIFICATE: ",
+    "ru" : "СЕРТИФИКАТ: "
+  },
+  "FrameDigitalAsset.Title.doc" : {
+    "en" : "DOCUMENT: ",
+    "ru" : "ДОКУМЕНТ: "
+  },
+  "FrameDigitalAsset.Title.Empty" : {
+    "en" : "ALIAS OR UNKNOWN: ",
+    "ru" : "ПСЕВДОНИМ ИЛИ НЕИЗВ: "
+  },
+  "FrameDigitalAsset.Title.Expired" : {
+    "en" : "EXPIRED: ",
+    "ru" : "ИСТЕКЛО: "
+  },
+  "FrameDigitalAsset.Title.SoonExpiration" : {
+    "en" : "EXPIRES SOON: ",
+    "ru" : "СКОРО ИСТЕЧЕТ: "
+  },
+  "FrameDigitalAsset.Title.dpoBrand" : {
+    "en" : "DPO Brand: ",
+    "ru" : "DPO Бренд: "
+  },
+  "FrameDigitalAsset.Title.dpo" : {
+    "en" : "DPO item: ",
+    "ru" : "DPO item: "
+  },
+  "FrameDigitalAsset.Title.afOwner" : {
+    "en" : "Antifake owner: ",
+    "ru" : "Antifake владелец: "
+  },
+  "FrameDigitalAsset.Title.afProduct" : {
+    "en" : "Antifake product: ",
+    "ru" : "Antifake продукт: "
+  },
+  "FrameDigitalAsset.Title.afLot" : {
+    "en" : "Antifake lot: ",
+    "ru" : "Antifake партия:"
+  },
+  "FrameDigitalAsset.Title.afUnknown" : {
+    "en" : "Antifake UNKNOWN:",
+    "ru" : "Antifake НЕИЗВЕСТНЫЙ ТИП: "
+  },
+  "FrameDigitalAsset.Title.Undetected" : {
+    "en" : "UNKNOWN: ",
+    "ru" : "НЕИЗВЕСТНО: "
+  },
+  "FrameDigitalAsset.Title.Erroneous" : {
+    "en" : "[ERRONEOUS]: ",
+    "ru" : "[ОШИБОЧНЫЙ]: "
+  },
+  "FrameDigitalAsset.Title.Invalid" : {
+    "en" : "[INVALID]: ",
+    "ru" : "[НЕДЕЙСТВИТЕЛЬНЫЙ]: "
+  },
+  "FrameDigitalAsset.Title.Expired" : {
+    "en" : "[EXPIRED]: ",
+    "ru" : "[ИСТЕКШИЙ]: "
+  },
+  "TFrameServerTask.OP_NAMENEW_ONE" : {
+    "en" : "Create: ",
+    "ru" : "Создать: "
+  },
+  "TFrameServerTask.Create_Unknown_Name" : {
+    "en" : "Name: ",
+    "ru" : "Имя: "
+  },
+  "TFrameServerTask.Create_DPO_record" : {
+    "en" : "DPO record: ",
+    "ru" : "DPO запись: "
+  },
+  "TFrameServerTask.bDetails" : {
+    "en" : "Details",
+    "ru" : "Подробнее"
+  },
+  "TFrameServerTask.bDelete" : {
+    "en" : "Delete",
+    "ru" : "Удалить"
+  },
+  "TFrameServerTask.bDelete.Hint" : {
+    "en" : "Permanently delete the tasks from the server queue",
+    "ru" : "Удалить записи из очереди задач сервера навсегда"
+  },
+  "TFrameServerTask.bExecute" : {
+    "en" : "Execute",
+    "ru" : "Выполнить"
+  },
+  "TFrameServerTask.bExecute.Hint" : {
+    "en" : "Perform operations in blockchain",
+    "ru" : "Выполнить операции в блокчейне"
+  },
+  "TFrameServerTask.lTotalNames" : {
+    "en" : "Records count:",
+    "ru" : "Количество записей:"
+  },
+  "TFrameServerTask.lTotalOwners" : {
+    "en" : "Owners count:",
+    "ru" : "Количество владельцев:"
+  },
+  "TFrameServerTask.lTotalCost" : {
+    "en" : "Total cost (EMC):",
+    "ru" : "Стоимость (EMC):"
+  },
+  "TFrameServerTask.lOwnedCount" : {
+    "en" : "Belong to your:",
+    "ru" : "Принадлежит Вам:"
+  },
+  "tFrameCreateName.NameIsFree" : {
+    "en" : "Name is not registered yet",
+    "ru" : "Имя свободно для регистрации"
+  },
+  "tFrameCreateName.NameIsDelegated" : {
+    "en" : " has registered the name till ",
+    "ru" : " зарегистрировал имя до "
+  },
+  "tFrameCreateName.lLoadTemplate" : {
+    "en" : "Load template:",
+    "ru" : "Загрузить шаблон:"
+  },
+  "tFrameCreateName.cLoadTemplate" : {
+    "en" : "Select template...",
+    "ru" : "Выберите шаблон..."
+  },
+  "tFrameCreateName.Templates.YourName" : {
+    "en" : "YourName",
+    "ru" : "ВашеИмя"
+  },
+  "tFrameCreateName.lDays" : {
+    "en" : "Validity (days)",
+    "ru" : "Период регистрации (дней)"
+  },
+  "tFrameCreateName.lName" : {
+    "en" : "Name of the digital asset",
+    "ru" : "Имя цифрового актива"
+  },
+  "tFrameCreateName.lValue" : {
+    "en" : "Value (text)",
+    "ru" : "Текст актива"
+  },
+  "tFrameCreateName.bSend" : {
+    "en" : "Create the asset",
+    "ru" : "Создать цифровой актив"
+  },
+  "tFrameCreateName.Templates.dnsName" : {
+    "en" : "dns:insertyourdomain.here",
+    "ru" : "dns:вставьтевашдомен.сюда"
+  },
+  "tFrameCreateName.Templates.dnsValue" : {
+    "en" : "A=127.0.0.1|TTL=6000",
+    "ru" : "A=127.0.0.1|TTL=6000"
+  },
+  "tFrameCreateName.Templates.sshName" : {
+    "en" : "ssh:YourName",
+    "ru" : "ssh:ВашеИмя"
+  },
+  "tFrameCreateName.Templates.sshValue" : {
+    "en" : "*Insert your ssh certificate here (a string like \"ssh-rsa AAA........\") or a link to another name with an @ symbol (for example, \"@AnotherName\"). You can insert multiple records, separating them with | (for example, \"user1|user2|user3\") to creating a group*",
+    "ru" : "*вставьте сюда Ваш ssh сертификат (строка вида \"ssh-rsa AAA........\") или ссылку на другое имя с символа @ (например, \"@AnotherName\"). Можно вставлять несколько записей, разделяя их знаком | (например, \"user1|user2|user3\")*"
+  },
+  "tFrameCreateName.Templates.sslName" : {
+    "en" : "ssl:YourCertificateSerialInhex",
+    "ru" : "ssl:СерийныйНомерВашегоСертификатаВhex"
+  },
+  "tFrameCreateName.Templates.sslValue" : {
+    "en" : "sha256=*insert sha256 hash of your SSL certificate here in hex (low case)*",
+    "ru" : "sha256=*вставьте сюда sha256 хеш Вашего SSL сертификата (hex, маленькие буквы)*"
+  },
+  "tFrameCreateName.Templates.enumName" : {
+    "en" : "enum:YourPhoneNumberInternational:0",
+    "ru" : "enum:ВашТелефонВМеждународномФормате:0"
+  },
+  "tFrameCreateName.Templates.enumValue" : {
+    "en" : "SIG=*fill the fields separated by | :verifier|signature E2U+sip=PRI1|PRI2|RegExp*",
+    "ru" : "SIG=*Заполните поля, разделенные знаком | : verifier|signature E2U+sip=PRI1|PRI2|RegExp*"
+  },
+  "tFrameCreateName.Templates.dpoBrandName" : {
+    "en" : "dpo:BrandName",
+    "ru" : "dpo:НаименованиеБренда"
+  },
+  "tFrameCreateName.Templates.dpoBrandValue" : {
+    "en" : "URL=",
+    "ru" : "URL="
+  },
+  "tFrameCreateName.Templates.dpoName" : {
+    "en" : "dpo:BrandName:SerialNumber:0",
+    "ru" : "dpo:НаименованиеБренда:СерийныйНомер:0"
+  },
+  "tFrameCreateName.Templates.dpoValue" : {
+    "en" : "Signature=*InsertBrandSignatureHere*",
+    "ru" : "Signature=*ВставьтеПодписьБрендаСюда*"
+  },
+  "tFrameCreateName.Templates.docName" : {
+    "en" : "doc:YourDocumentIDorSha256Hash",
+    "ru" : "doc:ИдентификаторВашегоДокументаИлиSha256Хеш"
+  },
+  "tFrameCreateName.Templates.docValue" : {
+    "en" : "TITLE=*Put document title here. This is not a required field.*",
+    "ru" : "TITLE=*Втавьте сюда заголовок документа. Это не обязательное поле.*"
+  },
+  "tFrameCreateName.Templates.certName" : {
+    "en" : "cert:AddressOr&NameOr@Hash:type:0",
+    "ru" : "cert:АдресИли&ИмяИли@Хеш:Тип:0"
+  },
+  "tFrameCreateName.Templates.certValue" : {
+    "en" : "*ISSUER=*UssuerName*\n*EXDATE=*ExpirationDate YYYYMMDD*\nSIGN=*IssuersSignature*",
+    "ru" : "*ISSUER=*ВставьтеИмяИздателя*\n*EXDATE=*ВставьтеДатуИстечения ГГГГММДД*\nSIGN=*ВставьтеПодписьИздателя*"
+  },
+  "NameViewForm.lInfo.myTask" : {
+    "en" : "Task for create an asset (owned by you): ",
+    "ru" : "Задача создание записи (Вашей): "
+  },
+  "NameViewForm.lInfo.myNVS" : {
+    "en" : "NVS asset (owned by you): ",
+    "ru" : "NVS запись (Ваша): "
+  },
+  "NameViewForm.lInfo.Task" : {
+    "en" : "Task for create an asset (owned by other(s)): ",
+    "ru" : "Задача создание записи (чужой/чужих): "
+  },
+  "NameViewForm.lInfo.NVS" : {
+    "en" : "NVS asset (owned by other): ",
+    "ru" : "NVS запись (чужая): "
+  },
+  "NameViewForm.lInfo.Expired" : {
+    "en" : "NAME EXPIRED: ",
+    "ru" : "ИМЯ ИСТЕКЛО: "
+  },
+  "NameViewForm.lOwnerWarning" : {
+    "en" : "WARNING! Changing the owner you lose control of this asset!",
+    "ru" : "ВНИМАНИЕ! Изменив владельца, Вы потеряете контроль над этим активом!"
+  },
+  "NameViewForm.eOwner" : {
+    "en" : "Owner",
+    "ru" : "Владелец"
+  },
+  "NameViewForm.lDaysLeft" : {
+    "en" : "Days left (approximately)",
+    "ru" : "Дней осталось (примерно)"
+  },
+  "NameViewForm.lDaysAdded" : {
+    "en" : "Days add: ",
+    "ru" : "Добавлено дней: "
+  },
+  "NameViewForm.msgNVSUpdateError" : {
+    "en" : "NVS record update error: ",
+    "ru" : "Ошибка обновления NVS записи: "
+  },
+  "NameViewForm.msgWrongAddress" : {
+    "en" : "Wrong new owner address",
+    "ru" : "Новый адрес пользователя неверен"
+  },
+  "NameViewForm.msgWrongAddressSig" : {
+    "en" : "New owner address is belong to another network",
+    "ru" : "Введенный новый адрес владельца имени принадлежит другой сети"
+  },
+  "NameViewForm.msgSendToBC" : {
+    "en" : "The changes are sent to blockchain. It will take some time (up to 20 minutes) to update.",
+    "ru" : "Сделанные изменения отправлены в блокчейн. Потребуется некоторое время (до 20 минут) для обновления."
+  },
+  "NameViewForm.Caption.TaskNewName" : {
+    "en" : "Create asset: ",
+    "ru" : "Создать актив: "
+  },
+  "NameViewForm.eOwner.myTask" : {
+    "en" : " (your address)",
+    "ru" : " (Ваш адрес)"
+  },
+  "AtomForm" : {
+    "en" : "Atom Contract",
+    "ru" : "Атомарный Контракт"
+  },
+  "AtomForm.NameNotLoaded" : {
+    "en" : "Please paste contract from buffer",
+    "ru" : "Вставьте контракт из буфера"
+  },
+  "AtomForm.PleaseWait" : {
+    "en" : "Please wait",
+    "ru" : "Пожалуйста подождите"
+  },
+  "AtomForm.WrongContract" : {
+    "en" : "Invalid contract data. The contract cannot be loaded",
+    "ru" : "Ошибочный контракт. Контракт не может быть загружен."
+  },
+  "AtomForm.WrongTime" : {
+    "en" : "The contract time does not correspond to the current one.\nThe contract may be outdated. In this case, you need to create a new contract.\nCheck the time set on your computer.",
+    "ru" : "Время контракта не соответствует текущему.\nКонтракт может быть устаревшим. В этом случае вам необходимо создать новый контракт.\nПроверьте время, установленное на вашем компьютере."
+  },
+  "AtomForm.BuyerBalance" : {
+    "en" : "Available funds in the buyer wallet: ",
+    "ru" : "Доступно средств у покупателя: "
+  },
+  "AtomForm.YouBuyTheName" : {
+    "en" : "You are buying a digital asset",
+    "ru" : "Вы покупаете цифровой актив"
+  },
+  "AtomForm.YouSellTheName" : {
+    "en" : "You are selling a digital asset",
+    "ru" : "Вы продаете цифровой актив"
+  },
+  "AtomForm.askForChangeConfirmation.Message" : {
+    "en" : "You are trying to change the data of the contract that has already been signed. Modifying this contract will invalidate the signature. Are you sure you want to make the change?",
+    "ru" : "Вы пытаетесь изменить данные контракта, который уже подписан. Изменение этого контракта сделает подписи недействительными. Вы уверены,  что хотите внести изменения?"
+  },
+  "AtomForm.lYouAreBuyer" : {
+    "en" : "You are the buyer",
+    "ru" : "Покупатель- это Вы"
+  },
+  "AtomForm.lPrice" : {
+    "en" : "Price (EMC)",
+    "ru" : "Цена (EMC)"
+  },
+  "AtomForm.lName" : {
+    "en" : "Asset name",
+    "ru" : "Наименование актива"
+  },
+  "AtomForm.lContractText" : {
+    "en" : "Contract code",
+    "ru" : "Код контракта"
+  },
+  "AtomForm.chAddScript" : {
+    "en" : "Script v2",
+    "ru" : "Скрипт версии 2"
+  },
+  "AtomForm.bSignSend" : {
+    "en" : "Sign the contract",
+    "ru" : "Подписать контракт"
+  },
+  "AtomForm.bClose" : {
+    "en" : "Close",
+    "ru" : "Выйти"
+  },
+  "AtomForm.bPasteFromBuffer" : {
+    "en" : "Paste from buffer",
+    "ru" : "Вставить из буффера"
+  },
+  "AtomForm.bCopyToBuffer" : {
+    "en" : "Copy to clipboard",
+    "ru" : "Скопировать в буффер"
+  },
+  "AtomForm.lState" : {
+    "en" : "State",
+    "ru" : "Состояние"
+  },
+  "AtomForm.lContractResume" : {
+    "en" : "Resume",
+    "ru" : "Краткая информация"
+  },
+  "WalletBasicsForm" : {
+    "en" : "Wallet basics",
+    "ru" : "Базовые операции кошелька"
+  },
+  "WalletBasicsForm.tsCreateName" : {
+    "en" : "Create digital asset",
+    "ru" : "Создать цифровой актив"
+  },
+  "WalletBasicsForm.tsPay" : {
+    "en" : "Transfer coins (pay)",
+    "ru" : "Перевод монет (платеж)"
+  },
+  "PleaseWait" : {
+    "en" : "Please wait",
+    "ru" : "Пожалуйста, подождите"
+  },
+  "MainForm.imAFCreateForPrinting" : {
+    "en" : "Create data package / NVS records",
+    "ru" : "Создание пакета документов / записей NVS"
+  },
+  "MainForm.miBecomeOwner" : {
+    "en" : "Become the owner of a digital asset",
+    "ru" : "Овладеть цифровым активом"
+  },
+  "AFCreateForPrintingForm" : {
+    "en" : "Create data package for label printing",
+    "ru" : "Создание пакета документов для типографии"
+  },
+  "AFCreateForPrintingForm.lStep1" : {
+    "en" : "Step 1: Choose the data source",
+    "ru" : "Шаг 1: укажите, откуда получить данные"
+  },
+  "AFCreateForPrintingForm.lStep2" : {
+    "en" : "Step 2: Choose general data and the data required for creation",
+    "ru" : "Шаг 2: Определите общие данные и данные для генерации"
+  },
+  "AFCreateForPrintingForm.lStep3" : {
+    "en" : "Step 3: Choose what is needed to be created",
+    "ru" : "Шаг 3: укажите, что требуется создать"
+  },
+  "AFCreateForPrintingForm.Messages.FileNotExist" : {
+    "en" : "Source file does not exist",
+    "ru" : "Исходный файл не существует"
+  },
+  "AFCreateForPrintingForm.Messages.LotNotSelected" : {
+    "en" : "Please select lot",
+    "ru" : "Пожалуйста выберите лот"
+  },
+  "AFCreateForPrintingForm.lInformation1.SerialVolume" : {
+    "en" : "Capacity: ",
+    "ru" : "Емкость: "
+  },
+  "AFCreateForPrintingForm.lInformation1.LotNotSelected" : {
+    "en" : "Lot not selected",
+    "ru" : "Партия товара не выбрана"
+  },
+  "AFCreateForPrintingForm.lInformation1.WrongLot" : {
+    "en" : "Incorrect value in Lot asset",
+    "ru" : "Ошибочная запись партии товара"
+  },
+  "AFCreateForPrintingForm.lInformation1.PleaseWait" : {
+    "en" : "Please wait for data to load",
+    "ru" : "Пожалуйста, подождите окончания загрузки данных"
+  },
+  "AFCreateForPrintingForm.rbIterRange" : {
+    "en" : "Create by range: ",
+    "ru" : "Создать по диапазону: "
+  },
+  "AFCreateForPrintingForm.rbIterFile" : {
+    "en" : "Create by file: ",
+    "ru" : "Создать по файлу: "
+  },
+  "AFCreateForPrintingForm.rbIterLot" : {
+    "en" : "Create by lot: ",
+    "ru" : "Создать по партии: "
+  },
+  "AFCreateForPrintingForm.lInformation" : {
+    "en" : "Information: ",
+    "ru" : "Информация: "
+  },
+  "AFCreateForPrintingForm.lBrand" : {
+    "en" : "Brand: ",
+    "ru" : "Бренд: "
+  },
+  "AFCreateForPrintingForm.lInformation1.BrandError" : {
+    "en" : "Brand finding error: ",
+    "ru" : "Ошибка нахождения бренда: "
+  },
+  "AFCreateForPrintingForm.chCreatePrivateCSV" : {
+    "en" : "Create CSV file with secret codes: ",
+    "ru" : "Создать CSV файл с секретными кодами: "
+  },
+  "AFCreateForPrintingForm.chCreatePublicCSV" : {
+    "en" : "Create public CSV file: ",
+    "ru" : "Создать публичный CSV файл: "
+  },
+  "AFCreateForPrintingForm.chCreatePrintCSV" : {
+    "en" : "Create CSV file for printing factory",
+    "ru" : "Создать CSV файл для типографии"
+  },
+  "AFCreateForPrintingForm.chCreateQR1" : {
+    "en" : "Save public QR code to folder: ",
+    "ru" : "Сохранить открытый QR код в каталог: "
+  },
+  "AFCreateForPrintingForm.chCreateQR2" : {
+    "en" : "Save secret QR code to folder: ",
+    "ru" : "Сохранить секретный QR код в каталог: "
+  },
+  "AFCreateForPrintingForm.chCreateNVSrecords" : {
+    "en" : "Create blockchain record (needs time!)",
+    "ru" : "Создать записи в блокчейн (потребует времени!)"
+  },
+  "AFCreateForPrintingForm.chCreateNVSrecordsOwnedByMe" : {
+    "en" : "Create blockchain records owned by me (NOT RECOMMENDED)",
+    "ru" : "Овладеть создаваемыми записями (НЕ РЕКОМЕНДУЕТСЯ)"
+  },
+  "AFCreateForPrintingForm.chLogErrorSerialsToFile" : {
+    "en" : "Save erroneous serials to file (RECOMMENDED): ",
+    "ru" : "Сохранить ошибочные номера в файл (РЕКОМЕНДУЕТСЯ) "
+  },
+  "AFCreateForPrintingForm.chCreateNVSrecordsAddCoins" : {
+    "en" : "Add coins to the asset:",
+    "ru" : "Добавить монет к активу:"
+  },
+  "AFCreateForPrintingForm.chCreateNVSrecordsAddCoins.Hint" : {
+    "en" : "Specify how many EMC coins should be added to the EmerDPO object you are creating.\nThe added coins will be passed on to the person who owns the NVS record (e.g. the buyer of the product)\nIn addition, if at least 0.0001 EMC is added, the buyer will not need to receive coins to become the owner of the Digital Asset",
+    "ru" : "Укажите, какое количество монет EMC следует добавить к создаваемому объекту EmerDPO.\nДобавленные монеты будут переданы тому, кто завладеет NVS записью (например, покупателю продукции)\nКроме того, если добавлено хотя бы 0.0001 EMC, покупателю не потребуется получать монет для того, чтобы стать владельцем Цифрового Актива"
+  },
+  "AFCreateForPrintingForm.bEditCustomFields" : {
+    "en" : "Edit custom fields",
+    "ru" : "Редактировать пользовательские поля"
+  },
+  "AFCreateForPrintingForm.chAddCustomFields" : {
+    "en" : "Add custom fields",
+    "ru" : "Добавить пользовательские поля"
+  },
+  "AFCreateForPrintingForm.chCreateBrandField" : {
+    "en" : "Link brand",
+    "ru" : "Добавить поле бренда"
+  },
+  "AFCreateForPrintingForm.chCreateParentField" : {
+    "en" : "Add parent link",
+    "ru" : "Добавить ссылку на родителя"
+  },
+  "AFCreateForPrintingForm.chCreateParentLotField" : {
+    "en" : "Ling lot",
+    "ru" : "Добавить ссылку на партию"
+  },
+  "AFCreateForPrintingForm.chCreateProductField" : {
+    "en" : "Link product",
+    "ru" : "Добавить ссылку на продукт"
+  },
+  "AFCreateForPrintingForm.lLeaseTime" : {
+    "en" : "The duration of the name lease (days)",
+    "ru" : "Длительность аренды имени, дней"
+  },
+  "AFCreateForPrintingForm.chCheckNamesIfFree" : {
+    "en" : "Check if the name is free and increment the suffix if it is necessary (requires time)",
+    "ru" : "Проверять, свободно ли имя, и увеличивать суффик имени если необходимо (требует времени)"
+  },
+  "AFCreateForPrintingForm.chAddRandomSuffix" : {
+    "en" : "Add random name suffix",
+    "ru" : "Добавлять случайный суффикс к имени"
+  },
+  "AFCreateForPrintingForm.cBrand.Manual" : {
+    "en" : "Manual add brand name",
+    "ru" : "Указать имя бренда вручную"
+  },
+  "AFCreateForPrintingForm.lBrandManual" : {
+    "en" : "Brand NVS name:",
+    "ru" : "NVS имя бренда: "
+  },
+  "AFCreateForPrintingForm.lBrandManualComment" : {
+    "en" : "Attention! Be very careful when manually entering the brand name.\nThe dpo prefix is not necessary.",
+    "ru" : "Внимание! Будьте очень внимательны при ручном вводе имени бренда.\nПрефикс dpo вводить не нужно."
+  },
+  "AFCreateForPrintingForm.chPubAddName" : {
+    "en" : "Add NVS name",
+    "ru" : "Добавить NVS имя"
+  },
+  "AFCreateForPrintingForm.chPubAddValue" : {
+    "en" : "Add NVS Value",
+    "ru" : "Добавить NVS Value"
+  },
+  "AFCreateForPrintingForm.chPubAddBrand" : {
+    "en" : "Add Brand",
+    "ru" : "Добавить Бренд"
+  },
+  "AFCreateForPrintingForm.chPubAddAddress" : {
+    "en" : "Add Blockchain Address",
+    "ru" : "Добавить адрес в блокчейне"
+  },
+  "AFCreateForPrintingForm.chPrivAddName" : {
+    "en" : "Add NVS name",
+    "ru" : "Добавить NVS имя"
+  },
+  "AFCreateForPrintingForm.chPrivAddValue" : {
+    "en" : "Add NVS Value",
+    "ru" : "Добавить NVS Value"
+  },
+  "AFCreateForPrintingForm.chPrivAddBrand" : {
+    "en" : "Add Brand",
+    "ru" : "Добавить бренд"
+  },
+  "AFCreateForPrintingForm.chPrivAddAddress" : {
+    "en" : "Add Blockchain Address",
+    "ru" : "Добавить адрес в блокчейне"
+  },
+  "AFCreateForPrintingForm.chFolderPackage" : {
+    "en" : "Use one folder for all files: ",
+    "ru" : "Один каталог для всех файлов: "
+  },
+  "AFCreateForPrintingForm.chSignValue" : {
+    "en" : "(Re)sign value",
+    "ru" : "(Пере)подписывать value"
+  },
+  "AFCreateForPrintingForm.msg.PleaseSetFileName" : {
+    "en" : "Please select the filename",
+    "ru" : "Пожалуйста, укажите имя файла"
+  },
+  "AFCreateForPrintingForm.msg.PleaseSetFolder" : {
+    "en" : "Please select the folder for save the data",
+    "ru" : "Пожалуйста, укажите имя каталога для сохранения данных"
+  },
+  "AFCreateForPrintingForm.msg.BrandMustBeSet" : {
+    "en" : "You must define brand",
+    "ru" : "Вы должны определить бренд"
+  },
+  "AFCreateForPrintingForm.msg.BrandMustBeYour" : {
+    "en" : "To create entries in the blockchain, the brand must belong to you or the private key of the owner`s address must be specified.",
+    "ru" : "Для создания записей в блокчейне бренд должен принадлежать Вам или должен быть задан приватный ключ адреса- владельца"
+  },
+  "AFCreateForPrintingForm.lTextQR1" : {
+    "en" : "public QR code text template:",
+    "ru" : "Шаблон текста открытого QR кода:"
+  },
+  "AFCreateForPrintingForm.lTextQR2" : {
+    "en" : "private QR code text template:",
+    "ru" : "Шаблон текста закрытого QR кода:"
+  },
+  "AFCreateForPrintingForm.lSecretLength" : {
+    "en" : "Secret code length ",
+    "ru" : "Длина секретного слова "
+  },
+  "AFCreateForPrintingForm.bDemo1" : {
+    "en" : "Demo1: 10 records in blockchain",
+    "ru" : "Демо 1: Десять записей в блокчейн"
+  },
+  "AFCreateForPrintingForm.bDemo2" : {
+    "en" : "Demo2: based on a lot",
+    "ru" : "Демо 2: На основе партии"
+  },
+  "AFCreateForPrintingForm.bDemo3" : {
+    "en" : "Demo3: 1000 serials set",
+    "ru" : "Демо 3: 1000 серийных номеров"
+  },
+  "AFCreateForPrintingForm.bDemo1.Desc" : {
+    "en" : "Demo1: 10 records in blockchain",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Пример 1</H3><font color=red>Внимание! Данный пример при запуске создаст реальные записи в блокчейн. Не запускайте его на исполнение!</font><H4>Решаемая задача</H4>Создание в блокчейн серии DPO записей<H4>Описание</H4>Данный пример создает в блокчейне 10 записей в формате DPO для бренда, имеющегося в системе<br>Если бренд в системе отсутствует, он не будет выбран.<br>Никакие файлы не будут созданы<br><H4>Что следует задать</H4><li><ul>Диапазон серийных номеров</ul><ul>Бренд- владелец товара.</ul></li></body></html>"
+  },
+  "AFCreateForPrintingForm.bDemo2.Desc" : {
+    "en" : "Demo2",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Пример 2</H3><H4>Решаемая задача</H4>Antifake: Создание полного набора документов в папку, без генерации в блокчейне<H4>Описание</H4>Предполагается, что Вы - владелец объекта \"бренд\", и этот бренд принадлежит Вашему адресу.<br>Кроме этого, существует объект Antifake \"лот\", который также принадлежит Вашему адресу.<br><br>Будут выбраны первый объекты из списка в качестве примера.<br>Если у Вас нет ни одного лота или ни одного бренда, пример не сможет быть запущен.<br><br>Все документы будут загружены в папку с именем \"demo2\", которая будет создана в папке с приложением.<br>Вы можете изменить это, указав желаемую папку.<br><br>Будут созданы:<ul><li><b>private.csv</b>со всей информацией, необходимой для генерации. Далее записи в блокчейне смогут быть созданы на базе этого файла.</li><li><b>public.csv</b>-файл для загрузки на сервер antifake. В нем не содержится секретной информации</li><li><b>print.csv</b>-файл для отправки в типографию. В нем содержится вся секретная информация, необходимая для создания этикеток</li><li>Папка<b>QR1</b>будет содержать QR-коды, предназначенные для открытой части этикетки товара. Все данные для генерации кода также содержатся в файле print.csv, файлы могут быть предоставлены для удобства типографии</li><li>Папка<b>QR2</b>будет содержать QR-коды, предназначенные для скрытой части этикетки товара. Все данные для генерации кода также содержатся в файле print.csv, файлы могут быть предоставлены для удобства типографии</li><li>если в процессе создания возникнут ошибки, они будут сохранены в файле<b>errors.csv</b>-файл для отправки в типографию.</li></ul><H4>Дополнительная информация</H4>Данный файл рассчитан на двухступенчатую генерацию (записи не создаются в блокчейн сразу, а могут быть быть созданы позднее на основе файла private.csv<br>Для защиты от возможных сквотеров имена будут иметь случайный суффикс (включена опция<font color=green>\"Добавлять случайны суффикс к имени\"</font>).<br>Тем не менее, будет проводится проверка существования каждой записи в блокчейне и изменение суффикса в случае, если такое имя уже есть. Эта проверка требует времени, Вы можете отключить ее для ускорения процесса (отключив функцию<font color=green>\"проверять, свободно ли имя\"</font>)<br>Если будет принято решение создавать записи в блокчейне сразу (будет включена опция<font color=green>\"Создавать записи в блокчейн\"</font>-генерацию случайного суффикса можно отключить.<br></body></html>"
+  },
+  "AFCreateForPrintingForm.bDemo3.Desc" : {
+    "en" : "Demo3",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Пример 3</H3></body></html>"
+  },
+  "AFCreateForPrintingForm.bCreate" : {
+    "en" : "Create",
+    "ru" : "Создать"
+  },
+  "AFCreateForPrintingForm.bCreate.Start" : {
+    "en" : "Create",
+    "ru" : "Создать"
+  },
+  "AFCreateForPrintingForm.bCreate.Stop" : {
+    "en" : "Stop",
+    "ru" : "Остановить"
+  },
+  "AFCreateForPrintingForm.bCreate.Stopping" : {
+    "en" : "Stopping...",
+    "ru" : "Остановка..."
+  },
+  "AFCreateForPrintingForm.bClose" : {
+    "en" : "Close",
+    "ru" : "Закрыть"
+  },
+  "AFCreateForPrintingForm.msg.LotNotSelected" : {
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Lot not selected</H3>You must choose a lot to continue</body></html>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Лот не выбран</H3>Для продолжения работы Вы должны выбрать существующую партию товара.</body></html>"
+  },
+  "NVSValueEditForm" : {
+    "en" : "NVS value editor",
+    "ru" : "Редактор NVS Value"
+  },
+  "NVSValueEditForm.bClose" : {
+    "en" : "Cancel and close",
+    "ru" : "Отменить и закрыть"
+  },
+  "NVSValueEditForm.bSave" : {
+    "en" : "Save and close",
+    "ru" : "Сохранить и закрыть"
+  },
+  "AFCreateForPrintingForm.tAFRequest.CantResolve" : {
+    "en" : "Can not resolve name path: ",
+    "ru" : "Невозможно разрешить наследование имени: "
+  },
+  "TakePossessionForm" : {
+    "en" : "Take possession of assets",
+    "ru" : "Завладеть цифровыми активами"
+  },
+  "TakePossessionForm.lTakePossession" : {
+    "en" : "Select the data to restore Private Key",
+    "ru" : "Выберите, по каким данным следует восстановить Приватный Ключ"
+  },
+  "TakePossessionForm.lTakePossession1" : {
+    "en" : "Associated address:",
+    "ru" : "Связанный с указанными данными адрес: "
+  },
+  "TakePossessionForm.lTakePossession2" : {
+    "en" : "Address balance:",
+    "ru" : "Баланс на адресе: "
+  },
+  "TakePossessionForm.lTakePossession3" : {
+    "en" : "Digital assets on the address:",
+    "ru" : "Цифровых активов на адресе: "
+  },
+  "TakePossessionForm.lTakePossession1.InvalidPrivateKey" : {
+    "en" : "Invalid private key.",
+    "ru" : "Ошибочный приватный ключ."
+  },
+  "TakePossessionForm.lTakePossession1.InvalidCred" : {
+    "en" : "Invalid key data",
+    "ru" : "Ошибочные данные приватного ключа"
+  },
+  "TakePossessionForm.lTakePossession2.PressButton" : {
+    "en" : "Press the button to request a list of assets.",
+    "ru" : "Нажмите кнопку для запроса списка активов"
+  },
+  "TakePossessionForm.rbTakeSerialPassword" : {
+    "en" : "Use Serial Number + Password (DPO / Antifake)",
+    "ru" : "Использовать серийный номер + пароль (DPO / Antifake)"
+  },
+  "TakePossessionForm.lSerial" : {
+    "en" : "Serial Number",
+    "ru" : "Серийный номер"
+  },
+  "TakePossessionForm.lPassword" : {
+    "en" : "Password",
+    "ru" : "Пароль"
+  },
+  "TakePossessionForm.rbTakePrivateKey" : {
+    "en" : "Use Private Key",
+    "ru" : "Использовать Приватный Ключ"
+  },
+  "TakePossessionForm.lPrivateKey" : {
+    "en" : "Private key",
+    "ru" : "Приватный ключ"
+  },
+  "TakePossessionForm.rbTakeMasterPassword" : {
+    "en" : "Use Master Password",
+    "ru" : "Использовать Мастер Пароль"
+  },
+  "TakePossessionForm.bTakePossession" : {
+    "en" : "Take Possession of ALL assets",
+    "ru" : "Завладеть всеми активами"
+  },
+  "TakePossessionForm.bClose" : {
+    "en" : "Close",
+    "ru" : "Закрыть"
+  },
+  "TakePossessionForm.messageTransferError" : {
+    "en" : "Asset transfer error: ",
+    "ru" : "Ошибка смены собственника цифрового актива: "
+  },
+  "TakePossessionForm.messageTransferDone" : {
+    "en" : "The change in ownership of digital assets is complete. It is required to wait for the completion of entering data into the blockchain.",
+    "ru" : "Изменение собственника цифровых активов завершено. Требуется подожать для окончания внесения данных в блокчейн."
+  },
+  "TakePossessionForm.bRequestAssets" : {
+    "en" : "Request digital assets list",
+    "ru" : "Запросить список цифровых активов"
+  },
+  "tEmerAPIServerTask.YouDontOwnPrivateKeyForSigning" : {
+    "en" : "You do not own a private key to sign NVS value",
+    "ru" : "Вы не владеете приватным ключем для подписи NVS значения"
+  },
+  "tEmerAPIServerTask.TimeIsOver" : {
+    "en" : "The time to complete this task has expired",
+    "ru" : "Время, в течении которого можно было исполнить эту задачу, истекло"
+  },
+  "tEmerAPIServerTask.YouDontOwnAsset" : {
+    "en" : "You do not own the Digital Asset required to sign the record being created. The name of the asset: ",
+    "ru" : "Вы не владеете Цифровым Активом, необходимым для подписи создаваемой записи. Имя актива: "
+  },
+  "tEmerAPIServerTask.UnknownTask" : {
+    "en" : "Unknown task type",
+    "ru" : "Неизвестный тип задачи"
+  },
+  "tEmerAPIServerTask.TheNameIsEmpty" : {
+    "en" : "The name of the Digital Asset is blank",
+    "ru" : "Имя Цифрового Актива пустое"
+  },
+  "tEmerAPIServerTask.TheValueIsEmpty" : {
+    "en" : "Value of the Digital Asset is empty",
+    "ru" : "Значение (Value) Цифрового Актива пустое"
+  },
+  "tEmerAPIServerTask.TheNameIsTooLong" : {
+    "en" : "Digital Asset name too long (max. length 512 bytes)",
+    "ru" : "Имя цифрового актива слишком длинное (макс длина 512 байт)"
+  },
+  "tEmerAPIServerTask.TheValueIsTooLong" : {
+    "en" : "Digital Asset value too long (max length 20480 bytes)",
+    "ru" : "Значение цифрового актива слишком длинное (макс длина 20480 байт)"
+  },
+  "tEmerAPIServerTask.TheTimePeriodIsTooShort" : {
+    "en" : "The duration of the Digital Asset`s Name lease is too short",
+    "ru" : "Длительность аренды имени Цифрового Актива слишком короткое"
+  },
+  "tEmerAPIServerTask.nameAlreadyExists" : {
+    "en" : "The name of the Digital Asset is already reserved: ",
+    "ru" : "Имя Цифрового Актива уже зарезервировано: "
+  },
+  "MessageAskNameDeleteConfirmation" : {
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Deletion: Are you sure?</H3><br>The Digital Asset will be deleted.<br>You will lose control of this asset.<br>Another user will be able to register this asset after that.</body></html>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Удаление: Вы уверены?</H3><br>Выбранный Цифровой Актив будет удален.<br>Вы потеряете контроль над этим активом.<br>Другой пользователь сможет зарегистрировать этот актив после этого.</body></html>"
+  },
+  "MainForm.lAssetsFilter" : {
+    "en" : "Digital Assets Filter",
+    "ru" : "Фильтр Цифровых Aктивов"
+  },
+  "MainForm.lAssetsFilterShowFirst" : {
+    "en" : "Show first",
+    "ru" : "Показывать первые"
+  },
+  "MainForm.chAssetsFilterShowExpired" : {
+    "en" : "Show expired",
+    "ru" : "Показывать истекшие"
+  },
+  "MainForm.bAssetsFilterRebuild" : {
+    "en" : "Rebuild",
+    "ru" : "Перестроить"
+  }
 }

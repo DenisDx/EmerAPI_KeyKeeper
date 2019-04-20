@@ -44,7 +44,7 @@
         <PackageName Value="LCL"/>
       </Item3>
     </RequiredPackages>
-    <Units Count="93">
+    <Units Count="94">
       <Unit0>
         <Filename Value="EmerApi.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -582,6 +582,11 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="TakePossessionUnit"/>
       </Unit92>
+      <Unit93>
+        <Filename Value="translationhelperunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="TranslationHelperUnit"/>
+      </Unit93>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

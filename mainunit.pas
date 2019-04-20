@@ -45,10 +45,14 @@ type
     Button1: TButton;
     Button2: TButton;
     Button3: TButton;
+    Button5: TButton;
+    Button6: TButton;
     bViewTX: TBitBtn;
     bViewTasks: TBitBtn;
     bCreateAsset: TBitBtn;
     chAssetsFilterShowExpired: TCheckBox;
+    chDevBeautyJSON: TCheckBox;
+    chDevBeautyHTML: TCheckBox;
     ilAdvCon: TImageList;
     pAssetsFilterNames: TCheckListBox;
     eAddress: TEdit;
@@ -163,6 +167,8 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
+    procedure Button6Click(Sender: TObject);
     procedure bViewTasksClick(Sender: TObject);
     procedure bViewTXClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
@@ -314,6 +320,8 @@ uses SettingsUnit,Localizzzeunit, questionUnit, MasterPasswordWizardUnit, setUPU
    ,NVSRecordUnit,BaseTXUnit
    ,math
    ,AntifakeHelperUnit
+   ,TranslationHelperUnit
+   ,LCLType
    ;
 
 
@@ -1694,57 +1702,65 @@ begin
 end;
 
 procedure TMainForm.Button3Click(Sender: TObject);
-var i,j:integer;
+begin
+  if readTranslationFile then begin
+    localizzze(self);
+    localizzze(MainMenu);
+  end;
+end;
+
+procedure TMainForm.Button5Click(Sender: TObject);
+var
     s:string;
     t:TJSONData;
-    ResStream : TResourceStream;
     fs:tFileStream;
-
-    newLocalizzzeData :TJSONObject;
 begin
- if fileexists(extractFilePath(application.ExeName)+'translation.txt') then
-   try
-     fs:=tFileStream.Create(extractFilePath(application.ExeName)+'translation.txt',fmOpenRead);
-     setLength(s,fs.Size);
-     fs.Read(s[1],length(s));
-   finally
-     FreeAndNil(fs);
-   end
- else begin
-  showMessageSafe('You must put translation.txt file into the program''s folder');
- end;
 
+  if IDYES <> Application.MessageBox('Warning! TRANSLATION directory will be erased! Are you sure you want to delete the directory?', 'WARNING', MB_ICONQUESTION + MB_YESNO) then exit;
 
-//  mLanguageData.Lines.Clear;
- try
-  t := GetJSON(changeQuotes(s));
-  try
-    newLocalizzzeData := TJSONObject.Create;
+  if fileexists(extractFilePath(application.ExeName)+'translation.txt') then
+    try
+      fs:=tFileStream.Create(extractFilePath(application.ExeName)+'translation.txt',fmOpenRead);
+      setLength(s,fs.Size);
+      fs.Read(s[1],length(s));
 
-    for i:=0 to t.Count-1 do begin
-      tJsonObject(newLocalizzzeData).Add(
-       trim(AnsiUpperCase(tJsonObject(t).Names[i]))
-       ,
-       t.Items[i].Clone
-      );
-      for j:=0 to tJsonObject(t.Items[i]).Count-1 do
-         if languages.IndexOf(tJsonObject(t.Items[i]).Names[j])<0
-            then languages.add(tJsonObject(t.Items[i]).Names[j]);
+      t := GetJSON(changeQuotes(s));
+      try
+        reriteTranslationFolder(t,chDevBeautyHTML.Checked);
+      finally
+        t.Free;
+      end;
+
+    finally
+      FreeAndNil(fs);
+    end
+  else
+   showMessageSafe('You must put translation.txt file into the program''s folder');
+end;
+
+procedure TMainForm.Button6Click(Sender: TObject);
+var fs:tFileStream;
+    js:tJsonData;
+    s:string;
+begin
+  js:=readTranslationFolder(chDevBeautyHTML.Checked);
+
+  if js<>nil then
+    try
+      fs:=tFileStream.Create(extractFilePath(application.ExeName)+'translation.txt',fmOpenWrite);
+      try
+        if chDevBeautyJSON.checked
+           then begin
+             s:=js.FormatJSON();
+             fs.Write(s[1],length(s));
+           end else js.DumpJSON(fs);
+      finally
+        fs.Free;
+      end;
+      Button3Click(nil);
+    finally
+      js.Free;
     end;
-
-  finally
-    t.Free;
-  end;
-
-  LocalizzzeData.Free;
-  LocalizzzeData:=newLocalizzzeData;
-
-  localizzze(self);
-  localizzze(MainMenu);
- except
-   on e: exception do
-     showMessageSafe('Incorrect JSON file: '+e.message);
- end;
 end;
 
 

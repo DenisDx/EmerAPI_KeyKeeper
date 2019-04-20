@@ -17,7 +17,8 @@ uses
   EmerAPITransactionUnit, BaseTXUnit, FrameServerTaskUnit, MempoolViewerUnit2,
   HDNodeUnit, masssendingunit, FrameDigitalAssetUnit, AtomFormUnit,
   FormAboutUnit, SplashFormUnit, SignMessageUnit, CheckSignatureUnit,
-  x509devUnit, addressQRunit, AFCreateForPrintingunit, NVSValueEdit, TakePossessionUnit;
+  x509devUnit, addressQRunit, AFCreateForPrintingunit, NVSValueEdit,
+  TakePossessionUnit, unit1;
 {$R *.res}
 
 begin
