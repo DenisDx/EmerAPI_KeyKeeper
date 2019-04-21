@@ -255,6 +255,8 @@ var
   function AssignElem(d:tJsonData):string;
   var t:tJsonData;
   begin
+    if d.Count=0 then begin result:=''; exit; end;
+
     t:=TJSONObject(d).Find(currentLanguage);
     if t<>nil then begin result:=t.AsString; exit; end;
 
