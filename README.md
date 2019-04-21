@@ -1,4 +1,4 @@
-EmerAPI KeyKeeper 0.0.8.4
+EmerAPI KeyKeeper 0.0.8.5
 =================
 
 EmerAPI / Antifake Key Keeper
@@ -33,6 +33,11 @@ QRCodeGenLib4Pascal <https://github.com/Xor-el/QRCodeGenLib4Pascal>
 This "Software" is Licensed Under  **`MIT License (MIT)`** .
 
 ##Version history
+
+0.0.8.5
+fixed a bug with quotes. 
+French language (part)
+
 0.0.8.4
 Added tools for translation: packing and unpacking the language resource file
 

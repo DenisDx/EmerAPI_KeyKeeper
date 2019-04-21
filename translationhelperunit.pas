@@ -75,7 +75,7 @@ begin
 
  //  mLanguageData.Lines.Clear;
   try
-   t := GetJSON(changeQuotes(s));
+   t := GetJSON(changeQuotesSafe(s));
    try
      newLocalizzzeData := TJSONObject.Create;
 

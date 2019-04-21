@@ -391,7 +391,7 @@ begin
 
 
 //  mLanguageData.Lines.Clear;
-  t := GetJSON(changeQuotes(s));
+  t := GetJSON(changeQuotesSafe(s));
   try
     LocalizzzeData := TJSONObject.Create;
     for i:=0 to t.Count-1 do begin

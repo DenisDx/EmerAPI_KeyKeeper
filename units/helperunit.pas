@@ -18,6 +18,7 @@ function myFloatToStr(v:double):ansistring;
 function myStrToFloat(v:ansistring):double;
 function changeNone(const s:string):string;
 function changeQuotes(const s:string):string;
+function changeQuotesSafe(const s:string):string;
 
 function myStrToInt(s:string):int64;
 
@@ -50,6 +51,46 @@ begin
         if copy(result,i,7)=': None}' then result:=copy(result,1,i-1)+': Null}'+copy(result,i+7,length(result)-7-i+1)
         ;
 
+end;
+
+function changeQuotesSafe(const s:string):string;
+var i:integer;
+    inq:boolean;
+    ins:boolean;
+    havesingle:boolean;
+    issingle:boolean;
+begin
+  //we analize if the ' used as quotes and do the changes only in this case
+
+  //"...." ; "  '  "  ignore \"  but not \\"
+  result:=s;
+
+  inq:=false; ins:=false; havesingle:=false; issingle:=false;
+  for i:=1 to length(result) do
+     if not ins then //not screened.
+        if not inq then begin
+          //not in quotes
+          if result[i] = '''' then begin
+              //have ' :-(
+             havesingle:=true;
+             result[i]:='"';
+             inq:=true;
+             issingle:=true;
+          end else if result[i] = '"' then begin inq:=true; issingle:=false; end;
+        end else begin
+           //we are in quotes... and current symbol is not screened
+           if issingle and (result[i] = '''') then begin
+             //end of the string
+             result[i]:='"';
+             inq:=false;
+           end else
+           if (not issingle) and (result[i] = '"') then
+             //end of the string
+             inq:=false
+           else if (result[i] = '\') then ins:=true;
+
+        end
+     else ins:=false; //we are in quotes and the symbol is screened. just do nothing.
 end;
 
 function changeQuotes(const s:string):string;

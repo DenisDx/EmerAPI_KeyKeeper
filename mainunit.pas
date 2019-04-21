@@ -1724,7 +1724,7 @@ begin
       setLength(s,fs.Size);
       fs.Read(s[1],length(s));
 
-      t := GetJSON(changeQuotes(s));
+      t := GetJSON(changeQuotesSafe(s));
       try
         reriteTranslationFolder(t,chDevBeautyHTML.Checked);
       finally
