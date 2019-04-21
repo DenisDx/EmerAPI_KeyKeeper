@@ -490,7 +490,7 @@
     "ru" : "English",
     "zh" : "English",
     "ua" : "English",
-    "fr" : "Anglais"
+    "fr" : "English"
   },
   "QuestionForm.cLanguage.fr" : {
     "en" : "Français",
@@ -504,21 +504,21 @@
     "ru" : "Русский",
     "zh" : "Русский",
     "ua" : "Русский",
-    "fr" : "Russe"
+    "fr" : "Русский"
   },
   "QuestionForm.cLanguage.zh" : {
     "en" : "中文",
     "ru" : "中文",
     "zh" : "中文",
     "ua" : "中文",
-    "fr" : "Chinois"
+    "fr" : "中文"
   },
   "QuestionForm.cLanguage.ua" : {
     "en" : "Українська",
     "ru" : "Українська",
     "zh" : "Українська",
     "ua" : "Українська",
-    "fr" : "Ukrainien"
+    "fr" : "Українська"
   },
   "QuestionForm.bHelp" : {
     "en" : "Help",
@@ -801,28 +801,28 @@
     "ru" : "English",
     "zh" : "English",
     "ua" : "English",
-    "fr" : "Anglais"
+    "fr" : "English"
   },
   "SettingsForm.sssLanguage.ru" : {
     "en" : "Русский",
     "ru" : "Русский",
     "zh" : "Русский",
     "ua" : "Русский",
-    "fr" : "Russe"
+    "fr" : "Русский"
   },
   "SettingsForm.sssLanguage.zh" : {
     "en" : "中文",
     "ru" : "中文",
     "zh" : "中文",
     "ua" : "中文",
-    "fr" : "Chinois"
+    "fr" : "中文"
   },
   "SettingsForm.sssLanguage.ua" : {
     "en" : "Українська",
     "ru" : "Українська",
     "zh" : "Українська",
     "ua" : "Українська",
-    "fr" : "Ukrainien"
+    "fr" : "Українська"
   },
   "setUPForm.lExplain" : {
     "en" : "Some fields have invalid values.\nPlease correct the values:",
@@ -2243,5 +2243,12 @@
     "en" : "Rebuild",
     "ru" : "Перестроить",
     "fr" : "Reconstruire"
-  }
+  },
+  "SettingsForm.sssLanguage.fr" : {
+    "en" : "Français",
+    "ru" : "Français",
+    "zh" : "Français",
+    "ua" : "Français",
+    "fr" : "Français"
+  }  
 }
