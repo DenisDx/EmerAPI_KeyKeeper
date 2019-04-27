@@ -10,7 +10,7 @@ object SettingsForm: TSettingsForm
   OnCreate = FormCreate
   OnShow = FormShow
   Position = poWorkAreaCenter
-  LCLVersion = '1.8.2.0'
+  LCLVersion = '1.8.4.0'
   object Panel1: TPanel
     Left = 0
     Height = 50
@@ -58,54 +58,54 @@ object SettingsForm: TSettingsForm
     Top = 50
     Width = 649
     HorzScrollBar.Page = 628
-    VertScrollBar.Page = 633
+    VertScrollBar.Page = 631
     Align = alClient
-    ClientHeight = 633
-    ClientWidth = 634
+    ClientHeight = 631
+    ClientWidth = 628
     TabOrder = 1
     object gMainSettings: TGroupBox
       Left = 0
       Height = 72
       Top = 0
-      Width = 634
+      Width = 628
       Align = alBottom
       Caption = 'Main Settings'
-      ClientHeight = 53
-      ClientWidth = 630
+      ClientHeight = 52
+      ClientWidth = 624
       TabOrder = 0
       object Label2: TLabel
         Left = 8
-        Height = 17
+        Height = 15
         Top = 0
-        Width = 116
+        Width = 93
         Caption = 'System language:'
         ParentColor = False
       end
       object sssLanguage: TComboBox
         Left = 8
-        Height = 32
+        Height = 23
         Top = 19
         Width = 200
         AutoSize = False
-        ItemHeight = 0
+        ItemHeight = 15
         OnChange = sssLanguageChange
         Style = csDropDownList
         TabOrder = 0
       end
       object ssbDev_Mode_ON: TCheckBox
         Left = 248
-        Height = 24
+        Height = 19
         Top = 24
-        Width = 137
+        Width = 107
         Caption = 'Developer mode'
         OnChange = ssbDev_Mode_ONChange
         TabOrder = 1
       end
       object ssbHide_To_Tray: TCheckBox
         Left = 416
-        Height = 24
+        Height = 19
         Top = 24
-        Width = 105
+        Width = 82
         Caption = 'Hide to tray'
         TabOrder = 2
       end
@@ -114,27 +114,27 @@ object SettingsForm: TSettingsForm
       Left = 0
       Height = 200
       Top = 780
-      Width = 634
+      Width = 628
       Align = alBottom
       Caption = 'Private Key And Security Settings'
-      ClientHeight = 181
-      ClientWidth = 630
+      ClientHeight = 180
+      ClientWidth = 624
       TabOrder = 1
       object ssbKeep_Private_Key: TCheckBox
         Left = 6
-        Height = 24
+        Height = 19
         Hint = 'check if you want to save private key to this computer'
         Top = 0
-        Width = 254
+        Width = 200
         Caption = 'Keep private key on this computer'
         OnChange = ssbKeep_Private_KeyChange
         TabOrder = 0
       end
       object Label1: TLabel
         Left = 6
-        Height = 17
+        Height = 15
         Top = 24
-        Width = 530
+        Width = 424
         Caption = 'If you checked this, your private key will be stored on this PC. Hence, if someone'
         ParentColor = False
       end
@@ -168,9 +168,9 @@ object SettingsForm: TSettingsForm
       end
       object ssbLockKPAfter: TCheckBox
         Left = 40
-        Height = 24
+        Height = 19
         Top = 48
-        Width = 139
+        Width = 109
         Caption = 'Lock Private Key '
         TabOrder = 4
       end
@@ -186,9 +186,9 @@ object SettingsForm: TSettingsForm
       end
       object lLockPKTime: TLabel
         Left = 440
-        Height = 17
+        Height = 15
         Top = 52
-        Width = 133
+        Width = 104
         Caption = 'minutes after usage'
         ParentColor = False
       end
@@ -197,11 +197,11 @@ object SettingsForm: TSettingsForm
       Left = 0
       Height = 280
       Top = 336
-      Width = 634
+      Width = 628
       Align = alBottom
       Caption = 'Local wallet'
-      ClientHeight = 261
-      ClientWidth = 630
+      ClientHeight = 260
+      ClientWidth = 624
       TabOrder = 2
       object ssbUse_Local_Wallet: TCheckBox
         Left = 8
@@ -241,8 +241,8 @@ object SettingsForm: TSettingsForm
         EditLabel.AnchorSideRight.Side = asrBottom
         EditLabel.AnchorSideBottom.Control = ssiLocal_Wallet_RPC_Port
         EditLabel.Left = 8
-        EditLabel.Height = 17
-        EditLabel.Top = 28
+        EditLabel.Height = 15
+        EditLabel.Top = 30
         EditLabel.Width = 200
         EditLabel.Caption = 'RPC Port'
         EditLabel.ParentColor = False
@@ -260,8 +260,8 @@ object SettingsForm: TSettingsForm
         EditLabel.AnchorSideRight.Side = asrBottom
         EditLabel.AnchorSideBottom.Control = sssLocal_Wallet_RPC_User_Name
         EditLabel.Left = 8
-        EditLabel.Height = 17
-        EditLabel.Top = 76
+        EditLabel.Height = 15
+        EditLabel.Top = 78
         EditLabel.Width = 200
         EditLabel.Caption = 'Local Wallet RPC User'
         EditLabel.ParentColor = False
@@ -278,8 +278,8 @@ object SettingsForm: TSettingsForm
         EditLabel.AnchorSideRight.Side = asrBottom
         EditLabel.AnchorSideBottom.Control = sssLocal_Wallet_RPC_Password
         EditLabel.Left = 216
-        EditLabel.Height = 17
-        EditLabel.Top = 76
+        EditLabel.Height = 15
+        EditLabel.Top = 78
         EditLabel.Width = 200
         EditLabel.Caption = 'Local Wallet RPC Password'
         EditLabel.ParentColor = False
@@ -347,8 +347,8 @@ object SettingsForm: TSettingsForm
         EditLabel.AnchorSideRight.Side = asrBottom
         EditLabel.AnchorSideBottom.Control = sssLocal_Wallet_RPC_Address
         EditLabel.Left = 216
-        EditLabel.Height = 17
-        EditLabel.Top = 28
+        EditLabel.Height = 15
+        EditLabel.Top = 30
         EditLabel.Width = 200
         EditLabel.Caption = 'RPC Address'
         EditLabel.ParentColor = False
@@ -387,11 +387,11 @@ object SettingsForm: TSettingsForm
       Left = 0
       Height = 268
       Top = 980
-      Width = 634
+      Width = 628
       Align = alBottom
       Caption = 'EmerAPI server'
-      ClientHeight = 249
-      ClientWidth = 630
+      ClientHeight = 248
+      ClientWidth = 624
       TabOrder = 3
       object ssbEmerAPI_Server_Connect_After_Start: TCheckBox
         Left = 216
@@ -413,8 +413,8 @@ object SettingsForm: TSettingsForm
         EditLabel.AnchorSideRight.Side = asrBottom
         EditLabel.AnchorSideBottom.Control = sssEmerAPI_server_address
         EditLabel.Left = 8
-        EditLabel.Height = 17
-        EditLabel.Top = 20
+        EditLabel.Height = 15
+        EditLabel.Top = 22
         EditLabel.Width = 408
         EditLabel.Caption = 'EmerAPI Server Address'
         EditLabel.ParentColor = False
@@ -441,8 +441,8 @@ object SettingsForm: TSettingsForm
         EditLabel.AnchorSideRight.Side = asrBottom
         EditLabel.AnchorSideBottom.Control = sssEmerAPI_Server_User_Name
         EditLabel.Left = 216
-        EditLabel.Height = 17
-        EditLabel.Top = 116
+        EditLabel.Height = 15
+        EditLabel.Top = 118
         EditLabel.Width = 200
         EditLabel.Caption = 'User Name'
         EditLabel.ParentColor = False
@@ -470,8 +470,8 @@ object SettingsForm: TSettingsForm
         EditLabel.AnchorSideRight.Side = asrBottom
         EditLabel.AnchorSideBottom.Control = sssEmerAPI_Server_Password
         EditLabel.Left = 424
-        EditLabel.Height = 17
-        EditLabel.Top = 116
+        EditLabel.Height = 15
+        EditLabel.Top = 118
         EditLabel.Width = 200
         EditLabel.Caption = 'Password'
         EditLabel.ParentColor = False
@@ -480,12 +480,12 @@ object SettingsForm: TSettingsForm
       object GroupBox5: TGroupBox
         Left = 0
         Height = 76
-        Top = 173
-        Width = 630
+        Top = 172
+        Width = 624
         Align = alBottom
         Caption = 'Advanced EmerAPI Server settings (Do not change it if you don''t know what it is)'
-        ClientHeight = 57
-        ClientWidth = 626
+        ClientHeight = 56
+        ClientWidth = 620
         TabOrder = 6
         object sssEmerAPI_Server_adv_Login_Suffix: TLabeledEdit
           Left = 5
@@ -498,8 +498,8 @@ object SettingsForm: TSettingsForm
           EditLabel.AnchorSideRight.Side = asrBottom
           EditLabel.AnchorSideBottom.Control = sssEmerAPI_Server_adv_Login_Suffix
           EditLabel.Left = 5
-          EditLabel.Height = 17
-          EditLabel.Top = 4
+          EditLabel.Height = 15
+          EditLabel.Top = 6
           EditLabel.Width = 95
           EditLabel.Caption = 'Login URL suffix'
           EditLabel.ParentColor = False
@@ -517,8 +517,8 @@ object SettingsForm: TSettingsForm
           EditLabel.AnchorSideRight.Side = asrBottom
           EditLabel.AnchorSideBottom.Control = sssEmerAPI_Server_adv_Data_suffix
           EditLabel.Left = 109
-          EditLabel.Height = 17
-          EditLabel.Top = 4
+          EditLabel.Height = 15
+          EditLabel.Top = 6
           EditLabel.Width = 95
           EditLabel.Caption = 'Data URL suffix'
           EditLabel.ParentColor = False
@@ -536,8 +536,8 @@ object SettingsForm: TSettingsForm
           EditLabel.AnchorSideRight.Side = asrBottom
           EditLabel.AnchorSideBottom.Control = sssEmerAPI_Server_adv_Login_Form_Name
           EditLabel.Left = 212
-          EditLabel.Height = 17
-          EditLabel.Top = 4
+          EditLabel.Height = 15
+          EditLabel.Top = 6
           EditLabel.Width = 95
           EditLabel.Caption = 'Login Par Name'
           EditLabel.ParentColor = False
@@ -555,8 +555,8 @@ object SettingsForm: TSettingsForm
           EditLabel.AnchorSideRight.Side = asrBottom
           EditLabel.AnchorSideBottom.Control = sssEmerAPI_Server_adv_Password_Form_Name
           EditLabel.Left = 317
-          EditLabel.Height = 17
-          EditLabel.Top = 4
+          EditLabel.Height = 15
+          EditLabel.Top = 6
           EditLabel.Width = 95
           EditLabel.Caption = 'Password Par Name'
           EditLabel.ParentColor = False
@@ -574,8 +574,8 @@ object SettingsForm: TSettingsForm
           EditLabel.AnchorSideRight.Side = asrBottom
           EditLabel.AnchorSideBottom.Control = sssEmerAPI_Server_adv_Cookie_Name
           EditLabel.Left = 420
-          EditLabel.Height = 17
-          EditLabel.Top = 4
+          EditLabel.Height = 15
+          EditLabel.Top = 6
           EditLabel.Width = 95
           EditLabel.Caption = 'Cookie Name'
           EditLabel.ParentColor = False
@@ -593,8 +593,8 @@ object SettingsForm: TSettingsForm
           EditLabel.AnchorSideRight.Side = asrBottom
           EditLabel.AnchorSideBottom.Control = sssEmerAPI_Server_adv_Query_Field_Name
           EditLabel.Left = 524
-          EditLabel.Height = 17
-          EditLabel.Top = 4
+          EditLabel.Height = 15
+          EditLabel.Top = 6
           EditLabel.Width = 95
           EditLabel.Caption = 'Cookie Name'
           EditLabel.ParentColor = False
@@ -695,8 +695,8 @@ object SettingsForm: TSettingsForm
         EditLabel.AnchorSideRight.Side = asrBottom
         EditLabel.AnchorSideBottom.Control = sssEmerAPI_Server_adv_yum_l
         EditLabel.Left = 168
-        EditLabel.Height = 17
-        EditLabel.Top = 70
+        EditLabel.Height = 15
+        EditLabel.Top = 72
         EditLabel.Width = 32
         EditLabel.Caption = 'yum_l'
         EditLabel.ParentColor = False
@@ -714,8 +714,8 @@ object SettingsForm: TSettingsForm
         EditLabel.AnchorSideRight.Side = asrBottom
         EditLabel.AnchorSideBottom.Control = sssEmerAPI_Server_adv_SessionKey
         EditLabel.Left = 160
-        EditLabel.Height = 17
-        EditLabel.Top = 108
+        EditLabel.Height = 15
+        EditLabel.Top = 110
         EditLabel.Width = 32
         EditLabel.Caption = 'Session key'
         EditLabel.ParentColor = False
@@ -727,11 +727,11 @@ object SettingsForm: TSettingsForm
       Left = 0
       Height = 164
       Top = 616
-      Width = 634
+      Width = 628
       Align = alBottom
       Caption = 'Dev options'
-      ClientHeight = 145
-      ClientWidth = 630
+      ClientHeight = 144
+      ClientWidth = 624
       TabOrder = 4
       object sssDev_WIF: TLabeledEdit
         Left = 8
@@ -744,8 +744,8 @@ object SettingsForm: TSettingsForm
         EditLabel.AnchorSideRight.Side = asrBottom
         EditLabel.AnchorSideBottom.Control = sssDev_WIF
         EditLabel.Left = 8
-        EditLabel.Height = 17
-        EditLabel.Top = 4
+        EditLabel.Height = 15
+        EditLabel.Top = 6
         EditLabel.Width = 200
         EditLabel.Caption = 'WIF ($80:main, $EF:testnet)'
         EditLabel.ParentColor = False
@@ -763,8 +763,8 @@ object SettingsForm: TSettingsForm
         EditLabel.AnchorSideRight.Side = asrBottom
         EditLabel.AnchorSideBottom.Control = sssDev_SIG
         EditLabel.Left = 216
-        EditLabel.Height = 17
-        EditLabel.Top = 4
+        EditLabel.Height = 15
+        EditLabel.Top = 6
         EditLabel.Width = 200
         EditLabel.Caption = 'Addr.sig ($21 emc, $6F test, $0 btc)'
         EditLabel.ParentColor = False
@@ -782,8 +782,8 @@ object SettingsForm: TSettingsForm
         EditLabel.AnchorSideRight.Side = asrBottom
         EditLabel.AnchorSideBottom.Control = sssDev_Server_Network
         EditLabel.Left = 424
-        EditLabel.Height = 17
-        EditLabel.Top = 4
+        EditLabel.Height = 15
+        EditLabel.Top = 6
         EditLabel.Width = 200
         EditLabel.Caption = 'Server Net Sign'
         EditLabel.ParentColor = False
@@ -801,8 +801,8 @@ object SettingsForm: TSettingsForm
         EditLabel.AnchorSideRight.Side = asrBottom
         EditLabel.AnchorSideBottom.Control = sssDev_Bip32_path
         EditLabel.Left = 8
-        EditLabel.Height = 17
-        EditLabel.Top = 52
+        EditLabel.Height = 15
+        EditLabel.Top = 54
         EditLabel.Width = 200
         EditLabel.Caption = 'HD key derive path'
         EditLabel.ParentColor = False
@@ -820,8 +820,8 @@ object SettingsForm: TSettingsForm
         EditLabel.AnchorSideRight.Side = asrBottom
         EditLabel.AnchorSideBottom.Control = sssDev_Bip32_SigPrivate
         EditLabel.Left = 216
-        EditLabel.Height = 17
-        EditLabel.Top = 52
+        EditLabel.Height = 15
+        EditLabel.Top = 54
         EditLabel.Width = 200
         EditLabel.Caption = 'HD key BIP32 Private signature'
         EditLabel.ParentColor = False
@@ -839,8 +839,8 @@ object SettingsForm: TSettingsForm
         EditLabel.AnchorSideRight.Side = asrBottom
         EditLabel.AnchorSideBottom.Control = sssDev_Bip32_SigPublic
         EditLabel.Left = 424
-        EditLabel.Height = 17
-        EditLabel.Top = 52
+        EditLabel.Height = 15
+        EditLabel.Top = 54
         EditLabel.Width = 200
         EditLabel.Caption = 'HD key BIP32 Public signature'
         EditLabel.ParentColor = False
@@ -858,8 +858,8 @@ object SettingsForm: TSettingsForm
         EditLabel.AnchorSideRight.Side = asrBottom
         EditLabel.AnchorSideBottom.Control = sssDev_Bip32_salt
         EditLabel.Left = 8
-        EditLabel.Height = 17
-        EditLabel.Top = 100
+        EditLabel.Height = 15
+        EditLabel.Top = 102
         EditLabel.Width = 200
         EditLabel.Caption = 'HD key derive path'
         EditLabel.ParentColor = False
@@ -877,8 +877,8 @@ object SettingsForm: TSettingsForm
         EditLabel.AnchorSideRight.Side = asrBottom
         EditLabel.AnchorSideBottom.Control = ssiDev_Bip32_Iter_Count
         EditLabel.Left = 216
-        EditLabel.Height = 17
-        EditLabel.Top = 100
+        EditLabel.Height = 15
+        EditLabel.Top = 102
         EditLabel.Width = 200
         EditLabel.Caption = 'HD key BIP32 Iteration Count'
         EditLabel.ParentColor = False
@@ -896,8 +896,8 @@ object SettingsForm: TSettingsForm
         EditLabel.AnchorSideRight.Side = asrBottom
         EditLabel.AnchorSideBottom.Control = sssDev_Bip32_Master_Secret
         EditLabel.Left = 424
-        EditLabel.Height = 17
-        EditLabel.Top = 100
+        EditLabel.Height = 15
+        EditLabel.Top = 102
         EditLabel.Width = 200
         EditLabel.Caption = 'HD key BIP32 Master Secret'
         EditLabel.ParentColor = False
@@ -909,23 +909,23 @@ object SettingsForm: TSettingsForm
       Left = 0
       Height = 104
       Top = 232
-      Width = 634
+      Width = 628
       Align = alBottom
       Caption = 'Payment Settings'
-      ClientHeight = 85
-      ClientWidth = 630
+      ClientHeight = 84
+      ClientWidth = 624
       TabOrder = 5
       object ssbAdd_One_Cent_To_Name_Tx_Fee: TCheckBox
         Left = 16
-        Height = 24
+        Height = 19
         Top = 8
-        Width = 591
+        Width = 470
         Caption = 'Add One Subcent To Name Tx Fee for prevent name TX drop if PoW reward increased'
         TabOrder = 0
       end
       object ssiKeep_Amount_Threshold: TLabeledEdit
         Left = 8
-        Height = 27
+        Height = 23
         Top = 50
         Width = 304
         EditLabel.AnchorSideLeft.Control = ssiKeep_Amount_Threshold
@@ -933,8 +933,8 @@ object SettingsForm: TSettingsForm
         EditLabel.AnchorSideRight.Side = asrBottom
         EditLabel.AnchorSideBottom.Control = ssiKeep_Amount_Threshold
         EditLabel.Left = 8
-        EditLabel.Height = 17
-        EditLabel.Top = 30
+        EditLabel.Height = 15
+        EditLabel.Top = 32
         EditLabel.Width = 304
         EditLabel.Caption = 'Minimal Amout To Keep For Minting (emc)'
         EditLabel.ParentColor = False
@@ -943,18 +943,18 @@ object SettingsForm: TSettingsForm
       end
       object Label6: TLabel
         Left = 312
-        Height = 17
+        Height = 15
         Top = 32
-        Width = 214
+        Width = 171
         Caption = 'Spending TX optimization mode'
         ParentColor = False
       end
       object ssiSpending_Optimization_Mode: TComboBox
         Left = 316
-        Height = 27
+        Height = 23
         Top = 50
         Width = 308
-        ItemHeight = 0
+        ItemHeight = 15
         ItemIndex = 0
         Items.Strings = (
           'Save coin/days'
@@ -970,23 +970,23 @@ object SettingsForm: TSettingsForm
       Left = 0
       Height = 160
       Top = 72
-      Width = 634
+      Width = 628
       Align = alBottom
       Caption = 'JSONRPC remote connection'
-      ClientHeight = 141
-      ClientWidth = 630
+      ClientHeight = 140
+      ClientWidth = 624
       TabOrder = 6
       object ssbJSONPRC_allowed: TCheckBox
         Left = 9
-        Height = 24
+        Height = 19
         Top = 0
-        Width = 166
+        Width = 133
         Caption = 'ssbJSONPRC_allowed'
         TabOrder = 0
       end
       object ssiJSONPRC_port: TSpinEdit
         Left = 9
-        Height = 27
+        Height = 23
         Top = 48
         Width = 130
         MaxValue = 65525
@@ -996,48 +996,48 @@ object SettingsForm: TSettingsForm
       end
       object lJSONPRC_port: TLabel
         Left = 8
-        Height = 17
+        Height = 15
         Top = 23
-        Width = 105
+        Width = 80
         Caption = 'lJSONPRC_port'
         ParentColor = False
       end
       object ssbJSONRPC_filter_commands: TCheckBox
         Left = 9
-        Height = 24
+        Height = 19
         Top = 80
-        Width = 220
+        Width = 181
         Caption = 'ssbJSONRPC_filter_commands'
         TabOrder = 2
       end
       object ssbJSONRPC_Allow_Nonlocal: TCheckBox
         Left = 304
-        Height = 24
+        Height = 19
         Top = 0
-        Width = 211
+        Width = 175
         Caption = 'ssbJSONRPC_Allow_Nonlocal'
         TabOrder = 3
       end
       object ssbJSONRPC_Allow_Only: TCheckBox
         Left = 304
-        Height = 24
+        Height = 19
         Top = 24
-        Width = 181
+        Width = 152
         Caption = 'ssbJSONRPC_Allow_Only'
         TabOrder = 4
       end
       object sssJSONRPC_allowed_commands: TEdit
         Left = 9
-        Height = 27
+        Height = 23
         Top = 104
-        Width = 621
+        Width = 615
         Anchors = [akTop, akLeft, akRight]
         TabOrder = 5
         Text = 'name_new|name_show|getbalance|signmessage'
       end
       object sssJSONRPC_allow_IPs: TEdit
         Left = 304
-        Height = 27
+        Height = 23
         Top = 48
         Width = 320
         TabOrder = 6
@@ -1046,7 +1046,7 @@ object SettingsForm: TSettingsForm
       end
       object ssiJSONPRC_timeout: TSpinEdit
         Left = 153
-        Height = 27
+        Height = 23
         Top = 48
         Width = 130
         MaxValue = 600
@@ -1056,9 +1056,9 @@ object SettingsForm: TSettingsForm
       end
       object lJSONPRC_timeout: TLabel
         Left = 152
-        Height = 17
+        Height = 15
         Top = 23
-        Width = 129
+        Width = 100
         Caption = 'lJSONPRC_timeout'
         ParentColor = False
       end

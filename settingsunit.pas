@@ -968,6 +968,7 @@ end;
 procedure TSettingsForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
 begin
     localizzze(MainForm);
+    localizzze(MainForm.MainMenu);
     MainForm.SetAndCheckBlockchain();
     MainForm.miDevTools.Visible:=nullToBool(Settings.getValue('Dev_Mode_ON'));
     MainForm.updateInfoTimer.Interval:=Settings.getValue('EMERAPI_SERVER_Refresh_period')*1000;
