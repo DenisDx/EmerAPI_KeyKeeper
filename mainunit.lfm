@@ -1217,6 +1217,10 @@ object MainForm: TMainForm
         Visible = False
         OnClick = miSignMessageClick
       end
+      object miSetOpenNic: TMenuItem
+        Caption = 'Set OpenNic DNS servers on this computer'
+        OnClick = miSetOpenNicClick
+      end
     end
     object miWallet: TMenuItem
       Caption = 'Wallet'

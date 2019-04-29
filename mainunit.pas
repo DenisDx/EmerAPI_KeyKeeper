@@ -54,6 +54,7 @@ type
     chDevBeautyJSON: TCheckBox;
     chDevBeautyHTML: TCheckBox;
     ilAdvCon: TImageList;
+    miSetOpenNic: TMenuItem;
     pAssetsFilterNames: TCheckListBox;
     eAddress: TEdit;
     eBalance: TEdit;
@@ -185,6 +186,7 @@ type
     procedure miBecomeOwnerClick(Sender: TObject);
     procedure miLotFilesClick(Sender: TObject);
     procedure miEncryptionClick(Sender: TObject);
+    procedure miSetOpenNicClick(Sender: TObject);
     procedure miTXClick(Sender: TObject);
     procedure miLogClick(Sender: TObject);
     procedure miConsoleClick(Sender: TObject);
@@ -249,6 +251,7 @@ type
 
     //!!procedure setPrivKey(value:ansistring);
     procedure onAnswer(sender:tObject;mr:tModalResult;mtag:ansistring);
+    procedure onAnswerTools(sender:tObject;mr:tModalResult;mtag:ansistring);
     procedure clearPrivKey;
     procedure AsyncAddressInfoDone(sender:TEmerAPIBlockchainThread;result:tJsonData);
     procedure blockChainonAsyncQueryRawDone(sender:TEmerAPIBlockchainThread;result:string);
@@ -322,6 +325,12 @@ uses SettingsUnit,Localizzzeunit, questionUnit, MasterPasswordWizardUnit, setUPU
    ,AntifakeHelperUnit
    ,TranslationHelperUnit
    ,LCLType
+   ,RunCmdUnit
+   ,fphttpclient //,fasthtmlparser
+   {$IFDEF Windows}
+   ,ShellApi
+   {$ENDIF Windows}
+
    ;
 
 
@@ -1902,6 +1911,24 @@ begin
 
 end;
 
+procedure TMainForm.miSetOpenNicClick(Sender: TObject);
+begin
+  {$IFDEF Unix}
+  showMessageSafe('Not supported');
+  exit;
+  {$ENDIF Unix}
+
+
+  with AskQuestionTag(self,@onAnswerTools,'msgSetOpenNicDNS') do begin
+    bYes.Visible:=true;
+    bNo.Visible:=true;
+    bHelp.Visible:=true;
+    bYes.setFocus;
+    Update;
+  end;
+
+end;
+
 procedure TMainForm.miTXClick(Sender: TObject);
 begin
   if CreateRawTXForm=nil then
@@ -2188,6 +2215,156 @@ begin
   localizzze(MainMenu);
 end;
 
+procedure TMainForm.onAnswerTools(sender:tObject;mr:tModalResult;mtag:ansistring);
+var str,s:string;
+    NetConnectionID:string;
+
+ {$IFDEF Windows}
+ function RunAsAdmin(const Handle: Hwnd; const Path, Params: string): Boolean;
+ var
+   sei: TShellExecuteInfoA;
+   Ret: DWORD;
+ begin
+   FillChar(sei, SizeOf(sei), 0);
+   sei.cbSize := SizeOf(sei);
+   sei.Wnd := Handle;
+   sei.fMask :=  SEE_MASK_FLAG_DDEWAIT or SEE_MASK_FLAG_NO_UI; //SEE_MASK_FLAG_NO_UI or SEE_MASK_NOCLOSEPROCESS; //          SEE_MASK_FLAG_DDEWAIT or SEE_MASK_FLAG_NO_UI    or SEE_MASK_NOCLOSEPROCESS;
+   sei.lpVerb := 'runas';
+   sei.lpFile := PAnsiChar(Path);
+   sei.lpParameters := PAnsiChar(Params);
+   sei.nShow := SW_HIDE;
+   //sei.nShow := SW_SHOWNORMAL;
+   Result := ShellExecuteExA(@sei);
+
+   //sleep(1000);
+   {
+   if sei.hProcess <> 0 then
+    try
+      repeat
+        Ret := MsgWaitForMultipleObjects(1, sei.hProcess, False, INFINITE, QS_ALLINPUT);
+        if Ret = (WAIT_OBJECT_0+1) then Application.ProcessMessages
+        else if Ret = WAIT_FAILED then RaiseLastOSError;
+      until Ret = WAIT_OBJECT_0;
+    finally
+      CloseHandle(sei.hProcess);
+    end;
+    }
+{
+   if sei.hProcess <> 0 then begin
+       while WaitForSingleObject(sei.hProcess, 50) = WAIT_TIMEOUT do
+         Application.ProcessMessages;
+       CloseHandle(sei.hProcess);
+     end;
+ }
+ end;
+ {$ENDIF Windows}
+
+begin
+
+  //http://www.supportrix.com/kb/how-to-change-the-dns-servers-via-terminal-on-a-mac/
+  //route get example.com | grep interface
+  //interface: en8
+
+  if (mr=mrYes) and (mtag='msgSetOpenNicDNS') then begin
+
+    if sender is TQuestionPanel then TQuestionPanel(sender).Enabled:=false;
+
+    NetConnectionID:='';
+    {$IFDEF Windows}
+      //NetConnectionID:=trim(executeAndReturn(['nic where "NetConnectionStatus=2" get NetConnectionID'],false,'wmic.exe'));
+      NetConnectionID:=trim(executeAndReturn(['nic where "NetConnectionStatus=2" get InterfaceIndex'],false,'wmic.exe'));
+      if pos(#10,NetConnectionID)<1 then NetConnectionID:=''
+      else begin
+        delete(NetConnectionID,1,pos(#10,NetConnectionID));
+        NetConnectionID:=trim(NetConnectionID);
+        //NetConnectionID:='!Беспроводная сеть'
+        //NetConnectionID:=#31#$80#$90#$FF
+      end;
+
+    {$ENDIF Windows}
+
+    {$IFDEF Unix}
+    {$ENDIF Unix}
+
+    if NetConnectionID='' then with AskQuestionTag(self,nil,'MainForm.msgSetOpenNicDNSWrongNetId') do begin
+         bOk.Visible:=true;
+         bOk.setFocus;
+         Update;
+         exit;
+       end;
+
+    //uses simpleinternet;
+    with TFPHTTPClient.Create(nil) do try
+      //str := get('https://api.opennic.org/geoip/?jsonp&res=4&ipv=4');
+      str := trim(get('https://api.opennic.org/geoip/?bare&res=4&ipv=4'));
+    finally
+      Free;
+    end;
+    //str := retrieve('https://www.opennic.org/');
+    //opennic([{"host":"ns1.jp.dns.opennic.glue","short":"ns1.jp","ip":"108.61.161.119","loc":"JP","miles":1793,"kilometers":2883,"stat":"96.69","manager":"palinuro"},{"host":"ns5.nsw.au.dns.opennic.glue","short":"ns5.nsw.au","ip":"207.148.83.241","loc":"NSW, AU","miles":4491,"kilometers":7221,"stat":"99.97","manager":"connorw600"},{"host":"ns5.ru.dns.opennic.glue","short":"ns5.ru","ip":"91.217.137.37","loc":"RU","miles":4442,"kilometers":7141,"stat":"99.96","manager":"virus_net"},{"host":"ns1.in.dns.opennic.glue","short":"ns1.in","ip":"139.59.6.115","loc":"IN","miles":2487,"kilometers":3998,"stat":"98.53","manager":"palinuro"}]);
+    if str='' then
+       with AskQuestionTag(self,nil,'MainForm.msgSetOpenNicDNSWrongAnswer') do begin
+         bOk.Visible:=true;
+         bOk.setFocus;
+         Update;
+         exit;
+       end;
+
+    str:=str+#10;
+
+
+    {$IFDEF Windows}
+    //netsh interface ip add dns "!Беспроводная сеть" 8.8.8.8 index=1 & netsh interface ip add dns "!Беспроводная сеть" 8.8.4.4 index=1
+     s:='';
+     while pos(#10,str)>0 do begin
+      if s<>'' then s:=s+' & ';
+      s:=s +
+       'netsh interface ip add dns '+NetConnectionID+' '+trim(copy(str,1,pos(#10,str)-1))+' index=1';
+      delete(str,1,pos(#10,str));
+      //str:='';
+     end;
+     if not RunAsAdmin(Handle, 'cmd', '/K '+s) then str:='error';
+    {$ENDIF Windows}
+
+    {
+    while pos(#10,str)>0 do begin
+      s:=trim(copy(str,1,pos(#10,str)-1));
+      {$IFDEF Windows}
+        //netsh interface ip add dns "NetConnectionID" 169.239.202.202 index=1
+        //netsh interface ip add dns "NetConnectionID" 5.132.191.104 index=1
+        //if trim(executeAndReturn(['interface ip add dns "'+NetConnectionID+'" '+s+' index=1'],true,'netsh'))='' then delete(str,1,pos(#10,str)) else break;
+        if RunAsAdmin(Handle, 'netsh', 'interface ip add dns "'+NetConnectionID+'" '+s+' index=1') then delete(str,1,pos(#10,str)) else break;
+        //if RunAsAdmin(Handle, 'cmd', '/K echo interface ip add dns '+NetConnectionID+' '+s+' index=1 & pause') then delete(str,1,pos(#10,str)) else break;
+
+
+
+      {$ENDIF Windows}
+
+      {$IFDEF Unix}
+      {$ENDIF Unix}
+
+      //showMessageSafe(str);
+
+
+    end;
+    }
+
+
+    if str='' then
+      with AskQuestionTag(self,nil,'MainForm.msgSetOpenNicDNSSuccess') do begin
+             bOk.Visible:=true;
+             bOk.setFocus;
+             Update;
+           end
+    else
+      with AskQuestionTag(self,nil,'MainForm.msgSetOpenNicDNSFail') do begin
+             bOk.Visible:=true;
+             bOk.setFocus;
+             Update;
+           end
+
+  end;
+end;
 
 procedure TMainForm.timerAskForMPTimer(Sender: TObject);
 begin
