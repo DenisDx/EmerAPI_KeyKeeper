@@ -385,6 +385,18 @@ end;
 
 function getNameColor(op:ansistring):tColor;
 begin
+
+  //it can be full name of just prefix
+  if pos('af:',op)=1 then begin
+    delete(op,1,3);
+    if pos(':',op)>0 then op:=copy(op,1,pos(':',op)-1);
+    op:='af:'+op;
+  end else if pos(':',op)>0 then begin
+    //not af. Just cut all
+    op:=copy(op,1,pos(':',op)-1);
+  end;
+
+
   result:=clWhite;
   if      uppercase(trim(op))='PAY'         then result:=RGBToColor($F0,$F0,$A0)
   else if uppercase(trim(op))='PAY_TO_MYSELF'    then result:=RGBToColor($A0,$F0,$A0)
@@ -414,6 +426,10 @@ begin
   else if trim(op)='blog'    then result:=RGBToColor($80,$D0,$A0)
   else if trim(op)='enum'    then result:=RGBToColor($A0,$D0,$80)
 
+  //af objects
+  else if trim(op)='af:lot'    then result:=RGBToColor($E0,$E0,$F0)
+  else if trim(op)='af:product'    then result:=RGBToColor($F0,$E0,$E0)
+  else if trim(op)='af:owner'    then result:=RGBToColor($E0,$F0,$F0)
 
   //AF
   else if uppercase(trim(op))='AF_UNKNOWN'    then result:=RGBToColor($C0,$C0,$C0)
@@ -795,7 +811,7 @@ var //pubKey:TECDSA_Public;
    bPay.Enabled:=e;
    miAntifake.Enabled:=e;
    miWallet.Enabled:=e;
-   miTools.Enabled:=e;
+   miCheckSignature.Enabled:=e;
    miServer.Enabled:=e;
  end;
 
@@ -1053,7 +1069,7 @@ end;
 
 procedure TMainForm.RebuildAssetsList(Sender: TObject);
 const
-  knownPreffixesArray:array[0..12] of ansistring =
+  knownPrefixesArray:array[0..12] of ansistring =
     (''
       ,'af:owner','af:product','af:lot'
       ,'dpo:','dpo:::','dns:','ssh:'
@@ -1063,8 +1079,8 @@ const
 
 var i:integer;
     fCounter:integer;
-    allowedPreffixes:ansistring;
-    knownPreffixes:ansistring;
+    allowedPrefixes:ansistring;
+    knownPrefixes:ansistring;
 
 function findControl(nvsname:ansistring):TFrameBaseNVS;
 var i:integer;
@@ -1090,7 +1106,7 @@ end;
 
 function needShow(NVSRecord:tBaseTXO {tUTXO tNVSRecord}):boolean;
 var i:integer;
-    name,preffix:ansistring;
+    name,prefix:ansistring;
     found:boolean;
 begin
  //do we need show (sbAssets.Controls[i] as TFrameBaseNVS).NVSRecord ?
@@ -1119,28 +1135,28 @@ begin
  if (fCounter>=seAssetsFilterShowFirst.Value) then exit;
 
 
- if pAssetsFilterNames.Checked[0] or (allowedPreffixes<>' ') then begin
+ if pAssetsFilterNames.Checked[0] or (allowedPrefixes<>' ') then begin
    name:='';
    if (NVSRecord is tNVSRecord) then name:=(NVSRecord as tNVSRecord).NVSName
    else if (NVSRecord is tUTXO) then name:=(NVSRecord as tUTXO).getNVSName;
 
-   preffix:=namePreffixExtract(name);
+   prefix:=namePrefixExtract(name);
 
-   //known preffix and not selected?
-   if (pos(' '+preffix+' ',knownPreffixes)>0) and (pos(' '+preffix+' ',allowedPreffixes)<1) then exit;
+   //known prefix and not selected?
+   if (pos(' '+prefix+' ',knownPrefixes)>0) and (pos(' '+prefix+' ',allowedPrefixes)<1) then exit;
 
-   //unknow preffixes are not allowed
-   if (pos(' '+preffix+' ',knownPreffixes)<1) and (not pAssetsFilterNames.Checked[0]) then exit;
+   //unknow prefixes are not allowed
+   if (pos(' '+prefix+' ',knownPrefixes)<1) and (not pAssetsFilterNames.Checked[0]) then exit;
 
    //check structure
-   if (pos(' '+preffix+' ',allowedPreffixes)>0) then begin
-     //finding real preffix
+   if (pos(' '+prefix+' ',allowedPrefixes)>0) then begin
+     //finding real prefix
 
      found:=false;
 
-     for i:=1 to min(length(knownPreffixesArray),pAssetsFilterNames.Count)-1 do //first is undetected
+     for i:=1 to min(length(knownPrefixesArray),pAssetsFilterNames.Count)-1 do //first is undetected
        if pAssetsFilterNames.Checked[i] then
-         if namePreffixMatched(knownPreffixesArray[i],name) then begin
+         if namePrefixMatched(knownPrefixesArray[i],name) then begin
            found:=true;
            break;
          end;
@@ -1160,13 +1176,13 @@ begin
  if emerAPI.UTXOList=nil then exit;
 
  //build prefixes
- allowedPreffixes:=' ';
- knownPreffixes:=' ';
- for i:=1 to min(length(knownPreffixesArray),pAssetsFilterNames.Count)-1 do //first is undetected
+ allowedPrefixes:=' ';
+ knownPrefixes:=' ';
+ for i:=1 to min(length(knownPrefixesArray),pAssetsFilterNames.Count)-1 do //first is undetected
  begin
    if pAssetsFilterNames.Checked[i] then
-     allowedPreffixes:=allowedPreffixes+namePreffixExtract(knownPreffixesArray[i])+' ';
-   knownPreffixes:=knownPreffixes+namePreffixExtract(knownPreffixesArray[i])+' ';
+     allowedPrefixes:=allowedPrefixes+namePrefixExtract(knownPrefixesArray[i])+' ';
+   knownPrefixes:=knownPrefixes+namePrefixExtract(knownPrefixesArray[i])+' ';
  end;
 
 
@@ -2293,6 +2309,7 @@ begin
          exit;
        end;
 
+    {
     //uses simpleinternet;
     with TFPHTTPClient.Create(nil) do try
       //str := get('https://api.opennic.org/geoip/?jsonp&res=4&ipv=4');
@@ -2300,6 +2317,9 @@ begin
     finally
       Free;
     end;
+    }
+    str := trim(executeAndReturn(['"https://api.opennic.org/geoip/?bare&res=4&ipv=4"'],false,'curl'));
+
     //str := retrieve('https://www.opennic.org/');
     //opennic([{"host":"ns1.jp.dns.opennic.glue","short":"ns1.jp","ip":"108.61.161.119","loc":"JP","miles":1793,"kilometers":2883,"stat":"96.69","manager":"palinuro"},{"host":"ns5.nsw.au.dns.opennic.glue","short":"ns5.nsw.au","ip":"207.148.83.241","loc":"NSW, AU","miles":4491,"kilometers":7221,"stat":"99.97","manager":"connorw600"},{"host":"ns5.ru.dns.opennic.glue","short":"ns5.ru","ip":"91.217.137.37","loc":"RU","miles":4442,"kilometers":7141,"stat":"99.96","manager":"virus_net"},{"host":"ns1.in.dns.opennic.glue","short":"ns1.in","ip":"139.59.6.115","loc":"IN","miles":2487,"kilometers":3998,"stat":"98.53","manager":"palinuro"}]);
     if str='' then

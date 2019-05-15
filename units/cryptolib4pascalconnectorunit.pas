@@ -104,8 +104,8 @@ function tmpTECDSA_Public_2_IECPublicKeyParameters(pubKey:ansistring):IECPublicK
 
 function ECDSAVerify(PubKey : IECPublicKeyParameters; const digest : AnsiString; Signature : AnsiString) : Boolean; overload;
 function ECDSAVerify(PubKey : ansistring; const digest : AnsiString; Signature : AnsiString) : Boolean; overload;
-function ECDSASign(PrivateKey: IECPrivateKeyParameters; const digest: AnsiString; findCorrect:boolean=true): AnsiString; overload;
-function ECDSASign(PrivateKey: ansistring; const digest: AnsiString; findCorrect:boolean=true): AnsiString; overload;
+function ECDSASign(PrivateKey: IECPrivateKeyParameters; const digest: AnsiString; less0x80:boolean=true; only32:boolean=true): AnsiString; overload;
+function ECDSASign(PrivateKey: ansistring; const digest: AnsiString; less0x80:boolean=true; only32:boolean=true): AnsiString; overload;
 
 function Encrypt_AES256(Const data, password : AnsiString): AnsiString;
 function Encrypt_AES256_CBC(Const data, password : AnsiString): AnsiString;
@@ -322,7 +322,7 @@ end;
 
 
 
-function ECDSASign(PrivateKey: ansistring; const digest: AnsiString; findCorrect:boolean=true): AnsiString;
+function ECDSASign(PrivateKey: ansistring; const digest: AnsiString; less0x80:boolean=true; only32:boolean=true): AnsiString;
 var
     Lcurve: IX9ECParameters;
     domain: IECDomainParameters;
@@ -334,10 +334,10 @@ begin
 
   domain := TECDomainParameters.Create(Lcurve.Curve, Lcurve.G, Lcurve.N, Lcurve.H, Lcurve.GetSeed);
 
-  result:=ECDSASign(TECPrivateKeyParameters.Create('ECDSA', buf2TBigInteger(PrivateKey), domain),digest,findCorrect);
+  result:=ECDSASign(TECPrivateKeyParameters.Create('ECDSA', buf2TBigInteger(PrivateKey), domain),digest,less0x80,only32);
 end;
 
-function ECDSASign(PrivateKey: IECPrivateKeyParameters; const digest: AnsiString; findCorrect:boolean=true): AnsiString;
+function ECDSASign(PrivateKey: IECPrivateKeyParameters; const digest: AnsiString; less0x80:boolean=true; only32:boolean=true): AnsiString;
 var
   Signer: ISigner;
   {&message,} sigBytes: TBytes;
@@ -382,7 +382,14 @@ begin
       Dmax.Subtract(D);
    }
     ti:=length(sig.s);
-  until (not findCorrect) or (i>1000)  or (ti=32); //or (((ord(sig.r[1])<128 )) and ((ord(sig.s[1]) <128)) and (ti<$80));
+  until (i>1000)  or (
+          ((not only32) or (ti=32))
+            and
+          ((not less0x80) or ((ord(sig.r[1])<128 )  and  (ord(sig.s[1]) <128)) )
+        );
+
+
+   //or (((ord(sig.r[1])<128 )) and ((ord(sig.s[1]) <128)) and (ti<$80));
 
 
 

@@ -2638,27 +2638,169 @@
   },
   "MainForm.miSetOpenNic" : {
     "en" : "Set OpenNic DNS servers on this computer",
-    "ru" : "Установить DNS сервера OpenNic на этом компьютере"
+    "ru" : "Установить DNS сервера OpenNic на этом компьютере",
+    "fr" : "Configurer OpenNic comme serveurs DNS sur cet ordinateur"
   },
   "msgSetOpenNicDNS" : {
-    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Set OpenNic DNS servers on this computer</H3><p>This function will change the settings of the current network connection.<br>After that, servers in alternative domain zones (e.g. Emercoin zones) will be accessible on your computer<br>Administrator rights are required to change the settings. Reply \"yes\" to the permission request.<br>Some antivirus software may warn you to change your DNS settings.<br>You will always be able to reset the default settings in the network connection settings.<br></p>Are you wish to change the network connection DNS settings?</body></html>",
-    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Установить DNS сервера OpenNic на этом компьютере</H3><p>Эта функция изменит настройки текущего сетевого подключения.<br>После этого на Вашем компьютере будут открываться сервера в альтернативных доменных зонах (например, зоны Эмеркоин)<br>Для изменения настроек потребуются права администратора. Ответьте \"да\" на запрос разрешения.<br>Некоторые антивирусные программы могут предупредить об изменении настроек DNS.<br>Вы всегда сможете вернуть стандартные настройки в параметрах сетевого подключения.<br></p>Изменить настройки DNS сетевого подключения?</body></html>"
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Set OpenNic DNS servers on this computer</H3><p>This function will change the settings of the current network connection.<br>After that, servers in alternative domain zones (e.g. Emercoin zones) will be accessible on your computer<br>Administrator rights are required to change the settings. Reply \"yes\" to the permission request.<br>Some antivirus software may warn you to change your DNS settings.<br>You can always reset the default settings in the network connection settings.<br></p>Do you wish to change the network connection DNS settings?</body></html>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Установить DNS сервера OpenNic на этом компьютере</H3><p>Эта функция изменит настройки текущего сетевого подключения.<br>После этого на Вашем компьютере будут открываться сервера в альтернативных доменных зонах (например, зоны Эмеркоин)<br>Для изменения настроек потребуются права администратора. Ответьте \"да\" на запрос разрешения.<br>Некоторые антивирусные программы могут предупредить об изменении настроек DNS.<br>Вы всегда сможете вернуть стандартные настройки в параметрах сетевого подключения.<br></p>Изменить настройки DNS сетевого подключения?</body></html>",
+    "fr" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Définit les serveurs OpenNic.org comme DNS sur cet ordinateur</H3><p>Cette fonction modifiera vos paramètres de connexion réseau actuels.<br>Après cela, les serveurs situés dans les zones de domaine alternatives (i.e. les zones Emercoin) seront accessibles à partir de votre ordinateur.<br>Les privilèges Administrateur sont requis pour modifier ces paramètres. Répondez \"Oui\" à la demande d'élévation de privilèges.<br>Certains logiciels antivirus peuvent vous alerter de la modification à vos paramètres DNS.<br>Vous pourrez toujours réinitialiser les paramètres par défaut dans les paramètres de connexion réseau..<br></p>Souhaitez-vous modifier les paramètres DNS de cette connexion réseau?</body></html>"
   },
   "MainForm.msgSetOpenNicDNSWrongAnswer" : {
     "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Error in accessing the server</H3>The opennic.org server does not respond or has returned erroneous data.<br>Try using this function later.<br>Perhaps you should update the application.</body></html>",
-    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Ошибка при доступе к серверу</H3>Сервер opennic.org не отвечает или вернул ошибочные данные.<br>Попробуйте использовать эту функцию позднее.<br>Возможно, следует обновить программу.</body></html>"
-  },  
-  
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Ошибка при доступе к серверу</H3>Сервер opennic.org не отвечает или вернул ошибочные данные.<br>Попробуйте использовать эту функцию позднее.<br>Возможно, следует обновить программу.</body></html>",
+    "fr" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Une erreur est survenue en accèdant au serveur</H3>Le serveur OpenNic.org ne répond pas ou envoie une réponse erronée<br>Essayez d'utiliser cette fonction plus tard.<br>Peut-être devriez-vous mettre à jour l'application.</body></html>"
+  },
   "MainForm.msgSetOpenNicDNSSuccess" : {
     "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>The change in network settings was successful</H3>EmerAPI KeyKeeper has changed your network settings<br>Now you can visit sites and servers in alternative domain zones<br>If the connection changes (e.g. you connect your computer to another network), you may need to perform this operation again.</body></html>",
-    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Изменение настроек сети прошло успешно</H3>EmerAPI KeyKeeper изменил настройки Вашей сети<br>Теперь Вы можете посещать сайты и сервера в альтернативных доменных зонах<br>Если подключение изменится (например, Вы подключите компьютер к другой сети) может потребоваться вновь выполнить эту операцию.</body></html>"
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Изменение настроек сети прошло успешно</H3>EmerAPI KeyKeeper изменил настройки Вашей сети<br>Теперь Вы можете посещать сайты и сервера в альтернативных доменных зонах<br>Если подключение изменится (например, Вы подключите компьютер к другой сети) может потребоваться вновь выполнить эту операцию.</body></html>",
+    "fr" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>La modification des paramètres réseau a réussi</H3>EmerAPI KeyKeeper a modifié vos paramètres réseau<br>Vous pouvez maintenant visiter les sites et les serveurs des zones de domaines alternatives<br>Si vous changez la connexion (par exemple, vous connectez votre ordinateur à un autre réseau), vous devrez peut-être exécuter cette opération à nouveau..</body></html>"
   },
   "MainForm.msgSetOpenNicDNSFail" : {
-    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Error changing network configuration</H3>EmerAPI KeyKeeper failed to change the network settings<br>Probably not enough access rights <br>Try to restart the program as administrator</body></html>",
-    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Ошибка при изменении конфигурации сети</H3>EmerAPI KeyKeeper не смог изменить настройки сети<br>Возможно, недостаточно прав доступа<br>Попробуйте перезапустить программу от имени администратора</body></html>"
-  },  
+    "en" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Error changing network configuration</H3>EmerAPI KeyKeeper failed to change the network settings<br>Probably not enough access rights<br>Try to restart the program as administrator</body></html>",
+    "ru" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Ошибка при изменении конфигурации сети</H3>EmerAPI KeyKeeper не смог изменить настройки сети<br>Возможно, недостаточно прав доступа<br>Попробуйте перезапустить программу от имени администратора</body></html>",
+    "fr" : "<HTML><head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><BODY><H3>Une erreur est survenue en modifiant la configuration réseau</H3>EmerAPI KeyKeeper n'a pas réussi à modifier les paramètres réseau<br>Probablement dû à des provilèges insuffisants<br>Essayez de relancer le programme avec le paramètre \"Exécuter en tant qu'Administrateur\"</body></html>"
+  },
   "MainForm.msgSetOpenNicDNSWrongNetId" : {
     "en" : "Wrong network ID. Perhaps network is not connected.",
-    "ru" : "Ошибочное подключение к сети. Возможно, сеть недоступна"
+    "ru" : "Ошибочное подключение к сети. Возможно, сеть недоступна",
+    "fr" : "Identifiant réseau (ID) invalide. Peut-être que le réseau n'est pas connecté."
+  },
+  "AFCreateForPrintingForm.msg.CantSaveFile" : {
+    "en" : "Error saving file ",
+    "ru" : "Ошибка сохранения файла "
+  },    
+  "Messages.ErrorReadingFile" : {
+    "en" : "Error reading file ",
+    "ru" : "Ошибка чтения файла "
+  },  
+  "Messages.ErrorWritingFile" : {
+    "en" : "Error writing file ",
+    "ru" : "Ошибка записи файла "
+  },    
+  "AFCreateForPrintingForm.chRecreateValue" : {
+    "en" : "(Re)Create Value",
+    "ru" : "(Пере)Создать Value"
+  },
+  "AFCreateForPrintingForm.chRecreateValue.Hint" : {
+    "en" : "Re-creates the body of the Digital Asset. This option only makes sense for the file. If a non-empty value is obtained from a file, it will not be recreated.",
+    "ru" : "Заново создает тело Цифрового Актива. Эта опция имеет смысл только для файла. Если непустое значение будет получено из файла, оно не будет пересоздаваться."
+  },  
+  "NameViewForm.bCreateGoods" : {
+    "en" : "Create goods",
+    "ru" : "Создать товар"
+  },  
+  "NameViewForm.bAtom" : {
+    "en" : "Atom Contract",
+    "ru" : "Атомарный контракт"
+  },  
+  "NameViewForm.bDelete" : {
+    "en" : "Delete in blockchain",
+    "ru" : "Удалить в блокчейн"
+  },  
+  "NameViewForm.tsState" : {
+    "en" : "State and tools",
+    "ru" : "Состояние и инструменты"
+  },  
+  "NameViewForm.tsRaw" : {
+    "en" : "Advanced",
+    "ru" : "Дополнительно"
+  },
+  "NameViewForm.tsDecoded" : {
+    "en" : "Decoded",
+    "ru" : "Декодировано"
+  },
+  "NameViewForm.bUpdateName" : {
+    "en" : "Save to blockchain",
+    "ru" : "Обновить в блокчейн"
+  },
+  "NameViewForm.bClose" : {
+    "en" : "Close",
+    "ru" : "Закрыть"
+  },
+  "NameViewForm.bShowHistory" : {
+    "en" : "Show history",
+    "ru" : "Показать историю"
+  },
+  "NameViewForm.eName" : {
+    "en" : "Name of the Digital Asset",
+    "ru" : "Наименование Цифрового Актива"
+  },
+  "AFCreateGoodsForLot" : {
+    "en" : "Create goods",
+    "ru" : "Создание товара"
+  },
+  "AFCreateGoodsForLot.lLotData" : {
+    "en" : "Lot infotmation:",
+    "ru" : "Данные по партии продукции"
+  },
+  "AFCreateGoodsForLot.eLot" : {
+    "en" : "Lot NVS name ",
+    "ru" : "NVS имя партии "
+  },
+  "AFCreateGoodsForLot.eProduct" : {
+    "en" : "NSV name of the product ",
+    "ru" : "NSV имя товара "
+  },
+  "AFCreateGoodsForLot.eBrand" : {
+    "en" : "NSV name of the brand ",
+    "ru" : "NVS имя торговой марки "
+  },
+  "AFCreateGoodsForLot.lMessage2" : {
+    "en" : "%s serials: %s",
+    "ru" : "%s серийных номеров: %s"
+  },
+  "AFCreateGoodsForLot.lMessage2.addMany" : {
+    "en" : "The series is quite large, and we recommend that you run a check before creating",
+    "ru" : "Серия довольно велика, рекомендуем выполнить проверку перед созданием"
+  },
+  "AFCreateGoodsForLot.lMessage2.addTooMany" : {
+    "en" : "The series is too big to make goods Digital Passports in NVS.",
+    "ru" : "Серия слишком велика для создания электронных паспортов товара в NVS."
+  },
+  "AFCreateGoodsForLot.lMessage2.Empty" : {
+    "en" : "Lot pool is empty",
+    "ru" : "Пустой пул номеров партии товара"
+  },  
+  "AFCreateGoodsForLot.chCreateInBlockchain" : {
+    "en" : "Put goods Digital Passports into blockchain",
+    "ru" : "Поместить Цифровые Паспорта товара в блокчейн"
+  },  
+  "AFCreateGoodsForLot.chAdvanced" : {
+    "en" : "Advanced mode: let me change setting before start",
+    "ru" : "Расширенный режим: дать возможность редактировать все параметры перед запуском"
+  },  
+  "AFCreateGoodsForLot.lDirectory" : {
+    "en" : "Directory for goods data",
+    "ru" : "Каталог для данных по товару"
+  },    
+  "AFCreateGoodsForLot.bCreate" : {
+    "en" : "Create",
+    "ru" : "Создать"
+  },    
+  "AFCreateGoodsForLot.bClose" : {
+    "en" : "Close",
+    "ru" : "Закрыть"
+  },
+  "AFCreateGoodsForLot.lMessage1" : {
+    "en" : "Creating goods data for lot ",
+    "ru" : "Создание данных по товару для партии "
+  },  
+  "AFCreateGoodsForLot.Messages.PleaseWait" : {
+    "en" : "Please wait for data loading...",
+    "ru" : "Пожалуйста подождите окончания загрузки данных..."
+  },    
+  "AFCreateGoodsForLot.lMessage3.noBrand" : {
+    "en" : "Can not create the goods: Brand is not detected",
+    "ru" : "Невозможно создать товары: Бренд не определяется"
+  },  
+  "AFCreateGoodsForLot.lMessage3.poolEmpty" : {
+    "en" : "Lot pool is empty.",
+    "ru" : "Пустой пул номеров партии товара"
+  },    
+  "AFCreateGoodsForLot.lMessage3" : {
+    "en" : "Click the button to create goods data",
+    "ru" : "Нажмите кнопку для создания данных по товару"
   }  
+  
 }

@@ -1,20 +1,20 @@
 object AFCreateForPrintingForm: TAFCreateForPrintingForm
-  Left = 440
-  Height = 755
-  Top = 79
+  Left = 438
+  Height = 773
+  Top = 60
   Width = 1000
   Caption = 'AFCreateForPrintingForm'
-  ClientHeight = 755
+  ClientHeight = 773
   ClientWidth = 1000
   Constraints.MinHeight = 600
   Constraints.MinWidth = 1000
   OnDestroy = FormDestroy
   OnShow = FormShow
-  LCLVersion = '1.8.2.0'
+  LCLVersion = '1.8.4.0'
   object pBottom: TPanel
     Left = 0
     Height = 97
-    Top = 658
+    Top = 676
     Width = 1000
     Align = alBottom
     BevelOuter = bvNone
@@ -80,7 +80,7 @@ object AFCreateForPrintingForm: TAFCreateForPrintingForm
   object mDebug: TMemo
     Left = 0
     Height = 33
-    Top = 625
+    Top = 643
     Width = 1000
     Align = alBottom
     Lines.Strings = (
@@ -90,30 +90,30 @@ object AFCreateForPrintingForm: TAFCreateForPrintingForm
   end
   object ScrollBox1: TScrollBox
     Left = 0
-    Height = 620
+    Height = 638
     Top = 0
     Width = 1000
-    HorzScrollBar.Page = 871
-    VertScrollBar.Page = 618
+    HorzScrollBar.Page = 838
+    VertScrollBar.Page = 634
     Align = alClient
-    ClientHeight = 618
-    ClientWidth = 985
+    ClientHeight = 634
+    ClientWidth = 979
     TabOrder = 2
     object pStep3: TPanel
       Left = 0
       Height = 440
-      Top = 480
-      Width = 985
+      Top = 504
+      Width = 979
       Align = alTop
       BevelOuter = bvNone
       ClientHeight = 440
-      ClientWidth = 985
+      ClientWidth = 979
       TabOrder = 0
       object lStep3: TLabel
         Left = 8
-        Height = 19
+        Height = 21
         Top = 8
-        Width = 13
+        Width = 12
         Caption = '3.'
         Font.Height = -16
         ParentColor = False
@@ -121,81 +121,81 @@ object AFCreateForPrintingForm: TAFCreateForPrintingForm
       end
       object chCreatePrintCSV: TCheckBox
         Left = 9
-        Height = 24
+        Height = 19
         Top = 180
-        Width = 146
+        Width = 113
         Caption = 'chCreatePrintCSV'
         OnChange = rbIterRangeChange
         TabOrder = 0
       end
       object chCreateQR1: TCheckBox
         Left = 8
-        Height = 24
+        Height = 19
         Top = 212
-        Width = 114
+        Width = 89
         Caption = 'chCreateQR1'
         OnChange = rbIterRangeChange
         TabOrder = 1
       end
       object chCreateQR2: TCheckBox
         Left = 10
-        Height = 24
+        Height = 19
         Top = 260
-        Width = 114
+        Width = 89
         Caption = 'chCreateQR2'
         OnChange = rbIterRangeChange
         TabOrder = 2
       end
       object chCreatePrivateCSV: TCheckBox
         Left = 8
-        Height = 24
+        Height = 19
         Top = 76
-        Width = 161
+        Width = 124
         Caption = 'chCreatePrivateCSV'
         OnChange = rbIterRangeChange
         TabOrder = 3
       end
       object chCreatePublicCSV: TCheckBox
         Left = 8
-        Height = 24
+        Height = 19
         Top = 128
-        Width = 154
+        Width = 121
         Caption = 'chCreatePublicCSV'
         OnChange = rbIterRangeChange
         TabOrder = 4
       end
       object chCreateNVSrecords: TCheckBox
         Left = 10
-        Height = 24
+        Height = 19
         Top = 312
-        Width = 167
+        Width = 128
         Caption = 'chCreateNVSrecords'
         OnChange = rbIterRangeChange
         TabOrder = 5
       end
       object chLogErrorSerialsToFile: TCheckBox
         Left = 11
-        Height = 24
+        Height = 19
         Top = 414
-        Width = 186
+        Width = 143
         Caption = 'chLogErrorSerialsToFile'
         OnChange = rbIterRangeChange
         TabOrder = 6
       end
       object chCreateNVSrecordsOwnedByMe: TCheckBox
         Left = 42
-        Height = 24
+        Height = 19
         Top = 336
-        Width = 251
+        Width = 196
         Caption = 'chCreateNVSrecordsOwnedByMe'
         OnChange = rbIterRangeChange
         TabOrder = 7
       end
       object fnLogErrorSerialsToFile: TFileNameEdit
         Left = 392
-        Height = 27
+        Height = 23
         Top = 414
-        Width = 587
+        Width = 581
         Filter = 'csv files (*.csv)|*.csv|All files (*.*)|*.*'
         FilterIndex = 0
         HideDirectories = False
@@ -208,9 +208,9 @@ object AFCreateForPrintingForm: TAFCreateForPrintingForm
       end
       object fnCreatePrivateCSV: TFileNameEdit
         Left = 392
-        Height = 27
+        Height = 23
         Top = 72
-        Width = 587
+        Width = 581
         Filter = 'csv files (*.csv)|*.csv|All files (*.*)|*.*'
         FilterIndex = 0
         HideDirectories = False
@@ -223,9 +223,9 @@ object AFCreateForPrintingForm: TAFCreateForPrintingForm
       end
       object fnCreatePublicCSV: TFileNameEdit
         Left = 392
-        Height = 27
+        Height = 23
         Top = 124
-        Width = 587
+        Width = 581
         Filter = 'csv files (*.csv)|*.csv|All files (*.*)|*.*'
         FilterIndex = 0
         HideDirectories = False
@@ -238,9 +238,9 @@ object AFCreateForPrintingForm: TAFCreateForPrintingForm
       end
       object fncreatePrintCSV: TFileNameEdit
         Left = 392
-        Height = 27
+        Height = 23
         Top = 176
-        Width = 587
+        Width = 581
         Filter = 'csv files (*.csv)|*.csv|All files (*.*)|*.*'
         FilterIndex = 0
         HideDirectories = False
@@ -253,9 +253,9 @@ object AFCreateForPrintingForm: TAFCreateForPrintingForm
       end
       object deCreateQR1: TDirectoryEdit
         Left = 392
-        Height = 27
+        Height = 23
         Top = 204
-        Width = 587
+        Width = 581
         ShowHidden = False
         ButtonWidth = 23
         NumGlyphs = 1
@@ -265,9 +265,9 @@ object AFCreateForPrintingForm: TAFCreateForPrintingForm
       end
       object deCreateQR2: TDirectoryEdit
         Left = 392
-        Height = 27
+        Height = 23
         Top = 256
-        Width = 587
+        Width = 581
         ShowHidden = False
         ButtonWidth = 23
         NumGlyphs = 1
@@ -277,82 +277,82 @@ object AFCreateForPrintingForm: TAFCreateForPrintingForm
       end
       object chPrivAddName: TCheckBox
         Left = 40
-        Height = 24
+        Height = 19
         Top = 100
-        Width = 135
+        Width = 107
         Caption = 'chPrivAddName'
         TabOrder = 14
       end
       object chPrivAddValue: TCheckBox
         Left = 271
-        Height = 24
+        Height = 19
         Top = 100
-        Width = 133
+        Width = 104
         Caption = 'chPrivAddValue'
         TabOrder = 15
       end
       object chPrivAddBrand: TCheckBox
         Left = 520
-        Height = 24
+        Height = 19
         Top = 100
-        Width = 135
+        Width = 106
         Caption = 'chPrivAddBrand'
         TabOrder = 16
       end
       object chPubAddName: TCheckBox
         Left = 40
-        Height = 24
+        Height = 19
         Top = 152
-        Width = 135
+        Width = 108
         Caption = 'chPubAddName'
         TabOrder = 17
       end
       object chPubAddValue: TCheckBox
         Left = 271
-        Height = 24
+        Height = 19
         Top = 156
-        Width = 133
+        Width = 105
         Caption = 'chPubAddValue'
         TabOrder = 18
       end
       object chPubAddBrand: TCheckBox
         Left = 520
-        Height = 24
+        Height = 19
         Top = 152
-        Width = 135
+        Width = 107
         Caption = 'chPubAddBrand'
         TabOrder = 19
       end
       object chPubAddAddress: TCheckBox
         Left = 720
-        Height = 24
+        Height = 19
         Top = 152
-        Width = 151
+        Width = 118
         Caption = 'chPubAddAddress'
         TabOrder = 20
       end
       object chPrivAddAddress: TCheckBox
         Left = 720
-        Height = 24
+        Height = 19
         Top = 100
-        Width = 151
+        Width = 117
         Caption = 'chPrivAddAddress'
         TabOrder = 21
       end
       object chFolderPackage: TCheckBox
         Left = 10
-        Height = 24
+        Height = 19
         Top = 40
-        Width = 141
+        Width = 110
         Caption = 'chFolderPackage'
         OnChange = rbIterRangeChange
         TabOrder = 22
       end
       object deFolderPackage: TDirectoryEdit
         Left = 392
-        Height = 27
+        Height = 23
         Top = 40
-        Width = 587
+        Width = 581
         ShowHidden = False
         ButtonWidth = 23
         NumGlyphs = 1
@@ -362,9 +362,9 @@ object AFCreateForPrintingForm: TAFCreateForPrintingForm
       end
       object eTextQR1: TEdit
         Left = 392
-        Height = 27
+        Height = 23
         Top = 230
-        Width = 587
+        Width = 581
         Anchors = [akTop, akLeft, akRight]
         OnChange = rbIterRangeChange
         TabOrder = 24
@@ -372,9 +372,9 @@ object AFCreateForPrintingForm: TAFCreateForPrintingForm
       end
       object eTextQR2: TEdit
         Left = 392
-        Height = 27
+        Height = 23
         Top = 282
-        Width = 587
+        Width = 581
         Anchors = [akTop, akLeft, akRight]
         OnChange = rbIterRangeChange
         TabOrder = 25
@@ -382,31 +382,31 @@ object AFCreateForPrintingForm: TAFCreateForPrintingForm
       end
       object lTextQR1: TLabel
         Left = 40
-        Height = 17
+        Height = 15
         Top = 238
-        Width = 61
+        Width = 46
         Caption = 'lTextQR1'
         ParentColor = False
       end
       object lTextQR2: TLabel
         Left = 40
-        Height = 17
+        Height = 15
         Top = 290
-        Width = 61
+        Width = 46
         Caption = 'lTextQR2'
         ParentColor = False
       end
       object lLeaseTime: TLabel
         Left = 40
-        Height = 17
+        Height = 15
         Top = 366
-        Width = 76
+        Width = 59
         Caption = 'lLeaseTime'
         ParentColor = False
       end
       object seLeaseTime: TSpinEdit
         Left = 392
-        Height = 27
+        Height = 23
         Top = 358
         Width = 166
         MaxValue = 1000000
@@ -416,16 +416,16 @@ object AFCreateForPrintingForm: TAFCreateForPrintingForm
       end
       object chCreateNVSrecordsAddCoins: TCheckBox
         Left = 41
-        Height = 24
+        Height = 19
         Top = 387
-        Width = 232
+        Width = 180
         Caption = 'chCreateNVSrecordsAddCoins'
         OnChange = rbIterRangeChange
         TabOrder = 27
       end
       object seCreateNVSrecordsAddCoins: TFloatSpinEdit
         Left = 392
-        Height = 27
+        Height = 23
         Top = 385
         Width = 166
         DecimalPlaces = 4
@@ -438,19 +438,19 @@ object AFCreateForPrintingForm: TAFCreateForPrintingForm
     end
     object pStep2: TPanel
       Left = 0
-      Height = 328
+      Height = 352
       Top = 152
-      Width = 985
+      Width = 979
       Align = alTop
       BevelOuter = bvNone
-      ClientHeight = 328
-      ClientWidth = 985
+      ClientHeight = 352
+      ClientWidth = 979
       TabOrder = 1
       object lStep2: TLabel
         Left = 8
-        Height = 19
+        Height = 21
         Top = 0
-        Width = 13
+        Width = 12
         Caption = '2.'
         Font.Height = -16
         ParentColor = False
@@ -458,55 +458,55 @@ object AFCreateForPrintingForm: TAFCreateForPrintingForm
       end
       object lBrand: TLabel
         Left = 9
-        Height = 17
-        Top = 32
-        Width = 44
+        Height = 15
+        Top = 56
+        Width = 34
         Caption = 'lBrand'
         ParentColor = False
       end
       object cBrand: TComboBox
         Left = 392
-        Height = 31
-        Top = 24
-        Width = 587
+        Height = 23
+        Top = 48
+        Width = 581
         Anchors = [akTop, akLeft, akRight]
-        ItemHeight = 0
+        ItemHeight = 15
         OnChange = rbIterRangeChange
         Style = csDropDownList
         TabOrder = 0
       end
       object chCreateBrandField: TCheckBox
         Left = 9
-        Height = 24
-        Top = 152
-        Width = 159
+        Height = 19
+        Top = 176
+        Width = 123
         Caption = 'chCreateBrandField'
         OnChange = rbIterRangeChange
         TabOrder = 1
       end
       object chCreateParentField: TCheckBox
         Left = 8
-        Height = 24
-        Top = 204
-        Width = 164
+        Height = 19
+        Top = 228
+        Width = 126
         Caption = 'chCreateParentField'
         OnChange = rbIterRangeChange
         TabOrder = 2
       end
       object chCreateParentLotField: TCheckBox
         Left = 9
-        Height = 24
-        Top = 228
-        Width = 187
+        Height = 19
+        Top = 252
+        Width = 143
         Caption = 'chCreateParentLotField'
         OnChange = rbIterRangeChange
         TabOrder = 3
       end
       object chAddCustomFields: TCheckBox
         Left = 8
-        Height = 24
-        Top = 260
-        Width = 161
+        Height = 19
+        Top = 284
+        Width = 127
         Caption = 'chAddCustomFields'
         OnChange = rbIterRangeChange
         TabOrder = 4
@@ -514,7 +514,7 @@ object AFCreateForPrintingForm: TAFCreateForPrintingForm
       object bEditCustomFields: TBitBtn
         Left = 392
         Height = 30
-        Top = 249
+        Top = 273
         Width = 421
         Caption = 'bEditCustomFields'
         OnClick = bEditCustomFieldsClick
@@ -522,67 +522,67 @@ object AFCreateForPrintingForm: TAFCreateForPrintingForm
       end
       object chCreateProductField: TCheckBox
         Left = 10
-        Height = 24
-        Top = 179
-        Width = 173
+        Height = 19
+        Top = 203
+        Width = 134
         Caption = 'chCreateProductField'
         OnChange = rbIterRangeChange
         TabOrder = 6
       end
       object chCheckNamesIfFree: TCheckBox
         Left = 8
-        Height = 24
-        Top = 285
-        Width = 168
+        Height = 19
+        Top = 309
+        Width = 132
         Caption = 'chCheckNamesIfFree'
         OnChange = rbIterRangeChange
         TabOrder = 7
       end
       object chAddRandomSuffix: TCheckBox
         Left = 8
-        Height = 24
-        Top = 309
-        Width = 164
+        Height = 19
+        Top = 333
+        Width = 129
         Caption = 'chAddRandomSuffix'
         TabOrder = 8
       end
       object lBrandManual: TLabel
         Left = 9
-        Height = 17
-        Top = 56
-        Width = 93
+        Height = 15
+        Top = 80
+        Width = 74
         Caption = 'lBrandManual'
         ParentColor = False
       end
       object lBrandManualComment: TLabel
         Left = 392
-        Height = 17
-        Top = 77
-        Width = 159
+        Height = 15
+        Top = 101
+        Width = 128
         Caption = 'lBrandManualComment'
         ParentColor = False
       end
       object eBrand: TEdit
         Left = 392
-        Height = 27
-        Top = 48
-        Width = 587
+        Height = 23
+        Top = 72
+        Width = 581
         Anchors = [akTop, akLeft, akRight]
         OnChange = rbIterRangeChange
         TabOrder = 9
       end
       object lSecretLength: TLabel
         Left = 8
-        Height = 17
-        Top = 128
-        Width = 93
+        Height = 15
+        Top = 152
+        Width = 72
         Caption = 'lSecretLength'
         ParentColor = False
       end
       object seSecretCodeLenght: TSpinEdit
         Left = 393
-        Height = 27
-        Top = 120
+        Height = 23
+        Top = 144
         Width = 190
         MaxValue = 32
         MinValue = 8
@@ -591,58 +591,66 @@ object AFCreateForPrintingForm: TAFCreateForPrintingForm
       end
       object chSignValue: TCheckBox
         Left = 8
-        Height = 24
-        Top = 77
-        Width = 107
+        Height = 19
+        Top = 101
+        Width = 85
         Caption = 'chSignValue'
         TabOrder = 11
       end
       object cCreateProductField: TComboBox
         Left = 392
-        Height = 29
-        Top = 175
-        Width = 587
+        Height = 23
+        Top = 199
+        Width = 581
         Anchors = [akTop, akLeft, akRight]
-        ItemHeight = 0
+        ItemHeight = 15
         TabOrder = 12
         Text = 'cCreateProductField'
       end
       object cCreateParentField: TComboBox
         Left = 392
-        Height = 29
-        Top = 200
-        Width = 587
+        Height = 23
+        Top = 224
+        Width = 581
         Anchors = [akTop, akLeft, akRight]
-        ItemHeight = 0
+        ItemHeight = 15
         TabOrder = 13
         Text = 'cCreateParentField'
       end
       object cCreateParentLotField: TComboBox
         Left = 392
-        Height = 29
-        Top = 224
-        Width = 587
+        Height = 23
+        Top = 248
+        Width = 581
         Anchors = [akTop, akLeft, akRight]
-        ItemHeight = 0
+        ItemHeight = 15
         TabOrder = 14
         Text = 'cCreateParentLotField'
+      end
+      object chRecreateValue: TCheckBox
+        Left = 10
+        Height = 19
+        Top = 24
+        Width = 107
+        Caption = 'chRecreateValue'
+        TabOrder = 15
       end
     end
     object pStep1: TPanel
       Left = 0
       Height = 152
       Top = 0
-      Width = 985
+      Width = 979
       Align = alTop
       BevelOuter = bvNone
       ClientHeight = 152
-      ClientWidth = 985
+      ClientWidth = 979
       TabOrder = 2
       object lStep1: TLabel
         Left = 8
-        Height = 19
+        Height = 21
         Top = 8
-        Width = 160
+        Width = 156
         Caption = '1. Choose data source '
         Font.Height = -16
         ParentColor = False
@@ -650,9 +658,9 @@ object AFCreateForPrintingForm: TAFCreateForPrintingForm
       end
       object rbIterRange: TRadioButton
         Left = 9
-        Height = 24
+        Height = 19
         Top = 36
-        Width = 106
+        Width = 81
         Caption = 'rbIterRange'
         Checked = True
         OnChange = rbIterRangeChange
@@ -661,27 +669,27 @@ object AFCreateForPrintingForm: TAFCreateForPrintingForm
       end
       object rbIterFile: TRadioButton
         Left = 8
-        Height = 24
+        Height = 19
         Top = 64
-        Width = 111
+        Width = 85
         Caption = 'rbSourceFile'
         OnChange = rbIterRangeChange
         TabOrder = 1
       end
       object rbIterLot: TRadioButton
         Left = 8
-        Height = 24
+        Height = 19
         Top = 92
-        Width = 110
+        Width = 84
         Caption = 'rbSourceLot'
         OnChange = rbIterRangeChange
         TabOrder = 2
       end
       object eIteratorRange: TEdit
         Left = 392
-        Height = 27
+        Height = 23
         Top = 32
-        Width = 587
+        Width = 581
         Anchors = [akTop, akLeft, akRight]
         OnChange = rbIterRangeChange
         TabOrder = 3
@@ -689,28 +697,28 @@ object AFCreateForPrintingForm: TAFCreateForPrintingForm
       end
       object lInformation: TLabel
         Left = 8
-        Height = 17
+        Height = 15
         Top = 120
-        Width = 85
+        Width = 66
         Caption = 'lInformation'
         ParentColor = False
       end
       object cLot: TComboBox
         Left = 392
-        Height = 31
+        Height = 23
         Top = 88
-        Width = 587
+        Width = 581
         Anchors = [akTop, akLeft, akRight]
-        ItemHeight = 0
+        ItemHeight = 15
         OnChange = rbIterRangeChange
         Style = csDropDownList
         TabOrder = 4
       end
       object fnIteraror: TFileNameEdit
         Left = 392
-        Height = 27
+        Height = 23
         Top = 60
-        Width = 587
+        Width = 581
         Filter = 'csv files (*.csv)|*.csv|All files (*.*)|*.*'
         FilterIndex = 0
         HideDirectories = False
@@ -723,9 +731,9 @@ object AFCreateForPrintingForm: TAFCreateForPrintingForm
       end
       object lInformation1: TLabel
         Left = 392
-        Height = 17
+        Height = 15
         Top = 120
-        Width = 93
+        Width = 72
         Caption = 'lInformation1'
         ParentColor = False
       end
@@ -735,9 +743,16 @@ object AFCreateForPrintingForm: TAFCreateForPrintingForm
     Cursor = crVSplit
     Left = 0
     Height = 5
-    Top = 620
+    Top = 638
     Width = 1000
     Align = alBottom
     ResizeAnchor = akBottom
+  end
+  object optStartOnDataReadyTimer: TTimer
+    Enabled = False
+    Interval = 1
+    OnTimer = optStartOnDataReadyTimerTimer
+    left = 223
+    top = 129
   end
 end

@@ -1,4 +1,4 @@
-EmerAPI KeyKeeper 0.0.8.6
+EmerAPI KeyKeeper 0.1.0
 =================
 
 EmerAPI / Antifake Key Keeper
@@ -33,6 +33,11 @@ QRCodeGenLib4Pascal <https://github.com/Xor-el/QRCodeGenLib4Pascal>
 This "Software" is Licensed Under  **`MIT License (MIT)`** .
 
 ##Version history
+
+0.1.0
+After deep testing, a number of errors were fixed
+Interface for fast creating antifake lots
+Visual Improvements
 
 0.0.8.7
 Set OpenNic DNS servers on this computer function (windows only) 

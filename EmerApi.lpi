@@ -44,7 +44,7 @@
         <PackageName Value="LCL"/>
       </Item3>
     </RequiredPackages>
-    <Units Count="95">
+    <Units Count="96">
       <Unit0>
         <Filename Value="EmerApi.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -592,6 +592,14 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="RunCmdUnit"/>
       </Unit94>
+      <Unit95>
+        <Filename Value="afcreategoodsforlotunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="AFCreateGoodsForLot"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="AFCreateGoodsForLotUnit"/>
+      </Unit95>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

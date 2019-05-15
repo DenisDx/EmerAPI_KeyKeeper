@@ -109,6 +109,8 @@ begin
     if eList[i]<>nil then
       try
         tWinControl(eList[i]).enabled:=true;
+        if tWinControl(eList[i]) is TQuestionPanel then
+          tWinControl(eList[i]).BringToFront;
       except
       end;
 
@@ -238,7 +240,7 @@ begin
   eList:=tList.Create;
   if aOwner is TWinControl then
     for i:=0 to TWinControl(aOwner).ControlCount-1 do
-       if not (TWinControl(aOwner).Controls[i] is TQuestionPanel) then
+       //!if not (TWinControl(aOwner).Controls[i] is TQuestionPanel) then
         if TWinControl(aOwner).Controls[i].Visible then
           if TWinControl(aOwner).Controls[i].Enabled then begin
              TWinControl(aOwner).Controls[i].Enabled:=false;
@@ -437,6 +439,8 @@ begin
 
     if cLanguage.Visible then RebuildLanguageCombo();
 
+    self.BringToFront;
+
 end;
 
 procedure AskQuestionInit();
@@ -543,7 +547,7 @@ begin
 
   result:=TQuestionPanel.create(Parent,onAnswer,Message,helpTag,Tag);
 
-
+  result.BringToFront;
 //!  QuestionForm.mQuestion.Text:=Message;
 
 //!  if QuestionForm.cLanguage.Visible then

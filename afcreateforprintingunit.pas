@@ -114,6 +114,7 @@ type
     optCheckNameIfFree:boolean;
     optAddRandomSuffix:boolean;
     optSignValue:boolean;
+    optRecreateValueForFile:boolean;
     optBrandName:ansistring;
     optBrandOwner:ansistring; //Address of the brand owner
     optSaveErrorFileName:string; //chLogErrorSerialsToFile
@@ -227,6 +228,7 @@ type
     chPubAddValue: TCheckBox;
     chPubAddBrand: TCheckBox;
     chPubAddAddress: TCheckBox;
+    chRecreateValue: TCheckBox;
     cLot: TComboBox;
     cCreateProductField: TComboBox;
     cCreateParentField: TComboBox;
@@ -269,12 +271,14 @@ type
     seSecretCodeLenght: TSpinEdit;
     seLeaseTime: TSpinEdit;
     Splitter1: TSplitter;
+    optStartOnDataReadyTimer: TTimer;
     procedure bCloseClick(Sender: TObject);
     procedure bCreateClick(Sender: TObject);
     procedure bDemo1Click(Sender: TObject);
     procedure bEditCustomFieldsClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure optStartOnDataReadyTimerTimer(Sender: TObject);
     procedure rbIterRangeChange(Sender: TObject);
   private
     //iterator data
@@ -290,6 +294,9 @@ type
     procedure onQuestionAnswer(sender:tObject;mr:tModalResult;mtag:ansistring);
     procedure getBrandCallBack(Sender:tAFRequest);
   public
+    optStartOnDataReady:boolean;
+    optCloseOnDone:boolean;
+
     procedure itStepDone(Sender: TObject);
     procedure itError(Sender: TObject);
 
@@ -339,19 +346,6 @@ const
   result would not be a valid file name so an error is raised.
 
 }
-
-function addPrefix(const pref:ansistring;const v:string):string;
-begin
-  if pos(pref,v)<>1
-    then result:=pref+v
-    else result:=v;
-end;
-
-function cutPreffix(const pref:ansistring;const v:string):string;
-begin
-  result:=v;
-  if pos(pref,result)=1 then delete(result,1,length(pref));
-end;
 
 function CleanFileName(const InputString: string): string;
 var
@@ -553,53 +547,6 @@ begin
   end;
 end;
 
-function getRangeSize(range:string):integer;
-var i:integer;
-    n:integer;
-    s1,s2:ansistring;
-
-begin
-  result:=0;
-  if range='' then exit;
-
-  if pos(':',range)>0 then exit;
-
-  while pos(';',range)>0 do begin
-    n:=getRangeSize(copy(range,1,pos(';',range)-1));
-    if n<1 then begin result:=0; exit; end;
-    result:=result + n;
-    delete(range,1,pos(';',range));
-  end;
-  if range='' then exit;
-
-  if pos('~',range)>1 then begin
-     s1:=copy(range,1,pos('~',range)-1);
-     delete(range,1,pos('~',range));
-     s2:=range;
-
-     if length(s1)<>length(s2) then begin result:=0; exit; end;
-
-     n:=0;
-     for i:=1 to length(s1) do begin
-       if not (
-           ((s1[i] in ['0'..'9']) and (s2[i] in ['0'..'9']))
-           or ((s1[i] in ['A'..'Z']) and (s2[i] in ['A'..'Z']))
-           or ((s1[i] in ['a'..'z']) and (s2[i] in ['a'..'z']))
-          ) then begin result:=0; exit; end;
-
-       if n>0 then begin
-         if s1[i] in ['0'..'9'] then n:=n*10 else n:=n*26;
-         n:=n + ord(s2[i])-ord(s1[i]);
-       end else if s1[i]<>s2[i] then n:=ord(s2[i])-ord(s1[i]);
-
-       if n<0 then begin result:=0; exit; end;
-     end;
-     result:=result + n + 1;
-
-  end else result:=result + 1;
-
-end;
-
 
 
 //////////////////////////////////////////////////////////////
@@ -620,7 +567,7 @@ end;
 function tSerialIteratorEl.getBrand:ansistring; //returns brand
 begin
  if parent is tSerialIteratorFile then begin
-   result:= addPrefix('dpo:',brandFromFile);
+   result:= addNVSNamePrefix('dpo:',brandFromFile);
    if result='' then result:=Parent.optBrandName;
  end else
    result:=Parent.optBrandName;
@@ -1023,6 +970,8 @@ begin
      s:=getTextToSign(Sender.nvsName,cutNVSValueParameter(Sender.nvsValue,'Signature'),'F-');
      s:=bufToBase64(signMessage(s,Sender.brandPrivKey));
 
+     Sender.nvsValue:=cutNVSValueParameter(Sender.nvsValue,'Signature');
+
      Sender.nvsValue:=addNVSValueParameter(Sender.nvsValue,'Signature',s);
      Sender.nvsValueSigned:=true;
   end;
@@ -1163,7 +1112,8 @@ begin
  else if fld='password' then
    result:=iel.Secret
  else if fld='brand' then
-   result:=optBrandName //cutPreffix('dpo:',optBrandName)
+   //result:=optBrandName //cutPreffix('dpo:',optBrandName)
+   result:=iel.getBrand
  else if fld='address' then
    result:=iel.Address
  else if fld='nvsname' then
@@ -1220,6 +1170,7 @@ begin
  if FilePrivateCSV<>'' then begin
    s:=createCSVLine(sender,TitlePrivateCSV);
    if (s='') or (not saveLineToFile(FilePrivateCSV,s)) then begin
+      if s<>'' then LastError:=localizzzeString('Messages.ErrorWritingFile','Error writing file');
       cbError(Sender,LastError);
       exit;
    end;
@@ -1403,7 +1354,7 @@ end;
 constructor tSerialIteratorRange.create(aRange:string);
 begin
   inherited create;
-  fNTotal:=getRangeSize(aRange);
+  fNTotal:=getLotRangeSize(aRange);
   if fNTotal=0 then raise exception.Create('Invalid range');
 
   fRange:=aRange;
@@ -1414,10 +1365,11 @@ constructor tSerialIteratorLot.create(lot:tBaseTXO);
 begin
   inherited create;
   fRange:=getSerialFromLot(lot);
-  if fNTotal=0 then raise exception.Create('Invalid range');
 
   fcRange:=fRange;
-  fNTotal:=getRangeSize(fRange);
+  fNTotal:=getLotRangeSize(fRange);
+
+  if fNTotal=0 then raise exception.Create('Invalid range');
 end;
 
 
@@ -1476,6 +1428,7 @@ begin
       Sender.nvsName:=value;
     end else if fld='nvsvalue' then begin
       Sender.nvsValue:=value;
+      Sender.nvsValueCreated:=(not optRecreateValueForFile)  and (value<>'');
     end else begin
       //unknown field
     end;
@@ -1537,6 +1490,9 @@ begin
   //LastSetEnabledAndViewFileTitle:='';
   //LastSetEnabledAndViewFileDescription:='';
   //LastSetEnabledAndViewFileAge:=0;
+
+  optStartOnDataReady:=false;
+  optCloseOnDone:=false;
 
   if fIterator<> nil then fIterator.Terminated:=true;
 
@@ -1629,6 +1585,8 @@ begin
   seSecretCodeLenght.Value:=12;
   chSignValue.Checked:=true;
 
+  chRecreateValue.Checked:=false;
+
   seLeaseTime.Value:=10000;
   seCreateNVSrecordsAddCoins.Value:=0.0001;
   chCreateNVSrecordsAddCoins.Checked:=false;
@@ -1648,8 +1606,8 @@ begin
   if cLot.ItemIndex<0 then exit;
 
 
-  if Sender.id='getBrandForLot'+cLot.Items[cLot.ItemIndex] then begin
-    s:=cutPreffix('dpo:',Sender.rNVSName);
+  if Sender.id='getBrandForLot_'+cLot.Items[cLot.ItemIndex] then begin
+    s:=cutNVSNamePrefix('dpo:',Sender.rNVSName);
     if cLot.ItemIndex<0 then savedLot:='' else savedLot:=cLot.Items[cLot.ItemIndex];
     if s='' then begin
       SavedBrand:='';
@@ -1668,6 +1626,10 @@ begin
         end;
       //bCreate.Enabled:=true;
       //fsdfd
+      if optStartOnDataReady then begin
+        optStartOnDataReadyTimer.Enabled:=true;
+        optStartOnDataReady:=false;
+      end;
     end;
   end;
 
@@ -1679,6 +1641,8 @@ var n:integer;
     //f:text;
     //s,title:string;
 lot : tBaseTXO;
+
+  //createValue:boolean; //just for shorten
 begin
   eIteratorRange.Enabled:= rbIterRange.checked;
   fnIteraror.Enabled := rbIterFile.checked;
@@ -1689,7 +1653,7 @@ begin
   cBrand.Enabled:= rbIterRange.checked or rbIterFile.checked;
 
   if rbIterRange.checked then begin
-     n:=getRangeSize(eIteratorRange.text);
+     n:=getLotRangeSize(eIteratorRange.text);
      lInformation1.Caption:=localizzzeString('AFCreateForPrintingForm.lInformation1.SerialVolume','Count: ')+inttostr(n);
 
   end else
@@ -1697,7 +1661,13 @@ begin
      if not fileexists(fnIteraror.FileName) then lInformation1.Caption:=localizzzeString('AFCreateForPrintingForm.Messages.FileNotExist','file does not exist')
      else begin
 
-       n:=setSerialCountFromFile(fnIteraror.FileName);
+       try
+         n:=setSerialCountFromFile(fnIteraror.FileName);
+         lInformation1.Caption:=localizzzeString('AFCreateForPrintingForm.lInformation1.SerialVolume','Count: ')+inttostr(n);
+       except
+         n:=0;
+         lInformation1.Caption:=localizzzeString('AFCreateForPrintingForm.Messages.ErrorReadingFile','Error reading file')
+       end;
 
        {
        if (LastSetEnabledAndViewFile=fnIteraror.FileName) and (LastSetEnabledAndViewFileAge=fileAge(fnIteraror.FileName)) then begin
@@ -1735,7 +1705,6 @@ begin
 
        end;
        }
-       lInformation1.Caption:=localizzzeString('AFCreateForPrintingForm.lInformation1.SerialVolume','Count: ')+inttostr(n);
      end;
   end else if rbIterLot.checked then begin
     if cLot.ItemIndex<0 then  lInformation1.Caption:=localizzzeString('AFCreateForPrintingForm.lInformation1.LotNotSelected','Lot not selected')
@@ -1745,7 +1714,7 @@ begin
 
       if lot = nil then raise exception.Create('Internal error 2: lot is nil');
 
-      n:=getRangeSize(getSerialFromLot(lot));
+      n:=getLotRangeSize(getSerialFromLot(lot));
 
       cCreateProductField.Text:=''; //SavedProduct
 
@@ -1769,7 +1738,7 @@ begin
             if SavedBrandError='' then begin
               lInformation1.Caption:=localizzzeString('AFCreateForPrintingForm.lInformation1.SerialVolume','Count: ')+inttostr(n)
                 +#10+localizzzeString('AFCreateForPrintingForm.lInformation1.PleaseWait','Please wait');
-              AFGetBrandForObject(lot,@getBrandCallBack,'getBrandForLot'+cLot.Items[cLot.ItemIndex]);
+              AFGetBrandForObject(lot,@getBrandCallBack,'getBrandForLot_'+cLot.Items[cLot.ItemIndex]);
             end else
               lInformation1.Caption:=localizzzeString('AFCreateForPrintingForm.lInformation1.SerialVolume','Count: ')+inttostr(n)
                 +#10+localizzzeString('AFCreateForPrintingForm.lInformation1.BrandError','Error: ')+SavedBrandError;
@@ -1780,6 +1749,9 @@ begin
   end else begin
     lInformation1.Caption:='';
   end;
+
+  chRecreateValue.Enabled:=rbIterFile.checked;
+  //createValue := (chRecreateValue.Enabled and chRecreateValue.checked);
 
   bEditCustomFields.Enabled:=chAddCustomFields.checked;
   if fNVSAddValue<>''
@@ -1852,6 +1824,13 @@ begin
 
   init;
 
+end;
+
+procedure TAFCreateForPrintingForm.optStartOnDataReadyTimerTimer(Sender: TObject
+  );
+begin
+  optStartOnDataReadyTimer.Enabled:=false;
+  if bCreate.Enabled then bCreate.Click;
 end;
 
 
@@ -1942,7 +1921,14 @@ begin
         dieControl('AFCreateForPrintingForm.Messages.FileNotExist', fnIteraror);
         exit;
       end;
-      fIterator:=tSerialIteratorFile.create(fnIteraror.FileName);
+      try
+        fIterator:=tSerialIteratorFile.create(fnIteraror.FileName);
+      except
+        on e:exception do begin
+          dieControl(e.Message, fnIteraror);
+          exit;
+        end;
+      end;
     end  else if rbIterLot.Checked then begin
       if cLot.ItemIndex<0 then
         begin
@@ -1966,6 +1952,8 @@ begin
       fIterator.optAddRandomSuffix := chAddRandomSuffix.Checked;
 
       fIterator.optSignValue:=chSignValue.Checked;
+
+      fIterator.optRecreateValueForFile:=chRecreateValue.Checked;
 
       if cBrand.ItemIndex>0 then begin
         brand:=getNVSRecordByName('dpo:'+cBrand.Items[cbrand.ItemIndex]); //tNVSRecord(cBrand.Items.Objects[cbrand.ItemIndex] );!
@@ -2000,7 +1988,8 @@ begin
         fIterator.optBrandOwner:='';
       end else
       //if we will need brand defined
-      if chCreatePrintCSV.checked or chCreateQR1.checked or chCreateQR2.checked or chCreateNVSrecords.checked then
+
+      if (chCreatePrintCSV.checked or chCreateQR1.checked or chCreateQR2.checked or chCreateNVSrecords.checked) and (not rbIterFile.Checked) then
       begin
         with AskQuestionTag(self,nil,'AFCreateForPrintingForm.msg.BrandMustBeSet') do begin
           bOk.Visible:=true;
@@ -2216,6 +2205,8 @@ begin
 
       fIterator.execute;  //will lock the exexution but will call application.processmessages
       ProgressBar.position:=0;
+
+      if optCloseOnDone then close;
     finally
       freeandnil(fIterator);
     end;

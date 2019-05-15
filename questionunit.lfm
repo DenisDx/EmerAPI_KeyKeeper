@@ -6,7 +6,7 @@ object QuestionForm: TQuestionForm
   Caption = 'QuestionForm'
   ClientHeight = 330
   ClientWidth = 912
-  LCLVersion = '1.8.4.0'
+  LCLVersion = '1.8.2.0'
   object Panel: TPanel
     Left = 0
     Height = 111
@@ -58,7 +58,7 @@ object QuestionForm: TQuestionForm
     end
     object cLanguage: TComboBoxEx
       Left = 168
-      Height = 40
+      Height = 31
       Top = 64
       Width = 172
       Images = ilLanguages
@@ -71,7 +71,7 @@ object QuestionForm: TQuestionForm
     end
     object Edit: TEdit
       Left = 8
-      Height = 23
+      Height = 27
       Top = 32
       Width = 893
       Anchors = [akTop, akLeft, akRight]
@@ -80,7 +80,7 @@ object QuestionForm: TQuestionForm
     end
     object FileNameEdit: TFileNameEdit
       Left = 8
-      Height = 23
+      Height = 27
       Top = 7
       Width = 893
       FileName = 'FileNameEdit'

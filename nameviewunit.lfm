@@ -2,10 +2,10 @@ object NameViewForm: TNameViewForm
   Left = 450
   Height = 349
   Top = 129
-  Width = 528
+  Width = 612
   Caption = 'NameViewForm'
   ClientHeight = 349
-  ClientWidth = 528
+  ClientWidth = 612
   Constraints.MinHeight = 300
   Constraints.MinWidth = 400
   OnActivate = FormActivate
@@ -18,20 +18,20 @@ object NameViewForm: TNameViewForm
     Left = 0
     Height = 50
     Top = 299
-    Width = 528
+    Width = 612
     Align = alBottom
     BevelOuter = bvNone
     ClientHeight = 50
-    ClientWidth = 528
+    ClientWidth = 612
     TabOrder = 0
-    object BitBtn1: TBitBtn
-      Left = 392
+    object bClose: TBitBtn
+      Left = 476
       Height = 34
       Top = 8
       Width = 122
       Anchors = [akTop, akRight]
       Caption = 'Close'
-      OnClick = BitBtn1Click
+      OnClick = bCloseClick
       TabOrder = 0
     end
     object bUpdateName: TBitBtn
@@ -56,17 +56,17 @@ object NameViewForm: TNameViewForm
     Left = 0
     Height = 72
     Top = 0
-    Width = 528
+    Width = 612
     Align = alTop
     BevelOuter = bvNone
     ClientHeight = 72
-    ClientWidth = 528
+    ClientWidth = 612
     TabOrder = 1
     object eName: TLabeledEdit
       Left = 4
       Height = 23
       Top = 43
-      Width = 520
+      Width = 604
       Anchors = [akTop, akLeft, akRight]
       Color = clBtnFace
       EditLabel.AnchorSideLeft.Control = eName
@@ -76,7 +76,7 @@ object NameViewForm: TNameViewForm
       EditLabel.Left = 4
       EditLabel.Height = 15
       EditLabel.Top = 25
-      EditLabel.Width = 520
+      EditLabel.Width = 604
       EditLabel.Caption = 'eName'
       EditLabel.ParentColor = False
       ReadOnly = True
@@ -98,7 +98,7 @@ object NameViewForm: TNameViewForm
     Left = 0
     Height = 227
     Top = 72
-    Width = 528
+    Width = 612
     ActivePage = tsState
     Align = alClient
     TabIndex = 2
@@ -106,12 +106,12 @@ object NameViewForm: TNameViewForm
     object tsRaw: TTabSheet
       Caption = 'Advanced'
       ClientHeight = 199
-      ClientWidth = 520
+      ClientWidth = 604
       inline seValue: TSynEdit
         Left = 0
         Height = 149
         Top = 0
-        Width = 520
+        Width = 604
         Align = alClient
         Font.Height = -13
         Font.Name = 'Courier New'
@@ -612,17 +612,17 @@ object NameViewForm: TNameViewForm
         Left = 0
         Height = 50
         Top = 149
-        Width = 520
+        Width = 604
         Align = alBottom
         BevelOuter = bvNone
         ClientHeight = 50
-        ClientWidth = 520
+        ClientWidth = 604
         TabOrder = 1
         object bShowHistory: TBitBtn
           Left = 7
           Height = 40
           Top = 10
-          Width = 161
+          Width = 193
           Caption = 'Show history'
           Glyph.Data = {
             0E060000424D1006000000000000360000002800000016000000160000000100
@@ -686,12 +686,12 @@ object NameViewForm: TNameViewForm
     object tsState: TTabSheet
       Caption = 'State and tools'
       ClientHeight = 199
-      ClientWidth = 520
+      ClientWidth = 604
       object eOwner: TLabeledEdit
         Left = 8
         Height = 23
         Top = 24
-        Width = 504
+        Width = 588
         Anchors = [akTop, akLeft, akRight]
         EditLabel.AnchorSideLeft.Control = eOwner
         EditLabel.AnchorSideRight.Control = eOwner
@@ -700,7 +700,7 @@ object NameViewForm: TNameViewForm
         EditLabel.Left = 8
         EditLabel.Height = 15
         EditLabel.Top = 6
-        EditLabel.Width = 504
+        EditLabel.Width = 588
         EditLabel.Caption = 'Owner'
         EditLabel.ParentColor = False
         TabOrder = 0
@@ -861,6 +861,15 @@ object NameViewForm: TNameViewForm
         }
         OnClick = bDeleteClick
         TabOrder = 3
+      end
+      object bCreateGoods: TBitBtn
+        Left = 408
+        Height = 40
+        Top = 152
+        Width = 192
+        Caption = 'Create goods data'
+        OnClick = bCreateGoodsClick
+        TabOrder = 4
       end
     end
   end

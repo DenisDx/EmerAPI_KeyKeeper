@@ -790,7 +790,10 @@ begin
      //tmpPEC_KEY_2_IECPrivateKeyParameters(privKey)
      //BigNum_2_IECPrivateKeyParameters(bignumToBuf(EC_KEY_get0_private_key(privKey)))
      privKey
-     , signatureHash)+chr(hashType);
+     , signatureHash) //32 bytes, r<0x80 and s<0x80
+     +chr(hashType);
+
+
 
    tBaseTXI(fIns[nIn]).signature:=writeScriptData(s) + writeScriptData(kpPubKey);
 

@@ -18,7 +18,7 @@ uses
   HDNodeUnit, masssendingunit, FrameDigitalAssetUnit, AtomFormUnit,
   FormAboutUnit, SplashFormUnit, SignMessageUnit, CheckSignatureUnit,
   x509devUnit, addressQRunit, AFCreateForPrintingunit, NVSValueEdit,
-  TakePossessionUnit, unit1;
+  TakePossessionUnit, AFCreateGoodsForLotUnit;
 {$R *.res}
 
 begin
@@ -44,6 +44,7 @@ begin
   Application.CreateForm(TAFCreateForPrintingForm, AFCreateForPrintingForm);
   Application.CreateForm(TNVSValueEditForm, NVSValueEditForm);
   Application.CreateForm(TTakePossessionForm, TakePossessionForm);
+  Application.CreateForm(TAFCreateGoodsForLot, AFCreateGoodsForLot);
   //Application.CreateForm(Tx509devform, x509devform);
   //Application.CreateForm(TNameViewForm, NameViewForm);
   Application.Run;

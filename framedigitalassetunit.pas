@@ -74,7 +74,7 @@ begin
 
     if NVSRecord.DaysLeft>0 then
       if NVSRecord.DaysLeft>ExpirationWarning
-         then pTitle.Color:=getNameColor(s)
+         then pTitle.Color:=getNameColor(fNVSRecord.NVSName)
          else begin
            pTitle.Color:=getNameColor('*expiresoon*');
            pref:=pref+localizzzeString('FrameDigitalAsset.Title.SoonExpiration','EXPIRE SOON: ');

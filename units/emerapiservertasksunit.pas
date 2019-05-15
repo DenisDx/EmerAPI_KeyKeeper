@@ -8,6 +8,16 @@ uses
   Classes, SysUtils, EmerAPIMain, emerapitypes, EmerAPIBlockchainUnit, fpjson;
 
 type
+
+tSignTask=record
+  signByAddress:ansistring; //don't need to sign if empty. could be overriden by signByName
+  signByName:ansistring; //Name's owner must sign. Overwrites signByAddress
+  signPreffix:ansistring; //'*' or 'F-'
+  signParName:ansistring; //'Signature' or 'SIGN' for AF
+  signForce:boolean;
+end;
+
+
 tEmerAPIServerTaskValid=(eptvUnknown,eptvValid,eptvInvalid,eptvPart); //part for a group means some tasks are valid
 
 tEmerAPIServerTaskList=class;
@@ -50,10 +60,7 @@ tBaseEmerAPIServerTask=class(tObject)
 
     onTaskUpdated:tNotifyEvent;
 
-    signByAddress:ansistring; //don't need to sign if empty. could be overriden by signByName
-    signByName:ansistring; //Name's owner must sign. Overwrites signByAddress
-    signPreffix:ansistring; //'*' or 'F-'
-    signParName:ansistring; //'Signature' or 'SIGN' for AF
+    sign:array of tSignTask;
 
     ShowInTXVieverDontCreate:boolean;
 
@@ -186,10 +193,14 @@ begin
  fOwner:=mOwner;
  fLastError:='';
 
+ setLength(sign,0);
+
+ {
  signByAddress:=''; //don't need to sign if empty. could be overriden by signByName
  signByName:=''; //Name's owner must sign. Overwrites signByAddress
  signPreffix:='*'; //'*' or 'F-'
  signParName:='SIGN'; //'Signature' or 'SIGN' for AF
+ }
 
  fValidateTaskPeriod:=30;
 end;
@@ -271,6 +282,7 @@ end;
 procedure tEmerAPIServerTask.validateTask();
 var nt,s:ansistring;
     var utxo:tbaseTXO;
+    i:integer;
 begin
  //check if the task is valid.
  //set fTaskValidAt and fTaskValid
@@ -299,6 +311,31 @@ begin
  //signByAddress:=''; //don't need to sign if empty. could be overriden by signByName
  //signByName:=''; //Name's owner must sign. Overwrites signByAddress
  //update signByAddress and check signing possibility
+
+ for i:=0 to length(sign)-1 do begin
+    //check if we control the address
+    s:='';
+    if sign[i].signByName<>'' then begin
+      //is it our address?
+      utxo:=emerAPI.UTXOList.findName(sign[i].signByName);
+
+      if utxo<>nil
+         then s:=utxo.getReceiver
+         else begin s:=''; fLastError := localizzzeString('tEmerAPIServerTask.YouDontOwnAsset','You dont own asset ')+sign[i].signByName; end;
+    end else
+      s:=sign[i].signByAddress;
+
+
+    if (s='') or (not isMyAddress(s)) then begin
+      fTaskValidAt:=now;
+      fTaskValid:=false;
+      if fLastError='' then fLastError := localizzzeString('tEmerAPIServerTask.YouDontOwnPrivateKeyForSigning','You do not own a private key to sign NVS values');
+      if assigned(fOwner) then fOwner.callNotify('taskUpdated');
+      exit;
+    end;
+ end;
+
+ {
  if (signByName<>'') or (signByAddress<>'') then begin
    //check if we control the address
    s:='';
@@ -321,6 +358,7 @@ begin
      exit;
    end;
  end;
+ }
 
  if TaskType='NEW_NAME' then begin
    //create name. We must check if the name is not exists
@@ -386,6 +424,7 @@ begin
 end;
 
 procedure tEmerAPIServerTask.updateDataByParent();
+var i:integer;
 begin
  {
  nName:=NVSName;
@@ -404,10 +443,22 @@ begin
    if fOwner.fOwnerTask.time<>-1 then time:=fOwner.fOwnerTask.time;
    if fOwner.fOwnerTask.LockTime<>-1 then LockTime:=fOwner.fOwnerTask.LockTime;
 
+   if length(fOwner.fOwnerTask.sign)>0 then begin
+     setLength(Sign,length(fOwner.fOwnerTask.sign));
+     for i:=0 to length(fOwner.fOwnerTask.sign)-1 do begin
+        sign[i].signByAddress:=fOwner.fOwnerTask.sign[i].signByAddress;
+        sign[i].signByName:=fOwner.fOwnerTask.sign[i].signByName;
+        sign[i].signPreffix:=fOwner.fOwnerTask.sign[i].signPreffix;
+        sign[i].signParName:=fOwner.fOwnerTask.sign[i].signParName;
+     end;
+   end;
+
+   {
    if fOwner.fOwnerTask.signByAddress<>'' then signByAddress:=fOwner.fOwnerTask.signByAddress;
    if fOwner.fOwnerTask.signByName<>'' then signByName:=fOwner.fOwnerTask.signByName;
    if fOwner.fOwnerTask.signPreffix<>'' then signPreffix:=fOwner.fOwnerTask.signPreffix;
    if fOwner.fOwnerTask.signParName<>'' then signParName:=fOwner.fOwnerTask.signParName;
+   }
 
    ShowInTXVieverDontCreate:=fOwner.fOwnerTask.ShowInTXVieverDontCreate;
  end;
@@ -443,7 +494,7 @@ var
     EmerAPI:tEmerAPI;
     //for signing:
     utxo:tbaseTXO; privKey,s:ansistring;
-
+    i:integer;
 begin
   inherited;//fonDone:=onDone;
   result:=false;
@@ -467,6 +518,28 @@ begin
   updateDataByParent;
 
   //sign?
+  for i:=0 to length(sign)-1 do begin
+    privKey:='';
+
+    if sign[i].signByName<>'' then begin
+      utxo:=emerAPI.UTXOList.findName(sign[i].signByName);
+      if utxo<>nil
+         then privKey:=MainForm.getPrivKey(utxo.getReceiver)
+         else privKey:='';
+    end else
+      privKey:=MainForm.getPrivKey(sign[i].signByAddress);
+
+    if privKey<>'' then begin
+      s:=getTextToSign(NVSName,cutNVSValueParameter(NVSValue,sign[i].signParName),sign[i].signPreffix);
+      s:=bufToBase64(signMessage(s,privKey));
+
+      nvsValue:=addNVSValueParameter(nvsValue,sign[i].signParName,s);
+    end
+    else //can't sign
+      begin fLastError:=('Can''t sign value'); exit; end;
+  end;
+
+  {
   if (signByAddress<>'') or (signByName<>'') then begin
     //signByAddress:=''; //don't need to sign if empty. could be overriden by signByName
     //signByName:=''; //Name's owner must sign. Overwrites signByAddress
@@ -491,7 +564,7 @@ begin
     else //can't sign
       begin fLastError:=('Can''t sign value'); exit; end;
   end;
-
+  }
 
   if TaskType='NEW_NAME' then begin
     if length(NVSName)>512 then begin fLastError:=('length(NVSName)>512');  exit; end;
@@ -765,6 +838,21 @@ var js,e:tJsonData;
     procedure setSignParams(task:tBaseEmerAPIServerTask);
     var s:ansistring;
         n:integer;
+        t:string;
+
+      procedure addNameSign(name:ansistring;par:ansistring='SIGN';pref:ansistring='*');
+      var i:integer;
+      begin
+        for i:=0 to length(task.sign)-1 do if task.sign[i].signByName=name then exit;
+        setLength(task.sign,length(task.sign)+1);
+        task.sign[length(task.sign)-1].signByName:=name;
+        task.sign[length(task.sign)-1].signByAddress:='';
+        task.sign[length(task.sign)-1].signParName:=par;
+        task.sign[length(task.sign)-1].signPreffix:=pref;
+        task.sign[length(task.sign)-1].signForce:=true;
+      end;
+
+    var j:integer;
     begin
      //mustBeSignedBy
      //signByAddress:=''; //don't need to sign if empty. could be overriden by signByName
@@ -775,9 +863,49 @@ var js,e:tJsonData;
      //s:=safeString(ja[i].FindPath('signbyname'));
      //if s<>'' then mustBeSignedBy:=s
      //         else mustBeSignedBy:=''; //if (pos('af:lot:',task.NVSName)=1) or (pos('af:product:',task.NVSName)=1) then mustBeSignedBy:='PARENT';!
-      task.signByName:=safeString(ja[i].FindPath('signbyname'));
+
+     //task.signByName:=safeString(ja[i].FindPath('signbyname'));
+      t:=safeString(ja[i].FindPath('signbyname'));
+      if t<>'' then begin
+        addNameSign(t);
+        {
+        setLength(task.sign,1);
+        task.sign[0].signByName:=t; //Name's owner must sign. Overwrites signByAddress
+        task.sign[0].signPreffix:='*'; //'*' or 'F-'
+        task.sign[0].signParName:='SIGN'; //'Signature' or 'SIGN' for AF
+        task.sign[0].signByAddress:='';
+        task.sign[0].signForce:=true;
+        }
+      end;
 
       //determine mustBeSignedBy
+      if length(task.sign)=0 then begin
+        s:=task.NVSName;
+        if (pos('af:lot:',s)=1) then begin
+           //20190409: af:lot:<NAME>:N
+           system.delete(s,1,7);
+           //task.signByName:='af:'+cutNameSuffix(s);
+           addNameSign('af:'+cutNameSuffix(s));
+
+           //we also add Parent signature if it is present
+           s:=getNVSValueParameter(task.NVSValue,'PARENT');
+           if s<>'' then addNameSign(s);
+
+        end else if (pos('af:product:',s)=1) then begin
+          //20190409: PARENT
+          s:=getNVSValueParameter(task.NVSValue,'PARENT');
+          if s<>'' then addNameSign(s);
+
+          s:=getNVSValueParameter(task.NVSValue,'BRAND');
+          if s<>'' then addNameSign(s,'Signature');
+
+        end else if (pos('dpo:',s)=1) and (pos(':', copy(s,5,length(s)-4) )<1) then begin //dpo brand
+          //20190409: PARENT
+          s:=getNVSValueParameter(task.NVSValue,'PARENT');
+          if s<>'' then addNameSign(s);
+        end
+      end;
+      {
       if (task.signByName='') and (task.NVSName<>'') then begin
         s:=task.NVSName;
         if (pos('af:lot:',s)=1) then begin
@@ -789,14 +917,18 @@ var js,e:tJsonData;
           task.signByName:=getNVSValueParameter(task.NVSValue,'PARENT');
         end;
       end;
+      }
 
       s:=safeString(ja[i].FindPath('signpreffix'));
-      if s<>'' then task.signPreffix:=s
-               else task.signPreffix:='*'; //if (pos('af:lot:',task.NVSName)=1) or (pos('af:product:',task.NVSName)=1) then mustBeSignedBy:='PARENT';!
+      if s<>'' then for j:=0 to length(task.sign) do task.sign[j].signPreffix:=s;
+
+      //if s<>'' then task.signPreffix:=s
+      //         else task.signPreffix:='*'; //if (pos('af:lot:',task.NVSName)=1) or (pos('af:product:',task.NVSName)=1) then mustBeSignedBy:='PARENT';!
 
       s:=safeString(ja[i].FindPath('signparname'));
-      if s<>'' then task.signParName:=s
-               else task.signParName:='SIGN'; //if (pos('af:lot:',task.NVSName)=1) or (pos('af:product:',task.NVSName)=1) then mustBeSignedBy:='PARENT';!
+      if s<>'' then for j:=0 to length(task.sign) do task.sign[j].signParName:=s;
+      //if s<>'' then task.signParName:=s
+      //         else task.signParName:='SIGN'; //if (pos('af:lot:',task.NVSName)=1) or (pos('af:product:',task.NVSName)=1) then mustBeSignedBy:='PARENT';!
 
 
     end;
@@ -841,7 +973,7 @@ begin
             try
               q:=365;
               s:=safeString(ja[i].FindPath('days'));
-              if s<>'' then q:=myStrToInt(s) else q:=365;
+              if s<>'' then q:=myStrToInt(s) else q:=365*5;
             except
               q:=365;
             end;

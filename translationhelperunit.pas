@@ -197,7 +197,9 @@ var dir:string;
     function decodeLineData(linepos:integer):string;
     var fn:string;
     begin
-      result:=line[linepos];
+      if line.Count>linepos
+        then result:=line[linepos]
+        else result:='';
       if (trim(result)<>'') and (result[1]<>'@') then exit;
       if (trim(result)<>'') and (result[1]='@') then begin
         fn:=IncludeTrailingPathDelimiter(extractFilePath(application.ExeName)+'TRANSLATION')+copy(result,2,length(result)-1);
@@ -256,7 +258,7 @@ begin
        readCols(line,csv[i]);
        //add param line[0]
        t:=tJsonObject.Create();
-       for j:=1 to min(langs.Count,line.Count)-1 do begin
+       for j:=1 to langs.Count{min(langs.Count,line.Count)}-1 do begin
          //if trim(line[j])<>'' then  -->>> maybe we have file
          s:=decodeLineData(j);
          if s<>'' then

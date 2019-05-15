@@ -359,10 +359,14 @@ begin
 end;
 
 procedure TMasterPasswordWizardForm.goNext(ts:tTabSheet); //lHistoryStack
+var t:boolean;
 begin
  lHistoryStack.Add(MainPageControl.ActivePage);
+ t:=InlineMessageTimer.Enabled; InlineMessageTimer.Enabled:=false;
  application.processmessages;
  MainPageControl.ActivePage:=ts;
+ application.processmessages;
+ if t then InlineMessageTimer.Enabled:=true;
 end;
 
 procedure TMasterPasswordWizardForm.tsAskForMasterPassHide(Sender: TObject);
@@ -422,6 +426,7 @@ begin
 
 
 end;
+
 
 procedure TMasterPasswordWizardForm.tsServerConnectedHide(Sender: TObject);
 var s1,s2:ansistring;

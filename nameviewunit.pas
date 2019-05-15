@@ -16,8 +16,9 @@ type
 
   TNameViewForm = class(TForm)
     bDelete: TBitBtn;
+    bCreateGoods: TBitBtn;
     bShowHistory: TBitBtn;
-    BitBtn1: TBitBtn;
+    bClose: TBitBtn;
     bAtom: TBitBtn;
     bUpdateName: TBitBtn;
     eName: TLabeledEdit;
@@ -39,8 +40,9 @@ type
     tsRaw: TTabSheet;
     tsDecoded: TTabSheet;
     procedure bAtomClick(Sender: TObject);
+    procedure bCreateGoodsClick(Sender: TObject);
     procedure bDeleteClick(Sender: TObject);
-    procedure BitBtn1Click(Sender: TObject);
+    procedure bCloseClick(Sender: TObject);
     procedure bShowHistoryClick(Sender: TObject);
     procedure bUpdateNameClick(Sender: TObject);
     procedure eOwnerChange(Sender: TObject);
@@ -78,7 +80,9 @@ function ShowNameViewForm(BaseEmerAPIServerTask:tBaseEmerAPIServerTask):TNameVie
 implementation
 
 {$R *.lfm}
-uses MainUnit, Localizzzeunit, emerapitypes, crypto, EmerTX, helperUnit, math, AtomFormUnit, QuestionUnit;
+uses MainUnit, Localizzzeunit, emerapitypes, crypto, EmerTX, helperUnit, math, AtomFormUnit, QuestionUnit
+  ,AFCreateGoodsForLotUnit
+  ;
 
 var LastActivatedNameViewForm:TNameViewForm=nil;
 
@@ -308,6 +312,8 @@ begin
 
     seDaysLeft.Value:=NVSRecord.DaysLeft;
     seDaysLeft.MinValue:=seDaysLeft.Value;
+
+    bCreateGoods.Visible:=pos('af:lot:',NVSRecord.NVSName)=1;
   end else if BaseEmerAPIServerTask<>nil then begin
      eName.Text:=BaseEmerAPIServerTask.NVSName;
      seValue.Text:=BaseEmerAPIServerTask.NVSValue;
@@ -324,6 +330,8 @@ begin
 
      seDaysLeft.Value:=BaseEmerAPIServerTask.NVSDays;
      seDaysLeft.MinValue:=0;
+
+     bCreateGoods.Visible:=false;
   end;
   tsDecoded.Visible:=false;
   //PageControl.ShowTabs:=tsDecoded.Visible;
@@ -336,7 +344,7 @@ begin
 
 end;
 
-procedure TNameViewForm.BitBtn1Click(Sender: TObject);
+procedure TNameViewForm.bCloseClick(Sender: TObject);
 begin
   Close;
 end;
@@ -385,6 +393,12 @@ end;
 procedure TNameViewForm.bAtomClick(Sender: TObject);
 begin
   if NVSRecord<>nil then ShowAtomForm(NVSRecord.NVSName);
+end;
+
+procedure TNameViewForm.bCreateGoodsClick(Sender: TObject);
+begin
+  if NVSRecord<>nil then
+    showGoodsDataCreationWindow(NVSRecord);
 end;
 
 procedure TNameViewForm.onAnswer(sender:tObject;mr:tModalResult;mtag:ansistring);
