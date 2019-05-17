@@ -4,7 +4,7 @@ unit EmerAPIMain;
 interface
 
 uses
-  Classes, SysUtils, UOpenSSL, UOpenSSLdef, Crypto, fpjson, jsonparser,
+  Classes, SysUtils, Crypto, fpjson, jsonparser,
   EmerAPIBlockchainMergedUnit, EmerAPIBlockchainUnit, EmerAPIServerUnit, EmerAPIWalletUnit, UTXOunit, emerapitypes, EmerTX, BlockchainUnit, MemPoolUnit;
 
 
@@ -45,7 +45,7 @@ type
 
 implementation
 
-uses HelperUnit, math, LazUTF8SysUtils;
+uses HelperUnit, math {, LazUTF8SysUtils};
 
 
 

@@ -270,8 +270,16 @@ begin
       lastPrivKey:='';
   end;
 
-  if (lastPrivKey<>'') then begin
+  if (lastPrivKey<>'') then
+  try
     lastAddress:=publicKey2Address(GetPublicKey(lastPrivKey),globals.AddressSig,true);
+  except
+    //UjjpLDhjjrKV
+    lastAddress:='';
+    lastPrivKey:='';
+  end;
+
+  if (lastPrivKey<>'') then begin
     if {lastAssetsAddress<>lastAddress} (fTargetUTXOList=nil) or (lastAddress<>fTargetUTXOList.tagString) then begin
       lTakePossession1.Caption:=localizzzeString('TakePossessionForm.lTakePossession1','')+''+lastAddress;
 

@@ -32,6 +32,7 @@ type
     lMessage3: TLabel;
     pBottom: TPanel;
     pTop: TPanel;
+    procedure bCloseClick(Sender: TObject);
     procedure bCreateClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
@@ -282,6 +283,11 @@ begin
       end;
 
   end;
+end;
+
+procedure TAFCreateGoodsForLot.bCloseClick(Sender: TObject);
+begin
+  close;
 end;
 
 end.

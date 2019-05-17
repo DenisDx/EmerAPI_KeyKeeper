@@ -30,7 +30,7 @@ begin
   Application.CreateForm(TSettingsForm, SettingsForm);
   Application.CreateForm(TMasterPasswordWizardForm, MasterPasswordWizardForm);
   Application.CreateForm(TQuestionForm, QuestionForm);
-  Application.CreateForm(TLocalizzzeForm, LocalizzzeForm);
+  //Application.CreateForm(TLocalizzzeForm, LocalizzzeForm);
   Application.CreateForm(TsetUPForm, setUPForm);
   Application.CreateForm(TaskForMPForm, askForMPForm);
   Application.CreateForm(TAskForUPForm, AskForUPForm);

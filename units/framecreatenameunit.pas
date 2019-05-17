@@ -75,7 +75,7 @@ begin
     exit;
   end;
 
-  nValue:=trim(clear13(seValue.text));
+  nValue:=trim(clearValue(seValue.text));
   if length(nValue)>20480 then begin
     seValue.SetFocus;
     showMessageSafe('Value too long');
@@ -126,7 +126,7 @@ begin
     exit;
   end;
 
-  nValue:=trim(clear13(seValue.text));
+  nValue:=trim(clearValue(seValue.text));
   if length(nValue)>20480 then begin
     seValue.SetFocus;
     showMessageSafe('Value too long');

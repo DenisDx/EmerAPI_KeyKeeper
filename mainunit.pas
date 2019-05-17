@@ -301,6 +301,8 @@ function isMyAddress(Address:ansistring):boolean;
 
 procedure setSynHighliterByName(SynEmerNVSSyn:TSynEmerNVSSyn;name:ansistring);
 
+function MasterPasswordValid(s:string;legacy:boolean=false):boolean;
+
 implementation
 
 {$R *.lfm}
@@ -332,6 +334,23 @@ uses SettingsUnit,Localizzzeunit, questionUnit, MasterPasswordWizardUnit, setUPU
    {$ENDIF Windows}
 
    ;
+
+function MasterPasswordValid(s:string;legacy:boolean=false):boolean;
+  var PrivateKey:ansistring;
+      pubKey:TECDSA_Public;
+      hd:tHDNode;
+begin
+  if legacy then begin
+    result:=false;
+    PrivateKey:='';
+    if trim(s)<>'' then
+    PrivateKey:=DoSha256(trim(s));
+    pubKey:=GetPublicKey(PrivateKey);
+    result:= not ((length(pubkey.x)<>32) or (length(pubkey.y)<>32));
+  end else begin
+    result:=mainForm.loadHDNodeFromBip(hd,smartExtractBIP32pass(trim(s)))
+  end;
+end;
 
 
 procedure setSynHighliterByName(SynEmerNVSSyn:TSynEmerNVSSyn;name:ansistring);
@@ -1114,7 +1133,7 @@ begin
  if not chAssetsFilterShowExpired.Checked then
    if (NVSRecord is tNVSRecord)
       then begin
-        if (NVSRecord as tNVSRecord).DaysLeft<1 then begin
+        if (NVSRecord as tNVSRecord).DaysLeft=0 then begin
           if needShowInvalidNamesUTXOCache.IndexOf((NVSRecord as tNVSRecord).NVSName)<0 then
             needShowInvalidNamesUTXOCache.Append((NVSRecord as tNVSRecord).NVSName);
           exit;

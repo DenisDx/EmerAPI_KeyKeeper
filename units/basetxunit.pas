@@ -9,7 +9,7 @@ uses
   Classes, SysUtils
   ,EmerTX
   ,crypto , CryptoLib4PascalConnectorUnit
-  ,UOpenSSL, UOpenSSLdef
+  //,UOpenSSL, UOpenSSLdef
   ,emerapitypes;
 
 //abstract TX output.
@@ -135,7 +135,11 @@ end;
 
 implementation
 
-uses math, LazUTF8SysUtils;
+uses math
+  //, LazUTF8SysUtils
+  ,dateutils
+  //,LazSysUtils
+  ;
 
 const
   TX_NAME_ID=$666;
@@ -452,7 +456,8 @@ begin
   result.locktime:=fLockTime;
   result.time:=fTime;
   if result.time=0 then begin
-    fTime:=winTimeToUnixTime(nowUTC());
+    //fTime:=winTimeToUnixTime(nowUTC());
+    fTime:=winTimeToUnixTime(LocalTimeToUniversal(now()));
     result.time:=fTime;
   end;
 

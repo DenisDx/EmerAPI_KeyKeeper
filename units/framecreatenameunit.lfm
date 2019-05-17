@@ -1,21 +1,21 @@
 object FrameCreateName: TFrameCreateName
   Left = 0
-  Height = 398
+  Height = 418
   Top = 0
   Width = 672
-  ClientHeight = 398
+  ClientHeight = 418
   ClientWidth = 672
   TabOrder = 0
   DesignLeft = 475
   DesignTop = 287
   object Panel1: TPanel
     Left = 0
-    Height = 152
+    Height = 160
     Top = 0
     Width = 672
     Align = alTop
     BevelOuter = bvNone
-    ClientHeight = 152
+    ClientHeight = 160
     ClientWidth = 672
     TabOrder = 0
     object lName: TLabel
@@ -39,7 +39,7 @@ object FrameCreateName: TFrameCreateName
     object lNameStat: TLabel
       Left = 64
       Height = 17
-      Top = 115
+      Top = 120
       Width = 72
       Caption = 'lNameStat'
       ParentColor = False
@@ -66,7 +66,7 @@ object FrameCreateName: TFrameCreateName
     object lNameExits: TLabel
       Left = 64
       Height = 17
-      Top = 136
+      Top = 141
       Width = 77
       Caption = 'lNameExits'
       ParentColor = False
@@ -74,7 +74,7 @@ object FrameCreateName: TFrameCreateName
     object bViewName: TBitBtn
       Left = 24
       Height = 34
-      Top = 117
+      Top = 122
       Width = 34
       Glyph.Data = {
         0E060000424D1006000000000000360000002800000016000000160000000100
@@ -167,7 +167,7 @@ object FrameCreateName: TFrameCreateName
   object Panel2: TPanel
     Left = 0
     Height = 75
-    Top = 323
+    Top = 343
     Width = 672
     Align = alBottom
     BevelOuter = bvNone
@@ -203,12 +203,12 @@ object FrameCreateName: TFrameCreateName
   end
   object Panel3: TPanel
     Left = 0
-    Height = 171
-    Top = 152
+    Height = 183
+    Top = 160
     Width = 672
     Align = alClient
     BevelOuter = bvNone
-    ClientHeight = 171
+    ClientHeight = 183
     ClientWidth = 672
     TabOrder = 1
     object lValue: TLabel
@@ -222,7 +222,7 @@ object FrameCreateName: TFrameCreateName
     object lValueStat: TLabel
       Left = 64
       Height = 17
-      Top = 150
+      Top = 162
       Width = 70
       Anchors = [akLeft, akBottom]
       Caption = 'lValueStat'
@@ -230,7 +230,7 @@ object FrameCreateName: TFrameCreateName
     end
     inline seValue: TSynEdit
       Left = 8
-      Height = 112
+      Height = 124
       Top = 32
       Width = 656
       Anchors = [akTop, akLeft, akRight, akBottom]

@@ -154,7 +154,7 @@ var
   cryptoTestForm: TcryptoTestForm=nil;
 
 implementation
-uses USha256, crypto, CryptoLib4PascalConnectorUnit, UOpenSSLdef, UOpenSSL, PodbiralkaUnit
+uses USha256, crypto, CryptoLib4PascalConnectorUnit, {UOpenSSLdef, UOpenSSL,} PodbiralkaUnit
   ,fpjson, jsonparser
   ,EmerApiTestUnit
 
@@ -936,7 +936,7 @@ var PrivateKey:ansistring;
     pubKey:TECDSA_Public;
     pubKey1:TECDSA_Public;
 
-    bn:PBIGNUM;
+    //bn:PBIGNUM;
 
     s:ansistring;
 var

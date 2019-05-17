@@ -13,9 +13,9 @@ uses
   {$endif}
 
   ,HDNodeUnit
-  ,ClpIX9ECParameters
-  ,ClpIECInterface
-    ,ClpBigInteger
+    ,ClpIX9ECParameters
+    ,ClpIECInterface
+      ,ClpBigInteger
   ;
 
 type

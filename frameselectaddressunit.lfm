@@ -1,16 +1,16 @@
 object FrameSelectAddress: TFrameSelectAddress
   Left = 0
-  Height = 127
+  Height = 143
   Top = 0
   Width = 443
-  ClientHeight = 127
+  ClientHeight = 143
   ClientWidth = 443
   TabOrder = 0
   DesignLeft = 905
   DesignTop = 294
   object eAddress: TEdit
     Left = 8
-    Height = 24
+    Height = 28
     Top = 4
     Width = 427
     Anchors = [akTop, akLeft, akRight]
@@ -29,51 +29,51 @@ object FrameSelectAddress: TFrameSelectAddress
   end
   object pAddressInfo: TPanel
     Left = 16
-    Height = 92
-    Top = 32
+    Height = 88
+    Top = 48
     Width = 419
     Anchors = [akTop, akLeft, akRight]
     BevelOuter = bvNone
-    ClientHeight = 92
+    ClientHeight = 88
     ClientWidth = 419
     TabOrder = 1
     object lAddressInfo: TLabel
       Left = 8
-      Height = 15
-      Top = 24
-      Width = 192
+      Height = 17
+      Top = 23
+      Width = 244
       Caption = 'Информация о выбранном адресе'
       ParentColor = False
     end
     object lPayments: TLabel
       Left = 8
-      Height = 15
-      Top = 49
-      Width = 234
+      Height = 17
+      Top = 48
+      Width = 300
       Caption = 'Ранее не делалось платежей на этот адрес'
       ParentColor = False
     end
     object chRefresh: TCheckBox
       Left = 8
-      Height = 19
-      Top = 0
-      Width = 162
+      Height = 24
+      Top = -1
+      Width = 206
       Caption = 'Обновлять информацию '
       TabOrder = 0
     end
     object lCert: TLabel
       Left = 8
-      Height = 15
-      Top = 72
-      Width = 149
+      Height = 17
+      Top = 71
+      Width = 187
       Caption = 'Имеющиеся сертификаты:'
       ParentColor = False
     end
     object chDecodeAddress: TCheckBox
       Left = 232
-      Height = 19
-      Top = 0
-      Width = 132
+      Height = 24
+      Top = -1
+      Width = 170
       Caption = 'Распознавать имена'
       Checked = True
       State = cbChecked

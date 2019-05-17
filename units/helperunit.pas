@@ -5,7 +5,7 @@ unit HelperUnit;
 interface
 
 uses
-  Classes, SysUtils, Forms, strutils
+  Classes, SysUtils, {Forms,} strutils
   {$IFDEF LCLCarbon}
   ,MACOSall
   {$ENDIF}
@@ -23,8 +23,23 @@ function changeQuotesSafe(const s:string):string;
 function myStrToInt(s:string):int64;
 
 function clear13(s:ansistring):ansistring;
+function clearValue(const s:ansistring):ansistring;
 
 implementation
+
+function clearValue(const s:ansistring):ansistring;
+begin
+  result:=clear13(s);
+
+  //remove spaces at the end
+
+  while (result<>'') and (pos(' '#10,result)>0) do delete(result,pos(' '#10,result),1);
+
+  while (result<>'') and (result[length(result)]=' ') do delete(result,length(result),1);
+  //remove #10 at the end
+  while (result<>'') and (result[length(result)]=#10) do delete(result,length(result),1);
+
+end;
 
 function clear13(s:ansistring):ansistring;
 begin
@@ -186,7 +201,7 @@ var
 begin
   //Возвращает путь для хранения данных. Обязательно с дополнением в конце
   //Для виндоуса это будет рабочий каталог
-  Result := ExtractFilePath(Application.ExeName);
+  Result := ExtractFilePath(Paramstr(0){Application.ExeName});
   {$IFDEF LCLCarbon}
     //Result := LeftStr(Result, Pos('myapp.app', Result)-1);
     //Result := ExtractFileDir(Paramstr(0));

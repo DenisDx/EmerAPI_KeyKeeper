@@ -5,7 +5,10 @@ unit EmerAPIBlockchainUnit;
 interface
 
 uses
-  Classes, SysUtils, FileUtil,fpjson, jsonparser, forms
+  Classes, SysUtils, fpjson, jsonparser
+  {$ifndef CONSOLEMODE}
+  , forms
+  {$endif}
   {$ifdef unix}
   ,cthreads
   ,cmem // the c memory manager is on some systems much faster for multi-threading
@@ -754,7 +757,9 @@ begin
  checkForReadyToStart;
  while (fTasksList.Count>0) and  ((now - t)*60*24*60<100) do begin
     sleep(100);
+    {$ifndef CONSOLEMODE}
     application.ProcessMessages;
+    {$endif}
  end;
  fFinalized:=true;
 end;

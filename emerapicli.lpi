@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CONFIG>
+  <ProjectOptions>
+    <Version Value="10"/>
+    <PathDelim Value="\"/>
+    <General>
+      <Flags>
+        <MainUnitHasCreateFormStatements Value="False"/>
+        <MainUnitHasScaledStatement Value="False"/>
+      </Flags>
+      <SessionStorage Value="InProjectDir"/>
+      <MainUnit Value="0"/>
+      <Title Value="EmerAPI KeyKeeper Console Client"/>
+      <UseAppBundle Value="False"/>
+      <ResourceType Value="res"/>
+    </General>
+    <BuildModes Count="1">
+      <Item1 Name="Default" Default="True"/>
+    </BuildModes>
+    <PublishOptions>
+      <Version Value="2"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+        <CommandLineParams Value="-a a1bqDnxjSK8hykK getpossesstx 66060000f666da5c010107fe5065c24b793729b3f792add35fd32cf764bd4a94047633745e16158c7d010000006b483045022100cdb9889db7ebff4aea378d7d0620c49b1bff735b1585f63713fdf8963cd910e6022055ba3633a92d2a6111caac5808226b8b2b30522e9f125944822e6842aab42a3b012102a6c72e4f68fb45cf49048ba91eaee1ea49c04380edac11f56b3f809dfad412e6feffffff02c800000000000000d151751a64706f3a74657374206272616e6420333a6131623a38323530340210276d4c9450524f445543543d0a504152454e544c4f543d61663a6c6f743a70726f647563743a746573742070726f64757420333a310a5369676e61747572653d49465675624c6f684d67676b6e7150564b386561687750414e446759376e4b3151543153354472556f742f5a49655a4b5846477438363748566b576e554b7869785730506250446c492b5a41535068646a4966546932343d7576a914cfe4764e6981155594431e0854ab058c9381e80588ac14e60000000000001976a9146fa7a0022942ac8c1e853073028484073fcd314088ac00000000"/>
+      </local>
+    </RunParams>
+    <Units Count="10">
+      <Unit0>
+        <Filename Value="emerapicli.lpr"/>
+        <IsPartOfProject Value="True"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="units\basetxunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="BaseTXUnit"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="units\crypto.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Crypto"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="units\cryptolib4pascalconnectorunit.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="units\emerapimain.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="units\emerapitypes.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="units\emertx.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="EmerTX"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="units\hdnodeunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="HDNodeUnit"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="units\helperunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="HelperUnit"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="units\emerapiblockchainunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="EmerAPIBlockchainUnit"/>
+      </Unit9>
+    </Units>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="11"/>
+    <PathDelim Value="\"/>
+    <Target>
+      <Filename Value="emerapicli"/>
+    </Target>
+    <SearchPaths>
+      <IncludeFiles Value="$(ProjOutDir)"/>
+      <OtherUnitFiles Value="units"/>
+      <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+    </SearchPaths>
+    <Linking>
+      <Debugging>
+        <UseExternalDbgSyms Value="True"/>
+      </Debugging>
+    </Linking>
+    <Other>
+      <CustomOptions Value="-dCONSOLEMODE"/>
+      <OtherDefines Count="1">
+        <Define0 Value="CONSOLEMODE"/>
+      </OtherDefines>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <Exceptions Count="3">
+      <Item1>
+        <Name Value="EAbort"/>
+      </Item1>
+      <Item2>
+        <Name Value="ECodetoolError"/>
+      </Item2>
+      <Item3>
+        <Name Value="EFOpenError"/>
+      </Item3>
+    </Exceptions>
+  </Debugging>
+</CONFIG>

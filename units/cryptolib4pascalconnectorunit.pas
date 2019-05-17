@@ -356,7 +356,7 @@ begin
   //setLength(message,length(digest));
   //Move(digest[1],message[0],length(digest));
 
-  //i:=0;
+  i:=0;
   repeat
     // Sign
     Signer.Init(True, PrivateKey);

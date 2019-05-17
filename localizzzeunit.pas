@@ -5,8 +5,12 @@ unit Localizzzeunit;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls, Buttons, Menus, fpjson, jsonparser, ComboEx;
-
+  Classes, SysUtils, fpjson, jsonparser
+  {$ifndef CONSOLEMODE}
+  , FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls, Buttons, Menus, ComboEx
+  {$endif}
+  ;
+{
 type
 
   { TLocalizzzeForm }
@@ -18,7 +22,7 @@ type
   public
 
   end;
-
+}
 
 //  Таким образом, если у злоумышленника будет доступ в этому компьютеру (например, он будет украден), ваш приватный ключ будет безнадежно скомпрометирован. Это будет означать БЕЗВОЗВРАТНУЮ потерю всех активов, зарегистрированных на Ваш публичный ключ.
 // Thus, if an attacker would have access to this computer (for example, it is stolen), your private key would be hopelessly compromised. This would mean the IRRETRIEVABLE losses of all assets registered to your public key.
@@ -115,7 +119,7 @@ var languages:tStringList;
 function CurrentLanguage():ansistring;
 
 var
-  LocalizzzeForm: TLocalizzzeForm;
+  //LocalizzzeForm: TLocalizzzeForm;
   LocalizzzeData:TJSONData;
 
 
@@ -130,12 +134,14 @@ function localizzzeString(sign:ansistring;s:String):String;
 implementation
 
 {$R *.lfm}
-uses Crypto, {$IFDEF MSWINDOWS}
-  windows,
+uses Crypto {$IFDEF MSWINDOWS}
+  ,windows
 
-  {$ENDIF} ComCtrls, settingsunit, helperUnit
-
-  ,CheckLst
+  {$ENDIF}
+  , settingsunit, helperUnit
+  {$ifndef CONSOLEMODE}
+  ,ComCtrls,CheckLst
+  {$endif}
   ;
 
 {  CHANGET INTO NEW WAY $R resources.rc}
@@ -357,11 +363,7 @@ begin
 end;
 
 
-{ TLocalizzzeForm }
-
-// эта процедура будет вытаскивать по имени ресурса файл, и отображать его в Image
-
-procedure TLocalizzzeForm.FormCreate(Sender: TObject);
+procedure localizzzeInit();
 var i,j:integer;
     s:string;
     t:TJSONData;
@@ -428,7 +430,7 @@ INITIALIZATION
   languages:=tStringList.Create;
   assignationList:=tStringList.create;
   LocalizzzeListCache:=tStringList.create;
-
+  localizzzeInit();
 FINALIZATION
 
 

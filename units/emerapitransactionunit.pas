@@ -5,7 +5,7 @@ unit EmerAPITransactionUnit;
 interface
 
 uses
-  Classes, SysUtils, UOpenSSL, UOpenSSLdef, Crypto, fpjson, jsonparser,
+  Classes, SysUtils, {UOpenSSL, UOpenSSLdef,} Crypto, fpjson, jsonparser,
   EmerAPIBlockchainMergedUnit, EmerAPIBlockchainUnit, EmerAPIServerUnit, EmerAPIWalletUnit, UTXOunit, emerapitypes, EmerTX, BlockchainUnit, EmerAPIMain, BaseTXUnit;
 
 type

@@ -7,92 +7,127 @@ object WalletBasicsForm: TWalletBasicsForm
   ClientHeight = 526
   ClientWidth = 836
   OnShow = FormShow
-  LCLVersion = '1.8.4.0'
+  LCLVersion = '1.8.2.0'
   object PageControl1: TPageControl
     Left = 0
     Height = 476
     Top = 0
     Width = 836
-    ActivePage = tsPay
+    ActivePage = tsCreateName
     Align = alClient
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     object tsPay: TTabSheet
       Caption = 'Transfer coins'
-      ClientHeight = 448
-      ClientWidth = 828
+      ClientHeight = 445
+      ClientWidth = 832
       inline FramePayToAddress1: TFramePayToAddress
-        Height = 448
-        Width = 828
+        Height = 445
+        Width = 832
         Align = alClient
-        ClientHeight = 448
-        ClientWidth = 828
+        ClientHeight = 445
+        ClientWidth = 832
         inherited pTop: TPanel
-          Width = 828
-          ClientWidth = 828
+          Width = 832
+          ClientWidth = 832
+          inherited lPayee: TLabel
+            Height = 17
+            Width = 44
+          end
         end
         inherited pAddressFrame: TPanel
-          Width = 828
-          ClientWidth = 828
+          Width = 832
+          ClientWidth = 832
           inherited FrameSelectAddress1: TFrameSelectAddress
             Height = 166
-            Width = 828
+            Width = 832
             Align = alClient
             ClientHeight = 166
-            ClientWidth = 828
+            ClientWidth = 832
             inherited eAddress: TEdit
-              Width = 804
+              Width = 808
             end
             inherited pAddressInfo: TPanel
               Height = 48
-              Width = 799
+              Width = 803
               ClientHeight = 48
-              ClientWidth = 799
+              ClientWidth = 803
+              inherited lAddressInfo: TLabel
+                Height = 17
+                Width = 244
+              end
+              inherited lPayments: TLabel
+                Height = 17
+                Width = 300
+              end
+              inherited chRefresh: TCheckBox
+                Height = 24
+                Width = 206
+              end
+              inherited lCert: TLabel
+                Height = 17
+                Width = 187
+              end
+              inherited chDecodeAddress: TCheckBox
+                Height = 24
+                Width = 170
+              end
             end
           end
         end
         inherited pTop1: TPanel
-          Width = 828
-          ClientWidth = 828
+          Width = 832
+          ClientWidth = 832
+          inherited lAmount: TLabel
+            Height = 17
+            Width = 116
+          end
+          inherited lBalance: TLabel
+            Height = 17
+            Width = 213
+          end
+          inherited eValue: TEdit
+            Height = 27
+          end
         end
       end
     end
     object tsCreateName: TTabSheet
       Caption = 'Create NVS record'
-      ClientHeight = 448
-      ClientWidth = 828
+      ClientHeight = 445
+      ClientWidth = 832
       inline FrameCreateName1: TFrameCreateName
-        Height = 448
-        Width = 828
+        Height = 445
+        Width = 832
         Align = alClient
-        ClientHeight = 448
-        ClientWidth = 828
+        ClientHeight = 445
+        ClientWidth = 832
         inherited Panel1: TPanel
-          Width = 828
-          ClientWidth = 828
+          Width = 832
+          ClientWidth = 832
           inherited eName: TEdit
-            Width = 812
+            Width = 816
           end
           inherited cLoadTemplate: TComboBox
-            Width = 540
+            Width = 544
           end
         end
         inherited Panel2: TPanel
-          Top = 373
-          Width = 828
-          ClientWidth = 828
+          Top = 370
+          Width = 832
+          ClientWidth = 832
         end
         inherited Panel3: TPanel
-          Height = 221
-          Width = 828
-          ClientHeight = 221
-          ClientWidth = 828
+          Height = 210
+          Width = 832
+          ClientHeight = 210
+          ClientWidth = 832
           inherited lValueStat: TLabel
-            Top = 202
+            Top = 189
           end
           inherited seValue: TSynEdit
-            Height = 166
-            Width = 812
+            Height = 151
+            Width = 816
           end
         end
       end

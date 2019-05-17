@@ -5,7 +5,7 @@ unit EmerTX;
 interface
 
 uses
-  Classes, SysUtils, UOpenSSLdef, Crypto, CryptoLib4PascalConnectorUnit;
+  Classes, SysUtils, {UOpenSSLdef,} Crypto, CryptoLib4PascalConnectorUnit;
 
 
 ///**
@@ -305,10 +305,11 @@ const
 
 implementation
 
-uses USha256, UOpenSSL, PodbiralkaUnit
-  ,fpjson, jsonparser
-  ,EmerApiTestUnit
-  ,EmerAPIDebugConsoleUnit{debug};
+uses //USha256, UOpenSSL, PodbiralkaUnit,
+  fpjson, jsonparser
+  //,EmerApiTestUnit
+  //,EmerAPIDebugConsoleUnit{debug}
+  ;
 
 function scriptDataBufToText(buf:ansistring;decodeText:boolean=false):ansistring;
 var i,n:integer;

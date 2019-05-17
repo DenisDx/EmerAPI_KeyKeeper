@@ -64,6 +64,8 @@ function reverse(buf:ansistring):ansistring;
 
 //function privKeyToCode58(PrivateKey:PEC_KEY;NetID:char=#128;compressed:boolean=false):ansistring;
 function privKeyToCode58(PrivateKey:ansistring;NetID:char=#128;compressed:boolean=false):ansistring;
+function loadPrivateKeyFromCode58(buf : AnsiString; netID:char=#0) : ansistring;
+function loadPrivateKeyFromBuf(buf : AnsiString) : ansistring;
 
 function raw2code58old(raw : TRawBytes): AnsiString;
 //function raw2code58(raw : TRawBytes;preffix:AnsiString=''): AnsiString;
@@ -1090,6 +1092,37 @@ begin
 end;
 *)
 
+function loadPrivateKeyFromBuf(buf : AnsiString) : ansistring;
+begin
+  result:='';
+  if ((length(buf)=33) and (buf[33]=#1))
+    then delete(buf,33,1)
+    else if (length(buf)<>32) then exit;
+
+  if not checkPrivKey(buf) then exit;
+
+  result:=buf;
+end;
+
+function loadPrivateKeyFromCode58(buf : AnsiString; netID:char=#0) : ansistring;
+begin
+  result:='';
+  try
+    result:=base58ToBufCheck(buf);
+  except
+    exit;
+  end;
+
+  if length(result)<33 then exit;
+
+  if netID<>#0 then
+    if result[1]<>netID then begin
+      result:='';
+      exit;
+    end;
+
+  result:=loadPrivateKeyFromBuf(result);
+end;
 
 function CreatePrivateKeyFromStrBuf(buf : AnsiString) : ansistring;
 begin

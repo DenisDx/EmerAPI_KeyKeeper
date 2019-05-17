@@ -477,7 +477,7 @@ begin
      NVSRecord.DaysAdd:=max(0,seDaysLeft.Value-NVSRecord.DaysLeft);
 
      if seValue.Modified then
-       NVSRecord.newValue:=clear13(seValue.Text)
+       NVSRecord.newValue:=clearValue(seValue.Text)
      else
        NVSRecord.newValue:='';
 

@@ -5,14 +5,18 @@ unit settingsunit;
 interface
 
 uses
-  Classes, SysUtils, FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  ExtCtrls, Buttons, ComboEx, CheckLst, Spin, mainUnit,lazfileutils;
+  Classes, SysUtils
+  {$ifndef CONSOLEMODE}
+  , FileUtil, Forms, Controls, Graphics, Dialogs, StdCtrls,
+  ExtCtrls, Buttons, ComboEx, CheckLst, Spin, mainUnit,lazfileutils
+  {$endif}
+  ;
 
 
 type
   tSettingsRecord = class(tObject)
     private
-      fControl:tWinControl;
+      fControl:TComponent;
       fName:ansistring;
       fHint:ansistring;
       fValue:variant;
@@ -25,7 +29,7 @@ type
       LastReadFromControlError:string;
       property value:variant read getValue write setValue;
       property hint:ansistring read fHint;
-      constructor create(ctrl:tWinControl); overload;
+      constructor create(ctrl:TComponent); overload;
       destructor destroy;
       procedure writeToControl();
       function readFromControl():boolean;
@@ -60,6 +64,7 @@ type
       procedure saveParams(names:array of ansistring);
   end;
 
+  {$ifndef CONSOLEMODE}
   { TSettingsForm }
 
 
@@ -173,8 +178,11 @@ type
   end;
 
 var
-  Settings: TSettings = nil;
   SettingsForm: TSettingsForm;
+  {$endif}
+var
+  Settings: TSettings = nil;
+
 
 
 function MakeConfigName(pname:string='emerapi';verifyname:boolean=true):string;
@@ -189,11 +197,17 @@ const
 
 implementation
 
+{$ifndef CONSOLEMODE}
 {$R *.lfm}
+{$endif}
 
-uses localizzzeUnit, HelperUnit, Variants, crypto, CryptoLib4PascalConnectorUnit, QuestionUnit, lclintf, askformpunit, UOpenSSL, setupunit, passwordHelper, lazUTF8
 
+uses localizzzeUnit, HelperUnit, Variants, crypto, CryptoLib4PascalConnectorUnit
+  {$ifndef CONSOLEMODE}
+  , QuestionUnit, lclintf, askformpunit, {UOpenSSL,} setupunit, lazUTF8
   ,askForUPUnit
+  {$endif}
+  ,passwordHelper
   //,QuestionUnit
   ;
 
@@ -218,7 +232,7 @@ end;
 
 {tSettingsRecord}
 
-constructor tSettingsRecord.create(ctrl:tWinControl);
+constructor tSettingsRecord.create(ctrl:TComponent);
 var name:ansistring;
 begin
   if ctrl=nil then raise exception.Create('tSettingsRecord.create:Wrong guide control!');
@@ -249,7 +263,7 @@ begin
 
   delete(name,1,1);
   fName:=name;
-  fHint:=trim(ctrl.Hint);
+  fHint:=trim(tWinControl(ctrl).Hint);
 end;
 
 destructor tSettingsRecord.destroy;
@@ -442,7 +456,7 @@ var s:string;
     if fControl.Owner<>nil then
       if fControl.Owner is tCustomForm then
         if tCustomForm(fControl.Owner).Visible then
-          fControl.SetFocus;
+          tWinControl(fControl).SetFocus;
     result:=false;
   end;
 
